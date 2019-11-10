@@ -1,0 +1,1 @@
+<p>To define an orthography, enter mappings from the practical orthography to phonetic characters as ordered pairs separated by semi-colons (e.g., lh, ɬ; h, ʔ). Reorder characters in the same way (AB, BA). Use "#" for edges (e.g., “uj#, ʍ” = final “uj” to “ʍ”).'

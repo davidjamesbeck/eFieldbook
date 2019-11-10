@@ -1,0 +1,113 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Process:               dateTimeTester [2127]\
+Path:                  /Users/USER/*/dateTimeTester.app/Contents/MacOS/dateTimeTester\
+Identifier:            com.UNTProject.dateTimeTester\
+Version:               ???\
+Code Type:             X86-64 (Native)\
+Parent Process:        Python [1833]\
+Responsible:           Terminal [1424]\
+User ID:               501\
+\
+Date/Time:             2016-09-06 12:00:53.495 -0600\
+OS Version:            Mac OS X 10.11.6 (15G31)\
+Report Version:        11\
+Anonymous UUID:        65905752-3EB2-4FED-0003-5A976D2F2D1E\
+\
+Sleep/Wake UUID:       C47B81D7-ABCA-4184-8B63-8B22CEA91CA7\
+\
+Time Awake Since Boot: 14000 seconds\
+Time Since Wake:       6600 seconds\
+\
+System Integrity Protection: enabled\
+\
+Crashed Thread:        0  Dispatch queue: com.apple.main-thread\
+\
+Exception Type:        EXC_BAD_ACCESS (SIGSEGV)\
+Exception Codes:       KERN_INVALID_ADDRESS at 0x0000000000000008\
+\
+VM Regions Near 0x8:\
+--> \
+    __TEXT                 0000000106589000-000000010861d000 [ 32.6M] r-x/rwx SM=COW  /Users/USER/*/dateTimeTester.app/Contents/MacOS/dateTimeTester\
+\
+Thread 0 Crashed:: Dispatch queue: com.apple.main-thread\
+0   com.UNTProject.dateTimeTester 	0x00000001067658a2 convertTo_QDateTime(_object*, void**, int*, _object*) + 66\
+1   com.UNTProject.dateTimeTester 	0x000000010660ee99 parsePass1 + 6985\
+2   com.UNTProject.dateTimeTester 	0x000000010660d27c parseKwdArgs + 284\
+3   com.UNTProject.dateTimeTester 	0x0000000106607ae7 sip_api_parse_args + 151\
+4   com.UNTProject.dateTimeTester 	0x00000001068a8752 meth_QDateTimeEdit_setDateTime(_object*, _object*) + 130\
+5   com.UNTProject.dateTimeTester 	0x0000000106abfa0c PyCFunction_Call + 220\
+6   com.UNTProject.dateTimeTester 	0x0000000106b4492d PyEval_EvalFrameEx + 23805\
+7   com.UNTProject.dateTimeTester 	0x0000000106b48ddb _PyEval_EvalCodeWithName + 3227\
+8   com.UNTProject.dateTimeTester 	0x0000000106b3ec0e PyEval_EvalCodeEx + 78\
+9   com.UNTProject.dateTimeTester 	0x0000000106aa47d0 function_call + 384\
+10  com.UNTProject.dateTimeTester 	0x0000000106a86d81 PyObject_Call + 97\
+11  com.UNTProject.dateTimeTester 	0x0000000106a9168d method_call + 141\
+12  com.UNTProject.dateTimeTester 	0x0000000106a86d81 PyObject_Call + 97\
+13  com.UNTProject.dateTimeTester 	0x0000000106b48115 PyEval_CallObjectWithKeywords + 165\
+14  com.UNTProject.dateTimeTester 	0x0000000106842da8 PyQtSlot::call(_object*, _object*) const + 40\
+15  com.UNTProject.dateTimeTester 	0x0000000106842ca5 PyQtSlot::invoke(void**, _object*, void*, bool) const + 309\
+16  com.UNTProject.dateTimeTester 	0x0000000106842d4c PyQtSlot::invoke(void**, _object*, void*) const + 12\
+17  com.UNTProject.dateTimeTester 	0x00000001068458d3 qt_metacall_worker(_sipSimpleWrapper*, _typeobject*, _sipTypeDef*, QMetaObject::Call, int, void**) + 643\
+18  com.UNTProject.dateTimeTester 	0x0000000106845622 qpycore_qobject_qt_metacall(_sipSimpleWrapper*, _sipTypeDef*, QMetaObject::Call, int, void**) + 66\
+19  com.UNTProject.dateTimeTester 	0x0000000107ba96e5 QMetaObject::metacall(QObject*, QMetaObject::Call, int, void**) + 165 (qmetaobject.cpp:296)\
+20  com.UNTProject.dateTimeTester 	0x0000000107bed267 QMetaObject::activate(QObject*, int, int, void**) + 3303 (qobject.cpp:3728)\
+21  com.UNTProject.dateTimeTester 	0x0000000107bec56d QMetaObject::activate(QObject*, QMetaObject const*, int, void**) + 61 (qobject.cpp:3579)\
+22  com.UNTProject.dateTimeTester 	0x00000001071965e5 QAbstractButton::released() + 37 (moc_qabstractbutton.cpp:297)\
+23  com.UNTProject.dateTimeTester 	0x0000000106df6d73 QAbstractButtonPrivate::emitReleased() + 51 (qabstractbutton.cpp:562)\
+24  com.UNTProject.dateTimeTester 	0x0000000106df6d01 QAbstractButtonPrivate::click() + 369 (qabstractbutton.cpp:525)\
+25  com.UNTProject.dateTimeTester 	0x0000000106df8047 QAbstractButton::mouseReleaseEvent(QMouseEvent*) + 231 (qabstractbutton.cpp:1133)\
+26  com.UNTProject.dateTimeTester 	0x00000001069c1fae sipQPushButton::mouseReleaseEvent(QMouseEvent*) + 126\
+27  com.UNTProject.dateTimeTester 	0x0000000106d1d41f QWidget::event(QEvent*) + 751 (qwidget.cpp:8707)\
+28  com.UNTProject.dateTimeTester 	0x0000000106df7e5e QAbstractButton::event(QEvent*) + 446 (qabstractbutton.cpp:1089)\
+29  com.UNTProject.dateTimeTester 	0x0000000106ec38da QPushButton::event(QEvent*) + 266 (qpushbutton.cpp:673)\
+30  com.UNTProject.dateTimeTester 	0x00000001069c24f4 sipQPushButton::event(QEvent*) + 116\
+31  com.UNTProject.dateTimeTester 	0x0000000106cc4e7c QApplicationPrivate::notify_helper(QObject*, QEvent*) + 396 (qapplication.cpp:3718)\
+32  com.UNTProject.dateTimeTester 	0x0000000106cc78b2 QApplication::notify(QObject*, QEvent*) + 4642 (qapplication.cpp:3278)\
+33  com.UNTProject.dateTimeTester 	0x000000010687a7ef sipQApplication::notify(QObject*, QEvent*) + 127\
+34  com.UNTProject.dateTimeTester 	0x0000000107b9e866 QCoreApplication::notifyInternal(QObject*, QEvent*) + 198 (qcoreapplication.cpp:965)\
+35  com.UNTProject.dateTimeTester 	0x0000000106ccdecf QCoreApplication::sendSpontaneousEvent(QObject*, QEvent*) + 95 (qcoreapplication.h:227)\
+36  com.UNTProject.dateTimeTester 	0x0000000106cc5dc3 QApplicationPrivate::sendMouseEvent(QWidget*, QMouseEvent*, QWidget*, QWidget*, QWidget**, QPointer<QWidget>&, bool) + 1107 (qapplication.cpp:2772)\
+37  com.UNTProject.dateTimeTester 	0x0000000106d4749f QWidgetWindow::handleMouseEvent(QMouseEvent*) + 3519 (qwidgetwindow.cpp:554)\
+38  com.UNTProject.dateTimeTester 	0x0000000106d45f21 QWidgetWindow::event(QEvent*) + 929 (qwidgetwindow.cpp:211)\
+39  com.UNTProject.dateTimeTester 	0x0000000106cc4e7c QApplicationPrivate::notify_helper(QObject*, QEvent*) + 396 (qapplication.cpp:3718)\
+40  com.UNTProject.dateTimeTester 	0x0000000106cc6d40 QApplication::notify(QObject*, QEvent*) + 1712 (qapplication.cpp:3162)\
+41  com.UNTProject.dateTimeTester 	0x000000010687a7ef sipQApplication::notify(QObject*, QEvent*) + 127\
+42  com.UNTProject.dateTimeTester 	0x0000000107b9e866 QCoreApplication::notifyInternal(QObject*, QEvent*) + 198 (qcoreapplication.cpp:965)\
+43  com.UNTProject.dateTimeTester 	0x0000000106ccdecf QCoreApplication::sendSpontaneousEvent(QObject*, QEvent*) + 95 (qcoreapplication.h:227)\
+44  com.UNTProject.dateTimeTester 	0x00000001073c8df6 QGuiApplicationPrivate::processMouseEvent(QWindowSystemInterfacePrivate::MouseEvent*) + 1990 (qguiapplication.cpp:1792)\
+45  com.UNTProject.dateTimeTester 	0x00000001073c8301 QGuiApplicationPrivate::processWindowSystemEvent(QWindowSystemInterfacePrivate::WindowSystemEvent*) + 225 (qguiapplication.cpp:1584)\
+46  com.UNTProject.dateTimeTester 	0x00000001073b323d QWindowSystemInterface::sendWindowSystemEvents(QFlags<QEventLoop::ProcessEventsFlag>) + 141 (qwindowsysteminterface.cpp:626)\
+47  com.UNTProject.dateTimeTester 	0x0000000106bf5f77 QCocoaEventDispatcherPrivate::processPostedEvents() + 327 (qcocoaeventdispatcher.mm:886)\
+48  com.UNTProject.dateTimeTester 	0x0000000106bf6a58 QCocoaEventDispatcherPrivate::postedEventsSourceCallback(void*) + 88 (qcocoaeventdispatcher.mm:923)\
+49  com.apple.CoreFoundation      	0x00007fff96e68881 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 17\
+50  com.apple.CoreFoundation      	0x00007fff96e47fbc __CFRunLoopDoSources0 + 556\
+51  com.apple.CoreFoundation      	0x00007fff96e474df __CFRunLoopRun + 927\
+52  com.apple.CoreFoundation      	0x00007fff96e46ed8 CFRunLoopRunSpecific + 296\
+53  com.apple.HIToolbox           	0x00007fff97a17935 RunCurrentEventLoopInMode + 235\
+54  com.apple.HIToolbox           	0x00007fff97a17677 ReceiveNextEventCommon + 184\
+55  com.apple.HIToolbox           	0x00007fff97a175af _BlockUntilNextEventMatchingListInModeWithFilter + 71\
+56  com.apple.AppKit              	0x00007fff9150fdf6 _DPSNextEvent + 1067\
+57  com.apple.AppKit              	0x00007fff9150f226 -[NSApplication _nextEventMatchingEventMask:untilDate:inMode:dequeue:] + 454\
+58  com.apple.AppKit              	0x00007fff91503d80 -[NSApplication run] + 682\
+59  com.UNTProject.dateTimeTester 	0x0000000106bf4dc7 QCocoaEventDispatcher::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) + 1159 (qcocoaeventdispatcher.mm:418)\
+60  com.UNTProject.dateTimeTester 	0x0000000107b9a25a QEventLoop::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) + 122 (qeventloop.cpp:128)\
+61  com.UNTProject.dateTimeTester 	0x0000000107b9a476 QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>) + 518 (qeventloop.cpp:204)\
+62  com.UNTProject.dateTimeTester 	0x0000000107b9f034 QCoreApplication::exec() + 388 (qcoreapplication.cpp:1229)\
+63  com.UNTProject.dateTimeTester 	0x00000001073c7f86 QGuiApplication::exec() + 22 (qguiapplication.cpp:1529)\
+64  com.UNTProject.dateTimeTester 	0x0000000106cc6549 QApplication::exec() + 9 (qapplication.cpp:2978)\
+65  com.UNTProject.dateTimeTester 	0x000000010687b3f0 meth_QApplication_exec_(_object*, _object*) + 80\
+66  com.UNTProject.dateTimeTester 	0x0000000106abfa0c PyCFunction_Call + 220\
+67  com.UNTProject.dateTimeTester 	0x0000000106b4492d PyEval_EvalFrameEx + 23805\
+68  com.UNTProject.dateTimeTester 	0x0000000106b48ddb _PyEval_EvalCodeWithName + 3227\
+69  com.UNTProject.dateTimeTester 	0x0000000106b3ebb1 PyEval_EvalCode + 81\
+70  com.UNTProject.dateTimeTester 	0x0000000106b6184e PyImport_ImportFrozenModuleObject + 526\
+71  com.UNTProject.dateTimeTester 	0x0000000106b61942 PyImport_ImportFrozenModule + 34\
+72  com.UNTProject.dateTimeTester 	0x000000010658f18e pyqtdeploy_start(int, char**, _inittab*, char const*, char const*, char const**) + 1374 (pyqtdeploy_start.cpp:268)\
+73  com.UNTProject.dateTimeTester 	0x000000010658ec1d main + 61 (pyqtdeploy_main.cpp:113)\
+74  com.UNTProject.dateTimeTester 	0x000000010658ebd4 start + 52\
+}

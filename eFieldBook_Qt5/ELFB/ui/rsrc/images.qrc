@@ -1,0 +1,24 @@
+<RCC>
+	<qresource prefix="/">
+		<file>AdvSearch.png</file>
+		<file>BeginBtn.png</file>
+		<file>BeginBtn2.png</file>
+		<file>Clip.png</file>
+		<file>ControlPanel.png</file>
+		<file>EndBtn.png</file>
+		<file>FwdBtn.png</file>
+		<file>HelpBtn.png</file>
+		<file>Index3.png</file>
+		<file>New.png</file>
+		<file>NextBtn.png</file>
+		<file>PrevBtn.png</file>
+		<file>PushBtn.png</file>
+		<file>RtnBtn.png</file>
+		<file>Search.png</file>
+		<file>SpeakerBtn.png</file>
+		<file>addMulti.png</file>
+		<file>duplicate.png</file>
+		<file>infoBtn.png</file>
+		<file>Splash(book).png</file>
+	</qresource>
+</RCC>

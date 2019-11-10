@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SearchDSets</class>
+ <widget class="QDialog" name="SearchDSets">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>224</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="toolTip">
+   <string>Enter text to find in the fields where you wish to search. 
+Entering terms in more than one field will search for entries 
+that meet all search criteria. Enter &quot;&amp;&quot; between AND search 
+terms in the same field, place &quot;¬&quot; before terms for NOT searches. 
+For edge-sensitive searches, place &quot;#&quot; on the edge you wish the 
+search to key on (e.g., &quot;#an&quot; will find all words beginning with 
+the string &quot;an&quot;). Combine AND/NOT and &quot;#&quot; in the order &quot;¬#&quot;. 
+Use the checkboxes on the left to parameterize searches.</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>361</x>
+     <y>171</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>352</x>
+     <y>0</y>
+     <width>148</width>
+     <height>107</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Metadata</string>
+   </property>
+   <widget class="QPlainTextEdit" name="Source">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>39</y>
+      <width>60</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustIgnored</enum>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="Researcher">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>39</y>
+      <width>60</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="Date">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>78</y>
+      <width>60</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="Updated">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>78</y>
+      <width>60</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>22</y>
+      <width>35</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Source</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>22</y>
+      <width>51</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Researcher</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>61</y>
+      <width>35</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Date</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>61</y>
+      <width>51</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Updated</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>72</y>
+     <width>150</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Comments</string>
+   </property>
+   <widget class="QPlainTextEdit" name="Comments">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>22</y>
+      <width>134</width>
+      <height>42</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>182</x>
+     <y>72</y>
+     <width>150</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Keywords</string>
+   </property>
+   <widget class="QPlainTextEdit" name="Keywords">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>22</y>
+      <width>134</width>
+      <height>42</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>0</y>
+     <width>312</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Search text</string>
+   </property>
+   <widget class="QPlainTextEdit" name="SearchText">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>23</y>
+      <width>295</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>28</x>
+     <y>148</y>
+     <width>325</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="horizontalSpacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="1">
+     <widget class="QCheckBox" name="accentBtn">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Perform searches that ignore lexical accent.
+Search term must contain no accented characters.</string>
+      </property>
+      <property name="text">
+       <string>Ignore accents</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QCheckBox" name="appendBtn">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Search results will not overwrite the results
+of previous searches on &quot;Search&quot; card.</string>
+      </property>
+      <property name="text">
+       <string>Append results</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QCheckBox" name="caseBtn">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Perform case-insensitive searches</string>
+      </property>
+      <property name="text">
+       <string>Ignore case</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QCheckBox" name="diacritBtn">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Perform searches that ignore diacritics. 
+Search term must contain no diacritics.</string>
+      </property>
+      <property name="text">
+       <string>Ignore diacrits</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QCheckBox" name="wholeWordBtn">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Whole word</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QCheckBox" name="recOnlyBtn">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Recorded only</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QCheckBox" name="limitBtn">
+   <property name="geometry">
+    <rect>
+     <x>367</x>
+     <y>154</y>
+     <width>131</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <italic>true</italic>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>limit search to current card. Lines
+containing results will be highlighted.
+Does not support AND or NOT searches.</string>
+   </property>
+   <property name="text">
+    <string>find on this page only</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="clearBtn">
+   <property name="geometry">
+    <rect>
+     <x>393</x>
+     <y>119</y>
+     <width>60</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	max-height: 19px;
+	min-height: 19px;
+	max-width: 60px;
+	min-width: 60px;
+	background: #6698FF;
+	color: white;    
+	border: 0px solid black;
+	border-radius: 4px;
+    	padding: 0 0 0 0;
+    	margin: 0 0 0 0;
+}
+
+QPushButton:pressed {
+	background: #1E90FF;
+	border: 2px outset #E6E6FA;
+}
+
+QPushButton:disabled {
+	background: #E6E6FA;
+	border: 0px outset #E6E6FA;
+}</string>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>SearchText</tabstop>
+  <tabstop>Source</tabstop>
+  <tabstop>Researcher</tabstop>
+  <tabstop>Date</tabstop>
+  <tabstop>Updated</tabstop>
+  <tabstop>Comments</tabstop>
+  <tabstop>Keywords</tabstop>
+  <tabstop>caseBtn</tabstop>
+  <tabstop>accentBtn</tabstop>
+  <tabstop>appendBtn</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>SearchDSets</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>SearchDSets</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

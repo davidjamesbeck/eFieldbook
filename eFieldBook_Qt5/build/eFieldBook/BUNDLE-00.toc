@@ -1,0 +1,3 @@
+([('eFieldBook',
+   '/Users/David/Google Drive/Current/ELFB/eFieldBook_Qt5/dist/eFieldBook',
+   'EXECUTABLE')],)

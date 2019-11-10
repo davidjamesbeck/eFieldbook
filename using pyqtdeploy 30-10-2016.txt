@@ -1,0 +1,40 @@
+using pyqtdeploy
+http://pyqt.sourceforge.net/Docs/pyqtdeploy/static_builds.html
+http://wiki.qt.io/Building_Qt_5_from_Git
+
+1) make a PyQtDeploy directory ($DEPLOYMENT) and a sysroot-macosx subdirectory ($SYSROOT)
+2) export SYSROOT=/Users/David/OpenSource/ELFBDeployment/sysroot-macosx
+
+BUILD QT
+1) Qt installers seem to work now
+
+USING build-sysroot.py 
+(file:///Users/David/OpenSource/PyQtDeploy/sysroot-macosx/lib/python3.5/site-packages/pyqtdeploy-1.3.2.dev1610282346/doc/html/build_sysroot.html)
+
+1) create a src subdirectory inside $SYSROOT
+2) get the archived source files ('.zip', '.tar.gz', '.tar.xz', '.tar.bz2' formats) for Python, sip, and PyQt and put them in src. Don't extract!
+3) get the latest build-sysroot.py file from Mercurial (there's a link on the last page of the pyqtdeploy manual, use "raw" link to download file) and put it in $DEPLOYMENT
+4) cd $DEPLOYMENT
+6) hack the qmake(self) method to return the location of the qmake binary you want to use instead of the symbolic link the script creates (which seems not to work). 
+7) sudo python3 build-sysroot.py  --sysroot /Users/David/OpenSource/$SYSROOT --all
+7) This should take care of everything, though you might have to install the packages one by one (type --build package instead of --all. At this point see the documentation.)
+
+RUNNING PYQTDEPLOY
+1)cd $SYSROOT
+2) pyqtdeploy myproject.pdy
+
+BUNDLING WITH XCODE
+https://plashless.wordpress.com/2014/06/07/using-xcode-to-bundle-a-pyqt-pyqtdeployed-app-that-is-sandboxed-and-code-signed/
+1) Download and install the qtLibPathFacade module for Python (https://github.com/bootchk/qtLibPathFacade). Follow the example given there to add one line to your main(), before you instantiate QApplication. (See main script file of ELFB)
+2) cd /Users/David/OpenSource/$SYSROOT/build
+3) /Users/David/OpenSource/Qt5.7/5.7/clang_64/bin/qmake -spec macx-xcode eFieldbook.pro (this creates eFieldbook.xcodeproj)
+4) doubleclick to open in XCode
+5) select project in left sidebar of centre pane
+6) select “Build Phases” in the top menubar of the middle pane
+7) Select “+” in top left corner of new tab
+8) Choose “New Run Script Phase” and expand by clicking on triangle to the right of the new phase that appears at the bottom of the list
+9) paste in  “/Users/David/OpenSource/Qt5.7/5.7/clang_64/bin/macdeployqt ${BUILT_PRODUCTS_DIR}/eFieldbook.app”
+10) Choose “Capabilities” in top menubar of the middle pane, toggle “App Sandbox” to “ON”; set File access “User selected files”
+11) Work out the code signing later
+12) Go to Products > Archive in the XCode menubar at the top of of the screen
+

@@ -1,0 +1,24 @@
+<RCC>
+	<qresource prefix="/">
+		<file>ELFB/ui/RSRC/AdvSearch.png</file>
+		<file>ELFB/ui/RSRC/BeginBtn.png</file>
+		<file>ELFB/ui/RSRC/BeginBtn2.png</file>
+		<file>ELFB/ui/RSRC/Clip.png</file>
+		<file>ELFB/ui/RSRC/ControlPanel.png</file>
+		<file>ELFB/ui/RSRC/EndBtn.png</file>
+		<file>ELFB/ui/RSRC/FwdBtn.png</file>
+		<file>ELFB/ui/RSRC/HelpBtn.png</file>
+		<file>ELFB/ui/RSRC/Index3.png</file>
+		<file>ELFB/ui/RSRC/New.png</file>
+		<file>ELFB/ui/RSRC/NextBtn.png</file>
+		<file>ELFB/ui/RSRC/PrevBtn.png</file>
+		<file>ELFB/ui/RSRC/PushBtn.png</file>
+		<file>ELFB/ui/RSRC/RtnBtn.png</file>
+		<file>ELFB/ui/RSRC/Search.png</file>
+		<file>ELFB/ui/RSRC/SpeakerBtn.png</file>
+		<file>ELFB/ui/RSRC/addMulti.png</file>
+		<file>ELFB/ui/RSRC/duplicate.png</file>
+		<file>ELFB/ui/RSRC/infoBtn.png</file>
+		<file>ELFB/ui/RSRC/Splash(book).png</file>
+	</qresource>
+</RCC>

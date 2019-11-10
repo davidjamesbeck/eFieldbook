@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Tasks SYSTEM "Tasks-5.1.dtd">
+<!-- eric6 tasks file for project eFieldbook -->
+<!-- Saved: 2015-12-09, 15:20:54 -->
+<Tasks version="5.1">
+  <ProjectScanFilter></ProjectScanFilter>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: set up routine to extract time codes</Summary>
+    <Description></Description>
+    <Created>2015-11-09, 11:45:46</Created>
+    <Resource>
+      <Filename>newTextBtns.py</Filename>
+      <Linenumber>153</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: ??use case with gloss in two languages?</Summary>
+    <Description></Description>
+    <Created>2015-11-09, 11:45:46</Created>
+    <Resource>
+      <Filename>newTextBtns.py</Filename>
+      <Linenumber>169</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: need to parameterize for working language (L1 v. L2)</Summary>
+    <Description></Description>
+    <Created>2015-12-02, 10:23:50</Created>
+    <Resource>
+      <Filename>lexOnlyBtns.py</Filename>
+      <Linenumber>203</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: add small caps formatting to abbreviations???</Summary>
+    <Description></Description>
+    <Created>2015-12-05, 17:55:37</Created>
+    <Resource>
+      <Filename>update.py</Filename>
+      <Linenumber>188</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: needs to allow for l2 option)</Summary>
+    <Description></Description>
+    <Created>2015-12-06, 09:02:40</Created>
+    <Resource>
+      <Filename>cardLoader.py</Filename>
+      <Linenumber>557</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: needs to allow for l2 option)</Summary>
+    <Description></Description>
+    <Created>2015-12-06, 09:02:40</Created>
+    <Resource>
+      <Filename>cardLoader.py</Filename>
+      <Linenumber>570</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: when the autoparser is hooked up, feed two-line examples to it</Summary>
+    <Description></Description>
+    <Created>2015-12-06, 14:38:26</Created>
+    <Resource>
+      <Filename>textOnlyBtns.py</Filename>
+      <Linenumber>27</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: we want to insert this immediately after the example element for the preceding line</Summary>
+    <Description></Description>
+    <Created>2015-12-06, 14:38:26</Created>
+    <Resource>
+      <Filename>textOnlyBtns.py</Filename>
+      <Linenumber>55</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: will need to add index purge here, too</Summary>
+    <Description></Description>
+    <Created>2015-12-06, 14:38:26</Created>
+    <Resource>
+      <Filename>textOnlyBtns.py</Filename>
+      <Linenumber>158</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: this is largely redundant with the copyline method in egOnlyBtns.</Summary>
+    <Description></Description>
+    <Created>2015-12-06, 14:38:26</Created>
+    <Resource>
+      <Filename>textOnlyBtns.py</Filename>
+      <Linenumber>161</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: make sure this is works for L2</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 07:36:26</Created>
+    <Resource>
+      <Filename>textTable.py</Filename>
+      <Linenumber>33</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: build a &quot;set researcher for current session&quot; dialog, menu</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:53:39</Created>
+    <Resource>
+      <Filename>menus.py</Filename>
+      <Linenumber>269</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: build a &quot;set speaker for current session&quot; dialog, menu</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:53:39</Created>
+    <Resource>
+      <Filename>menus.py</Filename>
+      <Linenumber>270</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: build a &quot;set date for current session&quot; dialog, menu</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:53:39</Created>
+    <Resource>
+      <Filename>menus.py</Filename>
+      <Linenumber>271</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: autofill current spkr, rsrchr</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:53:39</Created>
+    <Resource>
+      <Filename>menus.py</Filename>
+      <Linenumber>392</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: need to add a path to file names that are duplicated in the list</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:53:39</Created>
+    <Resource>
+      <Filename>menus.py</Filename>
+      <Linenumber>648</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: link up with datasets</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:58:46</Created>
+    <Resource>
+      <Filename>egOnlyBtns.py</Filename>
+      <Linenumber>259</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: add items to index after duplication</Summary>
+    <Description></Description>
+    <Created>2015-12-07, 10:58:46</Created>
+    <Resource>
+      <Filename>egOnlyBtns.py</Filename>
+      <Linenumber>407</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: need to tweak this to allow multiple fields to be selected</Summary>
+    <Description></Description>
+    <Created>2015-12-09, 09:16:55</Created>
+    <Resource>
+      <Filename>soundBtns.py</Filename>
+      <Linenumber>138</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1">
+    <Summary>TODO: make Index not implemented yet</Summary>
+    <Description></Description>
+    <Created>2015-12-09, 12:31:53</Created>
+    <Resource>
+      <Filename>ui/fieldbook.py</Filename>
+      <Linenumber>1784</Linenumber>
+    </Resource>
+  </Task>
+</Tasks>

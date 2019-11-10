@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OutPutFormatDialog</class>
+ <widget class="QDialog" name="OutPutFormatDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>329</width>
+    <height>178</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Output format</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>5</y>
+     <width>300</width>
+     <height>130</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>300</width>
+     <height>130</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>300</width>
+     <height>130</height>
+    </size>
+   </property>
+   <property name="title">
+    <string>Select file format:</string>
+   </property>
+   <widget class="QCheckBox" name="HtmlBox">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>31</y>
+      <width>86</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>86</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>86</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>.html</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="TxtBox">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>64</y>
+      <width>86</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>86</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>86</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>.txt</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="customBox">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>98</y>
+      <width>86</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>86</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>86</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Custom …</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="formatBox">
+    <property name="geometry">
+     <rect>
+      <x>111</x>
+      <y>27</y>
+      <width>180</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>180</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>180</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="title">
+     <string>Custom formats</string>
+    </property>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>39</y>
+       <width>170</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>150</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>158</x>
+     <y>141</y>
+     <width>164</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

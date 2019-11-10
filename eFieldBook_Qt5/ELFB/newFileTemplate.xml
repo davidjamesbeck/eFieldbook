@@ -1,0 +1,27 @@
+<FieldBook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    Font="Lucida Grande" Language="" Dbase="new database" L1Choice="en" LastCard="LX00"
+    LastDset="DS00" LastEG="EX00" LastLex="LX00" LastText="TX00" eParse="off" lAuto="off" Orth="none"
+    xsi:noNamespaceSchemaLocation="ELFB.xsd" noText="1" noEG="1">
+    <Lex Date="2000-01-01" LexID="LX00" Update="2015-05-07" Done="0">
+        <Orth>new word</Orth>
+        <Def Index="1">
+            <L1/>
+        </Def>
+    </Lex>
+    <Text Date="2000-01-01" TextID="TX00" Update="2000-01-01">
+        <Title>new text</Title>
+    </Text>
+    <Dset Date="2000-01-01" DsetID="DS00" Update="2015-05-07">
+        <Title>new dataset</Title>
+        <Data/>
+    </Dset>
+    <Ex Date="2000-01-01" ExID="EX00" Update="2015-05-07">
+        <Line/>
+        <Mrph/>
+        <ILEG/>
+        <L1Gloss/>
+    </Ex>
+    <Speaker SCode="XX"><Name>none</Name></Speaker>
+    <Rschr RCode="YYY"><Name>none</Name></Rschr>
+    <Abbreviations/>
+</FieldBook>

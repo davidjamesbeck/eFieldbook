@@ -1,0 +1,16 @@
+
+<p>Enter text to find in the fields where you wish to search. Entering terms in more than one field will search for entries that meet all search criteria. 
+
+<p>Enter &quot;&amp;&quot; between AND search terms in the same field, place &quot;¬&quot; before terms for NOT searches. 
+
+<p>For edge-sensitive searches, place &quot;#&quot; on the edge you wish the search to key on (e.g., &quot;#an&quot; will find all words beginning with the string &quot;an&quot;). 
+
+<p>Combine AND/NOT and &quot;#&quot; in the order &quot;¬#&quot;. 
+
+<p>Enclose items, separated by whitespace, in angle brackets &quot;&lt;&gt;&quot; to restrict search to single words in the interlinear glosses (e.g., to find all words with both &quot;1obj–&quot;and &quot;3pl.sub–&quot;, type &quot;&lt;1obj– 3pl.sub–&gt;&quot; in the ILEG search field. This also works in the Morph field. Note that this means that angle brackets are reserved characters in these two fields and can't be searched for there.
+
+<p>Use the checkboxes on the left to parameterize searches. 
+
+<center><b>Regex</b></center>
+
+<p>You may enter regular expressions in any of the fields and will probably get good results (no guarantees). This means that <b>you must put a backslash before a question mark </b>(&quot;\?&quot;), parentheses (&quot;\( \)&quot;), or square brackets </b>(&quot;\[ \]&quot;). It is also best practice to group terms in parentheses (i.e., &quot;(a|á)&quot; rather than &quot;a|á&quot;), this seems to work better with the Qt regex parser.

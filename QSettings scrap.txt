@@ -1,0 +1,78 @@
+class MainWindow(QMainWindow, Ui_Fieldbook):
+    """
+    Class documentation goes here.
+    """
+    
+    def __init__(self, parent=None):
+        """
+        Constructor
+        
+        @param parent reference to the parent widget (QWidget)
+        """
+        super(MainWindow, self).__init__(parent)
+        QtWidgets.QApplication.setActiveWindow(self)
+        QtWidgets.QApplication.setKeyboardInputInterval(600)
+        font = QtGui.QFont()
+        font.setFamily("Helvetica Neue")
+        font.setWeight(50)
+        QtWidgets.QApplication.setFont(font)
+        self.ui = Ui_Fieldbook
+        self.settings = QtCore.QSettings(QtCore.QSettings.NativeFormat, QtCore.QSettings.UserScope, 'UNTProject', 'eFieldbook')
+        self.Alphabetizer = Alphabetizer
+        self.setupUi(self)
+        dataIndex.fldbk = self
+        dataIndex.homePath = path.expanduser("~")
+        self.setStyleSheet("QMessageBox QPushButton {border: 0px solid black;font-size: 10pts;padding: 0 5 0 5;"
+                                                    "border-radius: 4px;min-width: 50px;min-height: 23px;"
+                                                    "max-width: 180px;max-height: 23px;background: #6698FF;color: white;}")
+        
+        tabConstructors.grammarTableBuilder(self)
+        tabConstructors.defTableBuilder(self)  
+        tabConstructors.egTableBuilder(self)
+        tabConstructors.speakerTableBuilder(self)
+        tabConstructors.researcherTableBuilder(self)
+        tabConstructors.mediaTableBuilder(self)
+        tabConstructors.egAbbreviationsBuilder(self)
+        tabConstructors.indexAbbreviationsBuilder(self)
+                
+        '''Load XML'''
+        '''determine the file to be opened on startup'''
+        fname = None
+        if self.settings.value('LastFile') and QtCore.QFile.exists(self.settings.value('LastFile')):
+            '''previously open file in QSettings exists, fname is set'''
+            fname = self.settings.value('LastFile')
+            dataIndex.sourceFile = fname
+            xmlFile = QtCore.QFile(fname)
+            if xmlFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):
+                '''tries to open file using QFile'''
+                xmlStream = QtCore.QTextStream(xmlFile)
+                xmlString = xmlStream.readAll()
+                dataIndex.root = etree.XML(xmlString)
+                xmlFile.close()
+            else:
+                '''QFile.open() fails, fname reset to None'''
+                fname = None
+        if fname == None:
+            '''if there is no file specified, ask for a file to open'''
+            openFileDialog = QtWidgets.QFileDialog(self)
+            filePath = openFileDialog.directory().currentPath()
+            openFileDialog.setDirectory(filePath)
+            fname = openFileDialog.getOpenFileName(self, "Open...","","XML (*.xml)")
+            if len(fname[0]) != 0:
+                '''user selects file in FileDialog'''
+                fname = fname[0]
+                dataIndex.sourceFile = fname
+                xmltree = etree.parse(fname)
+                dataIndex.root = xmltree.getroot()
+                if fname in dataIndex.recentFile:
+                    del dataIndex.recentFile[dataIndex.recentFile.index(fname)]
+                dataIndex.recentFile.insert(0, fname)
+            else:
+                '''user presses 'Cancel' on the FileDialog'''
+                blankDbFile = QtCore.QFile(dataIndex.rootPath + '/ELFB/newFileTemplate.xml')
+                blankDbFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+                blankDbString = blankDbFile.readAll()
+                blankDbFile.close()
+                dataIndex.root = etree.XML(blankDbString)
+                dataIndex.sourceFile = 'blank database'  
+                menus.saveAsDb(self, 'newDb')

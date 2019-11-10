@@ -1,0 +1,1 @@
+a, b, ch, d, e, f, g, h, i, j, k, l, lh, m, n, ñ, o, p, r, s, t, tl, tz, u, w, x, y, -, *; =; exclude accents

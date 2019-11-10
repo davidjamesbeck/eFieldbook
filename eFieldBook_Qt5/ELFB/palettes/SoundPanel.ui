@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SoundPanel</class>
+ <widget class="QWidget" name="SoundPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>146</width>
+    <height>77</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QGroupBox" name="SoundBox">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>146</width>
+     <height>77</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton {
+    background: auto;
+}
+QToolButton:pressed {
+	border: 2px outset transparent;
+}</string>
+   </property>
+   <property name="title">
+    <string>Sound</string>
+   </property>
+   <widget class="QComboBox" name="Recordings">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>24</y>
+      <width>101</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>select and play recording. 
+Filename is placed on clipboard
+to paste into a text document.</string>
+    </property>
+    <property name="insertPolicy">
+     <enum>QComboBox::InsertAtTop</enum>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="PlaySoundBtn">
+    <property name="geometry">
+     <rect>
+      <x>112</x>
+      <y>24</y>
+      <width>27</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>play recording. Filename
+is placed on clipboard to
+paste into a text document.</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="SoundFileMeta">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>52</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>speaker info for recording</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="SoundMetaBtn">
+    <property name="geometry">
+     <rect>
+      <x>86</x>
+      <y>51</y>
+      <width>19</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>metadata</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="AddMediaBtn">
+    <property name="geometry">
+     <rect>
+      <x>108</x>
+      <y>52</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>add media file</string>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QToolButton {
+	background: #6698FF;
+	color: white;
+	border: 1px solid #6698FF;
+}
+
+QToolButton:pressed {
+	border: 2px outset #1E90FF;
+}</string>
+    </property>
+    <property name="text">
+     <string>+</string>
+    </property>
+    <property name="toolButtonStyle">
+     <enum>Qt::ToolButtonTextOnly</enum>
+    </property>
+    <property name="autoRaise">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="DelMediaBtn">
+    <property name="geometry">
+     <rect>
+      <x>125</x>
+      <y>52</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>delete media file</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QToolButton {
+	background: #6698FF;
+	color: white;
+	border: 1px solid #6698FF;
+}
+
+QToolButton:pressed {
+	border: 2px outset #1E90FF;
+}</string>
+    </property>
+    <property name="text">
+     <string>–</string>
+    </property>
+    <property name="toolButtonStyle">
+     <enum>Qt::ToolButtonTextOnly</enum>
+    </property>
+    <property name="autoRaise">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
