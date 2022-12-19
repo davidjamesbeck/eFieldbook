@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_ElanImporter(object):
     def setupUi(self, ElanImporter):
         ElanImporter.setObjectName("ElanImporter")
@@ -29,8 +30,8 @@ class Ui_ElanImporter(object):
         self.sourceList.setMinimumSize(QtCore.QSize(0, 157))
         self.sourceList.setMaximumSize(QtCore.QSize(300, 157))
         self.sourceList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.sourceList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.sourceList.setDragDropMode(QtWidgets.QAbstractItemView.DragOnly)
+        self.sourceList.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.sourceList.setDragDropMode(QtWidgets.QAbstractItemView.DragDropMode.DragDropMode.DragOnly)
         self.sourceList.setIndentation(5)
         self.sourceList.setUniformRowHeights(True)
         self.sourceList.setAllColumnsShowFocus(True)
@@ -42,10 +43,10 @@ class Ui_ElanImporter(object):
         self.targetList.setMinimumSize(QtCore.QSize(0, 157))
         self.targetList.setMaximumSize(QtCore.QSize(300, 157))
         self.targetList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.targetList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.targetList.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.targetList.setDragEnabled(True)
-        self.targetList.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
-        self.targetList.setDefaultDropAction(QtCore.Qt.MoveAction)
+        self.targetList.setDragDropMode(QtWidgets.QAbstractItemView.DragDropMode.DragDrop)
+        self.targetList.setDefaultDropAction(QtCore.Qt.DropAction.MoveAction)
         self.targetList.setColumnCount(0)
         self.targetList.setObjectName("targetList")
         self.targetList.setRowCount(0)
@@ -60,13 +61,13 @@ class Ui_ElanImporter(object):
         sizePolicy.setHeightForWidth(self.tMetadataBox.sizePolicy().hasHeightForWidth())
         self.tMetadataBox.setSizePolicy(sizePolicy)
         self.tMetadataBox.setStyleSheet("QPlainTextEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 16px;\n"
-"    min-width: 45px;\n"
-"    min-height: 16px;\n"
-"    padding: 1px;\n"
-"}")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 16px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 16px;\n"
+                                        "    padding: 1px;\n"
+                                        "}")
         self.tMetadataBox.setObjectName("tMetadataBox")
         self.formLayoutWidget = QtWidgets.QWidget(self.tMetadataBox)
         self.formLayoutWidget.setGeometry(QtCore.QRect(9, 30, 414, 20))
@@ -150,7 +151,8 @@ class Ui_ElanImporter(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
         self.buttonBox.setSizePolicy(sizePolicy)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok|QtWidgets.QDialogButtonBox.StandardButton.Reset)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok | QtWidgets.QDialogButtonBox.StandardButton.Reset)
         self.buttonBox.setObjectName("buttonBox")
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralWidget)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(13, 9, 426, 41))
@@ -185,7 +187,7 @@ class Ui_ElanImporter(object):
         self.newSource.setToolTip(_translate("ElanImporter", "original speaker source"))
         self.tLabelDate.setText(_translate("ElanImporter", "Date"))
         self.newDate.setToolTip(_translate("ElanImporter", "date collected. yyyy–MM–dd \n"
-"format recommended"))
+                                                           "format recommended"))
         self.tLabelUpdated.setText(_translate("ElanImporter", "Transcribers"))
         self.newTranscriber.setToolTip(_translate("ElanImporter", "date last updated"))
         self.label_5.setText(_translate("ElanImporter", "Title:"))
@@ -193,10 +195,10 @@ class Ui_ElanImporter(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     ElanImporter = QtWidgets.QDialog()
     ui = Ui_ElanImporter()
     ui.setupUi(ElanImporter)
     ElanImporter.show()
     sys.exit(app.exec())
-

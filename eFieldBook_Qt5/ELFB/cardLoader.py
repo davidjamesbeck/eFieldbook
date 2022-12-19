@@ -833,7 +833,7 @@ def loadLexCard(lexRoot, navBtn=False):
           if i != len(subentry)-1:
               c2List = c2List + ', '
       if len(fldbk.lGrammar.toPlainText()) != 0:
-          c2List = "<br />" + c2List
+          c2List = c2List
       fldbk.lGrammar.insertHtml(c2List)
       
     subentry = lexRoot.findall('Cf')
@@ -1059,7 +1059,7 @@ def addTextWidget(fldbk, textRoot):
     """
     numLines = len(textRoot.findall('Ln'))
     progDialog = QtWidgets.QProgressDialog("Loading text ...", "Stop", 0, numLines, fldbk)
-    progDialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
+    progDialog.setWindowModality(QtCore.Qt.WindowModality.WindowModality.WindowModal)
     progDialog.setWindowTitle('Loading')
     j = 0
     fldbk.tText.setVisible(0)

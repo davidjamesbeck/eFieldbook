@@ -1,19 +1,19 @@
-##from PyQt6 import QtWidgets
 from ELFB import cardStackVar, dataIndex, cardLoader
 
 '''class for moving forward and back'''
 
-def goToCard(fldbk,direction):
-    ##move through cards on buttonclicks, called by buttons
+
+def goToCard(fldbk, direction):
+    """move through cards on buttonclicks, called by buttons"""
     if direction == -1:
-        targetID = cardStackVar.theQueue[cardStackVar.theCounter-1]
+        targetID = cardStackVar.theQueue[cardStackVar.theCounter - 1]
         cardStackVar.theCounter = cardStackVar.theCounter - 1
         fldbk.lFwdBtn.setEnabled(1)
         fldbk.tFwdBtn.setEnabled(1)
         fldbk.eFwdBtn.setEnabled(1)
         fldbk.dFwdBtn.setEnabled(1)
     else:
-        targetID = cardStackVar.theQueue[cardStackVar.theCounter+1]
+        targetID = cardStackVar.theQueue[cardStackVar.theCounter + 1]
         cardStackVar.theCounter += 1
         fldbk.lRtnBtn.setEnabled(1)
         fldbk.tRtnBtn.setEnabled(1)
@@ -28,7 +28,7 @@ def goToCard(fldbk,direction):
         fldbk.lRtnBtn.setEnabled(0)
         fldbk.tRtnBtn.setEnabled(0)
         fldbk.eRtnBtn.setEnabled(0)
-        fldbk.dRtnBtn.setEnabled(0)                
+        fldbk.dRtnBtn.setEnabled(0)
     if targetID[0] == "L":
         navBar = fldbk.lLexNav
         targetCard = dataIndex.lexDict[targetID]
@@ -61,16 +61,16 @@ def goToCard(fldbk,direction):
     try:
         cardLoader.resetNavBars(navBar, targetID)
     except UnboundLocalError:
-        fldbk.tabWidget.setCurrentIndex(0)                
+        fldbk.tabWidget.setCurrentIndex(0)
+
 
 def addToQueue(currentCard):
-    '''add card to list, remove from top if more than 20, called by cardloaders'''
-#    fldbk = dataIndex.fldbk
+    """add card to list, remove from top if more than 20, called by cardloaders"""
     if cardStackVar.theQueue[cardStackVar.theCounter] != currentCard:
         if len(cardStackVar.theQueue) - 1 == cardStackVar.theCounter:
             cardStackVar.theQueue.append(currentCard)
         else:
-            cardStackVar.theQueue = cardStackVar.theQueue[0:cardStackVar.theCounter+1]
+            cardStackVar.theQueue = cardStackVar.theQueue[0:cardStackVar.theCounter + 1]
             cardStackVar.theQueue.append(currentCard)
         if len(cardStackVar.theQueue) <= 20:
             cardStackVar.theCounter += 1

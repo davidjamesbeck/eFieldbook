@@ -8,14 +8,16 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_SearchDSets(object):
     def setupUi(self, SearchDSets):
         SearchDSets.setObjectName("SearchDSets")
         SearchDSets.resize(520, 224)
         self.buttonBox = QtWidgets.QDialogButtonBox(SearchDSets)
         self.buttonBox.setGeometry(QtCore.QRect(361, 171, 141, 41))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.groupBox = QtWidgets.QGroupBox(SearchDSets)
         self.groupBox.setGeometry(QtCore.QRect(352, 0, 148, 107))
@@ -26,7 +28,7 @@ class Ui_SearchDSets(object):
         font.setPointSize(9)
         self.Source.setFont(font)
         self.Source.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.Source.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.Source.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.SizeAdjustPolicy.AdjustIgnored)
         self.Source.setObjectName("Source")
         self.Researcher = QtWidgets.QPlainTextEdit(self.groupBox)
         self.Researcher.setGeometry(QtCore.QRect(80, 39, 60, 20))
@@ -156,27 +158,27 @@ class Ui_SearchDSets(object):
         self.clearBtn = QtWidgets.QPushButton(SearchDSets)
         self.clearBtn.setGeometry(QtCore.QRect(393, 119, 60, 19))
         self.clearBtn.setStyleSheet("QPushButton {\n"
-"    max-height: 19px;\n"
-"    min-height: 19px;\n"
-"    max-width: 60px;\n"
-"    min-width: 60px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #E6E6FA;\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"    background: #E6E6FA;\n"
-"    border: 0px outset #E6E6FA;\n"
-"}")
+                                    "    max-height: 19px;\n"
+                                    "    min-height: 19px;\n"
+                                    "    max-width: 60px;\n"
+                                    "    min-width: 60px;\n"
+                                    "    background: #6698FF;\n"
+                                    "    color: white;    \n"
+                                    "    border: 0px solid black;\n"
+                                    "    border-radius: 4px;\n"
+                                    "        padding: 0 0 0 0;\n"
+                                    "        margin: 0 0 0 0;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton:pressed {\n"
+                                    "    background: #1E90FF;\n"
+                                    "    border: 2px outset #E6E6FA;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton:disabled {\n"
+                                    "    background: #E6E6FA;\n"
+                                    "    border: 0px outset #E6E6FA;\n"
+                                    "}")
         self.clearBtn.setObjectName("clearBtn")
 
         self.retranslateUi(SearchDSets)
@@ -198,13 +200,13 @@ class Ui_SearchDSets(object):
         _translate = QtCore.QCoreApplication.translate
         SearchDSets.setWindowTitle(_translate("SearchDSets", "Dialog"))
         SearchDSets.setToolTip(_translate("SearchDSets", "Enter text to find in the fields where you wish to search. \n"
-"Entering terms in more than one field will search for entries \n"
-"that meet all search criteria. Enter \"&\" between AND search \n"
-"terms in the same field, place \"¬\" before terms for NOT searches. \n"
-"For edge-sensitive searches, place \"#\" on the edge you wish the \n"
-"search to key on (e.g., \"#an\" will find all words beginning with \n"
-"the string \"an\"). Combine AND/NOT and \"#\" in the order \"¬#\". \n"
-"Use the checkboxes on the left to parameterize searches."))
+                                                         "Entering terms in more than one field will search for entries \n"
+                                                         "that meet all search criteria. Enter \"&\" between AND search \n"
+                                                         "terms in the same field, place \"¬\" before terms for NOT searches. \n"
+                                                         "For edge-sensitive searches, place \"#\" on the edge you wish the \n"
+                                                         "search to key on (e.g., \"#an\" will find all words beginning with \n"
+                                                         "the string \"an\"). Combine AND/NOT and \"#\" in the order \"¬#\". \n"
+                                                         "Use the checkboxes on the left to parameterize searches."))
         self.groupBox.setTitle(_translate("SearchDSets", "Metadata"))
         self.label.setText(_translate("SearchDSets", "Source"))
         self.label_2.setText(_translate("SearchDSets", "Researcher"))
@@ -214,31 +216,31 @@ class Ui_SearchDSets(object):
         self.groupBox_3.setTitle(_translate("SearchDSets", "Keywords"))
         self.groupBox_4.setTitle(_translate("SearchDSets", "Search text"))
         self.accentBtn.setToolTip(_translate("SearchDSets", "Perform searches that ignore lexical accent.\n"
-"Search term must contain no accented characters."))
+                                                            "Search term must contain no accented characters."))
         self.accentBtn.setText(_translate("SearchDSets", "Ignore accents"))
         self.appendBtn.setToolTip(_translate("SearchDSets", "Search results will not overwrite the results\n"
-"of previous searches on \"Search\" card."))
+                                                            "of previous searches on \"Search\" card."))
         self.appendBtn.setText(_translate("SearchDSets", "Append results"))
         self.caseBtn.setToolTip(_translate("SearchDSets", "Perform case-insensitive searches"))
         self.caseBtn.setText(_translate("SearchDSets", "Ignore case"))
         self.diacritBtn.setToolTip(_translate("SearchDSets", "Perform searches that ignore diacritics. \n"
-"Search term must contain no diacritics."))
+                                                             "Search term must contain no diacritics."))
         self.diacritBtn.setText(_translate("SearchDSets", "Ignore diacrits"))
         self.wholeWordBtn.setText(_translate("SearchDSets", "Whole word"))
         self.recOnlyBtn.setText(_translate("SearchDSets", "Recorded only"))
         self.limitBtn.setToolTip(_translate("SearchDSets", "limit search to current card. Lines\n"
-"containing results will be highlighted.\n"
-"Does not support AND or NOT searches."))
+                                                           "containing results will be highlighted.\n"
+                                                           "Does not support AND or NOT searches."))
         self.limitBtn.setText(_translate("SearchDSets", "find on this page only"))
         self.clearBtn.setText(_translate("SearchDSets", "Clear"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     SearchDSets = QtWidgets.QDialog()
     ui = Ui_SearchDSets()
     ui.setupUi(SearchDSets)
     SearchDSets.show()
     sys.exit(app.exec())
-

@@ -6,7 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
+
 
 class Ui_DerivationManager(object):
     def setupUi(self, DerivationManager):
@@ -20,11 +21,12 @@ class Ui_DerivationManager(object):
         self.lexList = QtWidgets.QListView(self.groupBox)
         self.lexList.setGeometry(QtCore.QRect(9, 9, 262, 392))
         self.lexList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.lexList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.lexList.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.lexList.setObjectName("lexList")
         self.buttonBox = QtWidgets.QDialogButtonBox(DerivationManager)
         self.buttonBox.setGeometry(QtCore.QRect(123, 431, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(DerivationManager)
@@ -37,10 +39,10 @@ class Ui_DerivationManager(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     DerivationManager = QtWidgets.QDialog()
     ui = Ui_DerivationManager()
     ui.setupUi(DerivationManager)
     DerivationManager.show()
     sys.exit(app.exec())
-

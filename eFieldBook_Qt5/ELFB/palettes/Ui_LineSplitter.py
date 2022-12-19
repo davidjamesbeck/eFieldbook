@@ -6,7 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -96,7 +97,8 @@ class Ui_Dialog(object):
         self.label_7.setObjectName("label_7")
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(901, 398, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(Dialog)
@@ -105,7 +107,8 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Line splitter"))
-        self.label.setText(_translate("Dialog", "Select the column where the new example begins by clicking on its number."))
+        self.label.setText(
+            _translate("Dialog", "Select the column where the new example begins by clicking on its number."))
         self.label_2.setText(_translate("Dialog", "First half (line)"))
         self.label_3.setText(_translate("Dialog", "Second half (line)"))
         self.label_4.setText(_translate("Dialog", "First half (L1)"))
@@ -116,10 +119,10 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec())
-

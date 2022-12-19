@@ -3,81 +3,95 @@ from ELFB import cardLoader, cardStack, dataIndex
 
 '''navigation buttons'''
 
+
 def btnForward(fldbk):
     cardStack.goToCard(fldbk, +1)
+
 
 def btnBack(fldbk):
     cardStack.goToCard(fldbk, -1)
 
+
 def lastLxCard(fldbk):
     navBar = fldbk.lLexNav
     dct = dataIndex.lexDict
-    targetCard = lastCard(navBar,dct)
+    targetCard = lastCard(navBar, dct)
     cardLoader.loadLexCard(targetCard)
+
 
 def lastTxtCard(fldbk):
     navBar = fldbk.tTextNav
     dct = dataIndex.textDict
-    targetCard = lastCard(navBar,dct)
+    targetCard = lastCard(navBar, dct)
     cardLoader.loadTextCard(targetCard)
+
 
 def LastExCard(fldbk):
     egList = list(dataIndex.exDict.keys())
-    targetCard = dataIndex.exDict[egList[len(dataIndex.exDict)-1]]
+    targetCard = dataIndex.exDict[egList[len(dataIndex.exDict) - 1]]
     cardLoader.loadExCard(targetCard)
+
 
 def lastDsetCard(fldbk):
     navBar = fldbk.dDataNav
     dct = dataIndex.dataDict
-    targetCard = lastCard(navBar,dct)
+    targetCard = lastCard(navBar, dct)
     cardLoader.loadDataCard(targetCard)
 
-def lastCard(navBar,dct):
+
+def lastCard(navBar, dct):
     lastItem = navBar.model().rowCount() - 1
-    data = navBar.model().index(lastItem,0).data(32)
+    data = navBar.model().index(lastItem, 0).data(32)
     targetCard = dct[data]
-    navBar.setCurrentIndex(navBar.model().index(lastItem,0))
+    navBar.setCurrentIndex(navBar.model().index(lastItem, 0))
     navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
     return targetCard
-    
+
+
 def firstLxCard(fldbk):
     navBar = fldbk.lLexNav
     dct = dataIndex.lexDict
-    targetCard = firstCard(navBar,dct)
+    targetCard = firstCard(navBar, dct)
     cardLoader.loadLexCard(targetCard)
+
 
 def firstTxtCard(fldbk):
     navBar = fldbk.tTextNav
     dct = dataIndex.textDict
-    targetCard = firstCard(navBar,dct)
+    targetCard = firstCard(navBar, dct)
     cardLoader.loadTextCard(targetCard)
+
 
 def firstEgCard(fldbk):
     egList = list(dataIndex.exDict.keys())
     targetCard = dataIndex.exDict[egList[0]]
     cardLoader.loadExCard(targetCard)
 
+
 def firstDsetCard(fldbk):
     navBar = fldbk.dDataNav
     dct = dataIndex.dataDict
-    targetCard = firstCard(navBar,dct)
+    targetCard = firstCard(navBar, dct)
     cardLoader.loadDataCard(targetCard)
 
-def firstCard(navBar,dct):
-    data = navBar.model().index(0,0).data(32)
+
+def firstCard(navBar, dct):
+    data = navBar.model().index(0, 0).data(32)
     targetCard = dct[data]
-    navBar.setCurrentIndex(navBar.model().index(0,0))
+    navBar.setCurrentIndex(navBar.model().index(0, 0))
     navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
     return targetCard
+
 
 def goPrevLx(fldbk):
     navBar = fldbk.lLexNav
     dct = dataIndex.lexDict
-    targetCard = goPrev(navBar,dct)
+    targetCard = goPrev(navBar, dct)
     cardLoader.loadLexCard(targetCard)
 
+
 def goPrevEg(fldbk):
-    currentID = dataIndex.currentCard               
+    currentID = dataIndex.currentCard
     i = 1
     for child in dataIndex.root.iter('Ex'):
         if child.attrib.get('ExID') != currentID:
@@ -90,26 +104,29 @@ def goPrevEg(fldbk):
                 prevID = currentID
     targetCard = dataIndex.exDict[prevID]
     cardLoader.loadExCard(targetCard)
-    
+
+
 def goPrevTxt(fldbk):
     navBar = fldbk.tTextNav
     dct = dataIndex.textDict
-    targetCard = goPrev(navBar,dct)
+    targetCard = goPrev(navBar, dct)
     cardLoader.loadTextCard(targetCard)
+
 
 def goPrevDset(fldbk):
     navBar = fldbk.dDataNav
     dct = dataIndex.dataDict
-    targetCard = goPrev(navBar,dct)
+    targetCard = goPrev(navBar, dct)
     cardLoader.loadDataCard(targetCard)
 
-def goPrev(navBar,dct):
+
+def goPrev(navBar, dct):
     try:
         if navBar.currentIndex().row() == 0:
             current = navBar.model().rowCount() - 1
         else:
             current = navBar.currentIndex().row() - 1
-        navBar.setCurrentIndex(navBar.model().index(current,0))
+        navBar.setCurrentIndex(navBar.model().index(current, 0))
         navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
         data = navBar.currentIndex().data(32)
         targetCard = dct[data]
@@ -117,11 +134,13 @@ def goPrev(navBar,dct):
     except AttributeError:
         pass
 
+
 def goNextLx(fldbk):
     navBar = fldbk.lLexNav
     dct = dataIndex.lexDict
-    targetCard = goNext(navBar,dct)
+    targetCard = goNext(navBar, dct)
     cardLoader.loadLexCard(targetCard)
+
 
 def goNextEg(fldbk):
     currentID = dataIndex.currentCard
@@ -139,25 +158,28 @@ def goNextEg(fldbk):
         nextID = dataIndex.root.find('Ex').attrib.get('ExID')
         targetCard = dataIndex.exDict[nextID]
     cardLoader.loadExCard(targetCard)
-    
+
+
 def goNextTxt(fldbk):
     navBar = fldbk.tTextNav
     dct = dataIndex.textDict
-    targetCard = goNext(navBar,dct)
+    targetCard = goNext(navBar, dct)
     cardLoader.loadTextCard(targetCard)
+
 
 def goNextDset(fldbk):
     navBar = fldbk.dDataNav
     dct = dataIndex.dataDict
-    targetCard = goNext(navBar,dct)
+    targetCard = goNext(navBar, dct)
     cardLoader.loadDataCard(targetCard)
 
-def goNext(navBar,dct):
+
+def goNext(navBar, dct):
     if navBar.currentIndex().row() == navBar.model().rowCount() - 1:
         current = 0
     else:
         current = navBar.currentIndex().row() + 1
-    navBar.setCurrentIndex(navBar.model().index(current,0))
+    navBar.setCurrentIndex(navBar.model().index(current, 0))
     navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
     data = navBar.currentIndex().data(32)
     targetCard = dct[data]

@@ -79,7 +79,7 @@ class LineTextWidget(QFrame):
         self.setFrameStyle(QFrame.Shape.StyledPanel | QFrame.Shadow.Sunken)
  
         self.edit = QTextEdit()
-        self.edit.setFrameStyle(QFrame.NoFrame)
+        self.edit.setFrameStyle(QFrame.Shape.NoFrame)
         self.edit.setAcceptRichText(False)
  
         self.number_bar = self.NumberBar()

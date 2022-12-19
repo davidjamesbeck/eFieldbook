@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_NewLexDialog(object):
     def setupUi(self, NewLexDialog):
         NewLexDialog.setObjectName("NewLexDialog")
@@ -74,7 +75,8 @@ class Ui_NewLexDialog(object):
         self.label_3.setObjectName("label_3")
         self.buttonBox = QtWidgets.QDialogButtonBox(NewLexDialog)
         self.buttonBox.setGeometry(QtCore.QRect(224, 306, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(NewLexDialog)
@@ -84,7 +86,7 @@ class Ui_NewLexDialog(object):
         _translate = QtCore.QCoreApplication.translate
         NewLexDialog.setWindowTitle(_translate("NewLexDialog", "New lexical entry"))
         self.explanation.setText(_translate("NewLexDialog", "Provide the information required to start a new entry.\n"
-"Additional information can be added in the tab view."))
+                                                            "Additional information can be added in the tab view."))
         self.groupBox.setTitle(_translate("NewLexDialog", "Metadata"))
         self.label.setText(_translate("NewLexDialog", "Speaker"))
         self.label_2.setText(_translate("NewLexDialog", "Researcher"))
@@ -95,10 +97,10 @@ class Ui_NewLexDialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     NewLexDialog = QtWidgets.QDialog()
     ui = Ui_NewLexDialog()
     ui.setupUi(NewLexDialog)
     NewLexDialog.show()
     sys.exit(app.exec())
-

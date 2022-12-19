@@ -8,29 +8,30 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_LexSearchForm(object):
     def setupUi(self, LexSearchForm):
         LexSearchForm.setObjectName("LexSearchForm")
         LexSearchForm.resize(1126, 686)
         LexSearchForm.setAutoFillBackground(True)
         LexSearchForm.setStyleSheet("QFrame {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 8px;\n"
-"     padding: 0px;\n"
-"     background-color: rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 8px;\n"
-"     padding: 0px;\n"
-"     background-color: rgb(255, 255, 255);\n"
-"}")
+                                    "     border: 0px solid black;\n"
+                                    "     border-radius: 8px;\n"
+                                    "     padding: 0px;\n"
+                                    "     background-color: rgb(255, 255, 255);\n"
+                                    "}\n"
+                                    "\n"
+                                    "QLineEdit {\n"
+                                    "     border: 0px solid black;\n"
+                                    "     border-radius: 8px;\n"
+                                    "     padding: 0px;\n"
+                                    "     background-color: rgb(255, 255, 255);\n"
+                                    "}")
         self.lSearchHeader = QtWidgets.QGroupBox(LexSearchForm)
         self.lSearchHeader.setGeometry(QtCore.QRect(7, -2, 965, 138))
         self.lSearchHeader.setStyleSheet("QLineEdit {\n"
-"    padding-left: 3px;\n"
-"}")
+                                         "    padding-left: 3px;\n"
+                                         "}")
         self.lSearchHeader.setObjectName("lSearchHeader")
         self.lSearchOrth = QtWidgets.QLineEdit(self.lSearchHeader)
         self.lSearchOrth.setGeometry(QtCore.QRect(74, 24, 473, 39))
@@ -38,10 +39,10 @@ class Ui_LexSearchForm(object):
         font.setPointSize(18)
         self.lSearchOrth.setFont(font)
         self.lSearchOrth.setStyleSheet("QLineEdit {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 0px;\n"
-"     padding: 0px;\n"
-"}")
+                                       "     border: 0px solid black;\n"
+                                       "     border-radius: 0px;\n"
+                                       "     padding: 0px;\n"
+                                       "}")
         self.lSearchOrth.setObjectName("lSearchOrth")
         self.lSearchIPA = QtWidgets.QLineEdit(self.lSearchHeader)
         self.lSearchIPA.setGeometry(QtCore.QRect(74, 68, 473, 30))
@@ -49,10 +50,10 @@ class Ui_LexSearchForm(object):
         font.setPointSize(12)
         self.lSearchIPA.setFont(font)
         self.lSearchIPA.setStyleSheet("QLineEdit {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 0px;\n"
-"     padding: 0px;\n"
-"}")
+                                      "     border: 0px solid black;\n"
+                                      "     border-radius: 0px;\n"
+                                      "     padding: 0px;\n"
+                                      "}")
         self.lSearchIPA.setObjectName("lSearchIPA")
         self.notations = QtWidgets.QGroupBox(self.lSearchHeader)
         self.notations.setGeometry(QtCore.QRect(703, 22, 194, 112))
@@ -121,17 +122,17 @@ class Ui_LexSearchForm(object):
         sizePolicy.setHeightForWidth(self.lMetadataBox.sizePolicy().hasHeightForWidth())
         self.lMetadataBox.setSizePolicy(sizePolicy)
         self.lMetadataBox.setStyleSheet("QLineEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 16px;\n"
-"    min-width: 45px;\n"
-"    min-height: 16px;\n"
-"    padding: 1px;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    background: transparent;\n"
-"}")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 16px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 16px;\n"
+                                        "    padding: 1px;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QLabel {\n"
+                                        "    background: transparent;\n"
+                                        "}")
         self.lMetadataBox.setObjectName("lMetadataBox")
         self.lLabelSource = QtWidgets.QLabel(self.lMetadataBox)
         self.lLabelSource.setGeometry(QtCore.QRect(8, 22, 35, 16))
@@ -196,14 +197,16 @@ class Ui_LexSearchForm(object):
         self.lL1Box.setObjectName("lL1Box")
         self.lL1Search = QtWidgets.QLineEdit(self.lL1Box)
         self.lL1Search.setGeometry(QtCore.QRect(7, 26, 689, 116))
-        self.lL1Search.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lL1Search.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lL1Search.setObjectName("lL1Search")
         self.verticalLayout.addWidget(self.lL1Box)
         self.lL2Box = QtWidgets.QGroupBox(self.lDefBox)
         self.lL2Box.setObjectName("lL2Box")
         self.lL2Search = QtWidgets.QLineEdit(self.lL2Box)
         self.lL2Search.setGeometry(QtCore.QRect(7, 26, 689, 116))
-        self.lL2Search.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lL2Search.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lL2Search.setObjectName("lL2Search")
         self.verticalLayout.addWidget(self.lL2Box)
         self.lIndexBox = QtWidgets.QGroupBox(LexSearchForm)
@@ -221,12 +224,13 @@ class Ui_LexSearchForm(object):
         self.lKeywordsBox.setMinimumSize(QtCore.QSize(220, 0))
         self.lKeywordsBox.setAutoFillBackground(False)
         self.lKeywordsBox.setStyleSheet("QGroupBox.title {\n"
-"    background-color: transparent;\n"
-"}")
+                                        "    background-color: transparent;\n"
+                                        "}")
         self.lKeywordsBox.setObjectName("lKeywordsBox")
         self.lSearchKeywordIndex = QtWidgets.QLineEdit(self.lKeywordsBox)
         self.lSearchKeywordIndex.setGeometry(QtCore.QRect(7, 25, 201, 43))
-        self.lSearchKeywordIndex.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lSearchKeywordIndex.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchKeywordIndex.setObjectName("lSearchKeywordIndex")
         self.horizontalLayout_3.addWidget(self.lKeywordsBox)
         self.lPrimaryIndexBox = QtWidgets.QGroupBox(self.lIndexBox)
@@ -239,7 +243,8 @@ class Ui_LexSearchForm(object):
         self.lPrimaryIndexBox.setObjectName("lPrimaryIndexBox")
         self.lSearchPrimaryIndex = QtWidgets.QLineEdit(self.lPrimaryIndexBox)
         self.lSearchPrimaryIndex.setGeometry(QtCore.QRect(7, 25, 207, 43))
-        self.lSearchPrimaryIndex.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lSearchPrimaryIndex.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchPrimaryIndex.setObjectName("lSearchPrimaryIndex")
         self.horizontalLayout_3.addWidget(self.lPrimaryIndexBox)
         self.lSecondaryIndexBox = QtWidgets.QGroupBox(self.lIndexBox)
@@ -252,7 +257,8 @@ class Ui_LexSearchForm(object):
         self.lSecondaryIndexBox.setObjectName("lSecondaryIndexBox")
         self.lSearchSecondaryIndex = QtWidgets.QLineEdit(self.lSecondaryIndexBox)
         self.lSearchSecondaryIndex.setGeometry(QtCore.QRect(7, 25, 207, 43))
-        self.lSearchSecondaryIndex.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lSearchSecondaryIndex.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchSecondaryIndex.setObjectName("lSearchSecondaryIndex")
         self.horizontalLayout_3.addWidget(self.lSecondaryIndexBox)
         self.instructionBox = QtWidgets.QGroupBox(LexSearchForm)
@@ -333,7 +339,8 @@ class Ui_LexSearchForm(object):
         self.verticalLayout_2.addWidget(self.setLangBtn)
         self.lSearchNotes = QtWidgets.QLineEdit(LexSearchForm)
         self.lSearchNotes.setGeometry(QtCore.QRect(495, 596, 403, 54))
-        self.lSearchNotes.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.lSearchNotes.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchNotes.setObjectName("lSearchNotes")
 
         self.retranslateUi(LexSearchForm)
@@ -343,7 +350,7 @@ class Ui_LexSearchForm(object):
         _translate = QtCore.QCoreApplication.translate
         LexSearchForm.setWindowTitle(_translate("LexSearchForm", "Form"))
         LexSearchForm.setToolTip(_translate("LexSearchForm", "Perform searches that ignore diacritics.\n"
-"Search term must contain no diacritics."))
+                                                             "Search term must contain no diacritics."))
         self.lSearchHeader.setTitle(_translate("LexSearchForm", "Lexicographic info"))
         self.lSearchOrth.setToolTip(_translate("LexSearchForm", "search orthographic form"))
         self.lSearchIPA.setToolTip(_translate("LexSearchForm", "search phonemic form"))
@@ -358,9 +365,9 @@ class Ui_LexSearchForm(object):
         self.lSearchDialectName.setToolTip(_translate("LexSearchForm", "search by dialects"))
         self.lDialectSearch.setToolTip(_translate("LexSearchForm", "search for dialectal forms"))
         self.lGrmDialectSearch.setToolTip(_translate("LexSearchForm", "search for dialect-specific \n"
-"grammatical forms"))
+                                                                      "grammatical forms"))
         self.lC2DialectSearch.setToolTip(_translate("LexSearchForm", "search for dialect-specific \n"
-"alternative forms"))
+                                                                     "alternative forms"))
         self.lMetadataBox.setTitle(_translate("LexSearchForm", "Metadata"))
         self.lLabelSource.setText(_translate("LexSearchForm", "Source"))
         self.lLabelDate.setText(_translate("LexSearchForm", "Date"))
@@ -386,7 +393,7 @@ class Ui_LexSearchForm(object):
         self.lSearchSecondaryIndex.setToolTip(_translate("LexSearchForm", "search secondary language index"))
         self.instructionBox.setTitle(_translate("LexSearchForm", "Instructions"))
         self.sDoneBtn.setToolTip(_translate("LexSearchForm", "Check box to search only completed entries.\n"
-"Clear box to search for unfinished entries."))
+                                                             "Clear box to search for unfinished entries."))
         self.sDoneBtn.setText(_translate("LexSearchForm", "Done?"))
         self.doSearch.setToolTip(_translate("LexSearchForm", "Perform search"))
         self.doSearch.setText(_translate("LexSearchForm", "Submit"))
@@ -398,11 +405,11 @@ class Ui_LexSearchForm(object):
         self.caseBtn.setToolTip(_translate("LexSearchForm", "Perform case-insensitive searches."))
         self.caseBtn.setText(_translate("LexSearchForm", " Ignore case"))
         self.accentBtn.setToolTip(_translate("LexSearchForm", "Perform searches that ignore lexical accent.\n"
-"Search term must contain no accented characters."))
+                                                              "Search term must contain no accented characters."))
         self.accentBtn.setText(_translate("LexSearchForm", " Ignore accents"))
         self.diacritBtn.setText(_translate("LexSearchForm", " Ignore diacrits"))
         self.appendBtn.setToolTip(_translate("LexSearchForm", "Search results will not overwrite the results\n"
-"of previous searches on \"Search\" card."))
+                                                              "of previous searches on \"Search\" card."))
         self.appendBtn.setText(_translate("LexSearchForm", " Append results"))
         self.wholeWordBtn.setToolTip(_translate("LexSearchForm", "Find whole words only."))
         self.wholeWordBtn.setText(_translate("LexSearchForm", " Whole word"))
@@ -412,10 +419,10 @@ class Ui_LexSearchForm(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     LexSearchForm = QtWidgets.QWidget()
     ui = Ui_LexSearchForm()
     ui.setupUi(LexSearchForm)
     LexSearchForm.show()
     sys.exit(app.exec())
-

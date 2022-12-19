@@ -4,6 +4,7 @@ from ELFB import dataIndex
 
 
 def outputLexiconToCSV(fldbk):
+    print('okay')
     if fldbk.tabWidget.currentIndex() == 1:  # Lexicon tab
         navModel = fldbk.lLexNav.model()
         LexList = []

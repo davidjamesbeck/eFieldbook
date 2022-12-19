@@ -8,10 +8,11 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.setWindowModality(QtCore.Qt.WindowModal)
+        Dialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
         Dialog.resize(400, 135)
         Dialog.setMinimumSize(QtCore.QSize(400, 0))
         Dialog.setSizeGripEnabled(True)
@@ -42,7 +43,8 @@ class Ui_Dialog(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setMinimumSize(QtCore.QSize(164, 32))
         self.buttonBox.setMaximumSize(QtCore.QSize(164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.horizontalLayout.addWidget(self.buttonBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -56,20 +58,20 @@ class Ui_Dialog(object):
         self.newLine.setToolTip(_translate("Dialog", "new line"))
         self.newGloss.setToolTip(_translate("Dialog", "new gloss (optional if line is unparseable)"))
         self.parsingBox.setToolTip(_translate("Dialog", "check this box if the line is not a parseable\n"
-"line in the target language (e.g., it is spoken\n"
-"in the contact language, it is an interjectiion, \n"
-"etc.). For interlocutors other than the main \n"
-"narrator, a change of speaker, etc., add the\n"
-"initials plus a colon and a space to the gloss."))
+                                                        "line in the target language (e.g., it is spoken\n"
+                                                        "in the contact language, it is an interjectiion, \n"
+                                                        "etc.). For interlocutors other than the main \n"
+                                                        "narrator, a change of speaker, etc., add the\n"
+                                                        "initials plus a colon and a space to the gloss."))
         self.parsingBox.setText(_translate("Dialog", "unparseable?"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec())
-

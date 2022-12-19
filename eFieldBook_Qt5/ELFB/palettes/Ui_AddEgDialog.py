@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_AddEg(object):
     def setupUi(self, AddEg):
         AddEg.setObjectName("AddEg")
@@ -27,7 +28,8 @@ class Ui_AddEg(object):
         self.verticalLayout.addWidget(self.IDRef)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.checkBox = QtWidgets.QCheckBox(AddEg)
         font = QtGui.QFont()
@@ -37,7 +39,8 @@ class Ui_AddEg(object):
         self.horizontalLayout.addWidget(self.checkBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.buttonBox = QtWidgets.QDialogButtonBox(AddEg)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 
@@ -49,20 +52,20 @@ class Ui_AddEg(object):
         AddEg.setWindowTitle(_translate("AddEg", "Add example"))
         self.label.setText(_translate("AddEg", "Enter IDREF"))
         self.IDRef.setToolTip(_translate("AddEg", "Add the ID number of the example to add.\n"
-"This can be copied-and-pasted from the\n"
-"top left corner of the example viewed in the\n"
-"Examples tab."))
+                                                  "This can be copied-and-pasted from the\n"
+                                                  "top left corner of the example viewed in the\n"
+                                                  "Examples tab."))
         self.checkBox.setToolTip(_translate("AddEg", "check to add the example currently \n"
-"visible in the Examples tab"))
+                                                     "visible in the Examples tab"))
         self.checkBox.setText(_translate("AddEg", "Add current example"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     AddEg = QtWidgets.QDialog()
     ui = Ui_AddEg()
     ui.setupUi(AddEg)
     AddEg.show()
     sys.exit(app.exec())
-

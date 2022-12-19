@@ -8,29 +8,30 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(382, 307)
         Dialog.setStyleSheet("QPushButton {\n"
-"    background: white;\n"
-"    color: black;\n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"    padding: 0 0 0 0;\n"
-"    margin: 0 0 0 0;\n"
-"    min-height: 24px;\n"
-"    max-height: 24px;\n"
-"    min-width: 55px;\n"
-"    max-width: 55px;\n"
-"    font-size: 11pts;\n"
-"}\n"
-"\n"
-"QPushButton:default {\n"
-"    background: #2E9AFE;\n"
-"    color: white;\n"
-"}\n"
-"")
+                             "    background: white;\n"
+                             "    color: black;\n"
+                             "    border: 0px solid black;\n"
+                             "    border-radius: 4px;\n"
+                             "    padding: 0 0 0 0;\n"
+                             "    margin: 0 0 0 0;\n"
+                             "    min-height: 24px;\n"
+                             "    max-height: 24px;\n"
+                             "    min-width: 55px;\n"
+                             "    max-width: 55px;\n"
+                             "    font-size: 11pts;\n"
+                             "}\n"
+                             "\n"
+                             "QPushButton:default {\n"
+                             "    background: #2E9AFE;\n"
+                             "    color: white;\n"
+                             "}\n"
+                             "")
         Dialog.setSizeGripEnabled(True)
         self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -54,7 +55,8 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.gloss)
         self.hboxlayout = QtWidgets.QHBoxLayout()
         self.hboxlayout.setObjectName("hboxlayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding,
+                                           QtWidgets.QSizePolicy.Policy.Minimum)
         self.hboxlayout.addItem(spacerItem)
         self.defaultSelect = QtWidgets.QCheckBox(Dialog)
         font = QtGui.QFont()
@@ -63,7 +65,8 @@ class Ui_Dialog(object):
         self.defaultSelect.setFont(font)
         self.defaultSelect.setObjectName("defaultSelect")
         self.hboxlayout.addWidget(self.defaultSelect)
-        spacerItem1 = QtWidgets.QSpacerItem(131, 31, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(131, 31, QtWidgets.QSizePolicy.Policy.Expanding,
+                                            QtWidgets.QSizePolicy.Policy.Minimum)
         self.hboxlayout.addItem(spacerItem1)
         self.cancelButton = QtWidgets.QPushButton(Dialog)
         self.cancelButton.setObjectName("cancelButton")
@@ -83,9 +86,9 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Select alternative"))
         self.alternativesList.setToolTip(_translate("Dialog", "Select the correct alternative from the list \n"
-"of homphonous entreis in the index."))
+                                                              "of homphonous entreis in the index."))
         self.defaultSelect.setToolTip(_translate("Dialog", "Choose the selected alternative by default, \n"
-"don\'t ask about this set again."))
+                                                           "don\'t ask about this set again."))
         self.defaultSelect.setText(_translate("Dialog", "Use selection as default"))
         self.cancelButton.setText(_translate("Dialog", "&Cancel"))
         self.okButton.setText(_translate("Dialog", "&OK"))
@@ -93,10 +96,10 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec())
-

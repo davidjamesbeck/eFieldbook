@@ -645,7 +645,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
                     theItem = i
                     break                    
             self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem,0))
-            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.PositionAtCenter)
+            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
           
         self.lDerivatives.clicked.connect(goToDerivation)
         
@@ -659,7 +659,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
                     theItem = i
                     break                    
             self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem,0))
-            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.PositionAtCenter)
+            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
            
         self.lBase.clicked.connect(goToBase)
         

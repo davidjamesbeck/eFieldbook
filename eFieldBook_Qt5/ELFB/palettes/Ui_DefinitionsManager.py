@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -15,42 +16,42 @@ class Ui_Dialog(object):
         Dialog.setMinimumSize(QtCore.QSize(531, 100))
         Dialog.setMaximumSize(QtCore.QSize(16777215, 1677215))
         Dialog.setStyleSheet("QPushButton {\n"
-"    background: white;\n"
-"    color: black;\n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"    padding: 0 0 0 0;\n"
-"    margin: 0 0 0 0;\n"
-"    min-height: 24px;\n"
-"    max-height: 24px;\n"
-"    min-width: 55px;\n"
-"    max-width: 55px;\n"
-"    font-size: 11pts;\n"
-"}\n"
-"\n"
-"QPushButton:default {\n"
-"    background: #2E9AFE;\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QToolButton {\n"
-"    min-width: 20px;\n"
-"    max-width: 20px;\n"
-"    min-height: 20px;\n"
-"    max-height: 20px;\n"
-"     background: #2E9AFE;\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"    background: #F2F2F2;\n"
-"    color: #848484;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    background: #A4A4A4;\n"
-"    border: 2px outset #A4A4A4;\n"
-"}")
+                             "    background: white;\n"
+                             "    color: black;\n"
+                             "    border: 0px solid black;\n"
+                             "    border-radius: 4px;\n"
+                             "    padding: 0 0 0 0;\n"
+                             "    margin: 0 0 0 0;\n"
+                             "    min-height: 24px;\n"
+                             "    max-height: 24px;\n"
+                             "    min-width: 55px;\n"
+                             "    max-width: 55px;\n"
+                             "    font-size: 11pts;\n"
+                             "}\n"
+                             "\n"
+                             "QPushButton:default {\n"
+                             "    background: #2E9AFE;\n"
+                             "    color: white;\n"
+                             "}\n"
+                             "\n"
+                             "QToolButton {\n"
+                             "    min-width: 20px;\n"
+                             "    max-width: 20px;\n"
+                             "    min-height: 20px;\n"
+                             "    max-height: 20px;\n"
+                             "     background: #2E9AFE;\n"
+                             "    color: white;\n"
+                             "}\n"
+                             "\n"
+                             "QPushButton:disabled {\n"
+                             "    background: #F2F2F2;\n"
+                             "    color: #848484;\n"
+                             "}\n"
+                             "\n"
+                             "QToolButton:pressed {\n"
+                             "    background: #A4A4A4;\n"
+                             "    border: 2px outset #A4A4A4;\n"
+                             "}")
         Dialog.setSizeGripEnabled(False)
         self.lexBox = QtWidgets.QGroupBox(Dialog)
         self.lexBox.setGeometry(QtCore.QRect(13, 10, 466, 579))
@@ -180,23 +181,23 @@ class Ui_Dialog(object):
         self.minusEgBtn.setToolTip(_translate("Dialog", "remove example from selected subentry"))
         self.minusEgBtn.setText(_translate("Dialog", "–"))
         self.Part.setText(_translate("Dialog", "Part of\n"
-"Speech"))
+                                               "Speech"))
         self.Register.setText(_translate("Dialog", "Register"))
         self.Dialect.setText(_translate("Dialog", "Dialect"))
         self.AltLabel.setText(_translate("Dialog", "Alternate"))
         self.label.setText(_translate("Dialog", "Primary Indices"))
         self.label_2.setText(_translate("Dialog", "Secondary Indices"))
         self.PLanguage.setText(_translate("Dialog", "Primary\n"
-"language"))
+                                                    "language"))
         self.SLanguage.setText(_translate("Dialog", "Secondary\n"
-"language"))
+                                                    "language"))
         self.Examples.setText(_translate("Dialog", "Examples"))
         self.switchEgBtn.setToolTip(_translate("Dialog", "move example to a different subentry"))
         self.switchEgBtn.setText(_translate("Dialog", "Switch"))
         self.Clear.setToolTip(_translate("Dialog", "clear all fields"))
         self.Clear.setText(_translate("Dialog", "Clear"))
         self.Update.setToolTip(_translate("Dialog", "update selected subentry\n"
-"in the database"))
+                                                    "in the database"))
         self.Update.setText(_translate("Dialog", "Update"))
         self.SLanguage_2.setText(_translate("Dialog", "Context and Usage"))
         self.OkayBtn.setToolTip(_translate("Dialog", "close window and update the database"))
@@ -207,10 +208,10 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec())
-

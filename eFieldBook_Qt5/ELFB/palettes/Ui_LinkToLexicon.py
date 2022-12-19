@@ -6,7 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
+
 
 class Ui_EntryManager(object):
     def setupUi(self, EntryManager):
@@ -26,7 +27,8 @@ class Ui_EntryManager(object):
         self.lexList.header().setVisible(False)
         self.buttonBox = QtWidgets.QDialogButtonBox(EntryManager)
         self.buttonBox.setGeometry(QtCore.QRect(223, 415, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(EntryManager)
@@ -39,10 +41,10 @@ class Ui_EntryManager(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     EntryManager = QtWidgets.QDialog()
     ui = Ui_EntryManager()
     ui.setupUi(EntryManager)
     EntryManager.show()
     sys.exit(app.exec())
-

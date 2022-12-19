@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MediaManager(object):
     def setupUi(self, MediaManager):
         MediaManager.setObjectName("MediaManager")
@@ -21,7 +22,8 @@ class Ui_MediaManager(object):
         sizePolicy.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
         self.buttonBox.setSizePolicy(sizePolicy)
         self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok|QtWidgets.QDialogButtonBox.StandardButton.Reset)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok | QtWidgets.QDialogButtonBox.StandardButton.Reset)
         self.buttonBox.setObjectName("buttonBox")
         self.lexBox = QtWidgets.QGroupBox(MediaManager)
         self.lexBox.setGeometry(QtCore.QRect(10, 9, 330, 422))
@@ -209,20 +211,20 @@ class Ui_MediaManager(object):
         self.label_6.setText(_translate("MediaManager", "Filename"))
         self.label_2.setText(_translate("MediaManager", "File type"))
         self.researcherCode.setToolTip(_translate("MediaManager", "Select researcher code.\n"
-"Use \"YYY\" if unknown."))
+                                                                  "Use \"YYY\" if unknown."))
         self.speakerLabel.setText(_translate("MediaManager", "Speaker"))
         self.rschrLabel.setText(_translate("MediaManager", "Researcher"))
         self.speakerCode.setToolTip(_translate("MediaManager", "Select speaker code.\n"
-"Use \"XX\" if unknown."))
+                                                               "Use \"XX\" if unknown."))
         self.dateLabel.setText(_translate("MediaManager", "Date recorded"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MediaManager = QtWidgets.QDialog()
     ui = Ui_MediaManager()
     ui.setupUi(MediaManager)
     MediaManager.show()
     sys.exit(app.exec())
-

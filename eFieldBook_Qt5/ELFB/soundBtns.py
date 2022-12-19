@@ -1,15 +1,16 @@
-from PyQt6 import QtCore,  QtGui, QtWidgets,  QtMultimedia,  QtNetwork
-from ELFB import dataIndex, idGenerator, cardLoader
+from PyQt6 import QtCore, QtGui, QtWidgets
+from ELFB import dataIndex, idGenerator, playaudio
 from ELFB.palettes import MediaManager
 from xml.etree import ElementTree as etree
 from os import path
 
-'''media buttons (all cards)'''
+"""media buttons (all cards)"""
+
 
 def updateMediaInfo(fldbk, item, newName):
-    '''create new media node'''
+    """create new media node"""
     tree = dataIndex.root
-    medID = idGenerator.generateID("MC",dataIndex.mediaDict)
+    medID = idGenerator.generateID("MC", dataIndex.mediaDict)
     elemList = list(tree)
     elemList.reverse()
     for i, node in enumerate(elemList):
@@ -17,56 +18,58 @@ def updateMediaInfo(fldbk, item, newName):
             break
     i = len(elemList) - i
     newNode = etree.Element('Media')
-    tree.insert(i,newNode)
-    '''add attributes to media element'''
-    newNode.set('MedID',medID)
-    newNode.set('Filename',newName)
-    dataIndex.mediaDict[medID] = newNode  
-    
-    '''update media table'''
+    tree.insert(i, newNode)
+    """add attributes to media element"""
+    newNode.set('MedID', medID)
+    newNode.set('Filename', newName)
+    dataIndex.mediaDict[medID] = newNode
+
+    """update media table"""
     mediaTable = fldbk.mMediaTable
     nextRow = mediaTable.rowCount()
-    mediaTable.setRowCount(nextRow+1)
+    mediaTable.setRowCount(nextRow + 1)
     firstItem = QtWidgets.QTableWidgetItem(1001)
     firstItem.setText(newName)
-    '''data 36 is the new XML node'''
-    firstItem.setData(36,newNode)
-    '''data 37 is the path to the sound file'''
+    """data 36 is the new XML node"""
+    firstItem.setData(36, newNode)
+    """data 37 is the path to the sound file"""
     firstItem.setData(37, item)
     firstItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
-    mediaTable.setItem(nextRow,0,firstItem)
+    mediaTable.setItem(nextRow, 0, firstItem)
     secondItem = QtWidgets.QTableWidgetItem(1001)
     secondItem.setText('XX')
     secondItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
-    mediaTable.setItem(nextRow,1,secondItem)
+    mediaTable.setItem(nextRow, 1, secondItem)
     thirdItem = QtWidgets.QTableWidgetItem(1001)
     thirdItem.setText("???")
     thirdItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
-    mediaTable.setItem(nextRow,2,thirdItem)
+    mediaTable.setItem(nextRow, 2, thirdItem)
     fourthItem = QtWidgets.QTableWidgetItem(1001)
     fourthItem.setIcon(QtGui.QIcon(":/new/infoBtn.png"))
-    mediaTable.setItem(nextRow,3,fourthItem)       
-    mediaTable.sortItems(0,QtCore.Qt.SortOrder.AscendingOrder)
-    mediaTable.scrollToItem(fourthItem, QtWidgets.QAbstractItemView.PositionAtCenter)
+    mediaTable.setItem(nextRow, 3, fourthItem)
+    mediaTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)
+    mediaTable.scrollToItem(fourthItem, QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
     mediaTable.selectRow(fourthItem.row())
     return medID, newNode
 
+
 def setDefaultDirectory(fldbk, newFile):
-        setPathBox = QtWidgets.QMessageBox()
-        setPathBox.setIcon(QtWidgets.QMessageBox.Icon.Question)
-        setPathBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.No | QtWidgets.QMessageBox.StandardButton.Ok)
-        setPathBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
-        setPathBox.setText('Set default directory.')
-        setPathBox.setInformativeText('Use this directory as the default for locating recordings?')
-        setPathBox.exec()
-        if setPathBox.result() == QtWidgets.QMessageBox.StandardButton.Ok:
-            prefix = path.dirname(newFile)
-            fldbk.mMediaPath.setText(prefix)
-            dataIndex.root.set("MediaFolder",prefix)
-            dataIndex.unsavedEdit = 1        
+    setPathBox = QtWidgets.QMessageBox()
+    setPathBox.setIcon(QtWidgets.QMessageBox.Icon.Question)
+    setPathBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.No | QtWidgets.QMessageBox.StandardButton.Ok)
+    setPathBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+    setPathBox.setText('Set default directory.')
+    setPathBox.setInformativeText('Use this directory as the default for locating recordings?')
+    setPathBox.exec()
+    if setPathBox.result() == QtWidgets.QMessageBox.StandardButton.Ok:
+        prefix = path.dirname(newFile)
+        fldbk.mMediaPath.setText(prefix)
+        dataIndex.root.set("MediaFolder", prefix)
+        dataIndex.unsavedEdit = 1
+
 
 def addLinktoXML(metadataLabel, medID):
-    '''links the sound file to the current <Lex> element'''
+    """links the sound file to the current <Lex> element"""
     if QtCore.QObject.objectName(metadataLabel)[0] == 'l':
         child = dataIndex.lexDict[dataIndex.currentCard]
         elemList = list(child)
@@ -82,7 +85,7 @@ def addLinktoXML(metadataLabel, medID):
                 break
         i = len(elemList) - i
         newElem = etree.Element('Sound')
-        child.insert(i,newElem)
+        child.insert(i, newElem)
         newElem.attrib['MediaRef'] = medID
     elif QtCore.QObject.objectName(metadataLabel)[0] == 't':
         child = dataIndex.textDict[dataIndex.currentCard]
@@ -100,8 +103,9 @@ def addLinktoXML(metadataLabel, medID):
         child.append(newElem)
         newElem.attrib['MediaRef'] = medID
 
+
 def fileExists(item, newName):
-    node = dataIndex.root.find('Media[@Filename="%s"]'%newName)
+    node = dataIndex.root.find('Media[@Filename="%s"]' % newName)
     if path.dirname(item) != dataIndex.root.attrib.get('MediaFolder'):
         file = node.attrib.get('Filename')
         speaker = node.attrib.get('Spkr')
@@ -111,17 +115,18 @@ def fileExists(item, newName):
         msgbox.setText("File in database.")
         msgbox.setInformativeText('There is already a recording named\n\n%s\n\nin the database. '
                                   'If this is not the recording you are linking to, '
-                                  'select "Cancel" and rename the file.'%fileInfo)
+                                  'select "Cancel" and rename the file.' % fileInfo)
         msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Cancel | QtWidgets.QMessageBox.StandardButton.Ok)
         msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
         msgbox.exec()
         if msgbox.result() == QtWidgets.QMessageBox.StandardButton.Cancel:
-            return False            
+            return False
     medID = node.get('MedID')
     return medID
 
+
 def fileDuplicate(item, newName):
-    node = dataIndex.root.find('Media[@Filename="%s"]'%newName)
+    node = dataIndex.root.find('Media[@Filename="%s"]' % newName)
     file = node.attrib.get('Filename')
     speaker = node.attrib.get('Spkr')
     date = node.attrib.get('Date')
@@ -129,52 +134,54 @@ def fileDuplicate(item, newName):
     msgbox = QtWidgets.QMessageBox()
     msgbox.setText("File in database.")
     msgbox.setInformativeText('There is already a recording named\n\n%s\n\nin the database. '
-                              'Media files should have unique names.'%fileInfo)
+                              'Media files should have unique names.' % fileInfo)
     msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
     msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
     msgbox.exec()
 
-def newMedia(fldbk,):
-    #TODO: need to tweak this to allow multiple fields to be selected
+
+def newMedia(fldbk, ):
+    # TODO: need to tweak this to allow multiple fields to be selected
     newFile = QtWidgets.QFileDialog(fldbk, "Add recordings.")
-    if dataIndex.root.get("MediaFolder") != None:
+    if dataIndex.root.get("MediaFolder") is not None:
         newFile.setDirectory(dataIndex.root.get("MediaFolder"))
     else:
-        '''this keeps the finder out of the interior of the application bundle'''
+        """this keeps the finder out of the interior of the application bundle"""
         filePath = path.dirname(newFile.directory().currentPath())
         fileDir = path.split(filePath)
-        if fileDir[1] == 'com.UNTProject.eFieldbook':        
+        if fileDir[1] == 'com.UNTProject.eFieldbook':
             newFile.setDirectory(dataIndex.homePath)
-    newFile.setFileMode(QtWidgets.QFileDialog.ExistingFile)
+    newFile.setFileMode(QtWidgets.QFileDialog.FileMode.ExistingFile)
     if newFile.exec():
         newNames = newFile.selectedFiles()
         newName = newNames[0]
         if dataIndex.root.get("MediaFolder") is None or dataIndex.root.get("MediaFolder") != path.dirname(newName):
-            setDefaultDirectory(fldbk, newName)        
+            setDefaultDirectory(fldbk, newName)
         for item in newNames:
             sound2play = item
             newName = path.basename(item)
-            node = dataIndex.root.find('Media[@Filename="%s"]'%newName)
+            node = dataIndex.root.find('Media[@Filename="%s"]' % newName)
             if node is None:
                 medID, node = updateMediaInfo(fldbk, item, newName)
                 mManager = MediaManager.MediaManager(dataIndex.fldbk)
                 mManager.renameWindow(newName)
-                mManager.setValues(medID,fldbk.mediaTable,item)
+                mManager.setValues(medID, fldbk.mediaTable, item)
                 mManager.setComboBoxes()
-                mManager.exec()      
+                mManager.exec()
             else:
                 fileDuplicate(item, newName)
                 return
-        QtMultimedia.QSound.play(sound2play)
+        playaudio.soundOutput(sound2play)
         dataIndex.unsavedEdit = 1
 
-def delMedia(fldbk,caller,metadataLabel):
+
+def delMedia(fldbk, caller, metadataLabel):
     try:
         metadataLabel.clear()
     except AttributeError:
         pass
     i = caller.currentIndex()
-    medID = caller.itemData(i,35)
+    medID = caller.itemData(i, 35)
     msgbox = QtWidgets.QMessageBox()
     msgbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
     msgbox.setText("Remove recording.")
@@ -190,20 +197,20 @@ def delMedia(fldbk,caller,metadataLabel):
         if address[0] == "L":
             lexNode = dataIndex.lexDict[address]
             if metadataLabel != 'gManager':
-                if lexNode.find('Sound[@MediaRef="%s"]'%medID) != None:
-                    badNode = lexNode.find('Sound[@MediaRef="%s"]'%medID)
+                if lexNode.find('Sound[@MediaRef="%s"]' % medID) is not None:
+                    badNode = lexNode.find('Sound[@MediaRef="%s"]' % medID)
                     lexNode.remove(badNode)
         elif address[0] == "E":
             egNode = dataIndex.exDict[address]
-            badNode = egNode.find('Sound[@MediaRef="%s"]'%medID)
+            badNode = egNode.find('Sound[@MediaRef="%s"]' % medID)
             egNode.remove(badNode)
         elif address[0] == "D":
             dataNode = dataIndex.dataDict[address]
-            badNode = dataNode.find('Sound[@MediaRef="%s"]'%medID)
+            badNode = dataNode.find('Sound[@MediaRef="%s"]' % medID)
             dataNode.remove(badNode)
         elif address[0] == "T":
             textNode = dataIndex.textDict[address]
-            badNode = textNode.find('Sound[@MediaRef="%s"]'%medID)
+            badNode = textNode.find('Sound[@MediaRef="%s"]' % medID)
             textNode.remove(badNode)
         caller.removeItem(i)
     dataIndex.unsavedEdit = 1
@@ -217,29 +224,31 @@ def delMedia(fldbk,caller,metadataLabel):
         elif QtCore.QObject.objectName(caller)[0] == 'd':
             fldbk.dDelEgBtn.setEnabled(0)
 
+
 def mediaInfo(caller):
-    '''item is the path to file, data 37 in combobox item'''
+    """item is the path to file, data 37 in combobox item"""
     i = caller.currentIndex()
-    mediaID = caller.itemData(i,35)
-    item = caller.itemData(i,37)
+    mediaID = caller.itemData(i, 35)
+    item = caller.itemData(i, 37)
     mManager = MediaManager.MediaManager(dataIndex.fldbk)
     mManager.renameWindow(caller.currentText())
-    mManager.setValues(mediaID,caller,item)
-    mManager.exec()  
+    mManager.setValues(mediaID, caller, item)
+    mManager.exec()
+
 
 def playSound(fldbk, caller, IDREF=None):
-    '''begins by checking to see if temporary paths have been set for sound files
-    (rather than building the path each time)'''
+    """begins by checking to see if temporary paths have been set for sound files
+    (rather than building the path each time)"""
     data37 = None
-    if caller != None:
+    if caller is not None:
         if IDREF is None:
             if caller.currentIndex() == -1:
                 return
             if caller.itemData(caller.currentIndex(), 37):
                 data37 = caller.itemData(caller.currentIndex(), 37)
         else:
-            if caller.item(caller.currentRow(),0).data(37):
-                data37 = caller.item(caller.currentRow(),0).data(37)
+            if caller.item(caller.currentRow(), 0).data(37):
+                data37 = caller.item(caller.currentRow(), 0).data(37)
     if data37:
         soundFile = data37
     else:
@@ -247,25 +256,26 @@ def playSound(fldbk, caller, IDREF=None):
             prefix = dataIndex.root.get("MediaFolder")
         else:
             prefix = None
-        if IDREF != None:
+        if IDREF is not None:
             soundFile = dataIndex.mediaDict[IDREF].get('Filename')
         else:
             soundFile = caller.currentText()
         clipboard = QtWidgets.QApplication.clipboard()
         clipboard.setText(soundFile)
-        if prefix != None:
+        if prefix is not None:
             soundFile = prefix + "/" + soundFile
     if path.isfile(soundFile):
-        QtMultimedia.QSound.play(soundFile)            
+        playaudio.soundOutput(soundFile)
     else:
         soundFile = locateFile(fldbk, caller, soundFile, IDREF)
         if soundFile:
-            QtMultimedia.QSound.play(soundFile)
+            playaudio.soundOutput(soundFile)
+
 
 def locateFile(fldbk, caller, soundFile, IDREF=None):
     mFolder = QtWidgets.QFileDialog(fldbk, "Find missing recording?")
-    mFolder.setFileMode(QtWidgets.QFileDialog.ExistingFile)
-    mFolder.setOption(QtWidgets.QFileDialog.ReadOnly)
+    mFolder.setFileMode(QtWidgets.QFileDialog.FileMode.ExistingFile)
+    mFolder.setOption(QtWidgets.QFileDialog.Option.ReadOnly)
     if mFolder.exec():
         soundFile = mFolder.selectedFiles()[0]
         print(soundFile)
@@ -275,16 +285,17 @@ def locateFile(fldbk, caller, soundFile, IDREF=None):
             if IDREF is None:
                 caller.setItemData(caller.currentIndex(), soundFile, 37)
             else:
-                caller.item(caller.currentRow(),0).setData(37, soundFile)
+                caller.item(caller.currentRow(), 0).setData(37, soundFile)
         return soundFile
     else:
         return False
 
+
 def mChooseDir(fldbk):
     mFolder = QtWidgets.QFileDialog(fldbk, "Choose a directory")
-    mFolder.setFileMode(QtWidgets.QFileDialog.Directory)
-    mFolder.setOption(QtWidgets.QFileDialog.ReadOnly)
+    mFolder.setFileMode(QtWidgets.QFileDialog.FileMode.Directory)
+    mFolder.setOption(QtWidgets.QFileDialog.Option.ReadOnly)
     if mFolder.exec():
         soundFile = mFolder.selectedFiles()[0]
-        dataIndex.root.set("MediaFolder",soundFile)
+        dataIndex.root.set("MediaFolder", soundFile)
         dataIndex.unsavedEdit = 1

@@ -21,61 +21,61 @@ class Ui_Fieldbook(object):
         Fieldbook.setSizePolicy(sizePolicy)
         Fieldbook.setMaximumSize(QtCore.QSize(1145, 720))
         Fieldbook.setStyleSheet("QWidget {\n"
-"    background-color: rgb(244, 244, 244);\n"
-"}\n"
-"\n"
-"QGroupBox:title {\n"
-"    background-color: transparent;\n"
-"}\n"
-"\n"
-"QGroupBox {\n"
-"    background: transparent;\n"
-"}\n"
-"\n"
-"QCheckBox {\n"
-"    background: auto;\n"
-"}\n"
-"\n"
-"QFrame {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 8px;\n"
-"     padding: 0px;\n"
-"     background-color: rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-"\n"
-"QPushButton {\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    background: transparent;\n"
-"}\n"
-"\n"
-"QTextEdit {\n"
-"    padding-top: 3px;\n"
-"    padding-left: 3px;\n"
-"    margin-top: 0px;\n"
-"}\n"
-"\n"
-"p {\n"
-"    margin-top:0px; \n"
-"    margin-bottom:0px; \n"
-"    margin-left:0px; \n"
-"    margin-right:0px; \n"
-"    -qt-block-indent:0; \n"
-"    text-indent:0px;\n"
-"}")
+                                "    background-color: rgb(244, 244, 244);\n"
+                                "}\n"
+                                "\n"
+                                "QGroupBox:title {\n"
+                                "    background-color: transparent;\n"
+                                "}\n"
+                                "\n"
+                                "QGroupBox {\n"
+                                "    background: transparent;\n"
+                                "}\n"
+                                "\n"
+                                "QCheckBox {\n"
+                                "    background: auto;\n"
+                                "}\n"
+                                "\n"
+                                "QFrame {\n"
+                                "     border: 0px solid black;\n"
+                                "     border-radius: 8px;\n"
+                                "     padding: 0px;\n"
+                                "     background-color: rgb(255, 255, 255);\n"
+                                "}\n"
+                                "\n"
+                                "\n"
+                                "QPushButton {\n"
+                                "    background: #6698FF;\n"
+                                "    color: white;    \n"
+                                "    border: 0px solid black;\n"
+                                "    border-radius: 4px;\n"
+                                "        padding: 0 0 0 0;\n"
+                                "        margin: 0 0 0 0;\n"
+                                "}\n"
+                                "\n"
+                                "QPushButton:pressed {\n"
+                                "    background: #1E90FF;\n"
+                                "    border: 2px outset #1E90FF;\n"
+                                "}\n"
+                                "\n"
+                                "QLabel {\n"
+                                "    background: transparent;\n"
+                                "}\n"
+                                "\n"
+                                "QTextEdit {\n"
+                                "    padding-top: 3px;\n"
+                                "    padding-left: 3px;\n"
+                                "    margin-top: 0px;\n"
+                                "}\n"
+                                "\n"
+                                "p {\n"
+                                "    margin-top:0px; \n"
+                                "    margin-bottom:0px; \n"
+                                "    margin-left:0px; \n"
+                                "    margin-right:0px; \n"
+                                "    -qt-block-indent:0; \n"
+                                "    text-indent:0px;\n"
+                                "}")
         Fieldbook.setUnifiedTitleAndToolBarOnMac(False)
         self.centralWidget = QtWidgets.QWidget(Fieldbook)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Maximum)
@@ -89,7 +89,8 @@ class Ui_Fieldbook(object):
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
         self.mainLayout.setObjectName("mainLayout")
         self.scrollAreaMain = QtWidgets.QScrollArea(self.centralWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred,
+                                           QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.scrollAreaMain.sizePolicy().hasHeightForWidth())
@@ -283,8 +284,8 @@ class Ui_Fieldbook(object):
         self.lHeader = QtWidgets.QGroupBox(self.lexicon)
         self.lHeader.setGeometry(QtCore.QRect(7, -2, 904, 138))
         self.lHeader.setStyleSheet("QLineEdit {\n"
-"    padding-left: 3px;\n"
-"}")
+                                   "    padding-left: 3px;\n"
+                                   "}")
         self.lHeader.setObjectName("lHeader")
         self.lOrthography = QtWidgets.QLineEdit(self.lHeader)
         self.lOrthography.setGeometry(QtCore.QRect(74, 24, 473, 39))
@@ -349,8 +350,8 @@ class Ui_Fieldbook(object):
         font.setPointSize(10)
         self.lGrammarBox.setFont(font)
         self.lGrammarBox.setStyleSheet("QTextEdit {\n"
-"    font-size: 10pts;\n"
-"}")
+                                       "    font-size: 10pts;\n"
+                                       "}")
         self.lGrammarBox.setObjectName("lGrammarBox")
         self.lMetadataBox = QtWidgets.QGroupBox(self.lexicon)
         self.lMetadataBox.setGeometry(QtCore.QRect(976, -2, 148, 138))
@@ -360,13 +361,13 @@ class Ui_Fieldbook(object):
         sizePolicy.setHeightForWidth(self.lMetadataBox.sizePolicy().hasHeightForWidth())
         self.lMetadataBox.setSizePolicy(sizePolicy)
         self.lMetadataBox.setStyleSheet("QPlainTextEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 16px;\n"
-"    min-width: 45px;\n"
-"    min-height: 16px;\n"
-"    padding: 1px;\n"
-"}")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 16px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 16px;\n"
+                                        "    padding: 1px;\n"
+                                        "}")
         self.lMetadataBox.setObjectName("lMetadataBox")
         self.lLabelSource = QtWidgets.QLabel(self.lMetadataBox)
         self.lLabelSource.setGeometry(QtCore.QRect(8, 22, 35, 16))
@@ -472,8 +473,8 @@ class Ui_Fieldbook(object):
         self.lKeywordsBox.setMinimumSize(QtCore.QSize(220, 0))
         self.lKeywordsBox.setAutoFillBackground(False)
         self.lKeywordsBox.setStyleSheet("QGroupBox.title {\n"
-"    background-color: transparent;\n"
-"}")
+                                        "    background-color: transparent;\n"
+                                        "}")
         self.lKeywordsBox.setObjectName("lKeywordsBox")
         self.lKeywordIndex = QtWidgets.QPlainTextEdit(self.lKeywordsBox)
         self.lKeywordIndex.setGeometry(QtCore.QRect(7, 25, 207, 43))
@@ -527,20 +528,20 @@ class Ui_Fieldbook(object):
         self.lDerivationBox = QtWidgets.QGroupBox(self.lexicon)
         self.lDerivationBox.setGeometry(QtCore.QRect(912, 137, 210, 513))
         self.lDerivationBox.setStyleSheet("QToolButton {\n"
-"    min-height: 15px;\n"
-"    min-width: 18px;\n"
-"    max-height: 15px;\n"
-"    max-width: 18px;\n"
-"    padding-bottom: 3px;\n"
-"    font: 75 13pt \"Lucida Grande\";\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                          "    min-height: 15px;\n"
+                                          "    min-width: 18px;\n"
+                                          "    max-height: 15px;\n"
+                                          "    max-width: 18px;\n"
+                                          "    padding-bottom: 3px;\n"
+                                          "    font: 75 13pt \"Lucida Grande\";\n"
+                                          "    background: #6698FF;\n"
+                                          "    color: white;\n"
+                                          "    border: 1px solid #6698FF;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QToolButton:pressed {\n"
+                                          "    border: 2px outset #1E90FF;\n"
+                                          "}")
         self.lDerivationBox.setObjectName("lDerivationBox")
         self.lDerivatives = QtWidgets.QListWidget(self.lDerivationBox)
         self.lDerivatives.setGeometry(QtCore.QRect(12, 32, 187, 395))
@@ -624,13 +625,13 @@ class Ui_Fieldbook(object):
         sizePolicy.setHeightForWidth(self.tMetadataBox.sizePolicy().hasHeightForWidth())
         self.tMetadataBox.setSizePolicy(sizePolicy)
         self.tMetadataBox.setStyleSheet("QPlainTextEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 16px;\n"
-"    min-width: 45px;\n"
-"    min-height: 16px;\n"
-"    padding: 1px;\n"
-"}")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 16px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 16px;\n"
+                                        "    padding: 1px;\n"
+                                        "}")
         self.tMetadataBox.setObjectName("tMetadataBox")
         self.tLabelSource = QtWidgets.QLabel(self.tMetadataBox)
         self.tLabelSource.setGeometry(QtCore.QRect(8, 22, 35, 16))
@@ -730,7 +731,7 @@ class Ui_Fieldbook(object):
         self.tFullText.setGeometry(QtCore.QRect(8, 59, 893, 514))
         self.tFullText.setAutoFillBackground(True)
         self.tFullText.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"selection-background-color: transparent;")
+                                     "selection-background-color: transparent;")
         self.tFullText.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tFullText.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tFullText.setWidgetResizable(True)
@@ -749,25 +750,25 @@ class Ui_Fieldbook(object):
         font.setWeight(50)
         self.tToolBox.setFont(font)
         self.tToolBox.setStyleSheet("QPushButton {\n"
-"    max-width: 50px;\n"
-"    max-height: 16px;\n"
-"    min-width: 50px;\n"
-"    min-height: 16px;\n"
-"    font-size: 11pt;\n"
-"    font-style: bold;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                    "    max-width: 50px;\n"
+                                    "    max-height: 16px;\n"
+                                    "    min-width: 50px;\n"
+                                    "    min-height: 16px;\n"
+                                    "    font-size: 11pt;\n"
+                                    "    font-style: bold;\n"
+                                    "    background: #6698FF;\n"
+                                    "    color: white;    \n"
+                                    "    border: 0px solid black;\n"
+                                    "    border-radius: 4px;\n"
+                                    "        padding: 0 0 0 0;\n"
+                                    "        margin: 0 0 0 0;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton:pressed {\n"
+                                    "    background: #1E90FF;\n"
+                                    "    border: 2px outset #1E90FF;\n"
+                                    "}\n"
+                                    "")
         self.tToolBox.setObjectName("tToolBox")
         self.gridLayout = QtWidgets.QGridLayout(self.tToolBox)
         self.gridLayout.setContentsMargins(11, 11, 11, 11)
@@ -884,34 +885,34 @@ class Ui_Fieldbook(object):
         self.eAbbrBox = QtWidgets.QGroupBox(self.examples)
         self.eAbbrBox.setGeometry(QtCore.QRect(864, 139, 259, 515))
         self.eAbbrBox.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"     border: 0px solid black;\n"
-"     min-width: 60px;\n"
-"     min-height: 18px;\n"
-"     max-width: 60px;\n"
-"     max-height: 18px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                    "    background: #6698FF;\n"
+                                    "    color: white;\n"
+                                    "    border: 1px solid #6698FF;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QToolButton:pressed {\n"
+                                    "    border: 2px outset #1E90FF;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton {\n"
+                                    "     border: 0px solid black;\n"
+                                    "     min-width: 60px;\n"
+                                    "     min-height: 18px;\n"
+                                    "     max-width: 60px;\n"
+                                    "     max-height: 18px;\n"
+                                    "    background: #6698FF;\n"
+                                    "    color: white;    \n"
+                                    "    border: 0px solid black;\n"
+                                    "    border-radius: 4px;\n"
+                                    "        padding: 0 0 0 0;\n"
+                                    "        margin: 0 0 0 0;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton:pressed {\n"
+                                    "    background: #1E90FF;\n"
+                                    "    border: 2px outset #1E90FF;\n"
+                                    "}\n"
+                                    "")
         self.eAbbrBox.setObjectName("eAbbrBox")
         self.eEditAbbrBtn = QtWidgets.QPushButton(self.eAbbrBox)
         self.eEditAbbrBtn.setGeometry(QtCore.QRect(122, 486, 60, 18))
@@ -941,32 +942,32 @@ class Ui_Fieldbook(object):
         self.eTextInfoBox = QtWidgets.QGroupBox(self.examples)
         self.eTextInfoBox.setGeometry(QtCore.QRect(8, 464, 327, 111))
         self.eTextInfoBox.setStyleSheet("QPlainTextEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 20px;\n"
-"    min-width: 45px;\n"
-"    min-height: 20px;\n"
-"    padding: 1px;\n"
-"}\n"
-"QPushButton {\n"
-"     border: 0px solid black;\n"
-"     min-width: 60px;\n"
-"     min-height: 18px;\n"
-"     max-width: 60px;\n"
-"     max-height: 18px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 20px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 20px;\n"
+                                        "    padding: 1px;\n"
+                                        "}\n"
+                                        "QPushButton {\n"
+                                        "     border: 0px solid black;\n"
+                                        "     min-width: 60px;\n"
+                                        "     min-height: 18px;\n"
+                                        "     max-width: 60px;\n"
+                                        "     max-height: 18px;\n"
+                                        "    background: #6698FF;\n"
+                                        "    color: white;    \n"
+                                        "    border: 0px solid black;\n"
+                                        "    border-radius: 4px;\n"
+                                        "        padding: 0 0 0 0;\n"
+                                        "        margin: 0 0 0 0;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:pressed {\n"
+                                        "    background: #1E90FF;\n"
+                                        "    border: 2px outset #1E90FF;\n"
+                                        "}\n"
+                                        "")
         self.eTextInfoBox.setObjectName("eTextInfoBox")
         self.eSourceText = QtWidgets.QPlainTextEdit(self.eTextInfoBox)
         self.eSourceText.setGeometry(QtCore.QRect(15, 38, 297, 22))
@@ -1052,23 +1053,23 @@ class Ui_Fieldbook(object):
         self.eControlsBox.setMinimumSize(QtCore.QSize(350, 81))
         self.eControlsBox.setMaximumSize(QtCore.QSize(350, 81))
         self.eControlsBox.setStyleSheet("QPushButton {\n"
-"     border: 0px solid black;\n"
-"     min-width: 60px;\n"
-"     min-height: 18px;\n"
-"     max-width: 60px;\n"
-"     max-height: 18px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                        "     border: 0px solid black;\n"
+                                        "     min-width: 60px;\n"
+                                        "     min-height: 18px;\n"
+                                        "     max-width: 60px;\n"
+                                        "     max-height: 18px;\n"
+                                        "    background: #6698FF;\n"
+                                        "    color: white;    \n"
+                                        "    border: 0px solid black;\n"
+                                        "    border-radius: 4px;\n"
+                                        "        padding: 0 0 0 0;\n"
+                                        "        margin: 0 0 0 0;\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:pressed {\n"
+                                        "    background: #1E90FF;\n"
+                                        "    border: 2px outset #1E90FF;\n"
+                                        "}")
         self.eControlsBox.setObjectName("eControlsBox")
         self.gridLayout_9 = QtWidgets.QGridLayout(self.eControlsBox)
         self.gridLayout_9.setContentsMargins(11, 6, 11, 11)
@@ -1121,13 +1122,13 @@ class Ui_Fieldbook(object):
         sizePolicy.setHeightForWidth(self.eMetadataBox.sizePolicy().hasHeightForWidth())
         self.eMetadataBox.setSizePolicy(sizePolicy)
         self.eMetadataBox.setStyleSheet("QPlainTextEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 16px;\n"
-"    min-width: 45px;\n"
-"    min-height: 16px;\n"
-"    padding: 1px;\n"
-"}")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 16px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 16px;\n"
+                                        "    padding: 1px;\n"
+                                        "}")
         self.eMetadataBox.setObjectName("eMetadataBox")
         self.eLabelSource = QtWidgets.QLabel(self.eMetadataBox)
         self.eLabelSource.setGeometry(QtCore.QRect(8, 22, 35, 16))
@@ -1207,18 +1208,18 @@ class Ui_Fieldbook(object):
         self.eLinksBox = QtWidgets.QGroupBox(self.examples)
         self.eLinksBox.setGeometry(QtCore.QRect(8, 382, 327, 81))
         self.eLinksBox.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"    min-width: 28px;\n"
-"    max-width:28px;\n"
-"    min-height: 28px;\n"
-"    max-height: 28px;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                     "    background: #6698FF;\n"
+                                     "    color: white;\n"
+                                     "    border: 1px solid #6698FF;\n"
+                                     "    min-width: 28px;\n"
+                                     "    max-width:28px;\n"
+                                     "    min-height: 28px;\n"
+                                     "    max-height: 28px;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QToolButton:pressed {\n"
+                                     "    border: 2px outset #1E90FF;\n"
+                                     "}")
         self.eLinksBox.setObjectName("eLinksBox")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.eLinksBox)
         self.horizontalLayout_5.setContentsMargins(11, 11, 11, 11)
@@ -1412,13 +1413,13 @@ class Ui_Fieldbook(object):
         sizePolicy.setHeightForWidth(self.dMetadataBox.sizePolicy().hasHeightForWidth())
         self.dMetadataBox.setSizePolicy(sizePolicy)
         self.dMetadataBox.setStyleSheet("QPlainTextEdit {\n"
-"    font-size: 9;\n"
-"    border-radius: 0pts;\n"
-"    max-height: 16px;\n"
-"    min-width: 45px;\n"
-"    min-height: 16px;\n"
-"    padding: 1px;\n"
-"}")
+                                        "    font-size: 9;\n"
+                                        "    border-radius: 0pts;\n"
+                                        "    max-height: 16px;\n"
+                                        "    min-width: 45px;\n"
+                                        "    min-height: 16px;\n"
+                                        "    padding: 1px;\n"
+                                        "}")
         self.dMetadataBox.setObjectName("dMetadataBox")
         self.dLabelSource = QtWidgets.QLabel(self.dMetadataBox)
         self.dLabelSource.setGeometry(QtCore.QRect(8, 22, 35, 16))
@@ -1522,31 +1523,31 @@ class Ui_Fieldbook(object):
         font.setPointSize(10)
         self.dResetBtn.setFont(font)
         self.dResetBtn.setStyleSheet("QToolButton {\n"
-"    background: auto;\n"
-"    min-width: 16px;\n"
-"    min-height: 16px;\n"
-"    max-width: 16px;\n"
-"    max-height: 16px;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 4px;\n"
-"     min-width: 55px;\n"
-"     min-height: 22px;\n"
-"     max-width: 55px;\n"
-"     max-height: 22px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                     "    background: auto;\n"
+                                     "    min-width: 16px;\n"
+                                     "    min-height: 16px;\n"
+                                     "    max-width: 16px;\n"
+                                     "    max-height: 16px;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QPushButton {\n"
+                                     "     border: 0px solid black;\n"
+                                     "     border-radius: 4px;\n"
+                                     "     min-width: 55px;\n"
+                                     "     min-height: 22px;\n"
+                                     "     max-width: 55px;\n"
+                                     "     max-height: 22px;\n"
+                                     "    background: #6698FF;\n"
+                                     "    color: white;    \n"
+                                     "        padding: 0 0 0 0;\n"
+                                     "        margin: 0 0 0 0;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QPushButton:pressed {\n"
+                                     "    background: #1E90FF;\n"
+                                     "    border: 2px outset #1E90FF;\n"
+                                     "}\n"
+                                     "")
         self.dResetBtn.setObjectName("dResetBtn")
         self.dTitle = QtWidgets.QTextEdit(self.datasets)
         self.dTitle.setGeometry(QtCore.QRect(10, 18, 899, 40))
@@ -1563,15 +1564,15 @@ class Ui_Fieldbook(object):
         self.cResultsBox = QtWidgets.QGroupBox(self.concordances)
         self.cResultsBox.setGeometry(QtCore.QRect(13, 59, 878, 589))
         self.cResultsBox.setStyleSheet("QListWidget {\n"
-"    border: 1px;\n"
-"    border-color: rgb(0, 0, 0);\n"
-"    border-radius: 0px;\n"
-"}")
+                                       "    border: 1px;\n"
+                                       "    border-color: rgb(0, 0, 0);\n"
+                                       "    border-radius: 0px;\n"
+                                       "}")
         self.cResultsBox.setObjectName("cResultsBox")
         self.cSearchResults = QtWidgets.QListView(self.cResultsBox)
         self.cSearchResults.setGeometry(QtCore.QRect(16, 51, 846, 526))
         self.cSearchResults.setStyleSheet("border-left: 1px;\n"
-"border-color: rgb(0, 0, 0);")
+                                          "border-color: rgb(0, 0, 0);")
         self.cSearchResults.setObjectName("cSearchResults")
         self.cNumberOfHits = QtWidgets.QLabel(self.cResultsBox)
         self.cNumberOfHits.setGeometry(QtCore.QRect(17, 26, 79, 16))
@@ -1583,21 +1584,21 @@ class Ui_Fieldbook(object):
         self.cResultsControlsBox = QtWidgets.QGroupBox(self.concordances)
         self.cResultsControlsBox.setGeometry(QtCore.QRect(633, 10, 338, 56))
         self.cResultsControlsBox.setStyleSheet("QPushButton {\n"
-"    min-height: 25px;\n"
-"    min-width: 60px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                               "    min-height: 25px;\n"
+                                               "    min-width: 60px;\n"
+                                               "    background: #6698FF;\n"
+                                               "    color: white;    \n"
+                                               "    border: 0px solid black;\n"
+                                               "    border-radius: 4px;\n"
+                                               "        padding: 0 0 0 0;\n"
+                                               "        margin: 0 0 0 0;\n"
+                                               "}\n"
+                                               "\n"
+                                               "QPushButton:pressed {\n"
+                                               "    background: #1E90FF;\n"
+                                               "    border: 2px outset #1E90FF;\n"
+                                               "}\n"
+                                               "")
         self.cResultsControlsBox.setTitle("")
         self.cResultsControlsBox.setObjectName("cResultsControlsBox")
         self.cSaveResultsBtn = QtWidgets.QPushButton(self.cResultsControlsBox)
@@ -1615,9 +1616,9 @@ class Ui_Fieldbook(object):
         self.cSettingsBox = QtWidgets.QGroupBox(self.concordances)
         self.cSettingsBox.setGeometry(QtCore.QRect(983, -4, 127, 208))
         self.cSettingsBox.setStyleSheet("QCheckBox {\n"
-"    font-size: 10pt;\n"
-"    font-style: italic;\n"
-"}")
+                                        "    font-size: 10pt;\n"
+                                        "    font-style: italic;\n"
+                                        "}")
         self.cSettingsBox.setObjectName("cSettingsBox")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.cSettingsBox)
         self.verticalLayout_4.setContentsMargins(11, 6, 11, 6)
@@ -1663,8 +1664,8 @@ class Ui_Fieldbook(object):
         self.cFocusBox = QtWidgets.QGroupBox(self.concordances)
         self.cFocusBox.setGeometry(QtCore.QRect(904, 196, 208, 453))
         self.cFocusBox.setStyleSheet("QGroupBox {\n"
-"    min-width: 55px;\n"
-"}")
+                                     "    min-width: 55px;\n"
+                                     "}")
         self.cFocusBox.setObjectName("cFocusBox")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.cFocusBox)
         self.verticalLayout_2.setContentsMargins(11, 6, 11, 6)
@@ -1862,19 +1863,19 @@ class Ui_Fieldbook(object):
         self.cBrowseBtn.setFont(font)
         self.cBrowseBtn.setAutoFillBackground(False)
         self.cBrowseBtn.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px inset #6698FF;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                      "    background: #6698FF;\n"
+                                      "    color: white;    \n"
+                                      "    border: 0px inset #6698FF;\n"
+                                      "    border-radius: 4px;\n"
+                                      "        padding: 0 0 0 0;\n"
+                                      "        margin: 0 0 0 0;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton:pressed {\n"
+                                      "    background: #1E90FF;\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}\n"
+                                      "")
         self.cBrowseBtn.setAutoRaise(True)
         self.cBrowseBtn.setObjectName("cBrowseBtn")
         self.cReturnBtn = QtWidgets.QToolButton(self.concordances)
@@ -1886,19 +1887,19 @@ class Ui_Fieldbook(object):
         self.cReturnBtn.setFont(font)
         self.cReturnBtn.setAutoFillBackground(False)
         self.cReturnBtn.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid #6698FF;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                      "    background: #6698FF;\n"
+                                      "    color: white;    \n"
+                                      "    border: 0px solid #6698FF;\n"
+                                      "    border-radius: 4px;\n"
+                                      "        padding: 0 0 0 0;\n"
+                                      "        margin: 0 0 0 0;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton:pressed {\n"
+                                      "    background: #1E90FF;\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}\n"
+                                      "")
         self.cReturnBtn.setAutoRaise(True)
         self.cReturnBtn.setObjectName("cReturnBtn")
         self.label_27 = QtWidgets.QLabel(self.concordances)
@@ -1913,36 +1914,36 @@ class Ui_Fieldbook(object):
         self.mPeopleTab = QtWidgets.QTabWidget(self.meta)
         self.mPeopleTab.setGeometry(QtCore.QRect(9, 6, 729, 317))
         self.mPeopleTab.setStyleSheet("QPushButton {\n"
-"     min-width: 50px;\n"
-"     min-height: 16px;\n"
-"     max-width: 50px;\n"
-"     max-height: 16px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"\n"
-"QToolButton {\n"
-"    min-width: 16px;\n"
-"    min-height: 16px;\n"
-"    max-width: 16px;\n"
-"    max-height: 16px;\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                      "     min-width: 50px;\n"
+                                      "     min-height: 16px;\n"
+                                      "     max-width: 50px;\n"
+                                      "     max-height: 16px;\n"
+                                      "    background: #6698FF;\n"
+                                      "    color: white;    \n"
+                                      "    border: 0px solid black;\n"
+                                      "    border-radius: 4px;\n"
+                                      "        padding: 0 0 0 0;\n"
+                                      "        margin: 0 0 0 0;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton:pressed {\n"
+                                      "    background: #1E90FF;\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton {\n"
+                                      "    min-width: 16px;\n"
+                                      "    min-height: 16px;\n"
+                                      "    max-width: 16px;\n"
+                                      "    max-height: 16px;\n"
+                                      "    background: #6698FF;\n"
+                                      "    color: white;\n"
+                                      "    border: 1px solid #6698FF;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton:pressed {\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}")
         self.mPeopleTab.setObjectName("mPeopleTab")
         self.mResearchersTab = QtWidgets.QWidget()
         self.mResearchersTab.setObjectName("mResearchersTab")
@@ -2158,15 +2159,15 @@ class Ui_Fieldbook(object):
         self.mMediaBox.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
         self.mMediaBox.setMouseTracking(True)
         self.mMediaBox.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                     "    background: #6698FF;\n"
+                                     "    color: white;\n"
+                                     "    border: 1px solid #6698FF;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QToolButton:pressed {\n"
+                                     "    border: 2px outset #1E90FF;\n"
+                                     "}\n"
+                                     "")
         self.mMediaBox.setObjectName("mMediaBox")
         self.label_22 = QtWidgets.QLabel(self.mMediaBox)
         self.label_22.setGeometry(QtCore.QRect(10, 622, 36, 20))
@@ -2208,21 +2209,21 @@ class Ui_Fieldbook(object):
         self.mWriting = QtWidgets.QTabWidget(self.meta)
         self.mWriting.setGeometry(QtCore.QRect(9, 334, 729, 317))
         self.mWriting.setStyleSheet("QPushButton {\n"
-"     min-width: 50px;\n"
-"     min-height: 16px;\n"
-"     max-width: 50px;\n"
-"     max-height: 16px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                    "     min-width: 50px;\n"
+                                    "     min-height: 16px;\n"
+                                    "     max-width: 50px;\n"
+                                    "     max-height: 16px;\n"
+                                    "    background: #6698FF;\n"
+                                    "    color: white;    \n"
+                                    "    border: 0px solid black;\n"
+                                    "    border-radius: 4px;\n"
+                                    "        padding: 0 0 0 0;\n"
+                                    "        margin: 0 0 0 0;\n"
+                                    "}\n"
+                                    "QPushButton:pressed {\n"
+                                    "    background: #1E90FF;\n"
+                                    "    border: 2px outset #1E90FF;\n"
+                                    "}")
         self.mWriting.setObjectName("mWriting")
         self.mOrthTab = QtWidgets.QWidget()
         self.mOrthTab.setObjectName("mOrthTab")
@@ -2263,30 +2264,31 @@ class Ui_Fieldbook(object):
         self.groupBox_9 = QtWidgets.QGroupBox(self.mOrthTab)
         self.groupBox_9.setGeometry(QtCore.QRect(240, 115, 326, 168))
         self.groupBox_9.setStyleSheet("QToolButton {\n"
-"    background: auto;\n"
-"    min-width: 16px;\n"
-"    min-height: 16px;\n"
-"    max-width: 16px;\n"
-"    max-height: 16px;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"     min-width: 50px;\n"
-"     min-height: 16px;\n"
-"     max-width: 50px;\n"
-"     max-height: 16px;\n"
-"}\n"
-"\n"
-"QSpinBox {\n"
-"    max-width: 50px;\n"
-"    max-height: 16px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
-        self.groupBox_9.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
+                                      "    background: auto;\n"
+                                      "    min-width: 16px;\n"
+                                      "    min-height: 16px;\n"
+                                      "    max-width: 16px;\n"
+                                      "    max-height: 16px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton {\n"
+                                      "     min-width: 50px;\n"
+                                      "     min-height: 16px;\n"
+                                      "     max-width: 50px;\n"
+                                      "     max-height: 16px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QSpinBox {\n"
+                                      "    max-width: 50px;\n"
+                                      "    max-height: 16px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton:pressed {\n"
+                                      "    background: #1E90FF;\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}")
+        self.groupBox_9.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.groupBox_9.setObjectName("groupBox_9")
         self.oInput = QtWidgets.QPlainTextEdit(self.groupBox_9)
         self.oInput.setGeometry(QtCore.QRect(14, 34, 103, 108))
@@ -2393,36 +2395,36 @@ class Ui_Fieldbook(object):
         self.groupBox_21 = QtWidgets.QGroupBox(self.mOrthTab)
         self.groupBox_21.setGeometry(QtCore.QRect(12, 115, 220, 168))
         self.groupBox_21.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"    min-height: 18px;\n"
-"    min-width: 18px;\n"
-"    max-height: 18px;\n"
-"    max-width: 18px;\n"
-"    font-size: 14pt;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"     min-width: 125px;\n"
-"     min-height: 16px;\n"
-"     max-width: 125px;\n"
-"     max-height: 16px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                       "    background: #6698FF;\n"
+                                       "    color: white;\n"
+                                       "    border: 1px solid #6698FF;\n"
+                                       "    min-height: 18px;\n"
+                                       "    min-width: 18px;\n"
+                                       "    max-height: 18px;\n"
+                                       "    max-width: 18px;\n"
+                                       "    font-size: 14pt;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QToolButton:pressed {\n"
+                                       "    border: 2px outset #1E90FF;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton {\n"
+                                       "     min-width: 125px;\n"
+                                       "     min-height: 16px;\n"
+                                       "     max-width: 125px;\n"
+                                       "     max-height: 16px;\n"
+                                       "    background: #6698FF;\n"
+                                       "    color: white;    \n"
+                                       "    border: 0px solid black;\n"
+                                       "    border-radius: 4px;\n"
+                                       "        padding: 0 0 0 0;\n"
+                                       "        margin: 0 0 0 0;\n"
+                                       "}\n"
+                                       "QPushButton:pressed {\n"
+                                       "    background: #1E90FF;\n"
+                                       "    border: 2px outset #1E90FF;\n"
+                                       "}")
         self.groupBox_21.setObjectName("groupBox_21")
         self.oList = QtWidgets.QTableWidget(self.groupBox_21)
         self.oList.setGeometry(QtCore.QRect(12, 30, 196, 105))
@@ -2477,14 +2479,14 @@ class Ui_Fieldbook(object):
         font.setPointSize(10)
         self.oSetBtn.setFont(font)
         self.oSetBtn.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                   "    background: #6698FF;\n"
+                                   "    color: white;\n"
+                                   "    border: 1px solid #6698FF;\n"
+                                   "}\n"
+                                   "\n"
+                                   "QToolButton:pressed {\n"
+                                   "    border: 2px outset #1E90FF;\n"
+                                   "}")
         self.oSetBtn.setObjectName("oSetBtn")
         self.oHelpBtn = QtWidgets.QToolButton(self.mOrthTab)
         self.oHelpBtn.setGeometry(QtCore.QRect(632, 242, 32, 32))
@@ -2533,34 +2535,34 @@ class Ui_Fieldbook(object):
         self.groupBox_4.setMinimumSize(QtCore.QSize(158, 191))
         self.groupBox_4.setMaximumSize(QtCore.QSize(158, 191))
         self.groupBox_4.setStyleSheet("QPushButton {\n"
-"     min-width: 47px;\n"
-"     min-height: 16px;\n"
-"     max-width: 47px;\n"
-"     max-height: 16px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"QToolButton {\n"
-"    min-width: 16px;\n"
-"    min-height: 16px;\n"
-"    max-width: 16px;\n"
-"    max-height: 16px;\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                      "     min-width: 47px;\n"
+                                      "     min-height: 16px;\n"
+                                      "     max-width: 47px;\n"
+                                      "     max-height: 16px;\n"
+                                      "    background: #6698FF;\n"
+                                      "    color: white;    \n"
+                                      "    border: 0px solid black;\n"
+                                      "    border-radius: 4px;\n"
+                                      "        padding: 0 0 0 0;\n"
+                                      "        margin: 0 0 0 0;\n"
+                                      "}\n"
+                                      "QPushButton:pressed {\n"
+                                      "    background: #1E90FF;\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}\n"
+                                      "QToolButton {\n"
+                                      "    min-width: 16px;\n"
+                                      "    min-height: 16px;\n"
+                                      "    max-width: 16px;\n"
+                                      "    max-height: 16px;\n"
+                                      "    background: #6698FF;\n"
+                                      "    color: white;\n"
+                                      "    border: 1px solid #6698FF;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton:pressed {\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}")
         self.groupBox_4.setObjectName("groupBox_4")
         self.sList = QtWidgets.QListWidget(self.groupBox_4)
         self.sList.setGeometry(QtCore.QRect(11, 33, 136, 125))
@@ -2653,37 +2655,37 @@ class Ui_Fieldbook(object):
         font.setItalic(True)
         self.sOrderChangedLabel.setFont(font)
         self.sOrderChangedLabel.setStyleSheet("QLabel {\n"
-"    color: red;\n"
-"}")
+                                              "    color: red;\n"
+                                              "}")
         self.sOrderChangedLabel.setText("")
         self.sOrderChangedLabel.setObjectName("sOrderChangedLabel")
         self.mWriting.addTab(self.mAlphaTab, "")
         self.tabWidget.addTab(self.meta, "")
         self.index = QtWidgets.QWidget()
         self.index.setStyleSheet("QGroupBox {\n"
-"    background-color: transparent;\n"
-"}")
+                                 "    background-color: transparent;\n"
+                                 "}")
         self.index.setObjectName("index")
         self.iParserBox = QtWidgets.QGroupBox(self.index)
         self.iParserBox.setGeometry(QtCore.QRect(592, 438, 500, 186))
         self.iParserBox.setAutoFillBackground(False)
         self.iParserBox.setStyleSheet("QPushButton {\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"    min-height: 20px;\n"
-"    min-width: 60px;\n"
-"    max-height: 20px;\n"
-"    max-width: 60px;    \n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                      "    background: #6698FF;\n"
+                                      "    color: white;    \n"
+                                      "    border: 0px solid black;\n"
+                                      "    border-radius: 4px;\n"
+                                      "        padding: 0 0 0 0;\n"
+                                      "        margin: 0 0 0 0;\n"
+                                      "    min-height: 20px;\n"
+                                      "    min-width: 60px;\n"
+                                      "    max-height: 20px;\n"
+                                      "    max-width: 60px;    \n"
+                                      "}\n"
+                                      "\n"
+                                      "QPushButton:pressed {\n"
+                                      "    background: #1E90FF;\n"
+                                      "    border: 2px outset #1E90FF;\n"
+                                      "}")
         self.iParserBox.setFlat(True)
         self.iParserBox.setObjectName("iParserBox")
         self.iParser = QtWidgets.QLineEdit(self.iParserBox)
@@ -2722,34 +2724,34 @@ class Ui_Fieldbook(object):
         self.iAbbrBox = QtWidgets.QGroupBox(self.index)
         self.iAbbrBox.setGeometry(QtCore.QRect(864, 6, 259, 536))
         self.iAbbrBox.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"     border: 0px solid black;\n"
-"     min-width: 60px;\n"
-"     min-height: 20px;\n"
-"     max-width: 60px;\n"
-"     max-height: 20px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}\n"
-"")
+                                    "    background: #6698FF;\n"
+                                    "    color: white;\n"
+                                    "    border: 1px solid #6698FF;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QToolButton:pressed {\n"
+                                    "    border: 2px outset #1E90FF;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton {\n"
+                                    "     border: 0px solid black;\n"
+                                    "     min-width: 60px;\n"
+                                    "     min-height: 20px;\n"
+                                    "     max-width: 60px;\n"
+                                    "     max-height: 20px;\n"
+                                    "    background: #6698FF;\n"
+                                    "    color: white;    \n"
+                                    "    border: 0px solid black;\n"
+                                    "    border-radius: 4px;\n"
+                                    "        padding: 0 0 0 0;\n"
+                                    "        margin: 0 0 0 0;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QPushButton:pressed {\n"
+                                    "    background: #1E90FF;\n"
+                                    "    border: 2px outset #1E90FF;\n"
+                                    "}\n"
+                                    "")
         self.iAbbrBox.setFlat(True)
         self.iAbbrBox.setObjectName("iAbbrBox")
         self.iEditAbbrBtn = QtWidgets.QPushButton(self.iAbbrBox)
@@ -2838,8 +2840,8 @@ class Ui_Fieldbook(object):
         self.iStatsBox.setMaximumSize(QtCore.QSize(120, 16777215))
         self.iStatsBox.setAutoFillBackground(False)
         self.iStatsBox.setStyleSheet("QLabel {\n"
-"    font: 10pts;\n"
-"}")
+                                     "    font: 10pts;\n"
+                                     "}")
         self.iStatsBox.setObjectName("iStatsBox")
         self.iTokensLbl = QtWidgets.QLabel(self.iStatsBox)
         self.iTokensLbl.setGeometry(QtCore.QRect(15, 33, 100, 16))
@@ -2901,22 +2903,22 @@ class Ui_Fieldbook(object):
         self.iNavigationBox.setMaximumSize(QtCore.QSize(120, 150))
         self.iNavigationBox.setAutoFillBackground(False)
         self.iNavigationBox.setStyleSheet("QPushButton {\n"
-"    min-width: 74px;\n"
-"    max-width: 74px;\n"
-"    min-height: 22px;\n"
-"    max-height: 22px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                          "    min-width: 74px;\n"
+                                          "    max-width: 74px;\n"
+                                          "    min-height: 22px;\n"
+                                          "    max-height: 22px;\n"
+                                          "    background: #6698FF;\n"
+                                          "    color: white;    \n"
+                                          "    border: 0px solid black;\n"
+                                          "    border-radius: 4px;\n"
+                                          "        padding: 0 0 0 0;\n"
+                                          "        margin: 0 0 0 0;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QPushButton:pressed {\n"
+                                          "    background: #1E90FF;\n"
+                                          "    border: 2px outset #1E90FF;\n"
+                                          "}")
         self.iNavigationBox.setFlat(True)
         self.iNavigationBox.setObjectName("iNavigationBox")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.iNavigationBox)
@@ -2938,22 +2940,22 @@ class Ui_Fieldbook(object):
         self.iDisplayBox.setMaximumSize(QtCore.QSize(150, 150))
         self.iDisplayBox.setAutoFillBackground(False)
         self.iDisplayBox.setStyleSheet("QPushButton {\n"
-"    min-width: 66px;\n"
-"    max-width: 66px;\n"
-"    min-height: 22px;\n"
-"    max-height: 22px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                       "    min-width: 66px;\n"
+                                       "    max-width: 66px;\n"
+                                       "    min-height: 22px;\n"
+                                       "    max-height: 22px;\n"
+                                       "    background: #6698FF;\n"
+                                       "    color: white;    \n"
+                                       "    border: 0px solid black;\n"
+                                       "    border-radius: 4px;\n"
+                                       "        padding: 0 0 0 0;\n"
+                                       "        margin: 0 0 0 0;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QPushButton:pressed {\n"
+                                       "    background: #1E90FF;\n"
+                                       "    border: 2px outset #1E90FF;\n"
+                                       "}")
         self.iDisplayBox.setFlat(True)
         self.iDisplayBox.setObjectName("iDisplayBox")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.iDisplayBox)
@@ -2967,10 +2969,10 @@ class Ui_Fieldbook(object):
         font.setPointSize(11)
         self.iSortingBox.setFont(font)
         self.iSortingBox.setStyleSheet("QComboBox {\n"
-"    padding-left: 4px;\n"
-"    margin-left: 0px;\n"
-"}\n"
-"")
+                                       "    padding-left: 4px;\n"
+                                       "    margin-left: 0px;\n"
+                                       "}\n"
+                                       "")
         self.iSortingBox.setIconSize(QtCore.QSize(10, 10))
         self.iSortingBox.setObjectName("iSortingBox")
         self.iSortingBox.addItem("")
@@ -3255,11 +3257,12 @@ class Ui_Fieldbook(object):
         _translate = QtCore.QCoreApplication.translate
         Fieldbook.setWindowTitle(_translate("Fieldbook", "Electronic Fieldbook"))
         self.hTitle.setToolTip(_translate("Fieldbook", "name of database"))
-        self.hTitle.setHtml(_translate("Fieldbook", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:36pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Lucida Grande\';\"><br /></p></body></html>"))
+        self.hTitle.setHtml(_translate("Fieldbook",
+                                       "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                       "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                       "p, li { white-space: pre-wrap; }\n"
+                                       "</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:36pt; font-weight:400; font-style:normal;\">\n"
+                                       "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Lucida Grande\';\"><br /></p></body></html>"))
         self.groupBox.setToolTip(_translate("Fieldbook", "log in for editing mode"))
         self.groupBox.setTitle(_translate("Fieldbook", "Log In"))
         self.hPassword.setToolTip(_translate("Fieldbook", "enter password"))
@@ -3287,17 +3290,17 @@ class Ui_Fieldbook(object):
         self.lPOS.setToolTip(_translate("Fieldbook", "part of speech"))
         self.lLiteral.setToolTip(_translate("Fieldbook", "literal gloss/morphological breakdown"))
         self.lDialect.setToolTip(_translate("Fieldbook", "dialectal information. \n"
-"Use the format: Cdn. (US. soda)\n"
-"\n"
-"For expressions known for only one\n"
-"dialect, simply give the dialect name\n"
-"without an alternative. Separate\n"
-"multiple entries with a semi-colon."))
+                                                         "Use the format: Cdn. (US. soda)\n"
+                                                         "\n"
+                                                         "For expressions known for only one\n"
+                                                         "dialect, simply give the dialect name\n"
+                                                         "without an alternative. Separate\n"
+                                                         "multiple entries with a semi-colon."))
         self.lAutoBtn.setToolTip(_translate("Fieldbook", "link orthographic and phonemic transcriptions"))
         self.lAutoBtn.setText(_translate("Fieldbook", "Auto"))
         self.lRegister.setToolTip(_translate("Fieldbook", "register (e.g., archaic, vulgar, etc.)"))
         self.lBrrw.setToolTip(_translate("Fieldbook", "source of borrowed forms.\n"
-"Use the format: Sp. “nena”"))
+                                                      "Use the format: Sp. “nena”"))
         self.lGrammarBox.setTitle(_translate("Fieldbook", "Annotations"))
         self.lMetadataBox.setTitle(_translate("Fieldbook", "Metadata"))
         self.lLabelSource.setText(_translate("Fieldbook", "Source"))
@@ -3308,7 +3311,7 @@ class Ui_Fieldbook(object):
         self.lSource.setToolTip(_translate("Fieldbook", "original speaker source"))
         self.lResearcher.setToolTip(_translate("Fieldbook", "person who collected form"))
         self.lDate.setToolTip(_translate("Fieldbook", "date entered/date collected.\n"
-"yyyy–MM–dd format recommended"))
+                                                      "yyyy–MM–dd format recommended"))
         self.lConfirmed.setToolTip(_translate("Fieldbook", "additional confirmations"))
         self.lUpdated.setToolTip(_translate("Fieldbook", "date last updated"))
         self.lIndexBox.setTitle(_translate("Fieldbook", "Indices"))
@@ -3323,33 +3326,33 @@ class Ui_Fieldbook(object):
         self.lNotes.setToolTip(_translate("Fieldbook", "comments"))
         self.lDerivationBox.setTitle(_translate("Fieldbook", "Derivation"))
         self.lDerivatives.setToolTip(_translate("Fieldbook", "doubleclick to go to entry.\n"
-"Select an entry and click\n"
-"on \"–\" below to delete."))
+                                                             "Select an entry and click\n"
+                                                             "on \"–\" below to delete."))
         self.DerToolBox.setTitle(_translate("Fieldbook", "Base"))
         self.lRadicalBtn.setToolTip(_translate("Fieldbook", "add link to base\n"
-"of entry word"))
+                                                            "of entry word"))
         self.lRadicalBtn.setText(_translate("Fieldbook", "+"))
         self.lBreakLnkBtn.setToolTip(_translate("Fieldbook", "break link to base"))
         self.lBreakLnkBtn.setText(_translate("Fieldbook", "–"))
         self.lBase.setToolTip(_translate("Fieldbook", "click to go to\n"
-"entry for base"))
+                                                      "entry for base"))
         self.lAddDerBtn.setToolTip(_translate("Fieldbook", "add derivative"))
         self.lAddDerBtn.setText(_translate("Fieldbook", "+"))
         self.lRemoveDerBtn.setToolTip(_translate("Fieldbook", "remove derivative"))
         self.lRemoveDerBtn.setText(_translate("Fieldbook", "–"))
         self.label_8.setText(_translate("Fieldbook", "Manage Derivations:"))
         self.lDoneBtn.setToolTip(_translate("Fieldbook", "Select this when the entry is more or\n"
-"less complete. When not selected, \n"
-"entries will be sorted to the end of the\n"
-"navigation lists on this page and on the\n"
-"Home card. Leave unselected or deselect\n"
-"to single out entries for further attention."))
+                                                         "less complete. When not selected, \n"
+                                                         "entries will be sorted to the end of the\n"
+                                                         "navigation lists on this page and on the\n"
+                                                         "Home card. Leave unselected or deselect\n"
+                                                         "to single out entries for further attention."))
         self.lDoneBtn.setText(_translate("Fieldbook", "Done"))
         self.lNewBtn.setToolTip(_translate("Fieldbook", "new lexical entry"))
         self.lClipBtn.setToolTip(_translate("Fieldbook", "copy simplified entry to clipboard\n"
-"for use in other applications. Hold\n"
-"down the Option key to copy entry \n"
-"in L2"))
+                                                         "for use in other applications. Hold\n"
+                                                         "down the Option key to copy entry \n"
+                                                         "in L2"))
         self.lAdvancedSearchBtn.setToolTip(_translate("Fieldbook", "open advanced search form"))
         self.lAdvancedSearchBtn.setText(_translate("Fieldbook", "..."))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.lexicon), _translate("Fieldbook", "Lexicon"))
@@ -3362,9 +3365,9 @@ class Ui_Fieldbook(object):
         self.tSource.setToolTip(_translate("Fieldbook", "original speaker source"))
         self.tResearcher.setToolTip(_translate("Fieldbook", "person who collected form"))
         self.tDate.setToolTip(_translate("Fieldbook", "date collected. yyyy–MM–dd \n"
-"format recommended"))
+                                                      "format recommended"))
         self.tTranscriber.setToolTip(_translate("Fieldbook", "consultants and researchers \n"
-"who worked on transcription"))
+                                                             "who worked on transcription"))
         self.tUpdated.setToolTip(_translate("Fieldbook", "date last updated"))
         self.tNotes.setToolTip(_translate("Fieldbook", "comments"))
         self.tTextNav.setToolTip(_translate("Fieldbook", "list of texts"))
@@ -3378,17 +3381,17 @@ class Ui_Fieldbook(object):
         self.tSplitLineBtn.setToolTip(_translate("Fieldbook", "split selected line"))
         self.tSplitLineBtn.setText(_translate("Fieldbook", "Split"))
         self.tCopyLineBtn.setToolTip(_translate("Fieldbook", "copy selected line to clipboard. Hold\n"
-"down Option key for gloss in L2."))
+                                                             "down Option key for gloss in L2."))
         self.tCopyLineBtn.setText(_translate("Fieldbook", "Copy"))
         self.tLanguageBtn.setToolTip(_translate("Fieldbook", "switch language of free translation"))
         self.tLanguageBtn.setText(_translate("Fieldbook", "Gloss"))
         self.tOrthography.setToolTip(_translate("Fieldbook", "Switch display/export between phonetic \n"
-"and practical working (primary) orthography."))
+                                                             "and practical working (primary) orthography."))
         self.tSwitchLabel.setText(_translate("Fieldbook", "Display\n"
-"orthography"))
+                                                          "orthography"))
         self.tNewTextBtn.setToolTip(_translate("Fieldbook", "add new text"))
         self.tClipBtn.setToolTip(_translate("Fieldbook", "Place text on clipboard. Hold down\n"
-"Option key to get glosses in L2."))
+                                                         "Option key to get glosses in L2."))
         self.tNewTitle.setToolTip(_translate("Fieldbook", "enter title of new text"))
         self.tNewTitle.setPlaceholderText(_translate("Fieldbook", "new title"))
         self.tTitle.setToolTip(_translate("Fieldbook", "title of text"))
@@ -3406,10 +3409,10 @@ class Ui_Fieldbook(object):
         self.eKeywords.setToolTip(_translate("Fieldbook", "keywords"))
         self.eTextInfoBox.setTitle(_translate("Fieldbook", "Text Info"))
         self.eSourceText.setToolTip(_translate("Fieldbook", "if this is from a text, \n"
-"text name and line number"))
+                                                            "text name and line number"))
         self.eLabelTranscriber.setText(_translate("Fieldbook", "From text..."))
         self.eLocateBtn.setToolTip(_translate("Fieldbook", "find this example \n"
-"in a text or dataset"))
+                                                           "in a text or dataset"))
         self.eLocateBtn.setText(_translate("Fieldbook", "Locate"))
         self.label_9.setText(_translate("Fieldbook", "Time"))
         self.eTimeCode.setToolTip(_translate("Fieldbook", "time in recording"))
@@ -3419,21 +3422,23 @@ class Ui_Fieldbook(object):
         self.label_25.setText(_translate("Fieldbook", "Spoken by"))
         self.eControlsBox.setTitle(_translate("Fieldbook", "Tool Bar"))
         self.eAddAnnotationBtn.setToolTip(_translate("Fieldbook", "add analysis tier\n"
-"(row in table)"))
+                                                                  "(row in table)"))
         self.eAddAnnotationBtn.setText(_translate("Fieldbook", "AddTier"))
         self.eSplitBtn.setToolTip(_translate("Fieldbook", "split example into two separate entries"))
         self.eSplitBtn.setText(_translate("Fieldbook", "SplitEg"))
-        self.eAddMorphBtn.setToolTip(_translate("Fieldbook", "<html><head/><body><p>add column to table</p></body></html>"))
+        self.eAddMorphBtn.setToolTip(
+            _translate("Fieldbook", "<html><head/><body><p>add column to table</p></body></html>"))
         self.eAddMorphBtn.setText(_translate("Fieldbook", "AddMrph"))
         self.eDeleteBtn.setToolTip(_translate("Fieldbook", "remove column from table, \n"
-"removes morph from analysis"))
+                                                           "removes morph from analysis"))
         self.eDeleteBtn.setText(_translate("Fieldbook", "DelMrph"))
         self.eRemoveTier.setToolTip(_translate("Fieldbook", "remove analysis tier\n"
-"(row) in table"))
+                                                            "(row) in table"))
         self.eRemoveTier.setText(_translate("Fieldbook", "DelTier"))
         self.eDelColumnBtn.setToolTip(_translate("Fieldbook", "delete selected column"))
         self.eDelColumnBtn.setText(_translate("Fieldbook", "DelCol"))
-        self.eSplitColumnBtn.setToolTip(_translate("Fieldbook", "split selected column into two columns, adds new column to the right"))
+        self.eSplitColumnBtn.setToolTip(
+            _translate("Fieldbook", "split selected column into two columns, adds new column to the right"))
         self.eSplitColumnBtn.setText(_translate("Fieldbook", "SplitCol"))
         self.eClearAnalysisBtn.setText(_translate("Fieldbook", "ClearAll"))
         self.eMetadataBox.setTitle(_translate("Fieldbook", "Metadata"))
@@ -3444,36 +3449,38 @@ class Ui_Fieldbook(object):
         self.eSource.setToolTip(_translate("Fieldbook", "original speaker source"))
         self.eResearcher.setToolTip(_translate("Fieldbook", "person who collected form"))
         self.eDate.setToolTip(_translate("Fieldbook", "date collected. yyyy–MM–dd \n"
-"format recommended"))
+                                                      "format recommended"))
         self.eUpdated.setToolTip(_translate("Fieldbook", "date last updated"))
         self.groupBox_13.setTitle(_translate("Fieldbook", "Comments"))
         self.eNotes.setToolTip(_translate("Fieldbook", "comments"))
         self.eLinksBox.setToolTip(_translate("Fieldbook", "manage links to lexical entries"))
         self.eLinksBox.setTitle(_translate("Fieldbook", "Links"))
         self.eAddExampleBtn.setToolTip(_translate("Fieldbook", "add link to lexical\n"
-"entry or datset"))
+                                                               "entry or datset"))
         self.eAddExampleBtn.setText(_translate("Fieldbook", "+"))
         self.eBreakLnkBtn.setToolTip(_translate("Fieldbook", "<html><head/><body><p>break link</p></body></html>"))
         self.eBreakLnkBtn.setText(_translate("Fieldbook", "–"))
         self.eGoToLinkBtn.setToolTip(_translate("Fieldbook", "go to linked card"))
         self.eGoToLinkBtn.setText(_translate("Fieldbook", "➠"))
         self.label_28.setText(_translate("Fieldbook", "Example\n"
-"ID Number"))
+                                                      "ID Number"))
         self.eL1Gloss.setToolTip(_translate("Fieldbook", "primary language gloss"))
         self.eL2Gloss.setToolTip(_translate("Fieldbook", "secondary language gloss"))
         self.eAutoParsingBtn.setToolTip(_translate("Fieldbook", "automatically parse new examples. Hit\n"
-"\"return\" or \"tab\" after entering the line."))
+                                                                "\"return\" or \"tab\" after entering the line."))
         self.eAutoParsingBtn.setText(_translate("Fieldbook", "Autoparse"))
         self.eNewEgBtn.setToolTip(_translate("Fieldbook", "add new example"))
-        self.eCopyLineBtn.setToolTip(_translate("Fieldbook", "copy example to clipboard for use in other applications.\n"
-"Hold down Option key for gloss in L2 rather than L1."))
-        self.eDuplicateBtn.setToolTip(_translate("Fieldbook", "duplicate example (can be used for examples with minor variations)"))
+        self.eCopyLineBtn.setToolTip(
+            _translate("Fieldbook", "copy example to clipboard for use in other applications.\n"
+                                    "Hold down Option key for gloss in L2 rather than L1."))
+        self.eDuplicateBtn.setToolTip(
+            _translate("Fieldbook", "duplicate example (can be used for examples with minor variations)"))
         self.eAddMultiBtn.setToolTip(_translate("Fieldbook", "add several examples at a time.\n"
-"Allows for editing, saving, and \n"
-"trial parsing of two-line datasets."))
+                                                             "Allows for editing, saving, and \n"
+                                                             "trial parsing of two-line datasets."))
         self.groupBox_8.setTitle(_translate("Fieldbook", "Display orthography"))
         self.eOrthography.setToolTip(_translate("Fieldbook", "Switch display/export between phonetic \n"
-"and practical working (primary) orthography."))
+                                                             "and practical working (primary) orthography."))
         self.eMakeIndexBtn.setToolTip(_translate("Fieldbook", "make a morphological index for auto-parsing"))
         self.eFindUnparsedBtn.setToolTip(_translate("Fieldbook", "find next unparsed example"))
         self.eAdvancedSearchBtn.setToolTip(_translate("Fieldbook", "open advanced search form"))
@@ -3487,7 +3494,7 @@ class Ui_Fieldbook(object):
         self.dSource.setToolTip(_translate("Fieldbook", "original speaker source"))
         self.dResearcher.setToolTip(_translate("Fieldbook", "person who collected form"))
         self.dDate.setToolTip(_translate("Fieldbook", "date collected. yyyy–MM–dd \n"
-"format recommended"))
+                                                      "format recommended"))
         self.dUpdated.setToolTip(_translate("Fieldbook", "date last updated"))
         self.dDataNav.setToolTip(_translate("Fieldbook", "list of texts"))
         self.dKeywords.setToolTip(_translate("Fieldbook", "keywords"))
@@ -3495,27 +3502,28 @@ class Ui_Fieldbook(object):
         self.dResetBtn.setToolTip(_translate("Fieldbook", "Remove highlighting from search results."))
         self.dResetBtn.setText(_translate("Fieldbook", "Deselect"))
         self.dTitle.setToolTip(_translate("Fieldbook", "name of dataset"))
-        self.dTitle.setHtml(_translate("Fieldbook", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:24pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'.SF NS Text\';\"><br /></p></body></html>"))
+        self.dTitle.setHtml(_translate("Fieldbook",
+                                       "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                       "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                       "p, li { white-space: pre-wrap; }\n"
+                                       "</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:24pt; font-weight:400; font-style:normal;\">\n"
+                                       "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'.SF NS Text\';\"><br /></p></body></html>"))
         self.dAdvancedSearchBtn.setToolTip(_translate("Fieldbook", "open advanced search form"))
         self.dAdvancedSearchBtn.setText(_translate("Fieldbook", "..."))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.datasets), _translate("Fieldbook", "Datasets"))
         self.cResultsBox.setTitle(_translate("Fieldbook", "Results"))
         self.cSearchResults.setToolTip(_translate("Fieldbook", "Search results are displayed here. Click \n"
-"on line to go to database entry. Hold down \n"
-"the option key and click to remove. To cut-\n"
-"and-paste a hit into another application, hold\n"
-"down the Command key and click on the\n"
-"example, then paste into desired application."))
+                                                               "on line to go to database entry. Hold down \n"
+                                                               "the option key and click to remove. To cut-\n"
+                                                               "and-paste a hit into another application, hold\n"
+                                                               "down the Command key and click on the\n"
+                                                               "example, then paste into desired application."))
         self.cNumberOfHits.setToolTip(_translate("Fieldbook", "number of hits"))
         self.cNumberOfHits.setText(_translate("Fieldbook", "Hits:"))
         self.cSaveResultsBtn.setToolTip(_translate("Fieldbook", "save search results to text file"))
         self.cSaveResultsBtn.setText(_translate("Fieldbook", "Save"))
         self.cArchiveBtn.setToolTip(_translate("Fieldbook", "save results as archive file \n"
-"that can be reloaded later"))
+                                                            "that can be reloaded later"))
         self.cArchiveBtn.setText(_translate("Fieldbook", "Archive"))
         self.cLoadPrevBtn.setToolTip(_translate("Fieldbook", "load archived file of previous search results"))
         self.cLoadPrevBtn.setText(_translate("Fieldbook", "Load"))
@@ -3540,7 +3548,7 @@ class Ui_Fieldbook(object):
         self.cFindAllBtn.setToolTip(_translate("Fieldbook", "search all cards"))
         self.cFindAllBtn.setText(_translate("Fieldbook", "find in all"))
         self.cLexiconFocusBox.setToolTip(_translate("Fieldbook", "select parts of \n"
-"lexicon to search"))
+                                                                 "lexicon to search"))
         self.cLexiconFocusBox.setTitle(_translate("Fieldbook", "Lexicon"))
         self.cOrthographyBtn.setText(_translate("Fieldbook", "orthography"))
         self.cLiteralGlossBtn.setText(_translate("Fieldbook", "literal gloss"))
@@ -3549,7 +3557,7 @@ class Ui_Fieldbook(object):
         self.cL2DefinitionBtn.setText(_translate("Fieldbook", "L2 definition"))
         self.cKeywordBtn.setText(_translate("Fieldbook", "keyword"))
         self.cExamplesFocusBox.setToolTip(_translate("Fieldbook", "select parts of\n"
-"examples to search"))
+                                                                  "examples to search"))
         self.cExamplesFocusBox.setTitle(_translate("Fieldbook", "Examples"))
         self.cL2GlossExamplesBtn.setText(_translate("Fieldbook", "L2 Gloss"))
         self.cLineExamplesBtn.setText(_translate("Fieldbook", "line"))
@@ -3558,7 +3566,7 @@ class Ui_Fieldbook(object):
         self.cAnalysisExamplesBtn.setText(_translate("Fieldbook", "analysis"))
         self.cExKeywordBtn.setText(_translate("Fieldbook", "keyword"))
         self.cTextsFocusBox.setToolTip(_translate("Fieldbook", "select parts of \n"
-"texts to search"))
+                                                               "texts to search"))
         self.cTextsFocusBox.setTitle(_translate("Fieldbook", "Texts"))
         self.cAnalysisTextsBtn.setText(_translate("Fieldbook", "analysis"))
         self.cLineTextsBtn.setText(_translate("Fieldbook", "line"))
@@ -3569,9 +3577,9 @@ class Ui_Fieldbook(object):
         self.cAfterLabel.setText(_translate("Fieldbook", "Lines after"))
         self.groupBox_15.setTitle(_translate("Fieldbook", "Find:"))
         self.cTarget.setToolTip(_translate("Fieldbook", "enter text to search for, press \"Return\" to search.\n"
-"\\& = AND; ¬ = NOT; # = edge/word-boundary."))
+                                                        "\\& = AND; ¬ = NOT; # = edge/word-boundary."))
         self.cBrowseBtn.setToolTip(_translate("Fieldbook", "Open browser tool to step back\n"
-"and forth through search results."))
+                                                           "and forth through search results."))
         self.cBrowseBtn.setText(_translate("Fieldbook", "☞"))
         self.cReturnBtn.setToolTip(_translate("Fieldbook", "Return to search form on lexicon card."))
         self.cReturnBtn.setText(_translate("Fieldbook", "↩︎"))
@@ -3579,7 +3587,7 @@ class Ui_Fieldbook(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.concordances), _translate("Fieldbook", "Search"))
         self.mResearcher.setToolTip(_translate("Fieldbook", "full name of consultant"))
         self.mAffiliation.setToolTip(_translate("Fieldbook", "consultant’s birthdate\n"
-"yyyy-MM-dd format recommended"))
+                                                             "yyyy-MM-dd format recommended"))
         self.mRInfo.setToolTip(_translate("Fieldbook", "other information"))
         self.label_20.setText(_translate("Fieldbook", "Name"))
         self.label_21.setText(_translate("Fieldbook", "Affiliation"))
@@ -3596,13 +3604,14 @@ class Ui_Fieldbook(object):
         self.mRDelBtn.setToolTip(_translate("Fieldbook", "remove consultant"))
         self.mRDelBtn.setText(_translate("Fieldbook", "–"))
         self.mRSetDefaultBtn.setToolTip(_translate("Fieldbook", "Use this to set a researcher that will be\n"
-"loaded at the beginning of every session\n"
-"and auto-filled when adding new records."))
+                                                                "loaded at the beginning of every session\n"
+                                                                "and auto-filled when adding new records."))
         self.mRSetDefaultBtn.setText(_translate("Fieldbook", "Set as default"))
-        self.mPeopleTab.setTabText(self.mPeopleTab.indexOf(self.mResearchersTab), _translate("Fieldbook", "Researchers"))
+        self.mPeopleTab.setTabText(self.mPeopleTab.indexOf(self.mResearchersTab),
+                                   _translate("Fieldbook", "Researchers"))
         self.mSpeaker.setToolTip(_translate("Fieldbook", "full name of consultant"))
         self.mBirthday.setToolTip(_translate("Fieldbook", "consultant’s birthdate\n"
-"yyyy-MM-dd format recommended"))
+                                                          "yyyy-MM-dd format recommended"))
         self.mSCode.setToolTip(_translate("Fieldbook", "unique two-letter code for speaker"))
         self.mBirthplace.setToolTip(_translate("Fieldbook", "consultant’s place of birth"))
         self.mInfo.setToolTip(_translate("Fieldbook", "other information"))
@@ -3620,15 +3629,16 @@ class Ui_Fieldbook(object):
         self.mSpDelBtn.setToolTip(_translate("Fieldbook", "remove consultant"))
         self.mSpDelBtn.setText(_translate("Fieldbook", "–"))
         self.mSpSetDefaultBtn.setToolTip(_translate("Fieldbook", "Use this to set a consultant that will be\n"
-"loaded at the beginning of every session\n"
-"and auto-filled when adding new records."))
+                                                                 "loaded at the beginning of every session\n"
+                                                                 "and auto-filled when adding new records."))
         self.mSpSetDefaultBtn.setText(_translate("Fieldbook", "Set as default"))
-        self.mPeopleTab.setTabText(self.mPeopleTab.indexOf(self.mConsultantsTab), _translate("Fieldbook", "Consultants"))
+        self.mPeopleTab.setTabText(self.mPeopleTab.indexOf(self.mConsultantsTab),
+                                   _translate("Fieldbook", "Consultants"))
         self.mMediaBox.setToolTip(_translate("Fieldbook", "Default directory where media files are located"))
         self.mMediaBox.setTitle(_translate("Fieldbook", "Media manager"))
         self.label_22.setText(_translate("Fieldbook", "Path:"))
         self.mMediaPath.setToolTip(_translate("Fieldbook", "Default directory where media files are stored.\n"
-"Type in field to change."))
+                                                           "Type in field to change."))
         self.mPlaySoundBtn.setToolTip(_translate("Fieldbook", "play recording"))
         self.mAddMediaBtn.setToolTip(_translate("Fieldbook", "add media file"))
         self.mAddMediaBtn.setText(_translate("Fieldbook", "+"))
@@ -3637,12 +3647,12 @@ class Ui_Fieldbook(object):
         self.groupBox_10.setTitle(_translate("Fieldbook", "Edit orthography"))
         self.groupBox_14.setTitle(_translate("Fieldbook", "Diacritics"))
         self.oDiacriticsField.setToolTip(_translate("Fieldbook", "Enter diacritic marks here that can\n"
-"be removed for \"fuzzy\" searches.\n"
-"Use comma and space between items."))
+                                                                 "be removed for \"fuzzy\" searches.\n"
+                                                                 "Use comma and space between items."))
         self.groupBox_17.setTitle(_translate("Fieldbook", "Segments"))
         self.oOrder.setToolTip(_translate("Fieldbook", "enter desired transformations as comma-delimited pairs;\n"
-"separate pairs with semi-colons. Enter all transformations\n"
-"in the correct order and test before saving."))
+                                                       "separate pairs with semi-colons. Enter all transformations\n"
+                                                       "in the correct order and test before saving."))
         self.oUpdateBtn.setToolTip(_translate("Fieldbook", "save changes to the selected orthography"))
         self.oUpdateBtn.setText(_translate("Fieldbook", "Update"))
         self.oClearTransformBtn.setToolTip(_translate("Fieldbook", "clear transformations"))
@@ -3662,21 +3672,22 @@ class Ui_Fieldbook(object):
         self.label_23.setText(_translate("Fieldbook", "Practical"))
         self.label_29.setText(_translate("Fieldbook", "Phonetic"))
         self.groupBox_19.setToolTip(_translate("Fieldbook", "Switch the entire database to a new \n"
-"orthographic system or to update to\n"
-"a new phonological transcription system. "))
+                                                            "orthographic system or to update to\n"
+                                                            "a new phonological transcription system. "))
         self.groupBox_19.setTitle(_translate("Fieldbook", "Update database"))
         self.oTransformBox.setToolTip(_translate("Fieldbook", "Select direction of transformation\n"
-"(from phonetic to practical orthography\n"
-"or practical to phonetic orthography)"))
+                                                              "(from phonetic to practical orthography\n"
+                                                              "or practical to phonetic orthography)"))
         self.oApplyBtn.setToolTip(_translate("Fieldbook", "Apply this orthography to the transcriptions\n"
-"of all headwords in the lexicon."))
+                                                          "of all headwords in the lexicon."))
         self.oApplyBtn.setText(_translate("Fieldbook", "Apply"))
         self.label_11.setText(_translate("Fieldbook", "Convert from"))
         self.groupBox_20.setToolTip(_translate("Fieldbook", "Select an orthography to use for export and clipping.\n"
-"This does not change what is saved in the database."))
+                                                            "This does not change what is saved in the database."))
         self.groupBox_20.setTitle(_translate("Fieldbook", "For export"))
         self.label_12.setText(_translate("Fieldbook", "Select from list"))
-        self.oSetExportBtn.setToolTip(_translate("Fieldbook", "Set the selected orthography for use in export and clipping"))
+        self.oSetExportBtn.setToolTip(
+            _translate("Fieldbook", "Set the selected orthography for use in export and clipping"))
         self.oSetExportBtn.setText(_translate("Fieldbook", "Set"))
         self.groupBox_21.setTitle(_translate("Fieldbook", "Orthographies"))
         self.oList.setToolTip(_translate("Fieldbook", "select an orthographic transformation"))
@@ -3689,24 +3700,25 @@ class Ui_Fieldbook(object):
         self.oDeleteBtn.setToolTip(_translate("Fieldbook", "delete selected orthography"))
         self.oDeleteBtn.setText(_translate("Fieldbook", "–"))
         self.oSetBtn.setToolTip(_translate("Fieldbook", "Set selected orthography as the primary orthography\n"
-"for auto-conversion to phonetic characters."))
+                                                        "for auto-conversion to phonetic characters."))
         self.oSetBtn.setText(_translate("Fieldbook", "Set primary orthography"))
         self.oHelpBtn.setToolTip(_translate("Fieldbook", "get help"))
         self.oHelpBtn.setText(_translate("Fieldbook", "?"))
         self.mWriting.setTabText(self.mWriting.indexOf(self.mOrthTab), _translate("Fieldbook", "Orthography"))
         self.groupBox_11.setTitle(_translate("Fieldbook", "Sorting order"))
         self.sOrder.setToolTip(_translate("Fieldbook", "enter symbols in rank-order delimited by commas"))
-        self.label_26.setText(_translate("Fieldbook", "<html><head/><body><p>Enter all the orthographic symbols used in the headwords of lexical entries in the order (ascending) that they are to be sorted. Make sure that <span style=\" font-style:italic;\">all</span> symbols used in headwords are included in the list, including morpheme-boundary markers that appear in headwords. Enter symbols to be ignored for alphabetization in the “Exclusions” field.</p></body></html>"))
+        self.label_26.setText(_translate("Fieldbook",
+                                         "<html><head/><body><p>Enter all the orthographic symbols used in the headwords of lexical entries in the order (ascending) that they are to be sorted. Make sure that <span style=\" font-style:italic;\">all</span> symbols used in headwords are included in the list, including morpheme-boundary markers that appear in headwords. Enter symbols to be ignored for alphabetization in the “Exclusions” field.</p></body></html>"))
         self.groupBox_12.setTitle(_translate("Fieldbook", "Exclusions"))
         self.sExclusions.setToolTip(_translate("Fieldbook", "enter symbols (e.g., punctuation) to\n"
-"be removed before sorting"))
+                                                            "be removed before sorting"))
         self.sAccentBtn.setToolTip(_translate("Fieldbook", "Do not count acute accents on vowels for alphabetization.\n"
-"Unchecking this means accented vowels must be assigned\n"
-"a rank-order in the sorting order being used."))
+                                                           "Unchecking this means accented vowels must be assigned\n"
+                                                           "a rank-order in the sorting order being used."))
         self.sAccentBtn.setText(_translate("Fieldbook", "Exclude accents"))
         self.groupBox_4.setTitle(_translate("Fieldbook", "Preset orders"))
         self.sList.setToolTip(_translate("Fieldbook", "list of available sorting orders.\n"
-"Double-click to edit names."))
+                                                      "Double-click to edit names."))
         self.sMoveUpBtn.setToolTip(_translate("Fieldbook", "move order up in list."))
         self.sMoveUpBtn.setText(_translate("Fieldbook", "▲"))
         self.sMoveDownBtn.setToolTip(_translate("Fieldbook", "move order down in list."))
@@ -3719,13 +3731,13 @@ class Ui_Fieldbook(object):
         self.sTestBtn.setToolTip(_translate("Fieldbook", "test sorting order"))
         self.sTestBtn.setText(_translate("Fieldbook", "Test"))
         self.sUpdateBtn.setToolTip(_translate("Fieldbook", "update changes to selected sorting order.\n"
-"Orders can be renamed by double-clicking\n"
-"in the list."))
+                                                           "Orders can be renamed by double-clicking\n"
+                                                           "in the list."))
         self.sUpdateBtn.setText(_translate("Fieldbook", "Update"))
         self.sDoSort.setToolTip(_translate("Fieldbook", "Re-sort based on selected order."))
         self.sDoSort.setText(_translate("Fieldbook", "Apply"))
         self.sSaveAsBtn.setToolTip(_translate("Fieldbook", "create a new sorting order based on the\n"
-"“Sort order” and “Exclusions” fields."))
+                                                           "“Sort order” and “Exclusions” fields."))
         self.sSaveAsBtn.setText(_translate("Fieldbook", "Save As"))
         self.sClearBtn.setText(_translate("Fieldbook", "Clear"))
         self.mWriting.setTabText(self.mWriting.indexOf(self.mAlphaTab), _translate("Fieldbook", "Alphabetization"))
@@ -3735,16 +3747,16 @@ class Ui_Fieldbook(object):
         self.iParser.setToolTip(_translate("Fieldbook", "line editor"))
         self.iSkipBtn.setText(_translate("Fieldbook", "Skip"))
         self.iStartBtn.setToolTip(_translate("Fieldbook", "start analysis from\n"
-"selection or from \n"
-"first unparsed form"))
+                                                          "selection or from \n"
+                                                          "first unparsed form"))
         self.iStartBtn.setText(_translate("Fieldbook", "Analyze"))
         self.iLookUpBtn.setToolTip(_translate("Fieldbook", "look up radical \n"
-"in lexicon"))
+                                                           "in lexicon"))
         self.iLookUpBtn.setText(_translate("Fieldbook", "Radical"))
         self.iExamplesBtn.setToolTip(_translate("Fieldbook", "show examples"))
         self.iExamplesBtn.setText(_translate("Fieldbook", "Examples"))
         self.iBackBtn.setToolTip(_translate("Fieldbook", "go back to most \n"
-"recently analyzed form"))
+                                                         "recently analyzed form"))
         self.iBackBtn.setText(_translate("Fieldbook", "Back"))
         self.iEnterBtn.setToolTip(_translate("Fieldbook", "enter analysis"))
         self.iEnterBtn.setText(_translate("Fieldbook", "Enter"))
@@ -3767,8 +3779,8 @@ class Ui_Fieldbook(object):
         self.iUpdateExampleBtn.setText(_translate("Fieldbook", "Update"))
         self.groupBox_22.setTitle(_translate("Fieldbook", "Errors"))
         self.iErrorBox.setToolTip(_translate("Fieldbook", "Lists examples that show matching errors \n"
-"where lines contain different numbers of\n"
-"elements. Click on line to go to example."))
+                                                          "where lines contain different numbers of\n"
+                                                          "elements. Click on line to go to example."))
         self.iStatsBox.setTitle(_translate("Fieldbook", "Stats"))
         self.iTokensLbl.setText(_translate("Fieldbook", "Tokens:"))
         self.iWordformLbl.setText(_translate("Fieldbook", "Wordforms:"))
@@ -3786,7 +3798,7 @@ class Ui_Fieldbook(object):
         self.iLocateBtn.setText(_translate("Fieldbook", "Locate"))
         self.iDisplayBox.setTitle(_translate("Fieldbook", "Sort by:"))
         self.iSortingBox.setToolTip(_translate("Fieldbook", "sort index by wordform, morphological \n"
-"breakdown, or analysis"))
+                                                            "breakdown, or analysis"))
         self.iSortingBox.setItemText(0, _translate("Fieldbook", "Wordform"))
         self.iSortingBox.setItemText(1, _translate("Fieldbook", "Root"))
         self.iDuplicateBtn.setToolTip(_translate("Fieldbook", "highlight potential duplicate entries"))
@@ -3872,16 +3884,18 @@ class Ui_Fieldbook(object):
         self.actionNormal.setShortcut(_translate("Fieldbook", "Ctrl+Shift+I"))
         self.actionLook_Up.setText(_translate("Fieldbook", "Look Up"))
         self.actionLook_Up.setToolTip(_translate("Fieldbook", "find lexical entry by orthographic form\n"
-"(exact match) or any card by ID number"))
+                                                              "(exact match) or any card by ID number"))
         self.actionLook_Up.setShortcut(_translate("Fieldbook", "Ctrl+L"))
         self.actionSession_Date.setText(_translate("Fieldbook", "Session Date"))
-        self.actionSession_Date.setToolTip(_translate("Fieldbook", "Choose a date to fill in by default for the remainder of the session."))
+        self.actionSession_Date.setToolTip(
+            _translate("Fieldbook", "Choose a date to fill in by default for the remainder of the session."))
         self.actionSession_Speaker.setText(_translate("Fieldbook", "Session Speaker"))
         self.actionSession_Researcher.setText(_translate("Fieldbook", "Session Researcher"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Fieldbook = QtWidgets.QMainWindow()
     ui = Ui_Fieldbook()

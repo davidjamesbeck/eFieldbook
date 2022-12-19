@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/GrammarManager.ui'
+# Form implementation generated from reading ui
+# file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/GrammarManager.ui'
 #
 # Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
+
 
 class Ui_gManager(object):
     def setupUi(self, gManager):
@@ -47,11 +49,11 @@ class Ui_gManager(object):
         self.groupBox_2.setMinimumSize(QtCore.QSize(255, 65))
         self.groupBox_2.setMaximumSize(QtCore.QSize(255, 65))
         self.groupBox_2.setStyleSheet("QPushButton {\n"
-"    min-width: 76px;\n"
-"    min-height: 30px;\n"
-"    max-width: 76px;\n"
-"    max-height: 30px;\n"
-"}")
+                                      "    min-width: 76px;\n"
+                                      "    min-height: 30px;\n"
+                                      "    max-width: 76px;\n"
+                                      "    max-height: 30px;\n"
+                                      "}")
         self.groupBox_2.setTitle("")
         self.groupBox_2.setObjectName("groupBox_2")
         self.Del = QtWidgets.QPushButton(self.groupBox_2)
@@ -65,7 +67,8 @@ class Ui_gManager(object):
         self.Clear.setObjectName("Clear")
         self.buttonBox = QtWidgets.QDialogButtonBox(self.groupBox_2)
         self.buttonBox.setGeometry(QtCore.QRect(83, 32, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(gManager)
@@ -84,10 +87,10 @@ class Ui_gManager(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     gManager = QtWidgets.QDialog()
     ui = Ui_gManager()
     ui.setupUi(gManager)
     gManager.show()
     sys.exit(app.exec())
-

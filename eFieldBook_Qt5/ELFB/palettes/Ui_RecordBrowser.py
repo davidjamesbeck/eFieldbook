@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -18,22 +19,22 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(Dialog.sizePolicy().hasHeightForWidth())
         Dialog.setSizePolicy(sizePolicy)
         Dialog.setStyleSheet("QPushButton {\n"
-"     border: 0px solid black;\n"
-"     border-radius: 4px;\n"
-"     min-width: 50px;\n"
-"     min-height: 18px;\n"
-"     max-width: 76px;\n"
-"     max-height: 24px;\n"
-"     background: #6698FF;\n"
-"     color: white;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     border: 2px solid black;\n"
-"     border-radius: 8px;\n"
-"}\n"
-"\n"
-"")
+                             "     border: 0px solid black;\n"
+                             "     border-radius: 4px;\n"
+                             "     min-width: 50px;\n"
+                             "     min-height: 18px;\n"
+                             "     max-width: 76px;\n"
+                             "     max-height: 24px;\n"
+                             "     background: #6698FF;\n"
+                             "     color: white;\n"
+                             "}\n"
+                             "\n"
+                             "QPushButton:pressed {\n"
+                             "     border: 2px solid black;\n"
+                             "     border-radius: 8px;\n"
+                             "}\n"
+                             "\n"
+                             "")
         Dialog.setSizeGripEnabled(False)
         Dialog.setModal(False)
         self.PrevBtn = QtWidgets.QToolButton(Dialog)
@@ -53,16 +54,16 @@ class Ui_Dialog(object):
         self.groupBox = QtWidgets.QGroupBox(Dialog)
         self.groupBox.setGeometry(QtCore.QRect(15, 90, 226, 67))
         self.groupBox.setStyleSheet("QToolButton {\n"
-"    background: transparent;\n"
-"     min-width: 32px;\n"
-"     min-height: 32px;\n"
-"     max-width: 32px;\n"
-"     max-height: 32px;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 3px red;\n"
-"}")
+                                    "    background: transparent;\n"
+                                    "     min-width: 32px;\n"
+                                    "     min-height: 32px;\n"
+                                    "     max-width: 32px;\n"
+                                    "     max-height: 32px;\n"
+                                    "}\n"
+                                    "\n"
+                                    "QToolButton:pressed {\n"
+                                    "    border: 3px red;\n"
+                                    "}")
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -100,13 +101,14 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Browse results"))
-        Dialog.setToolTip(_translate("Dialog", "<html><head/><body><p>This palette allows you to step back and forth through search results. Use the <span style=\" font-weight:600;\">Scratchpad</span> to make lists of examples of special interest. The <span style=\" font-weight:600;\">Discard</span> button will remove resuts from the Results field on the Search tab.</p></body></html>"))
+        Dialog.setToolTip(_translate("Dialog",
+                                     "<html><head/><body><p>This palette allows you to step back and forth through search results. Use the <span style=\" font-weight:600;\">Scratchpad</span> to make lists of examples of special interest. The <span style=\" font-weight:600;\">Discard</span> button will remove resuts from the Results field on the Search tab.</p></body></html>"))
         self.PrevBtn.setToolTip(_translate("Dialog", "Go backwards."))
         self.NextBtn.setToolTip(_translate("Dialog", "Go forwards."))
         self.groupBox.setToolTip(_translate("Dialog", "Builds a list of earmarked examples from the search results\n"
-"that are especially interesting or that you want to set aside for\n"
-"some purpose or another. Scratchpads can be saved to a file\n"
-"or converted into a Dataset."))
+                                                      "that are especially interesting or that you want to set aside for\n"
+                                                      "some purpose or another. Scratchpads can be saved to a file\n"
+                                                      "or converted into a Dataset."))
         self.groupBox.setTitle(_translate("Dialog", "Scratchpad"))
         self.Select.setToolTip(_translate("Dialog", "Add this example to scratchpad."))
         self.Select.setText(_translate("Dialog", "Add to pad"))
@@ -120,10 +122,10 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec())
-

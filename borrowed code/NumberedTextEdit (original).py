@@ -66,7 +66,7 @@ class LineTextWidget(QtGui.QFrame):
         self.setFrameStyle(QtGui.QFrame.Shape.StyledPanel | QtGui.QFrame.Shadow.Sunken)
  
         self.edit = dataIndex.fldbk.portal
-        self.edit.setFrameStyle(QtGui.QFrame.NoFrame)
+        self.edit.setFrameStyle(QtGui.QFrame.Shape.NoFrame)
         self.edit.setAcceptRichText(False)
  
         self.number_bar = self.NumberBar()

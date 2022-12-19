@@ -8,14 +8,16 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_SearchTexts(object):
     def setupUi(self, SearchTexts):
         SearchTexts.setObjectName("SearchTexts")
         SearchTexts.resize(519, 353)
         self.buttonBox = QtWidgets.QDialogButtonBox(SearchTexts)
         self.buttonBox.setGeometry(QtCore.QRect(420, 282, 81, 51))
-        self.buttonBox.setOrientation(QtCore.Qt.Vertical)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setOrientation(QtCore.Qt.Orientation.Vertical)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.groupBox = QtWidgets.QGroupBox(SearchTexts)
         self.groupBox.setGeometry(QtCore.QRect(349, 0, 148, 107))
@@ -270,14 +272,14 @@ class Ui_SearchTexts(object):
         self.caseBtn.setToolTip(_translate("SearchTexts", "Perform case-insensitive searches"))
         self.caseBtn.setText(_translate("SearchTexts", "Ignore case"))
         self.accentBtn.setToolTip(_translate("SearchTexts", "Perform searches that ignore lexical accent.\n"
-"Search term must contain no accented characters."))
+                                                            "Search term must contain no accented characters."))
         self.accentBtn.setText(_translate("SearchTexts", "Ignore accents"))
         self.diacritBtn.setToolTip(_translate("SearchTexts", "Perform searches that ignore diacritics. \n"
-"Search term must contain no diacritics."))
+                                                             "Search term must contain no diacritics."))
         self.diacritBtn.setText(_translate("SearchTexts", "Ignore diacrits"))
         self.wholeWordBtn.setText(_translate("SearchTexts", "Whole word"))
         self.appendBtn.setToolTip(_translate("SearchTexts", "Search results will not overwrite the results\n"
-"of previous searches on \"Search\" card."))
+                                                            "of previous searches on \"Search\" card."))
         self.appendBtn.setText(_translate("SearchTexts", "Append results"))
         self.setLangBtn.setText(_translate("SearchTexts", "Second language"))
         self.limitBtn.setText(_translate("SearchTexts", "this text only"))
@@ -287,10 +289,10 @@ class Ui_SearchTexts(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     SearchTexts = QtWidgets.QDialog()
     ui = Ui_SearchTexts()
     ui.setupUi(SearchTexts)
     SearchTexts.show()
     sys.exit(app.exec())
-

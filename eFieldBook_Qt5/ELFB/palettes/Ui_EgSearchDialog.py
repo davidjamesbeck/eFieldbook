@@ -8,36 +8,38 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_SearchExamples(object):
     def setupUi(self, SearchExamples):
         SearchExamples.setObjectName("SearchExamples")
         SearchExamples.resize(517, 368)
         SearchExamples.setStyleSheet("QPushButton {\n"
-"    max-height: 19px;\n"
-"    min-height: 19px;\n"
-"    max-width: 60px;\n"
-"    min-width: 60px;\n"
-"    background: #6698FF;\n"
-"    color: white;    \n"
-"    border: 0px solid black;\n"
-"    border-radius: 4px;\n"
-"        padding: 0 0 0 0;\n"
-"        margin: 0 0 0 0;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background: #1E90FF;\n"
-"    border: 2px outset #E6E6FA;\n"
-"}\n"
-"\n"
-"QPushButton:disabled {\n"
-"    background: #E6E6FA;\n"
-"    border: 0px outset #E6E6FA;\n"
-"}")
+                                     "    max-height: 19px;\n"
+                                     "    min-height: 19px;\n"
+                                     "    max-width: 60px;\n"
+                                     "    min-width: 60px;\n"
+                                     "    background: #6698FF;\n"
+                                     "    color: white;    \n"
+                                     "    border: 0px solid black;\n"
+                                     "    border-radius: 4px;\n"
+                                     "        padding: 0 0 0 0;\n"
+                                     "        margin: 0 0 0 0;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QPushButton:pressed {\n"
+                                     "    background: #1E90FF;\n"
+                                     "    border: 2px outset #E6E6FA;\n"
+                                     "}\n"
+                                     "\n"
+                                     "QPushButton:disabled {\n"
+                                     "    background: #E6E6FA;\n"
+                                     "    border: 0px outset #E6E6FA;\n"
+                                     "}")
         self.buttonBox = QtWidgets.QDialogButtonBox(SearchExamples)
         self.buttonBox.setGeometry(QtCore.QRect(345, 325, 142, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.groupBox = QtWidgets.QGroupBox(SearchExamples)
         self.groupBox.setGeometry(QtCore.QRect(349, 0, 148, 107))
@@ -293,16 +295,16 @@ class Ui_SearchExamples(object):
         self.caseBtn.setToolTip(_translate("SearchExamples", "Perform case-insensitive searches"))
         self.caseBtn.setText(_translate("SearchExamples", "Ignore case"))
         self.accentBtn.setToolTip(_translate("SearchExamples", "Perform searches that ignore lexical accent.\n"
-"Search term must contain no accented characters."))
+                                                               "Search term must contain no accented characters."))
         self.accentBtn.setText(_translate("SearchExamples", "Ignore accents"))
         self.diacritBtn.setToolTip(_translate("SearchExamples", "Perform searches that ignore diacritics. \n"
-"Search term must contain no diacritics."))
+                                                                "Search term must contain no diacritics."))
         self.diacritBtn.setText(_translate("SearchExamples", "Ignore diacrits"))
         self.wholeWordBtn.setText(_translate("SearchExamples", "Whole word"))
         self.recOnlyBtn.setToolTip(_translate("SearchExamples", "Find only examples with recordings"))
         self.recOnlyBtn.setText(_translate("SearchExamples", "Recorded only"))
         self.appendBtn.setToolTip(_translate("SearchExamples", "Search results will not overwrite the results\n"
-"of previous searches on \"Search\" card."))
+                                                               "of previous searches on \"Search\" card."))
         self.appendBtn.setText(_translate("SearchExamples", "Append results"))
         self.setLangBtn.setText(_translate("SearchExamples", "Second language"))
         self.egSearchHelpBtn.setToolTip(_translate("SearchExamples", "search help"))
@@ -312,10 +314,10 @@ class Ui_SearchExamples(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     SearchExamples = QtWidgets.QDialog()
     ui = Ui_SearchExamples()
     ui.setupUi(SearchExamples)
     SearchExamples.show()
     sys.exit(app.exec())
-

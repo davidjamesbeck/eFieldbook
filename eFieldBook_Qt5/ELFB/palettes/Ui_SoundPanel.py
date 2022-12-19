@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_SoundPanel(object):
     def setupUi(self, SoundPanel):
         SoundPanel.setObjectName("SoundPanel")
@@ -15,11 +16,11 @@ class Ui_SoundPanel(object):
         self.SoundBox = QtWidgets.QGroupBox(SoundPanel)
         self.SoundBox.setGeometry(QtCore.QRect(0, 0, 146, 77))
         self.SoundBox.setStyleSheet("QToolButton {\n"
-"    background: auto;\n"
-"}\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset transparent;\n"
-"}")
+                                    "    background: auto;\n"
+                                    "}\n"
+                                    "QToolButton:pressed {\n"
+                                    "    border: 2px outset transparent;\n"
+                                    "}")
         self.SoundBox.setObjectName("SoundBox")
         self.Recordings = QtWidgets.QComboBox(self.SoundBox)
         self.Recordings.setGeometry(QtCore.QRect(5, 21, 101, 27))
@@ -52,14 +53,14 @@ class Ui_SoundPanel(object):
         self.AddMediaBtn.setFont(font)
         self.AddMediaBtn.setAutoFillBackground(False)
         self.AddMediaBtn.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                       "    background: #6698FF;\n"
+                                       "    color: white;\n"
+                                       "    border: 1px solid #6698FF;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QToolButton:pressed {\n"
+                                       "    border: 2px outset #1E90FF;\n"
+                                       "}")
         self.AddMediaBtn.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextOnly)
         self.AddMediaBtn.setAutoRaise(True)
         self.AddMediaBtn.setObjectName("AddMediaBtn")
@@ -71,14 +72,14 @@ class Ui_SoundPanel(object):
         font.setWeight(75)
         self.DelMediaBtn.setFont(font)
         self.DelMediaBtn.setStyleSheet("QToolButton {\n"
-"    background: #6698FF;\n"
-"    color: white;\n"
-"    border: 1px solid #6698FF;\n"
-"}\n"
-"\n"
-"QToolButton:pressed {\n"
-"    border: 2px outset #1E90FF;\n"
-"}")
+                                       "    background: #6698FF;\n"
+                                       "    color: white;\n"
+                                       "    border: 1px solid #6698FF;\n"
+                                       "}\n"
+                                       "\n"
+                                       "QToolButton:pressed {\n"
+                                       "    border: 2px outset #1E90FF;\n"
+                                       "}")
         self.DelMediaBtn.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextOnly)
         self.DelMediaBtn.setAutoRaise(True)
         self.DelMediaBtn.setObjectName("DelMediaBtn")
@@ -91,11 +92,11 @@ class Ui_SoundPanel(object):
         SoundPanel.setWindowTitle(_translate("SoundPanel", "Form"))
         self.SoundBox.setTitle(_translate("SoundPanel", "Sound"))
         self.Recordings.setToolTip(_translate("SoundPanel", "select and play recording. \n"
-"Filename is placed on clipboard\n"
-"to paste into a text document."))
+                                                            "Filename is placed on clipboard\n"
+                                                            "to paste into a text document."))
         self.PlaySoundBtn.setToolTip(_translate("SoundPanel", "play recording. Filename\n"
-"is placed on clipboard to\n"
-"paste into a text document."))
+                                                              "is placed on clipboard to\n"
+                                                              "paste into a text document."))
         self.SoundFileMeta.setToolTip(_translate("SoundPanel", "speaker info for recording"))
         self.SoundMetaBtn.setToolTip(_translate("SoundPanel", "metadata"))
         self.AddMediaBtn.setToolTip(_translate("SoundPanel", "add media file"))
@@ -106,10 +107,10 @@ class Ui_SoundPanel(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     SoundPanel = QtWidgets.QWidget()
     ui = Ui_SoundPanel()
     ui.setupUi(SoundPanel)
     SoundPanel.show()
     sys.exit(app.exec())
-

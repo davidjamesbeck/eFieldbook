@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_NavBar(object):
     def setupUi(self, NavBar):
         NavBar.setObjectName("NavBar")
@@ -20,17 +21,17 @@ class Ui_NavBar(object):
         sizePolicy.setHeightForWidth(self.ControlBar.sizePolicy().hasHeightForWidth())
         self.ControlBar.setSizePolicy(sizePolicy)
         self.ControlBar.setStyleSheet("QFrame {\n"
-"     border: 1px solid gray;\n"
-"}\n"
-"\n"
-"QToolButton {\n"
-"     background: transparent;\n"
-"     min-width: 32px;\n"
-"     min-height: 32px;\n"
-"     max-width: 32px;\n"
-"     max-height: 32px;\n"
-"}\n"
-"")
+                                      "     border: 1px solid gray;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton {\n"
+                                      "     background: transparent;\n"
+                                      "     min-width: 32px;\n"
+                                      "     min-height: 32px;\n"
+                                      "     max-width: 32px;\n"
+                                      "     max-height: 32px;\n"
+                                      "}\n"
+                                      "")
         self.ControlBar.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.ControlBar.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.ControlBar.setObjectName("ControlBar")
@@ -96,10 +97,10 @@ class Ui_NavBar(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     NavBar = QtWidgets.QWidget()
     ui = Ui_NavBar()
     ui.setupUi(NavBar)
     NavBar.show()
     sys.exit(app.exec())
-

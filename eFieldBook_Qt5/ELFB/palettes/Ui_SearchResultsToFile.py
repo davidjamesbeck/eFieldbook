@@ -8,6 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
+
 class Ui_OutPutFormatDialog(object):
     def setupUi(self, OutPutFormatDialog):
         OutPutFormatDialog.setObjectName("OutPutFormatDialog")
@@ -48,7 +49,8 @@ class Ui_OutPutFormatDialog(object):
         self.comboBox.setObjectName("comboBox")
         self.buttonBox = QtWidgets.QDialogButtonBox(OutPutFormatDialog)
         self.buttonBox.setGeometry(QtCore.QRect(158, 141, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.StandardButton.Cancel | QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(OutPutFormatDialog)
@@ -66,10 +68,10 @@ class Ui_OutPutFormatDialog(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     OutPutFormatDialog = QtWidgets.QDialog()
     ui = Ui_OutPutFormatDialog()
     ui.setupUi(OutPutFormatDialog)
     OutPutFormatDialog.show()
     sys.exit(app.exec())
-
