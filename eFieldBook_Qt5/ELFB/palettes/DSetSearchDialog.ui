@@ -17,9 +17,9 @@
    <string>Enter text to find in the fields where you wish to search. 
 Entering terms in more than one field will search for entries 
 that meet all search criteria. Enter &quot;&amp;&quot; between AND search 
-terms in the same field, place &quot;¬&quot; before terms for NOT searches. 
-For edge-sensitive searches, place &quot;#&quot; on the edge you wish the 
-search to key on (e.g., &quot;#an&quot; will find all words beginning with 
+terms in the same field, place &quot;¬&quot; before terms for NOT searches.
+For edge-sensitive searches, place &quot;#&quot; on the edge you wish the
+search to key on (e.g., &quot;#an&quot; will find all words beginning with
 the string &quot;an&quot;). Combine AND/NOT and &quot;#&quot; in the order &quot;¬#&quot;. 
 Use the checkboxes on the left to parameterize searches.</string>
   </property>

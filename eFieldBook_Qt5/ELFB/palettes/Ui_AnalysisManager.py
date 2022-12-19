@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/AnalysisManager.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -74,7 +74,7 @@ class Ui_Dialog(object):
         font.setFamily("Monaco")
         self.portal.setFont(font)
         self.portal.setToolTip("")
-        self.portal.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
+        self.portal.setLineWrapMode(QtWidgets.QTextEdit.LineWrapMode.NoWrap)
         self.portal.setObjectName("portal")
         self.controlBox = QtWidgets.QGroupBox(self.tPortalBox)
         self.controlBox.setGeometry(QtCore.QRect(0, 464, 893, 48))
@@ -101,7 +101,7 @@ class Ui_Dialog(object):
         self.findTerm.setObjectName("findTerm")
         self.horizontalLayout_3.addWidget(self.findTerm)
         self.findPrevBtn = QtWidgets.QToolButton(self.horizontalLayoutWidget)
-        self.findPrevBtn.setArrowType(QtCore.Qt.NoArrow)
+        self.findPrevBtn.setArrowType(QtCore.Qt.ArrowType.NoArrow)
         self.findPrevBtn.setObjectName("findPrevBtn")
         self.horizontalLayout_3.addWidget(self.findPrevBtn)
         self.findNextBtn = QtWidgets.QToolButton(self.horizontalLayoutWidget)
@@ -120,7 +120,7 @@ class Ui_Dialog(object):
         self.wholeWordBtn.setFont(font)
         self.wholeWordBtn.setObjectName("wholeWordBtn")
         self.horizontalLayout_3.addWidget(self.wholeWordBtn)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
         self.activateReplace = QtWidgets.QCheckBox(self.horizontalLayoutWidget)
         self.activateReplace.setText("")
@@ -155,7 +155,7 @@ class Ui_Dialog(object):
         self.controlBox.raise_()
         self.tNewMetadataBox = QtWidgets.QGroupBox(Dialog)
         self.tNewMetadataBox.setGeometry(QtCore.QRect(913, -1, 148, 138))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tNewMetadataBox.sizePolicy().hasHeightForWidth())
@@ -207,8 +207,8 @@ class Ui_Dialog(object):
         font.setItalic(False)
         font.setWeight(50)
         self.tNewSource.setFont(font)
-        self.tNewSource.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.tNewSource.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.tNewSource.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tNewSource.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tNewSource.setObjectName("tNewSource")
         self.tNewResearcher = QtWidgets.QPlainTextEdit(self.tNewMetadataBox)
         self.tNewResearcher.setGeometry(QtCore.QRect(80, 39, 60, 18))
@@ -218,8 +218,8 @@ class Ui_Dialog(object):
         font.setItalic(False)
         font.setWeight(50)
         self.tNewResearcher.setFont(font)
-        self.tNewResearcher.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.tNewResearcher.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.tNewResearcher.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tNewResearcher.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tNewResearcher.setObjectName("tNewResearcher")
         self.tNewDate = QtWidgets.QPlainTextEdit(self.tNewMetadataBox)
         self.tNewDate.setGeometry(QtCore.QRect(8, 76, 60, 18))
@@ -229,8 +229,8 @@ class Ui_Dialog(object):
         font.setItalic(False)
         font.setWeight(50)
         self.tNewDate.setFont(font)
-        self.tNewDate.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.tNewDate.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.tNewDate.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tNewDate.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tNewDate.setObjectName("tNewDate")
         self.tNewTranscriber = QtWidgets.QPlainTextEdit(self.tNewMetadataBox)
         self.tNewTranscriber.setGeometry(QtCore.QRect(8, 113, 132, 18))
@@ -240,8 +240,8 @@ class Ui_Dialog(object):
         font.setItalic(False)
         font.setWeight(50)
         self.tNewTranscriber.setFont(font)
-        self.tNewTranscriber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.tNewTranscriber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.tNewTranscriber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tNewTranscriber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tNewTranscriber.setObjectName("tNewTranscriber")
         self.tNewUpdated = QtWidgets.QPlainTextEdit(self.tNewMetadataBox)
         self.tNewUpdated.setGeometry(QtCore.QRect(80, 76, 60, 18))
@@ -251,8 +251,8 @@ class Ui_Dialog(object):
         font.setItalic(False)
         font.setWeight(50)
         self.tNewUpdated.setFont(font)
-        self.tNewUpdated.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.tNewUpdated.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.tNewUpdated.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tNewUpdated.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tNewUpdated.setReadOnly(True)
         self.tNewUpdated.setObjectName("tNewUpdated")
         self.verticalLayoutWidget = QtWidgets.QWidget(Dialog)
@@ -306,7 +306,7 @@ class Ui_Dialog(object):
         self.gridLayout.addWidget(self.tSpliceBtn, 0, 1, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout)
         self.frame_3 = QtWidgets.QFrame(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
@@ -540,5 +540,5 @@ if __name__ == "__main__":
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

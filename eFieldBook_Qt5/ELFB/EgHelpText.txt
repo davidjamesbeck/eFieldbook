@@ -1,9 +1,9 @@
 
 <p>Enter text to find in the fields where you wish to search. Entering terms in more than one field will search for entries that meet all search criteria. 
 
-<p>Enter &quot;&amp;&quot; between AND search terms in the same field, place &quot;¬&quot; before terms for NOT searches. 
+<p>Enter &quot;&amp;&quot; between AND search terms in the same field, place &quot;¬&quot; before terms for NOT searches.
 
-<p>For edge-sensitive searches, place &quot;#&quot; on the edge you wish the search to key on (e.g., &quot;#an&quot; will find all words beginning with the string &quot;an&quot;). 
+<p>For edge-sensitive searches, place &quot;#&quot; on the edge you wish the search to key on (e.g., &quot;#an&quot; will find all words beginning with the string &quot;an&quot;).
 
 <p>Combine AND/NOT and &quot;#&quot; in the order &quot;¬#&quot;. 
 

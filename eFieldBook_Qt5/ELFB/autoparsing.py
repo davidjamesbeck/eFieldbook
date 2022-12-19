@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt6 import QtWidgets, QtCore
 from ELFB import dataIndex, indexOnlyBtns
 from ELFB.palettes import HomophoneManager
 import re
@@ -24,10 +24,11 @@ def doParse():
     if fldbk.eAnalysis.columnCount() <= 2 and noParse == True:
         fldbk.eAnalysis.setColumnCount(0)
         wordList = cleanLine(line)
+        fldbk.eAnalysis.setRowCount(2)
         fldbk.eAnalysis.setColumnCount(len(wordList)+1)
         for i, word in enumerate(wordList):
             newMorphs, newAnalysis = autoParse(word, line, gloss)
-            if newMorphs == None:
+            if newMorphs is None:
                 newMorphs = word
                 newAnalysis = "[—]"
             newItem = QtWidgets.QTableWidgetItem(1001)
@@ -38,8 +39,8 @@ def doParse():
             fldbk.eAnalysis.setItem(1, i, newItem)
             fldbk.eAnalysis.resizeColumnToContents(i)
         inertItem = QtWidgets.QTableWidgetItem(1001)
-        flags = QtCore.Qt.ItemFlags()
-        flags != QtCore.Qt.ItemIsEnabled
+        flags = inertItem.flags()
+        flags != QtCore.Qt.ItemFlag.ItemIsEnabled
         inertItem.setFlags(flags)
         fldbk.eAnalysis.setItem(0, i+1, inertItem)
         inertItem = QtWidgets.QTableWidgetItem(1001)
@@ -47,7 +48,7 @@ def doParse():
         fldbk.eAnalysis.setItem(1, i+1, inertItem)
         lastHeadWidget = QtWidgets.QTableWidgetItem(1001)
         lastHeadWidget.setText('+')
-        fldbk.eAnalysis.setHorizontalHeaderItem(i+1,lastHeadWidget)
+        fldbk.eAnalysis.setHorizontalHeaderItem(i+1, lastHeadWidget)
         fldbk.eAnalysis.resizeColumnToContents(i+1)
     else:
         wordList = cleanLine(line)
@@ -84,26 +85,26 @@ def autoParse(word, textLine=None, glossLine=None):
                 homophoneList = []
                 for line in matchedLines:
                     homophoneList.append(line[1] + ' ‘' + line[2] +'’')
-                if dataIndex.homophoneDefaultChoice != None and word in dataIndex.homophoneDefaultChoice:
+                if dataIndex.homophoneDefaultChoice is not None and word in dataIndex.homophoneDefaultChoice:
                     form = dataIndex.homophoneDefaultChoice[word]
                     newMorphs = form[0]
                     newAnalysis = form[1]
                 else:
                     dialog = HomophoneManager.HomophoneManager(fldbk)
-                    if textLine != None:
+                    if textLine is not None:
                         dialog.line.setPlainText(textLine)
-                    if glossLine != None:
+                    if glossLine is not None:
                         dialog.gloss.setPlainText(glossLine)
                     for item in homophoneList:
                         newItem = QtWidgets.QListWidgetItem()
                         newItem.setText(item)
                         dialog.alternativesList.addItem(newItem)
-                    if dialog.exec_() and dialog.index != None:
+                    if dialog.exec() and dialog.index is not None:
                         lineMatch = matchedLines[dialog.index]
                         newMorphs = lineMatch[1]
                         newAnalysis = lineMatch[2]
                         if dialog.defaultSelect.isChecked():
-                            if dataIndex.homophoneDefaultChoice == None:
+                            if dataIndex.homophoneDefaultChoice is None:
                                 dataIndex.homophoneDefaultChoice = {lineMatch[0] : [lineMatch[1], lineMatch[2]]}
                             else:
                                 dataIndex.homophoneDefaultChoice[lineMatch[0]] = [lineMatch[1], lineMatch[2]]
@@ -111,13 +112,13 @@ def autoParse(word, textLine=None, glossLine=None):
     
 def askToBuildIndex():
     breakbox = QtWidgets.QMessageBox()
-    breakbox.setIcon(QtWidgets.QMessageBox.Warning)
+    breakbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
     breakbox.setText("Build index?")
     breakbox.setInformativeText('Full auto-parsing requires a morphological index to be generated. Do you want to build one now?')
-    breakbox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
-    breakbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-    breakbox.exec_()
-    if breakbox.result() == QtWidgets.QMessageBox.Ok:    
+    breakbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok | QtWidgets.QMessageBox.StandardButton.Cancel)
+    breakbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+    breakbox.exec()
+    if breakbox.result() == QtWidgets.QMessageBox.StandardButton.Ok:    
         indexOnlyBtns.buildIndex()
         return True
     else:
@@ -125,18 +126,19 @@ def askToBuildIndex():
 
 def cleanLine(line):
     #TODO: make it possible for users to define punctuation characters
-    table = str.maketrans('','','!¡?¿.,/…-–—“”;')
+    table = str.maketrans('', '', '!¡?¿., /…-–—“”;')
     line = line.translate(table)
     p = re.compile('[\(\[\{<].*?[\)\]\}>]')
     line = p.sub('', line)
     while '  ' in line:
         line = line.replace('  ', ' ')
     line = line.strip()
+    line = line.replace('\t', ' ')
     lineList = line.split(' ')
     return lineList
 
 def storeUnparsedItem(item):
-    '''this seems essentially to be a flag, either None or [--]'''
+    """this seems essentially to be a flag, either None or [--]"""
     if item.row() == 1:
         dataIndex.unparsedILEG = item
     

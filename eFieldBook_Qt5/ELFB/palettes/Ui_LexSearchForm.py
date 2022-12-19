@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Google Drive/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/LexSearchForm.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.2
+# Created by: PyQt6 UI code generator 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_LexSearchForm(object):
     def setupUi(self, LexSearchForm):
@@ -56,7 +56,7 @@ class Ui_LexSearchForm(object):
         self.lSearchIPA.setObjectName("lSearchIPA")
         self.notations = QtWidgets.QGroupBox(self.lSearchHeader)
         self.notations.setGeometry(QtCore.QRect(703, 22, 194, 112))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.notations.sizePolicy().hasHeightForWidth())
@@ -115,7 +115,7 @@ class Ui_LexSearchForm(object):
         self.lC2DialectSearch.setObjectName("lC2DialectSearch")
         self.lMetadataBox = QtWidgets.QGroupBox(LexSearchForm)
         self.lMetadataBox.setGeometry(QtCore.QRect(976, -2, 148, 138))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lMetadataBox.sizePolicy().hasHeightForWidth())
@@ -196,14 +196,14 @@ class Ui_LexSearchForm(object):
         self.lL1Box.setObjectName("lL1Box")
         self.lL1Search = QtWidgets.QLineEdit(self.lL1Box)
         self.lL1Search.setGeometry(QtCore.QRect(7, 26, 689, 116))
-        self.lL1Search.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lL1Search.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
         self.lL1Search.setObjectName("lL1Search")
         self.verticalLayout.addWidget(self.lL1Box)
         self.lL2Box = QtWidgets.QGroupBox(self.lDefBox)
         self.lL2Box.setObjectName("lL2Box")
         self.lL2Search = QtWidgets.QLineEdit(self.lL2Box)
         self.lL2Search.setGeometry(QtCore.QRect(7, 26, 689, 116))
-        self.lL2Search.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lL2Search.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading | QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.lL2Search.setObjectName("lL2Search")
         self.verticalLayout.addWidget(self.lL2Box)
         self.lIndexBox = QtWidgets.QGroupBox(LexSearchForm)
@@ -213,7 +213,7 @@ class Ui_LexSearchForm(object):
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.lIndexBox)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.lKeywordsBox = QtWidgets.QGroupBox(self.lIndexBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lKeywordsBox.sizePolicy().hasHeightForWidth())
@@ -226,11 +226,11 @@ class Ui_LexSearchForm(object):
         self.lKeywordsBox.setObjectName("lKeywordsBox")
         self.lSearchKeywordIndex = QtWidgets.QLineEdit(self.lKeywordsBox)
         self.lSearchKeywordIndex.setGeometry(QtCore.QRect(7, 25, 201, 43))
-        self.lSearchKeywordIndex.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lSearchKeywordIndex.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchKeywordIndex.setObjectName("lSearchKeywordIndex")
         self.horizontalLayout_3.addWidget(self.lKeywordsBox)
         self.lPrimaryIndexBox = QtWidgets.QGroupBox(self.lIndexBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lPrimaryIndexBox.sizePolicy().hasHeightForWidth())
@@ -239,11 +239,11 @@ class Ui_LexSearchForm(object):
         self.lPrimaryIndexBox.setObjectName("lPrimaryIndexBox")
         self.lSearchPrimaryIndex = QtWidgets.QLineEdit(self.lPrimaryIndexBox)
         self.lSearchPrimaryIndex.setGeometry(QtCore.QRect(7, 25, 207, 43))
-        self.lSearchPrimaryIndex.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lSearchPrimaryIndex.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchPrimaryIndex.setObjectName("lSearchPrimaryIndex")
         self.horizontalLayout_3.addWidget(self.lPrimaryIndexBox)
         self.lSecondaryIndexBox = QtWidgets.QGroupBox(self.lIndexBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lSecondaryIndexBox.sizePolicy().hasHeightForWidth())
@@ -252,7 +252,7 @@ class Ui_LexSearchForm(object):
         self.lSecondaryIndexBox.setObjectName("lSecondaryIndexBox")
         self.lSearchSecondaryIndex = QtWidgets.QLineEdit(self.lSecondaryIndexBox)
         self.lSearchSecondaryIndex.setGeometry(QtCore.QRect(7, 25, 207, 43))
-        self.lSearchSecondaryIndex.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lSearchSecondaryIndex.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchSecondaryIndex.setObjectName("lSearchSecondaryIndex")
         self.horizontalLayout_3.addWidget(self.lSecondaryIndexBox)
         self.instructionBox = QtWidgets.QGroupBox(LexSearchForm)
@@ -274,8 +274,8 @@ class Ui_LexSearchForm(object):
         self.lSearchControlBar.setGeometry(QtCore.QRect(166, 596, 258, 54))
         self.lSearchControlBar.setMinimumSize(QtCore.QSize(258, 54))
         self.lSearchControlBar.setMaximumSize(QtCore.QSize(258, 54))
-        self.lSearchControlBar.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.lSearchControlBar.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.lSearchControlBar.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.lSearchControlBar.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.lSearchControlBar.setObjectName("lSearchControlBar")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.lSearchControlBar)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -333,7 +333,7 @@ class Ui_LexSearchForm(object):
         self.verticalLayout_2.addWidget(self.setLangBtn)
         self.lSearchNotes = QtWidgets.QLineEdit(LexSearchForm)
         self.lSearchNotes.setGeometry(QtCore.QRect(495, 596, 403, 54))
-        self.lSearchNotes.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.lSearchNotes.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
         self.lSearchNotes.setObjectName("lSearchNotes")
 
         self.retranslateUi(LexSearchForm)
@@ -417,5 +417,5 @@ if __name__ == "__main__":
     ui = Ui_LexSearchForm()
     ui.setupUi(LexSearchForm)
     LexSearchForm.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

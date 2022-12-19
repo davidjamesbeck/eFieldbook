@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt6 import QtWidgets, QtCore
 from ELFB import dataIndex
 
 from .Ui_AddEgDialog import Ui_AddEg
@@ -7,8 +7,8 @@ from .Ui_AddEgDialog import Ui_AddEg
 class AddEgDialog(QtWidgets.QDialog, Ui_AddEg):
     
     def __init__(self, parent):
-        super(AddEgDialog,self).__init__(parent)
-        QtWidgets.QDialog.__init__(self,parent)
+        super(AddEgDialog, self).__init__(parent)
+        QtWidgets.QDialog.__init__(self, parent)
         self.setupUi(self)
         self.IDREF = ''
     
@@ -30,13 +30,10 @@ class AddEgDialog(QtWidgets.QDialog, Ui_AddEg):
         """
         If user checks this box, IDREF is set
         to id number of current example.
-        
-        @param checked DESCRIPTION
-        @type bool
         """
         if checked == 1 and dataIndex.lastEx:
-            if not dataIndex.lastEx in dataIndex.exDict:
-                #making sure that the current value of lastEx is valid
+            if dataIndex.lastEx not in dataIndex.exDict:
+                """making sure that the current value of lastEx is valid"""
                 dataIndex.lastEx = list(dataIndex.exDict.keys())[0]
             self.IDRef.setText(dataIndex.lastEx)
             self.IDREF = dataIndex.lastEx

@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/GrammarManager.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_gManager(object):
     def setupUi(self, gManager):
@@ -15,7 +15,7 @@ class Ui_gManager(object):
         gManager.setSizeGripEnabled(False)
         self.lexBox = QtWidgets.QGroupBox(gManager)
         self.lexBox.setGeometry(QtCore.QRect(10, 9, 410, 386))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lexBox.sizePolicy().hasHeightForWidth())
@@ -65,7 +65,7 @@ class Ui_gManager(object):
         self.Clear.setObjectName("Clear")
         self.buttonBox = QtWidgets.QDialogButtonBox(self.groupBox_2)
         self.buttonBox.setGeometry(QtCore.QRect(83, 32, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(gManager)
@@ -89,5 +89,5 @@ if __name__ == "__main__":
     ui = Ui_gManager()
     ui.setupUi(gManager)
     gManager.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

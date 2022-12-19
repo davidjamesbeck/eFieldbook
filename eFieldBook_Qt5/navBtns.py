@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt6 import QtWidgets
 from ELFB import cardLoader, cardStack, dataIndex
 
 '''navigation buttons'''
@@ -37,7 +37,7 @@ def lastCard(navBar,dct):
     data = navBar.model().index(lastItem,0).data(32)
     targetCard = dct[data]
     navBar.setCurrentIndex(navBar.model().index(lastItem,0))
-    navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+    navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
     return targetCard
     
 def firstLxCard(fldbk):
@@ -67,7 +67,7 @@ def firstCard(navBar,dct):
     data = navBar.model().index(0,0).data(32)
     targetCard = dct[data]
     navBar.setCurrentIndex(navBar.model().index(0,0))
-    navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+    navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
     return targetCard
 
 def goPrevLx(fldbk):
@@ -110,7 +110,7 @@ def goPrev(navBar,dct):
         else:
             current = navBar.currentIndex().row() - 1
         navBar.setCurrentIndex(navBar.model().index(current,0))
-        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
         data = navBar.currentIndex().data(32)
         targetCard = dct[data]
         return targetCard
@@ -158,7 +158,7 @@ def goNext(navBar,dct):
     else:
         current = navBar.currentIndex().row() + 1
     navBar.setCurrentIndex(navBar.model().index(current,0))
-    navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+    navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
     data = navBar.currentIndex().data(32)
     targetCard = dct[data]
     return targetCard

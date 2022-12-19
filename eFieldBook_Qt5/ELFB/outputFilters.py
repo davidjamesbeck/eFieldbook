@@ -1,7 +1,8 @@
 from ELFB import dataIndex
 
-'''converts XML to various formats for output or between
-formats for different views in the database'''
+"""converts XML to various formats for output or between
+formats for different views in the database"""
+
 
 def lexToText(nodeID):
     node = dataIndex.lexDict[nodeID]
@@ -11,5 +12,6 @@ def lexToText(nodeID):
     newText = entryWord + " (" + pos + ") " + dfn + " [" + nodeID + "]"
     return newText
     
+
 def egToText(nodeID):
     print(nodeID)

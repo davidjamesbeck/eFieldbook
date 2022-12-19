@@ -4,8 +4,8 @@
 Module implementing HomophoneManager.
 """
 
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QDialog, QListWidgetItem
+from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtWidgets import QDialog, QListWidgetItem
 
 from .Ui_HomophoneManager import Ui_Dialog
 
@@ -14,6 +14,7 @@ class HomophoneManager(QDialog, Ui_Dialog):
     """
     Class documentation goes here.
     """
+
     def __init__(self, parent=None):
         """
         Constructor
@@ -26,7 +27,7 @@ class HomophoneManager(QDialog, Ui_Dialog):
         self.selection = ''
         self.index = None
         self.defaultChecked = 0
-    
+
     @pyqtSlot(int)
     def on_defaultSelect_stateChanged(self, p0):
         """
@@ -39,33 +40,21 @@ class HomophoneManager(QDialog, Ui_Dialog):
             self.defaultchecked == 0
         else:
             self.defaultChecked == 1
-    
+
     @pyqtSlot()
     def on_okButton_released(self):
         """
         Slot documentation goes here.
         """
         self.accept()
-    
+
     @pyqtSlot(QListWidgetItem)
     def on_alternativesList_itemClicked(self, item):
-        """
-        Slot documentation goes here.
-        
-        @param item DESCRIPTION
-        @type QListWidgetItem
-        """
         self.selection = item.text()
         self.index = self.alternativesList.currentRow()
-    
+
     @pyqtSlot(QListWidgetItem)
     def on_alternativesList_itemDoubleClicked(self, item):
-        """
-        Slot documentation goes here.
-        
-        @param item DESCRIPTION
-        @type QListWidgetItem
-        """
         self.selection = item.text()
         self.index = self.alternativesList.currentRow()
         self.accept()

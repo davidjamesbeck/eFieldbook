@@ -1,10 +1,11 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 from ELFB import dataIndex,  Alphabetizer, formattingHandlers
 
-'''Build list boxes for Home, Lexicon, Texts, and Dataset cards'''
+"""Build list boxes for Home, Lexicon, Texts, and Dataset cards"""
+
 
 def navListBuilderLex(fldbk):
-    '''make models for the lex Navs'''
+    """make models for the lex Navs"""
     navModelL = QtGui.QStandardItemModel()
     for node in dataIndex.root.iter('Lex'):
         LexID = node.attrib.get('LexID')
@@ -25,7 +26,8 @@ def navListBuilderLex(fldbk):
     else:
         fldbk.hLexiconLabel.setText("Lexicon: %s entries" % s)    
    
-def navListBuilderText(fldbk):    
+
+def navListBuilderText(fldbk):
     navModelT = QtGui.QStandardItemModel()
     for node in dataIndex.root.iter('Text'):
         TextID = node.attrib.get('TextID')
@@ -37,12 +39,12 @@ def navListBuilderText(fldbk):
         navModelT.appendRow(item)
     proxyModelT = QtCore.QSortFilterProxyModel()
     proxyModelT.setSourceModel(navModelT)
-    proxyModelT.setSortCaseSensitivity(0)
-    proxyModelT.sort(0,QtCore.Qt.AscendingOrder)
+    proxyModelT.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+    proxyModelT.sort(0, QtCore.Qt.SortOrder.AscendingOrder)
     fldbk.hTextNav.setModel(proxyModelT)
     fldbk.tTextNav.setModel(proxyModelT)
-    fldbk.hTextNav.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-    fldbk.tTextNav.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+    fldbk.hTextNav.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+    fldbk.tTextNav.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
     s = str(formattingHandlers.addCommas(navModelT.rowCount()))
     if s == '1':
         fldbk.hTextsLabel.setText("Texts: 1 text")
@@ -50,6 +52,7 @@ def navListBuilderText(fldbk):
         fldbk.hTextsLabel.setText("Texts: %s texts" % s)
     fldbk.hTextNav.setSelectionModel(fldbk.tTextNav.selectionModel())        
     
+
 def navListBuilderData(fldbk):
     navModelD = QtGui.QStandardItemModel()
     for node in dataIndex.root.iter('Dset'):
@@ -62,8 +65,8 @@ def navListBuilderData(fldbk):
         navModelD.appendRow(item)
     proxyModelD = QtCore.QSortFilterProxyModel()
     proxyModelD.setSourceModel(navModelD)
-    proxyModelD.setSortCaseSensitivity(0)
-    proxyModelD.sort(0,QtCore.Qt.AscendingOrder)
+    proxyModelD.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+    proxyModelD.sort(0, QtCore.Qt.SortOrder.AscendingOrder)
     fldbk.hDataNav.setModel(proxyModelD)
     fldbk.dDataNav.setModel(proxyModelD)
     s = str(formattingHandlers.addCommas(navModelD.rowCount()))

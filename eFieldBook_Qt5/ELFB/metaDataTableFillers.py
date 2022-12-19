@@ -1,5 +1,6 @@
-from PyQt5 import QtWidgets, QtCore,  QtGui
+from PyQt6 import QtWidgets, QtCore,  QtGui
 from ELFB import dataIndex, metaDataBtns
+
 
 def fillRTable(fldbk):
     fldbk.mRTable.setRowCount(0)
@@ -20,23 +21,23 @@ def fillRTable(fldbk):
                     info = child.find('Info').text
                 except AttributeError:
                     info = None
-                dataList = [code,name,level,affiliation,info]
+                dataList = [code, name, level, affiliation, info]
                 nextRow = fldbk.mRTable.rowCount()
                 fldbk.mRTable.setRowCount(nextRow+1)
-                fldbk.mRTable.setRowHeight(nextRow,20)
-                for i in range(0,5):
+                fldbk.mRTable.setRowHeight(nextRow, 20)
+                for i in range(0, 5):
                     newItem = QtWidgets.QTableWidgetItem(1001)
-                    if dataList[i] != None:
+                    if dataList[i] is not None:
                         itemText = dataList[i]
                         newItem.setText(itemText)
-                    newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
-                    fldbk.mRTable.setItem(nextRow,i,newItem)
-                fldbk.mRTable.item(nextRow,0).setData(36,child)
-                fldbk.mRTable.item(nextRow,0).setData(40,level)
-        for j in range(0,fldbk.mRTable.columnCount()-1):
+                    newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
+                    fldbk.mRTable.setItem(nextRow, i, newItem)
+                fldbk.mRTable.item(nextRow, 0).setData(36, child)
+                fldbk.mRTable.item(nextRow, 0).setData(40, level)
+        for j in range(0, fldbk.mRTable.columnCount()-1):
             fldbk.mRTable.resizeColumnToContents(j)
             if fldbk.mRTable.columnWidth(j) > 165:
-                fldbk.mRTable.setColumnWidth(j,165)
+                fldbk.mRTable.setColumnWidth(j, 165)
         fldbk.mRTable.resizeColumnToContents(fldbk.mRTable.columnCount()-1)
         
 def fillConsultantTable(fldbk):
@@ -58,32 +59,32 @@ def fillConsultantTable(fldbk):
                     info = child.find('Info').text
                 except AttributeError:
                     info = None
-                dataList = [code,name,birthday,place,info]
+                dataList = [code, name, birthday, place, info]
                 nextRow = fldbk.mSpTable.rowCount()
                 fldbk.mSpTable.setRowCount(nextRow+1)
-                fldbk.mSpTable.setRowHeight(nextRow,20)
-                for i in range(0,5):
+                fldbk.mSpTable.setRowHeight(nextRow, 20)
+                for i in range(0, 5):
                     newItem = QtWidgets.QTableWidgetItem(1001)
-                    if dataList[i] != None:
+                    if dataList[i] is not None:
                         itemText = dataList[i]
                         newItem.setText(itemText)
-                    newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
-                    fldbk.mSpTable.setItem(nextRow,i,newItem)
-                fldbk.mSpTable.item(nextRow,0).setData(36,child)
-        for j in range(0,fldbk.mSpTable.columnCount()-1):
+                    newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
+                    fldbk.mSpTable.setItem(nextRow, i, newItem)
+                fldbk.mSpTable.item(nextRow, 0).setData(36, child)
+        for j in range(0, fldbk.mSpTable.columnCount()-1):
             fldbk.mSpTable.resizeColumnToContents(j)
     else:
         fldbk.mSpTable.clear()
             
 def fillMediaTable(fldbk, icon=None):
-    if icon == None:
+    if icon is None:
         icon = QtGui.QIcon(':InfoBtn.png')
     if dataIndex.root.findall("Media"):
         fldbk.mMediaTable.setRowCount(0)
-        fldbk.mMediaTable.setColumnWidth(0,216)
-        fldbk.mMediaTable.setColumnWidth(1,34)
-        fldbk.mMediaTable.setColumnWidth(2,40)
-        fldbk.mMediaTable.setColumnWidth(3,25)
+        fldbk.mMediaTable.setColumnWidth(0, 216)
+        fldbk.mMediaTable.setColumnWidth(1, 34)
+        fldbk.mMediaTable.setColumnWidth(2, 40)
+        fldbk.mMediaTable.setColumnWidth(3, 25)
         for item in dataIndex.mediaDict:
             mediaElement = dataIndex.mediaDict[item]
             file = mediaElement.attrib.get('Filename')
@@ -97,59 +98,59 @@ def fillMediaTable(fldbk, icon=None):
             except AttributeError:
                 researcher = "YYY"
                 mediaElement.set('Rschr', 'YYY')
-            dataList = [file,speaker,researcher]
+            dataList = [file, speaker, researcher]
             nextRow = fldbk.mMediaTable.rowCount()
             fldbk.mMediaTable.setRowCount(nextRow+1)
-            fldbk.mMediaTable.setRowHeight(nextRow,20)
-            for i in range(0,len(dataList)):
+            fldbk.mMediaTable.setRowHeight(nextRow, 20)
+            for i in range(0, len(dataList)):
                 newItem = QtWidgets.QTableWidgetItem(1001)
-                if dataList[i] != None:
+                if dataList[i] is not None:
                     itemText = dataList[i]
                     newItem.setText(itemText)
-                    newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
-                    fldbk.mMediaTable.setItem(nextRow,i,newItem)
-            fldbk.mMediaTable.item(nextRow,0).setData(36,mediaElement)
+                    newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
+                    fldbk.mMediaTable.setItem(nextRow, i, newItem)
+            fldbk.mMediaTable.item(nextRow, 0).setData(36, mediaElement)
             newItem = QtWidgets.QTableWidgetItem(1001)
             newItem.setIcon(icon)
-            fldbk.mMediaTable.setItem(nextRow,3,newItem) 
-        fldbk.mMediaTable.sortItems(0,QtCore.Qt.AscendingOrder)    
+            fldbk.mMediaTable.setItem(nextRow, 3, newItem) 
+        fldbk.mMediaTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)    
     else:
         fldbk.mMediaTable.clear()
         
 def fillOrth(fldbk):
-    if dataIndex.root.find('Orthography') != None:
+    if dataIndex.root.find('Orthography') is not None:
         labelList = []
         orthList = dataIndex.root.findall('Orthography')
         fldbk.oList.setRowCount(len(orthList))
-        for i,item in enumerate(orthList):
+        for i, item in enumerate(orthList):
             name = item.attrib.get('Name')
             labelList.append(name)
             kind = ''
             newOrth = QtWidgets.QTableWidgetItem(1001)
             newType = QtWidgets.QTableWidgetItem(1001)
-            newOrth.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
-            newType.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+            newOrth.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
+            newType.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
             newOrth.setText(name)
             newType.setText(kind)
-            fldbk.oList.setItem(i,0,newOrth)
-            fldbk.oList.setItem(i,1,newType)
-            fldbk.oList.item(i,0).setData(36,item)
-            fldbk.oList.setRowHeight(i,20) 
+            fldbk.oList.setItem(i, 0, newOrth)
+            fldbk.oList.setItem(i, 1, newType)
+            fldbk.oList.item(i, 0).setData(36, item)
+            fldbk.oList.setRowHeight(i, 20) 
         fldbk.oExportSelect.insertItems(0, labelList)
     
-        if dataIndex.root.attrib.get('Orth') != None:
-            for i,item in enumerate(orthList):
+        if dataIndex.root.attrib.get('Orth') is not None:
+            for i, item in enumerate(orthList):
                 if item.attrib.get('Name') == dataIndex.root.attrib.get('Orth'):
                     fldbk.oList.item(i, 1).setText('primary')
                     fldbk.oExportSelect.setCurrentIndex(i)
-                    node = fldbk.oList.item(i,0).data(36)
+                    node = fldbk.oList.item(i, 0).data(36)
                     order = node.text
                     try:
                         diacrits = node.attrib.get('Diacrits')
                         fldbk.oDiacriticsField.setPlainText(diacrits)
                         dataIndex.diacrits = []
-                        for item in diacrits.split(','):
-                            dataIndex.diacrits.append(item.strip())
+                        for item2 in diacrits.split(', '):
+                            dataIndex.diacrits.append(item2.strip())
                     except AttributeError:  
                         pass
                     fldbk.oOrder.setPlainText(order)
@@ -164,11 +165,12 @@ def fillOrth(fldbk):
         fldbk.oUpdateBtn.setEnabled(0)
         fldbk.oClearTransformBtn.setEnabled(0)   
 
+
 def fillSort(fldbk):
-    if dataIndex.root.get("noDefaultSort") == None:
+    if dataIndex.root.get("noDefaultSort") is None:
         item = QtWidgets.QListWidgetItem('Built-In')
-        item.setData(32,'Built-In')
-        item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+        item.setData(32, 'Built-In')
+        item.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
         fldbk.sList.addItem(item)
     delegate = QtWidgets.QItemDelegate()
     fldbk.sList.setItemDelegate(delegate)
@@ -177,10 +179,11 @@ def fillSort(fldbk):
         sortKey = node.attrib.get('SName')
         item = QtWidgets.QListWidgetItem(sortKey)
         item.setData(32, sortKey)
-        item.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable)
+        item.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEditable)
         fldbk.sList.addItem(item)  
-    currentItem = fldbk.sList.findItems(dataIndex.root.get('SortKey', default="Built-In"), QtCore.Qt.MatchExactly)
+    currentItem = fldbk.sList.findItems(dataIndex.root.get('SortKey', default="Built-In"), QtCore.Qt.MatchFlag.MatchExactly)
     fldbk.sList.setCurrentItem(currentItem[0])
+
 
 def fillAbbrevTables(fldbk):
     abbrModel = QtGui.QStandardItemModel()
@@ -198,12 +201,12 @@ def fillAbbrevTables(fldbk):
         newItem.setData(child.attrib.get('ACode'), 35)
         newItem.setData(child, 36)
         newItem.setText(itemText)
-        newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+        newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
         abbrModel.appendRow(newItem)
     abbrModelProxy = QtCore.QSortFilterProxyModel()
     abbrModelProxy.setSourceModel(abbrModel)
     abbrModelProxy.setDynamicSortFilter(True)
-    abbrModelProxy.sort(0, QtCore.Qt.AscendingOrder)
+    abbrModelProxy.sort(0, QtCore.Qt.SortOrder.AscendingOrder)
     fldbk.eAbbreviations.setModel(abbrModelProxy)
     fldbk.eAbbreviations.resizeColumnToContents(0)
     fldbk.eAbbreviations.resizeRowsToContents()

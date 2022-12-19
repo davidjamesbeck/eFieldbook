@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtCore
+from PyQt6 import QtGui, QtCore
 from ELFB import searchClasses
 
 def dAdvancedSearch(fldbk):
@@ -12,7 +12,7 @@ def removeHiliting(fldbk):
     text = fldbk.dData.document()
     block = text.begin()
     cursor = QtGui.QTextCursor(block)
-    cursor.select(QtGui.QTextCursor.Document)
-    format = QtGui.QTextCharFormat()
-    format.setBackground(QtCore.Qt.white)
-    cursor.setCharFormat(format)
+    cursor.select(QtGui.QTextCursor.SelectionType.Document)
+    charformat = QtGui.QTextCharFormat()
+    charformat.setBackground(QtCore.Qt.GlobalColor.white)
+    cursor.setCharFormat(charformat)

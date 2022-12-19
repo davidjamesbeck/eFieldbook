@@ -4,8 +4,8 @@
 Module implementing AddLineDialog.
 """
 
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QDialog
+from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtWidgets import QDialog
 
 from .Ui_AddTextLine import Ui_Dialog
 

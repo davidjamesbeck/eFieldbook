@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['eFieldBook.py'],
-             pathex=['/Users/David/Google Drive/Current/ELFB/eFieldBook_Qt5'],
+             pathex=['/Users/David/OpenSource/github/ELFB/eFieldBook_Qt5'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -29,8 +29,8 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
-          console=False , icon='/Users/David/Google Drive/Current/ELFB/eFieldBook_Qt5/ELFB.iconset/icon_32x32.png')
+          console=False , icon='/Users/David/OpenSource/github/ELFB/eFieldBook_Qt5/ELFB.icns')
 app = BUNDLE(exe,
              name='eFieldbook.app',
-             icon='/Users/David/Google Drive/Current/ELFB/eFieldBook_Qt5/ELFB.iconset/icon_32x32.png',
+             icon='/Users/David/OpenSource/github/ELFB/eFieldBook_Qt5/ELFB.icns',
              bundle_identifier='com.ualberta.linguistics.eFieldbook')

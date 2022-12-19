@@ -5,8 +5,8 @@ Module implementing MainWindow.
 """
 
 import os
-from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QMainWindow
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import QMainWindow
 from .Ui_fieldbook import Ui_Fieldbook
 from ELFB import dataIndex, cardLoader, Alphabetizer, cardStack, menus, navLists, dictBuilder, contextMenus, NumberedLineEdit, metaDataTableFillers, formattingHandlers
 from ELFB.focusOutFilter import focusOutFilter, dialectFilter, borrowFilter
@@ -72,7 +72,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         except (TypeError, PermissionError, FileNotFoundError):
             '''error arises if fname has not been set'''
             blankDbFile = QtCore.QFile(dataIndex.rootPath + '/ELFB/newFileTemplate.xml')
-            blankDbFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+            blankDbFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text)
             dataIndex.xmltree = MyElementTree.parse(blankDbFile)
             dataIndex.sourceFile = 'blank database'
         self.giveWindowTitle()
@@ -299,7 +299,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         dbTitle = dataIndex.root.attrib.get('Dbase')
         dbTitle = formattingHandlers.XMLtoRTF(dbTitle)
         self.hTitle.setText(dbTitle)
-        self.hTitle.setAlignment(QtCore.Qt.AlignHCenter)
+        self.hTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.filter = focusOutFilter(self.hTitle)
         self.hTitle.installEventFilter(self.filter)
         self.hTitle.textChanged.connect(self.flagUnsavedEdits)
@@ -449,7 +449,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         '''text fields'''
         '''Texts tab'''
         self.tNewTitle.setVisible(0)
-        self.tNewTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.tNewTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.tPortalBox.setVisible(0)
         self.tNewMetadataBox.setVisible(0)
         self.tNewTextComments.setVisible(0)
@@ -481,7 +481,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.filter = focusOutFilter(self.tTitle)
         self.tTitle.installEventFilter(self.filter)
         self.tTitle.textChanged.connect(self.flagUnsavedEdits)
-        self.tTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.tTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         
         '''Examples tab'''
         self.filter = focusOutFilter(self.eLine)
@@ -591,7 +591,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             targetCard = dataIndex.lexDict[data]
             cardLoader.loadLexCard(self, targetCard)
             self.lLexNav.setCurrentIndex(pointer)
-            self.lLexNav.scrollTo(pointer, QtWidgets.QAbstractItemView.EnsureVisible)
+            self.lLexNav.scrollTo(pointer, QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
             dataIndex.unsavedEdit = 0
             dataIndex.currentCard = data
             self.tabWidget.setCurrentIndex(1)
@@ -606,7 +606,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
           self.tabWidget.setCurrentIndex(2)
           cardLoader.loadTextCard(self, targetCard)
           self.tTextNav.setCurrentIndex(pointer)
-          self.tTextNav.scrollTo(pointer, QtWidgets.QAbstractItemView.EnsureVisible)
+          self.tTextNav.scrollTo(pointer, QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
           dataIndex.unsavedEdit = 0
     
         self.hTextNav.clicked.connect(goToTxtCard)
@@ -618,7 +618,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
           cardLoader.loadDataCard(self, targetCard)
           i = self.hDataNav.currentIndex()
           self.dDataNav.setCurrentIndex(i)
-          self.dDataNav.scrollTo(i, QtWidgets.QAbstractItemView.EnsureVisible)
+          self.dDataNav.scrollTo(i, QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
           self.tabWidget.setCurrentIndex(4)
           dataIndex.unsavedEdit = 0
     
@@ -697,7 +697,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.eAbbreviations.verticalHeader().hide()
         self.eAbbreviations.horizontalHeader().hide()
         self.eAbbreviations.setShowGrid(0)
-        self.eAbbreviations.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.eAbbreviations.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.eAbbreviations.setStyleSheet("selection-background-color: #E6E6E6;")
         self.eAbbreviations.setColumnCount(1)
         self.eAbbreviations.setRowCount(0)
@@ -715,13 +715,13 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             newItem.setData(35,child.attrib.get('ACode'))
             newItem.setData(36,child)
             newItem.setText(itemText)
-            newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+            newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
             nextRow = self.eAbbreviations.rowCount()
             self.eAbbreviations.setRowCount(nextRow+1)
             self.eAbbreviations.setItem(nextRow,0,newItem)
             self.eAbbreviations.setRowHeight(nextRow,20)
         self.eAbbreviations.resizeColumnToContents(0)
-        self.eAbbreviations.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.eAbbreviations.sortItems(0,QtCore.Qt.SortOrder.AscendingOrder)
         
         if dataIndex.root.attrib.get('eParse') == 'on':
             self.eAutoParsingBtn.setChecked(1)
@@ -797,13 +797,13 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.mSpTable.verticalHeader().hide()
         self.mSpTable.horizontalHeader().hide()
         self.mSpTable.setShowGrid(0)
-        self.mSpTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.mSpTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.mSpTable.setStyleSheet("selection-background-color: #E6E6E6;")
         self.mSpTable.setColumnCount(5)
         self.mSpTable.itemClicked.connect(fillSpForm)
     
         metaDataTableFillers.fillConsultantTable(self)
-        self.mSpTable.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.mSpTable.sortItems(0,QtCore.Qt.SortOrder.AscendingOrder)
     
         '''researchers sub-tab'''
         
@@ -842,13 +842,13 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.mRTable.verticalHeader().hide()
         self.mRTable.horizontalHeader().hide()
         self.mRTable.setShowGrid(0)
-        self.mRTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.mRTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.mRTable.setStyleSheet("selection-background-color: #E6E6E6;")
         self.mRTable.setColumnCount(5)
         self.mRTable.itemClicked.connect(fillRForm)
     
         metaDataTableFillers.fillRTable(self)
-        self.mRTable.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.mRTable.sortItems(0,QtCore.Qt.SortOrder.AscendingOrder)
     
         '''media sub-tab'''
         
@@ -870,7 +870,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.mMediaTable.verticalHeader().hide()
         self.mMediaTable.horizontalHeader().hide()
         self.mMediaTable.setShowGrid(0)
-        self.mMediaTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.mMediaTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.mMediaTable.setStyleSheet("selection-background-color: #E6E6E6;")
         self.mMediaTable.setColumnCount(4)
         self.mMediaTable.setAlternatingRowColors(1)
@@ -879,7 +879,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         if dataIndex.root.get("MediaFolder"):
             prefix = dataIndex.root.get("MediaFolder")
             self.mMediaPath.setText(prefix)
-        self.mMediaTable.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.mMediaTable.sortItems(0,QtCore.Qt.SortOrder.AscendingOrder)
         
         '''orthographies sub-tab'''
         
@@ -911,7 +911,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.iAbbreviations.verticalHeader().hide()
         self.iAbbreviations.horizontalHeader().hide()
         self.iAbbreviations.setShowGrid(0)
-        self.iAbbreviations.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.iAbbreviations.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.iAbbreviations.setStyleSheet("selection-background-color: #E6E6E6;")
         self.iAbbreviations.setColumnCount(1)
         self.iAbbreviations.setRowCount(0)        
@@ -929,13 +929,13 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             newItem.setData(35,child.attrib.get('ACode'))
             newItem.setData(36,child)
             newItem.setText(itemText)
-            newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)
+            newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)
             nextRow = self.iAbbreviations.rowCount()
             self.iAbbreviations.setRowCount(nextRow+1)
             self.iAbbreviations.setItem(nextRow,0,newItem)
             self.iAbbreviations.setRowHeight(nextRow,20)
         self.iAbbreviations.resizeColumnToContents(0)
-        self.iAbbreviations.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.iAbbreviations.sortItems(0,QtCore.Qt.SortOrder.AscendingOrder)
         
         self.recoverRecentFiles()
         dataIndex.unsavedEdit = 0
@@ -950,7 +950,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         Actions performed when tabWidget is clicked.
         """
-        if dataIndex.sourceFile == None:
+        if dataIndex.sourceFile is None:
             return
         if self.tabWidget.currentIndex() == 0: #Home tab
             self.actionNewCard.setEnabled(False)
@@ -1009,7 +1009,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
                     theItem = i
                     break                    
             self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem,0))
-            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
             if pendingChange:
                 dataIndex.unsavedEdit = 1
             else:
@@ -1029,7 +1029,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
                         theItem = i
                         break                    
                 self.tTextNav.setCurrentIndex(self.tTextNav.model().index(theItem,0))
-                self.tTextNav.scrollTo(self.tTextNav.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+                self.tTextNav.scrollTo(self.tTextNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
                 dataIndex.currentCard = lastText
             entry = dataIndex.textDict[lastText]
             cardLoader.loadTextCard(self, entry)
@@ -1096,7 +1096,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
                         theItem = i
                         break                    
                 self.dDataNav.setCurrentIndex(self.dDataNav.model().index(theItem,0))
-                self.dDataNav.scrollTo(self.dDataNav.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+                self.dDataNav.scrollTo(self.dDataNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
                 dataIndex.currentCard = lastDset
             else:
                 lastDset = dataIndex.root.find('Dset')         
@@ -1181,14 +1181,14 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             msgbox = QtWidgets.QMessageBox()
             msgbox.setText("Any unsaved changes will be lost.")
             msgbox.setInformativeText("Do you want to save changes?")
-            msgbox.setStandardButtons(QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
-            msgbox.setDefaultButton(QtWidgets.QMessageBox.Save)
-            reply = msgbox.exec_()
-            if reply == QtWidgets.QMessageBox.Cancel:
+            msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Save | QtWidgets.QMessageBox.StandardButton.Discard | QtWidgets.QMessageBox.StandardButton.Cancel)
+            msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Save)
+            reply = msgbox.exec()
+            if reply == QtWidgets.QMessageBox.StandardButton.Cancel:
               event.ignore()
               return
-            elif reply == QtWidgets.QMessageBox.Save:
-              QtWidgets.QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            elif reply == QtWidgets.QMessageBox.StandardButton.Save:
+              QtWidgets.QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.CursorShape.WaitCursor))
               dataIndex.xmltree.write(dataIndex.sourceFile, encoding="UTF-8")
               QtWidgets.QApplication.restoreOverrideCursor()
         self.settings.setValue('LastFile',dataIndex.sourceFile)
@@ -1731,15 +1731,15 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         if self.mMediaTable.currentRow() == -1:
             return
         msgbox = QtWidgets.QMessageBox()
-        msgbox.setIcon(QtWidgets.QMessageBox.Warning)
+        msgbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
         msgbox.setText("Remove recording.")
         msgbox.setInformativeText('This will remove all links to \n'
                                   'and information about this \n'
                                   'recording from the database. Proceed?')
-        msgbox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
-        msgbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-        msgbox.exec_()
-        if msgbox.result() == QtWidgets.QMessageBox.Ok:
+        msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok | QtWidgets.QMessageBox.StandardButton.Cancel)
+        msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+        msgbox.exec()
+        if msgbox.result() == QtWidgets.QMessageBox.StandardButton.Ok:
             self.mMediaTable.removeRow(self.mMediaTable.currentRow())
             self.mMediaTable.setCurrentCell(-1,-1)
             print('purge')
@@ -1821,14 +1821,14 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         check box for lexical entries considered more or less complete.
         """
-        lexOnlyBtns.doneBtn(self, p0)
+        lexOnlyBtns.doneBtn(p0)
         
     @QtCore.pyqtSlot()
     def on_lClipBtn_released(self):
         """
         copies a digest of the lexical entry to the clipboard.
         """
-        lexOnlyBtns.clipEG(self)
+        lexOnlyBtns.clipEG()
     
     @QtCore.pyqtSlot()
     def on_lAdvancedSearch_released(self):
@@ -1893,7 +1893,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         Place text on clipboard.
         """
-        textOnlyBtns.clipText(self)
+        textOnlyBtns.clipText()
         
     @QtCore.pyqtSlot()
     def on_tLoadNewTextBtn_released(self):
@@ -2288,12 +2288,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         responds to user click on search results view on Search card
         """
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        if modifiers == QtCore.Qt.AltModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
             self.cSearchResults.model().removeRow(index.row())
             hitNumber = self.cSearchResults.model().rowCount()
             self.cNumberOfHits.setText('Hits: %s' %str(hitNumber))
             return
-        if modifiers == QtCore.Qt.ControlModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.MetaModifier:
             row = index.row()
             datum = self.cSearchResults.model().item(row, 0).text()
             datum = datum.replace("</p><p>", "\n")
@@ -2356,7 +2356,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             self.recordBrowser = RecordBrowser.RecordBrowser(self)
             self.recordBrowser.setObjectName('recordBrowser')
             self.recordBrowser.setModal(0)
-            self.recordBrowser.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowStaysOnTopHint)
+            self.recordBrowser.setWindowFlags(QtCore.Qt.WindowType.Dialog | QtCore.Qt.WindowType.WindowStaysOnTopHint)
             self.recordBrowser.show()
             self.recordBrowser.raise_()
     
@@ -2489,7 +2489,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         find text anywhere on cards of current type
         """
-        menus.findAgain(self)
+        menus.findAgain()
     
     @QtCore.pyqtSlot()
     def on_actionFuzzy_Find_triggered(self):
@@ -2503,7 +2503,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         repeat find ignoring caps, accents, diacrits
         """
-        menus.fuzzyAgain(self)
+        menus.fuzzyAgain()
     
     @QtCore.pyqtSlot(int)
     def on_eOrthography_activated(self, index):

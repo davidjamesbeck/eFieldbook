@@ -80,9 +80,9 @@ BUILD SIP\par
 \par
 BUILD PYQT\par
 13) cd to PYQT\par
-14) pyqtdeploycli --package pyqt5 --target osx-64 configure\par
-15) edit pyqt5-osx.cfg file in PyQt5 directory down to bare essentials\par
-16) /usr/local/bin/python3.5 configure.py --static --sysroot=/Users/David/OpenSource/PyQtDeploy/sysroot-macosx --no-tools --no-qsci-api --no-designer-plugin --no-qml-plugin --configuration=pyqt5-osx.cfg --sip-incdir=/Users/David/OpenSource/PyQtDeploy/sip-4.17/siplib\par
+14) pyqtdeploycli --package PyQt6 --target osx-64 configure\par
+15) edit PyQt6-osx.cfg file in PyQt6 directory down to bare essentials\par
+16) /usr/local/bin/python3.5 configure.py --static --sysroot=/Users/David/OpenSource/PyQtDeploy/sysroot-macosx --no-tools --no-qsci-api --no-designer-plugin --no-qml-plugin --configuration=PyQt6-osx.cfg --sip-incdir=/Users/David/OpenSource/PyQtDeploy/sip-4.17/siplib\par
 (17) manually change \ldblquote MacOSX10.10.sdk\rdblquote  to \ldblquote MacOSX10.11.sdk\rdblquote  in all Makefiles)\par
 18) make, make install\par
 \par

@@ -1,10 +1,9 @@
-
 """
 Module implementing DSetSearchDialog.
 """
 
-from PyQt5.QtWidgets import QDialog
-from PyQt5.QtCore import pyqtSlot
+from PyQt6.QtWidgets import QDialog
+from PyQt6.QtCore import pyqtSlot
 
 from .Ui_DSetSearchDialog import Ui_SearchDSets
 
@@ -13,6 +12,7 @@ class DSetSearchDialog(QDialog, Ui_SearchDSets):
     """
     Class documentation goes here.
     """
+
     def __init__(self, parent):
         """
         Constructor
@@ -37,7 +37,7 @@ class DSetSearchDialog(QDialog, Ui_SearchDSets):
             self.Source.setEnabled(0)
             self.Researcher.setEnabled(0)
             self.Date.setEnabled(0)
-            self.Updated.setEnabled(0)            
+            self.Updated.setEnabled(0)
             self.Comments.setEnabled(0)
             self.Keywords.setEnabled(0)
             self.appendBtn.setEnabled(0)

@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/SoundPanel.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_SoundPanel(object):
     def setupUi(self, SoundPanel):
@@ -26,7 +26,7 @@ class Ui_SoundPanel(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.Recordings.setFont(font)
-        self.Recordings.setInsertPolicy(QtWidgets.QComboBox.InsertAtTop)
+        self.Recordings.setInsertPolicy(QtWidgets.QComboBox.InsertPolicy.InsertAtTop)
         self.Recordings.setObjectName("Recordings")
         self.PlaySoundBtn = QtWidgets.QToolButton(self.SoundBox)
         self.PlaySoundBtn.setGeometry(QtCore.QRect(112, 24, 27, 23))
@@ -60,7 +60,7 @@ class Ui_SoundPanel(object):
 "QToolButton:pressed {\n"
 "    border: 2px outset #1E90FF;\n"
 "}")
-        self.AddMediaBtn.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+        self.AddMediaBtn.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextOnly)
         self.AddMediaBtn.setAutoRaise(True)
         self.AddMediaBtn.setObjectName("AddMediaBtn")
         self.DelMediaBtn = QtWidgets.QToolButton(self.SoundBox)
@@ -79,7 +79,7 @@ class Ui_SoundPanel(object):
 "QToolButton:pressed {\n"
 "    border: 2px outset #1E90FF;\n"
 "}")
-        self.DelMediaBtn.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+        self.DelMediaBtn.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonTextOnly)
         self.DelMediaBtn.setAutoRaise(True)
         self.DelMediaBtn.setObjectName("DelMediaBtn")
 
@@ -111,5 +111,5 @@ if __name__ == "__main__":
     ui = Ui_SoundPanel()
     ui.setupUi(SoundPanel)
     SoundPanel.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

@@ -63,7 +63,7 @@ class LineTextWidget(QtGui.QFrame):
     def __init__(self, *args):
         QtGui.QFrame.__init__(self, *args)
  
-        self.setFrameStyle(QtGui.QFrame.StyledPanel | QtGui.QFrame.Sunken)
+        self.setFrameStyle(QtGui.QFrame.Shape.StyledPanel | QtGui.QFrame.Shadow.Sunken)
  
         self.edit = dataIndex.fldbk.portal
         self.edit.setFrameStyle(QtGui.QFrame.NoFrame)

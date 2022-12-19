@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtWidgets,  QtCore
+from PyQt6 import QtGui, QtWidgets,  QtCore
 from ELFB import dataIndex
  
 class LineTextWidget(QtWidgets.QFrame):
@@ -62,7 +62,7 @@ class LineTextWidget(QtWidgets.QFrame):
     def __init__(self, *args):
         QtWidgets.QFrame.__init__(self, *args)
  
-        self.setFrameStyle(QtWidgets.QFrame.StyledPanel | QtWidgets.QFrame.Sunken)
+        self.setFrameStyle(QtWidgets.QFrame.Shape.StyledPanel | QtWidgets.QFrame.Shadow.Sunken)
  
         self.edit = dataIndex.fldbk.portal
         self.edit.setFrameStyle(QtWidgets.QFrame.NoFrame)

@@ -35,7 +35,7 @@
        </font>
       </property>
       <property name="toolTip">
-       <string>Choose the selected alternative by default, 
+       <string>Choose the selected alternative by default,
 don't ask about this set again.</string>
       </property>
       <property name="text">

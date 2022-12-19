@@ -5,30 +5,27 @@ Module implementing AnalysisManager.
 This dialog adds and manages new texts
 """
 
-from PyQt5 import QtGui, QtWidgets, QtCore
-from ELFB import NumberedLineEdit, idGenerator, dataIndex, cardLoader, formattingHandlers, autoparsing, MissingDataBox, update
+from PyQt6 import QtGui, QtWidgets, QtCore
+from ELFB import NumberedLineEdit, idGenerator, dataIndex, cardLoader, formattingHandlers, autoparsing, MissingDataBox, \
+    update
 from xml.etree import ElementTree as etree
 from os import path
 from ELFB.palettes import SessionDate, ElanImporter
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QDialog
+from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtWidgets import QDialog
 from .Ui_AnalysisManager import Ui_Dialog
+
 
 class AnalysisManager(QDialog, Ui_Dialog):
     """
     Class documentation goes here.
     """
+
     def __init__(self, parent=None):
-        """
-        Constructor
-        
-        @param parent reference to the parent widget
-        @type QWidget
-        """
         super(AnalysisManager, self).__init__(parent)
         self.setupUi(self)
         self.setModal(0)
-        self.portal.setTabStopWidth(15)
+        self.portal.setTabStopDistance(15)
         self.tNumberBox = NumberedLineEdit.TextNumberWidget(self.tPortalBox, self.portal)
         self.tNumberBox.setGeometry(8, 8, 875, 444)
         self.tNumberBox.setVisible(1)
@@ -41,8 +38,8 @@ class AnalysisManager(QDialog, Ui_Dialog):
         self.alignTextBtn.setEnabled(0)
         self.importSelector.addItem('ELAN file')
         self.helpBtn.setStyleSheet('QToolButton {border: 0px; background: transparent;'
-            ' padding: 0px; min-width: 40px; min-height: 40px;}'
-            'QToolButton:pressed {border: 3px outset transparent;}')
+                                   ' padding: 0px; min-width: 40px; min-height: 40px;}'
+                                   'QToolButton:pressed {border: 3px outset transparent;}')
         newCardIconSize = QtCore.QSize(40, 40)
         newCardIcon = QtGui.QIcon(':HelpBtn.png')
         self.helpBtn.setIcon(newCardIcon)
@@ -50,10 +47,10 @@ class AnalysisManager(QDialog, Ui_Dialog):
         self.L2Gloss = 0
 
     def toggleActivation(self, checked):
-        '''
+        """
         makes the replace functions available or hides them
         when the checkbox is toggled
-        '''
+        """
         if checked == 1:
             self.replaceBtn.setEnabled(1)
             self.findReplaceBtn.setEnabled(1)
@@ -68,28 +65,28 @@ class AnalysisManager(QDialog, Ui_Dialog):
             self.rpcLabel.setStyleSheet('color: gray;')
 
     def clearNewText(self):
-        '''
+        """
         clears all fields
-        '''
+        """
         self.portal.clear()
         self.tNumberBox.number_bar.update()
         self.tTitle.clear()
         self.tNewSource.clear()
         self.tNewResearcher.clear()
         self.tNewDate.clear()
-        self.tNewUpdated.clear()    
-        self.tNewTranscriber.clear()    
+        self.tNewUpdated.clear()
+        self.tNewTranscriber.clear()
         self.lineErrorNumber.setText('')
         self.wordErrorNumber.setText('')
         self.morphErrorNumber.setText('')
         self.tLinesValidBtn.setChecked(0)
         self.tWordsValidBtn.setChecked(0)
         self.tMorphsValidBtn.setChecked(0)
-        
+
     def checkIleg(self, parseLine, ilegLine, blockNumber):
-        '''
+        """
         ensures that there are the same number of words on each line of the gloss
-        '''
+        """
         parseLine = parseLine.replace('\t\n', '')
         ilegLine = ilegLine.replace('\t\n', '')
         wordList = parseLine.split('\t')
@@ -101,23 +98,23 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 morphList = item.split('–')
                 abbrList = ilegList[i].split('–')
                 if len(morphList) != len(abbrList):
-                    self.tNumberBox.morphErrors.append(blockNumber-2)
+                    self.tNumberBox.morphErrors.append(blockNumber - 2)
                     break
                 else:
                     cliticList = item.split('=')
                     cliticGlossList = ilegList[i].split('=')
                     if len(cliticList) != len(cliticGlossList):
-                        self.tNumberBox.morphErrors.append(blockNumber-2)
+                        self.tNumberBox.morphErrors.append(blockNumber - 2)
                         break
-        
+
     def editTracker(self):
-        '''
+        """
         removes hilighting from corrected lines
-        '''
+        """
         cursor = self.portal.textCursor()
-        selection = cursor.select(QtGui.QTextCursor.BlockUnderCursor)
-        try: 
-            if selection.background() == QtCore.Qt.white:
+        selection = cursor.select(QtGui.QTextCursor.SelectionType.BlockUnderCursor)
+        try:
+            if selection.background() == QtCore.Qt.GlobalColor.white:
                 return
         except AttributeError:
             pass
@@ -128,17 +125,17 @@ class AnalysisManager(QDialog, Ui_Dialog):
         block = cursor.block()
         if len(self.tNumberBox.wordErrors) != 0:
             format = QtGui.QTextCharFormat()
-            format.setBackground(QtCore.Qt.white)
+            format.setBackground(QtCore.Qt.GlobalColor.white)
             for item in self.tNumberBox.wordErrors:
-                if item == blockNumber +1:
+                if item == blockNumber + 1:
                     self.tNumberBox.wordErrors.remove(item)
-                    nextBlock = text.findBlockByNumber(blockNumber+1)
+                    nextBlock = text.findBlockByNumber(blockNumber + 1)
                     cursor = QtGui.QTextCursor(block)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
                     cursor.setCharFormat(format)
                     cursor = QtGui.QTextCursor(nextBlock)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                    cursor.setCharFormat(format)                
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                    cursor.setCharFormat(format)
                     if self.tNumberBox.wordErrorIndex:
                         self.tNumberBox.wordErrorIndex -= 1
                     errorNumber = len(self.tNumberBox.wordErrors)
@@ -150,17 +147,17 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     elif errorNumber == 1:
                         self.wordErrorNumber.setText('1 word error')
                     else:
-                        self.wordErrorNumber.setText('%d word errors' %errorNumber)
+                        self.wordErrorNumber.setText('%d word errors' % errorNumber)
                     break
                 elif item == blockNumber:
                     self.tNumberBox.wordErrors.remove(item)
-                    prevBlock = text.findBlockByNumber(blockNumber-1)
+                    prevBlock = text.findBlockByNumber(blockNumber - 1)
                     cursor = QtGui.QTextCursor(prevBlock)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
                     cursor.setCharFormat(format)
                     cursor = QtGui.QTextCursor(block)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                    cursor.setCharFormat(format)            
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                    cursor.setCharFormat(format)
                     if self.tNumberBox.wordErrorIndex:
                         self.tNumberBox.wordErrorIndex -= 1
                     errorNumber = len(self.tNumberBox.wordErrors)
@@ -172,21 +169,21 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     elif errorNumber == 1:
                         self.wordErrorNumber.setText('1 word error')
                     else:
-                        self.wordErrorNumber.setText('%d word errors' %errorNumber)
+                        self.wordErrorNumber.setText('%d word errors' % errorNumber)
                     break
         if len(self.tNumberBox.morphErrors) != 0:
             format = QtGui.QTextCharFormat()
-            format.setBackground(QtCore.Qt.white)
+            format.setBackground(QtCore.Qt.GlobalColor.white)
             for item in self.tNumberBox.morphErrors:
-                if item == blockNumber +1:
+                if item == blockNumber + 1:
                     self.tNumberBox.morphErrors.remove(item)
-                    nextBlock = text.findBlockByNumber(blockNumber+1)
+                    nextBlock = text.findBlockByNumber(blockNumber + 1)
                     cursor = QtGui.QTextCursor(block)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
                     cursor.setCharFormat(format)
                     cursor = QtGui.QTextCursor(nextBlock)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                    cursor.setCharFormat(format)                
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                    cursor.setCharFormat(format)
                     if self.tNumberBox.morphErrorIndex:
                         self.tNumberBox.morphErrorIndex -= 1
                     errorNumber = len(self.tNumberBox.morphErrors)
@@ -198,17 +195,17 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     elif errorNumber == 1:
                         self.morphErrorNumber.setText('1 morph error')
                     else:
-                        self.morphErrorNumber.setText('%d morph errors' %errorNumber)
+                        self.morphErrorNumber.setText('%d morph errors' % errorNumber)
                     break
                 elif item == blockNumber:
                     self.tNumberBox.morphErrors.remove(item)
-                    prevBlock = text.findBlockByNumber(blockNumber-1)
+                    prevBlock = text.findBlockByNumber(blockNumber - 1)
                     cursor = QtGui.QTextCursor(prevBlock)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
                     cursor.setCharFormat(format)
                     cursor = QtGui.QTextCursor(block)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                    cursor.setCharFormat(format)            
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                    cursor.setCharFormat(format)
                     if self.tNumberBox.morphErrorIndex:
                         self.tNumberBox.morphErrorIndex -= 1
                     errorNumber = len(self.tNumberBox.morphErrors)
@@ -220,22 +217,22 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     elif errorNumber == 1:
                         self.morphErrorNumber.setText('1 morph error')
                     else:
-                        self.morphErrorNumber.setText('%d morph errors' %errorNumber)
+                        self.morphErrorNumber.setText('%d morph errors' % errorNumber)
                     break
-                    
+
     def cleanText(self, text):
-        '''
+        """
         corrects for common punctuation errors in input
-        '''
+        """
         text = text.replace('-', '–')
         text = text.strip()
         text = text.replace('\t\n', '\n')
         return text
-    
+
     def alignText(self):
-        '''
+        """
         aligns lines 2 and 3 of four-line glosses throughout the text
-        '''
+        """
         text = self.portal.document()
         cursor = self.portal.textCursor()
         block = text.begin()
@@ -247,40 +244,40 @@ class AnalysisManager(QDialog, Ui_Dialog):
             blockNumber = block.blockNumber()
             pLine = block.text()
             aLine = block.next().text()
-            pLine, aLine = self.align(pLine, aLine,  blockNumber)
-            if pLine == None:
+            pLine, aLine = self.align(pLine, aLine, blockNumber)
+            if pLine is None:
                 break
             if blockNumber == prevBlock:
                 breakbox = QtWidgets.QMessageBox()
-                breakbox.setIcon(QtWidgets.QMessageBox.Warning)
+                breakbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
                 breakbox.setText("Format Error")
                 breakbox.setInformativeText('There is an error in the formatting of this text at line %d. '
                                             'The most likely cause is a tab character somewhere in the line. '
-                                            'Please replace it with a space.'%blockNumber)
-                breakbox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-                breakbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-                breakbox.exec_()
+                                            'Please replace it with a space.' % blockNumber)
+                breakbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                breakbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+                breakbox.exec()
                 text = self.portal.document()
                 block = text.findBlockByNumber(blockNumber)
                 position = text.documentLayout().blockBoundingRect(block).topLeft()
-                self.portal.verticalScrollBar().setValue(position.y()-220)
+                self.portal.verticalScrollBar().setValue(position.y() - 220)
                 self.portal.horizontalScrollBar().setValue(0)
                 break
             cursor.setPosition(block.position())
-            cursor.select(QtGui.QTextCursor.BlockUnderCursor)
+            cursor.select(QtGui.QTextCursor.SelectionType.BlockUnderCursor)
             cursor.insertText('\n' + pLine)
             block = block.next()
             cursor.setPosition(block.position())
-            cursor.select(QtGui.QTextCursor.BlockUnderCursor)
+            cursor.select(QtGui.QTextCursor.SelectionType.BlockUnderCursor)
             cursor.insertText('\n' + aLine)
             block = block.next()
             prevBlock = blockNumber
 
     def align(self, pLine, aLine, blockNumber):
-        '''
+        """
         adds spaces as needed to align glosses.
         called by alignText() for each pair of lines
-        '''
+        """
         pLineList = pLine.split('\t')
         aLineList = aLine.split('\t')
         for i, item in enumerate(pLineList):
@@ -296,38 +293,39 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     pLineList[i] += spacer
             except IndexError:
                 breakbox = QtWidgets.QMessageBox()
-                breakbox.setIcon(QtWidgets.QMessageBox.Warning)
+                breakbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
                 breakbox.setText("Format Error")
-                breakbox.setInformativeText('There is an error in the formatting of this text at line %d.' %blockNumber)
-                breakbox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-                breakbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-                breakbox.exec_()
+                breakbox.setInformativeText(
+                    'There is an error in the formatting of this text at line %d.' % blockNumber)
+                breakbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                breakbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+                breakbox.exec()
                 text = self.portal.document()
                 block = text.findBlockByNumber(blockNumber)
                 position = text.documentLayout().blockBoundingRect(block).topLeft()
-                self.portal.verticalScrollBar().setValue(position.y()-220)
+                self.portal.verticalScrollBar().setValue(position.y() - 220)
                 self.portal.horizontalScrollBar().setValue(0)
-                return None,  None
+                return None, None
         newPLine = '\t'.join(pLineList)
         newALine = '\t'.join(aLineList)
         return newPLine, newALine
 
     def tryParse(self):
-        '''
+        """
         trial parsing of new texts, results shown in portal
-        '''
+        """
         if len(self.portal.toPlainText()) == 0:
             return
         if len(dataIndex.fldbk.iIndex.toPlainText()) == 0:
-            parse = autoparsing.askToBuildIndex() 
-            if parse == False:
+            parse = autoparsing.askToBuildIndex()
+            if parse is False:
                 return
         if self.validateNewText() != 'okay':
             QtWidgets.QApplication.beep()
             return
         text = self.portal.document()
         block = text.begin()
-        counter = 0   
+        counter = 0
         blockNumber = 0
         parsedText = ''
         for i in range(0, text.blockCount()):
@@ -340,16 +338,16 @@ class AnalysisManager(QDialog, Ui_Dialog):
             counter += 1
             if len(block.next().text()) <= 1:
                 if counter == 4:
-                    #if this is a 4-line block
+                    # if this is a 4-line block
                     textLine = text.findBlockByNumber(blockNumber - 4).text()
                     textLine, speaker, tCode, eTime = update.fixGlosses(textLine)
                     glossLine = text.findBlockByNumber(blockNumber - 1).text()
                     glossLine, spokenBy, timeCode, endTime = update.fixGlosses(glossLine)
-                    if speaker != None and spokenBy == None:
+                    if speaker is not None and spokenBy is None:
                         spokenBy = speaker
-                    if tCode != None and timeCode == None:
+                    if tCode is not None and timeCode is None:
                         timeCode = tCode
-                    if eTime != None and endTime == None:
+                    if eTime is not None and endTime is None:
                         endTime = tCode
                     parseLine = text.findBlockByNumber(blockNumber - 3).text()
                     parseLine = self.cleanText(parseLine)
@@ -361,58 +359,59 @@ class AnalysisManager(QDialog, Ui_Dialog):
                         for i, item in enumerate(ilegList):
                             if item == '[—]':
                                 newMorphs, newAnalysis = autoparsing.autoParse(wordList[i], textLine, glossLine)
-                                if newMorphs != None:
+                                if newMorphs is not None:
                                     ilegList[i] = newAnalysis
                                     wordList[i] = newMorphs
                         parseLine = '\t'.join(wordList)
                         ilegLine = '\t'.join(ilegList)
                 elif counter == 2:
-                    #if this is a 2-line block without an interlinear gloss
-                    textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime = self.twoLineTextHandler(text, blockNumber, True)
-                if timeCode != None:
-                    timeCode = ' [' + timeCode 
-                    if endTime != None:
+                    # if this is a 2-line block without an interlinear gloss
+                    textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime = self.twoLineTextHandler(
+                        text, blockNumber, True)
+                if timeCode is not None:
+                    timeCode = ' [' + timeCode
+                    if endTime is not None:
                         timeCode += ' – ' + endTime + ']'
                     else:
-                        timeCode+= ']'
+                        timeCode += ']'
                 else:
                     timeCode = ''
-                if spokenBy != None:
+                if spokenBy is not None:
                     spokenBy += ': '
                 else:
                     spokenBy = ''
                 parsedText += spokenBy + textLine + '\n' + parseLine + '\n' + ilegLine + '\n' + glossLine + timeCode + '\n\n'
                 block = block.next().next()
                 counter = 0
-                blockNumber += 1 
+                blockNumber += 1
             else:
-                block = block.next()   
+                block = block.next()
         newText = parsedText[:-1]
         self.portal.setText(newText)
 
     def twoLineTextHandler(self, text, blockNumber, parse):
-        '''
+        """
         breaks up a two-line text into chunks either for 
         creating eg cards or for trial parsing
-        '''
+        """
         textLine = text.findBlockByNumber(blockNumber - 2).text()
         textLine, speaker, tCode, eTime = update.fixGlosses(textLine)
         glossLine = text.findBlockByNumber(blockNumber - 1).text()
         glossLine, spokenBy, timeCode, endTime = update.fixGlosses(glossLine)
-        if speaker != None and spokenBy == None:
+        if speaker is not None and spokenBy is None:
             spokenBy = speaker
-        if tCode != None and timeCode == None:
+        if tCode is not None and timeCode is None:
             timeCode = tCode
-        if eTime != None and endTime == None:
+        if eTime is not None and endTime is None:
             endTime = tCode
         parseLine = ''
         ilegLine = ''
-        if parse == True:
+        if parse is True:
             QtWidgets.QApplication.restoreOverrideCursor()
             wordList = autoparsing.cleanLine(textLine)
             for i, word in enumerate(wordList):
                 newMorphs, newAnalysis = autoparsing.autoParse(word, textLine, glossLine)
-                if newMorphs == None:
+                if newMorphs is None:
                     newMorphs = word
                     newAnalysis = "[—]"
                 if parseLine == '':
@@ -423,10 +422,10 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     ilegLine += '\t' + newAnalysis
         return textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime
 
-    def newBlock(self, count): 
-        '''
+    def newBlock(self, count):
+        """
         adjusts line numbers, etc., when blocks are added
-        '''
+        """
         oldCount = self.tNumberBox.editorBlockCount
         if oldCount == count:
             return
@@ -435,7 +434,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
         errorFixed = None
         try:
             errorNumber = len(self.tNumberBox.lineErrors)
-            if self.tNumberBox.lineErrorIndex == None:
+            if self.tNumberBox.lineErrorIndex is None:
                 targetLine = self.tNumberBox.lineErrors[0]
             else:
                 targetLine = self.tNumberBox.lineErrors[self.tNumberBox.lineErrorIndex]
@@ -447,31 +446,31 @@ class AnalysisManager(QDialog, Ui_Dialog):
             if len(boundaryBlock.text()) <= 1:
                 errorFixed = 1
             if errorFixed:
-                if self.tNumberBox.lineErrorIndex == None:
+                if self.tNumberBox.lineErrorIndex is None:
                     self.tNumberBox.lineErrors.pop(0)
                 else:
                     self.tNumberBox.lineErrors.pop(self.tNumberBox.lineErrorIndex)
-                    self.tNumberBox.lineErrorIndex -= 1    
+                    self.tNumberBox.lineErrorIndex -= 1
                 if count > oldCount and errorNumber != 0:
                     block = self.portal.document().findBlockByNumber(targetLine)
                     cursor = QtGui.QTextCursor(block)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                    format = QtGui.QTextCharFormat()
-                    format.setBackground(QtCore.Qt.white)
-                    cursor.setCharFormat(format)
-                elif count < oldCount and errorNumber != 0:     
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                    charformat = QtGui.QTextCharFormat()
+                    charformat.setBackground(QtCore.Qt.GlobalColor.white)
+                    cursor.setCharFormat(charformat)
+                elif count < oldCount and errorNumber != 0:
                     adjustment = diff - 1
-                    block = self.portal.document().findBlockByNumber(targetLine+adjustment)
+                    block = self.portal.document().findBlockByNumber(targetLine + adjustment)
                     cursor = QtGui.QTextCursor(block)
-                    cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                    format = QtGui.QTextCharFormat()
-                    format.setBackground(QtCore.Qt.white)
-                    cursor.setCharFormat(format)
+                    cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                    charformat = QtGui.QTextCharFormat()
+                    charformat.setBackground(QtCore.Qt.GlobalColor.white)
+                    cursor.setCharFormat(charformat)
         except IndexError:
             pass
         targetLine = self.portal.textCursor().blockNumber()
         try:
-            if len(self.tNumberBox.lineErrors) !=0:
+            if len(self.tNumberBox.lineErrors) != 0:
                 for i, item in enumerate(self.tNumberBox.lineErrors):
                     if item > targetLine:
                         item += diff
@@ -479,9 +478,9 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 if len(self.tNumberBox.lineErrors) == 1:
                     self.lineErrorNumber.setText('1 line error')
                 else:
-                    self.lineErrorNumber.setText('%d line errors' %len(self.tNumberBox.lineErrors))
+                    self.lineErrorNumber.setText('%d line errors' % len(self.tNumberBox.lineErrors))
             else:
-                if self.tNumberBox.lineErrorIndex != None:
+                if self.tNumberBox.lineErrorIndex is not None:
                     self.tLinesValidBtn.setChecked(1)
                     self.lineErrorPrev.setEnabled(0)
                     self.lineErrorNext.setEnabled(0)
@@ -489,7 +488,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
         except TypeError:
             pass
         try:
-            if len(self.tNumberBox.wordErrors) !=0:
+            if len(self.tNumberBox.wordErrors) != 0:
                 for i, item in enumerate(self.tNumberBox.wordErrors):
                     if item > targetLine:
                         item += diff
@@ -497,19 +496,19 @@ class AnalysisManager(QDialog, Ui_Dialog):
         except TypeError:
             pass
         try:
-            if len(self.tNumberBox.morphErrors) !=0:
+            if len(self.tNumberBox.morphErrors) != 0:
                 for i, item in enumerate(self.tNumberBox.morphErrors):
                     if item > targetLine:
                         item += diff
                         self.tNumberBox.morphErrors[i] = item
         except TypeError:
             pass
-        
+
     def validateNewText(self):
-        '''
+        """
         checks for mismatched lines, words, and morphs
-        '''
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        """
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         self.tLinesValidBtn.setChecked(0)
         self.tWordsValidBtn.setChecked(0)
         self.tMorphsValidBtn.setChecked(0)
@@ -521,7 +520,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
         self.morphErrorNext.setEnabled(0)
         text = self.portal.document()
         block = text.begin()
-        counter = 0   
+        counter = 0
         textLine = ''
         formatted = ''
         blockNumber = 0
@@ -554,7 +553,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     pass
                 else:
                     self.tNumberBox.lineErrors.append(blockNumber)
-                formatted += textLine +"\n"
+                formatted += textLine + "\n"
                 textLine = ""
                 block = block.next().next()
                 counter = 0
@@ -564,13 +563,13 @@ class AnalysisManager(QDialog, Ui_Dialog):
         formatted = self.cleanText(formatted)
         self.portal.setText(formatted)
         text = self.portal.document()
-        text.blockCountChanged.connect(self.newBlock)    
+        text.blockCountChanged.connect(self.newBlock)
         block = text.begin()
         cursor = QtGui.QTextCursor(block)
-        cursor.select(QtGui.QTextCursor.Document)
-        format = QtGui.QTextCharFormat()
-        format.setBackground(QtCore.Qt.white)
-        cursor.setCharFormat(format)
+        cursor.select(QtGui.QTextCursor.SelectionType.Document)
+        charformat = QtGui.QTextCharFormat()
+        charformat.setBackground(QtCore.Qt.GlobalColor.white)
+        cursor.setCharFormat(charformat)
         okayToGo = 1
         if len(self.tNumberBox.lineErrors) == 0:
             self.tLinesValidBtn.setChecked(1)
@@ -580,16 +579,16 @@ class AnalysisManager(QDialog, Ui_Dialog):
             self.lineErrorNext.setEnabled(1)
             if len(self.tNumberBox.lineErrors) == 1:
                 self.lineErrorNumber.setText('1 line error')
-            else:            
-                self.lineErrorNumber.setText('%d line errors' %len(self.tNumberBox.lineErrors))
+            else:
+                self.lineErrorNumber.setText('%d line errors' % len(self.tNumberBox.lineErrors))
             for line in self.tNumberBox.lineErrors:
                 text = self.portal.document()
-                block = text.findBlockByNumber(line-1)
+                block = text.findBlockByNumber(line - 1)
                 cursor = QtGui.QTextCursor(block)
-                cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                format = QtGui.QTextCharFormat()
-                format.setBackground(QtCore.Qt.yellow)
-                cursor.setCharFormat(format)
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                charformat = QtGui.QTextCharFormat()
+                charformat.setBackground(QtCore.Qt.GlobalColor.yellow)
+                cursor.setCharFormat(charformat)
         if len(self.tNumberBox.wordErrors) == 0:
             self.tWordsValidBtn.setChecked(1)
         else:
@@ -599,22 +598,22 @@ class AnalysisManager(QDialog, Ui_Dialog):
             if len(self.tNumberBox.wordErrors) == 1:
                 self.wordErrorNumber.setText('1 word error')
             else:
-                self.wordErrorNumber.setText('%d word errors' %len(self.tNumberBox.wordErrors))
+                self.wordErrorNumber.setText('%d word errors' % len(self.tNumberBox.wordErrors))
             for line in self.tNumberBox.wordErrors:
                 text = self.portal.document()
-                block = text.findBlockByNumber(line-1)
+                block = text.findBlockByNumber(line - 1)
                 cursor = QtGui.QTextCursor(block)
-                cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                format = QtGui.QTextCharFormat()
-                format.setBackground(QtCore.Qt.cyan)
-                cursor.setCharFormat(format)
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                charformat = QtGui.QTextCharFormat()
+                charformat.setBackground(QtCore.Qt.GlobalColor.cyan)
+                cursor.setCharFormat(charformat)
                 block = text.findBlockByNumber(line)
                 cursor = QtGui.QTextCursor(block)
-                cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                format = QtGui.QTextCharFormat()
-                format.setBackground(QtCore.Qt.cyan)
-                cursor.setCharFormat(format)
-    
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                charformat = QtGui.QTextCharFormat()
+                charformat.setBackground(QtCore.Qt.GlobalColor.cyan)
+                cursor.setCharFormat(charformat)
+
         if len(self.tNumberBox.morphErrors) == 0:
             self.tMorphsValidBtn.setChecked(1)
         else:
@@ -624,116 +623,116 @@ class AnalysisManager(QDialog, Ui_Dialog):
             if len(self.tNumberBox.morphErrors) == 1:
                 self.morphErrorNumber.setText('1 morph error')
             else:
-                self.morphErrorNumber.setText('%d morph errors' %len(self.tNumberBox.morphErrors))
+                self.morphErrorNumber.setText('%d morph errors' % len(self.tNumberBox.morphErrors))
             for line in self.tNumberBox.morphErrors:
                 text = self.portal.document()
-                block = text.findBlockByNumber(line-1)
+                block = text.findBlockByNumber(line - 1)
                 cursor = QtGui.QTextCursor(block)
-                cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                format = QtGui.QTextCharFormat()
-                format.setBackground(QtCore.Qt.green)
-                cursor.setCharFormat(format)
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                charformat = QtGui.QTextCharFormat()
+                charformat.setBackground(QtCore.Qt.GlobalColor.green)
+                cursor.setCharFormat(charformat)
                 block = text.findBlockByNumber(line)
                 cursor = QtGui.QTextCursor(block)
-                cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.KeepAnchor)
-                format = QtGui.QTextCharFormat()
-                format.setBackground(QtCore.Qt.green)
-                cursor.setCharFormat(format)
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                charformat = QtGui.QTextCharFormat()
+                charformat.setBackground(QtCore.Qt.GlobalColor.green)
+                cursor.setCharFormat(charformat)
         QtWidgets.QApplication.restoreOverrideCursor()
         if len(self.portal.toPlainText()) == 0:
             self.portal.setText('blank text')
         QtWidgets.QApplication.restoreOverrideCursor()
         if okayToGo == 1:
             self.alignTextBtn.setEnabled(1)
-#            self.alignText()
+            #            self.alignText()
             return 'okay'
-        
+
     def removeHiliting(self):
-        '''
+        """
         removes all highlighting added by searches and validation
-        '''
+        """
         text = self.portal.document()
         block = text.begin()
         cursor = QtGui.QTextCursor(block)
-        cursor.select(QtGui.QTextCursor.Document)
-        format = QtGui.QTextCharFormat()
-        format.setBackground(QtCore.Qt.white)
-        cursor.setCharFormat(format)  
+        cursor.select(QtGui.QTextCursor.SelectionType.Document)
+        charformat = QtGui.QTextCharFormat()
+        charformat.setBackground(QtCore.Qt.GlobalColor.white)
+        cursor.setCharFormat(charformat)
         self.removeHiliteBtn.setEnabled(0)
-        
-    '''FIND AND REPLACE SCRIPTS'''
-    
+
+    """FIND AND REPLACE SCRIPTS"""
+
     def findItem(self, flag=None, silent=None):
-        '''
+        """
         find item typed in findTerm LineEdit
-        '''
-        if flag != None:
+        """
+        if flag is not None:
             direction = 'back'
-            flag |= QtGui.QTextDocument.FindCaseSensitively
+            flag |= QtGui.QTextDocument.FindFlag.FindCaseSensitively
         else:
             direction = 'forwards'
-            flag = QtGui.QTextDocument.FindCaseSensitively
+            flag = QtGui.QTextDocument.FindFlag.FindCaseSensitively
         if len(self.portal.toPlainText()) == 0:
             return
         self.removeHiliting()
         if self.wholeWordBtn.isChecked():
-            if flag == None:
-                flag = QtGui.QTextDocument.FindWholeWords
+            if flag is None:
+                flag = QtGui.QTextDocument.FindFlag.FindWholeWords
             else:
-                flag |= QtGui.QTextDocument.FindWholeWords        
-        if self.portal.find(self.findTerm.text(), flag) == False:
+                flag |= QtGui.QTextDocument.FindFlag.FindWholeWords
+        if self.portal.find(self.findTerm.text(), flag) is False:
             if direction == 'back':
-                self.portal.moveCursor(QtGui.QTextCursor.End)
+                self.portal.moveCursor(QtGui.QTextCursor.MoveOperation.End)
             else:
-                self.portal.moveCursor(QtGui.QTextCursor.Start)
-            if self.portal.find(self.findTerm.text(), flag) == False and silent == None:
+                self.portal.moveCursor(QtGui.QTextCursor.MoveOperation.Start)
+            if self.portal.find(self.findTerm.text(), flag) is False and silent is None:
                 QtWidgets.QApplication.beep()
             return self.portal.find(self.findTerm.text(), flag)
-  
+
     def replaceOnce(self, silent=None):
-        '''
+        """
         replaces one instance of the find term with replace term
-        '''
+        """
         if self.portal.textCursor().selection().toPlainText() == self.findTerm.text():
             self.portal.textCursor().insertText(self.replaceTerm.text())
             return
         hit = self.findItem(None, silent)
-        if hit != False:
+        if hit is not False:
             self.portal.textCursor().insertText(self.replaceTerm.text())
         return hit
 
     def replaceFind(self):
-        '''
+        """
         replaces one instance of the find term with replace term and finds
         the next candidate for replacement
-        '''
+        """
         if len(self.portal.textCursor().selection().toPlainText()) == 0:
             self.findItem()
             return
         else:
             self.portal.textCursor().insertText(self.replaceTerm.text())
             self.findItem()
-        
+
     def replaceAll(self):
-        '''
+        """
         global find and replace
-        '''
+        """
         hit = True
-        self.portal.moveCursor(QtGui.QTextCursor.Start)
-        while hit != False:
+        self.portal.moveCursor(QtGui.QTextCursor.MoveOperation.Start)
+        while hit is not False:
             hit = self.replaceOnce('no beep')
-            self.portal.moveCursor(QtGui.QTextCursor.Start)
+            self.portal.moveCursor(QtGui.QTextCursor.MoveOperation.Start)
         self.removeHiliteBtn.setEnabled(0)
-    
+
     def findAll(self):
-        '''
+        """
         finds and highlights all instances of find term
-        '''
+        """
         self.removeHiliting()
         lookFor = self.findTerm.text()
         cursor = self.portal.textCursor()
-        format = QtGui.QTextCharFormat()
-        format.setBackground(QtGui.QBrush(QtGui.QColor("yellow")))
+        charformat = QtGui.QTextCharFormat()
+        charformat.setBackground(QtGui.QBrush(QtGui.QColor("yellow")))
         if self.wholeWordBtn.isChecked():
             lookFor = '(\s|^)' + lookFor + '(\s|$)'
         regex = QtCore.QRegularExpression(lookFor)
@@ -745,27 +744,27 @@ class AnalysisManager(QDialog, Ui_Dialog):
             self.removeHiliteBtn.setEnabled(1)
             while (index.hasMatch()):
                 if self.wholeWordBtn.isChecked():
-                    cursor.setPosition(index.capturedStart()+1)
+                    cursor.setPosition(index.capturedStart() + 1)
                 else:
                     cursor.setPosition(index.capturedStart())
-                cursor.setPosition(index.capturedEnd(), QtGui.QTextCursor.KeepAnchor)
+                cursor.setPosition(index.capturedEnd(), QtGui.QTextCursor.MoveMode.KeepAnchor)
                 pos = index.capturedStart() + len(index.captured())
-                cursor.mergeCharFormat(format)
-                index = regex.match(dataset, pos)  
+                cursor.mergeCharFormat(charformat)
+                index = regex.match(dataset, pos)
         else:
             self.removeHiliteBtn.setEnabled(0)
             QtWidgets.QApplication.beep()
-    
+
     def importFiles(self, fileType):
         if fileType == 'ELAN file':
             dialog = ElanImporter.ElanImporter(self)
             askFile = dialog.getFilePath()
-            if askFile == False:
+            if askFile is False:
                 return
             else:
                 dialog.displayTiers()
-            if dialog.exec_():
-                #get metadata from dialog as list [source, researcher, date, transcriber, title]
+            if dialog.exec():
+                # get metadata from dialog as list [source, researcher, date, transcriber, title]
                 metaData = dialog.getMetadata()
                 self.tNewSource.setPlainText(metaData[0])
                 self.tNewResearcher.setPlainText(metaData[1])
@@ -774,16 +773,16 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 self.tTitle.setPlainText(metaData[4])
                 newText = dialog.importText()
                 self.portal.setPlainText(newText)
-            self.setWindowState(QtCore.Qt.WindowActive)
+            self.setWindowState(QtCore.Qt.WindowState.WindowActive)
             self.raise_()
-    
+
     @pyqtSlot()
     def on_portal_textChanged(self):
         """
         tracks edits in new text field.
         """
-        self.editTracker() 
-    
+        self.editTracker()
+
     @pyqtSlot()
     def on_tSpliceBtn_released(self):
         """
@@ -802,16 +801,17 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 selectionStart = cursor.selectionStart()
                 selectionEnd = cursor.selectionEnd()
                 cursor.setPosition(selectionStart)
-                cursor.movePosition(QtGui.QTextCursor.StartOfLine, QtGui.QTextCursor.MoveAnchor)
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.StartOfLine, QtGui.QTextCursor.MoveMode.MoveAnchor)
                 selectionStart = cursor.position()
                 firstBlock = cursor.blockNumber()
                 cursor.setPosition(selectionEnd)
-                cursor.movePosition(QtGui.QTextCursor.EndOfLine, QtGui.QTextCursor.MoveAnchor)
+                cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfLine, QtGui.QTextCursor.MoveMode.MoveAnchor)
                 selectionEnd = cursor.position()
                 lastBlock = cursor.blockNumber()
-                cursor.setPosition(selectionStart, QtGui.QTextCursor.MoveAnchor)
-                cursor.setPosition(selectionEnd, QtGui.QTextCursor.KeepAnchor)
-                if not len(text.findBlockByNumber(firstBlock-1).text()) <=1 or not len(text.findBlockByNumber(lastBlock+1).text()) <= 1:
+                cursor.setPosition(selectionStart, QtGui.QTextCursor.MoveMode.MoveAnchor)
+                cursor.setPosition(selectionEnd, QtGui.QTextCursor.MoveMode.KeepAnchor)
+                if not len(text.findBlockByNumber(firstBlock - 1).text()) <= 1 or not len(
+                        text.findBlockByNumber(lastBlock + 1).text()) <= 1:
                     QtWidgets.QApplication.beep()
                     return
                 oldBlock = cursor.selectedText()
@@ -822,36 +822,36 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 ilegLine = lineList.pop(0).strip()
                 for i in range(0, len(lineList), 2):
                     parseLine += '\t' + lineList[i].strip()
-                    ilegLine += '\t' + lineList[i+1].strip()
-                newLine += parseLine + '\n'+ ilegLine + '\n' + glossLine
-                format = QtGui.QTextCharFormat()
-                format.setBackground(QtCore.Qt.white)
-                cursor.setCharFormat(format)
-                #newBlock() called HERE
+                    ilegLine += '\t' + lineList[i + 1].strip()
+                newLine += parseLine + '\n' + ilegLine + '\n' + glossLine
+                charformat = QtGui.QTextCharFormat()
+                charformat.setBackground(QtCore.Qt.GlobalColor.white)
+                cursor.setCharFormat(charformat)
+                # newBlock() called HERE
                 cursor.insertText(newLine)
-                if self.tNumberBox.lineErrorIndex != None:
+                if self.tNumberBox.lineErrorIndex is not None:
                     if len(self.tNumberBox.lineErrors) == 0:
                         self.lineErrorNumber.setText('')
                         self.tLinesValidBtn.setChecked(1)
                         self.lineErrorPrev.setEnabled(0)
                         self.lineErrorNext.setEnabled(0)
-                    elif len(self.tNumberBox.lineErrors) == 1: 
+                    elif len(self.tNumberBox.lineErrors) == 1:
                         self.lineErrorNumber.setText('1 line error.')
                     else:
-                        self.lineErrorNumber.setText('%d line errors.' %len(self.tNumberBox.lineErrors))
+                        self.lineErrorNumber.setText('%d line errors.' % len(self.tNumberBox.lineErrors))
                 self.tNumberBox.number_bar.update()
                 return
             except IndexError:
                 pass
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         text = self.portal.document()
         block = text.begin()
         cursor = QtGui.QTextCursor(block)
-        cursor.select(QtGui.QTextCursor.Document)
-        format = QtGui.QTextCharFormat()
-        format.setBackground(QtCore.Qt.white)
-        cursor.setCharFormat(format)
-        counter = 0   
+        cursor.select(QtGui.QTextCursor.SelectionType.Document)
+        charformat = QtGui.QTextCharFormat()
+        charformat.setBackground(QtCore.Qt.GlobalColor.white)
+        cursor.setCharFormat(charformat)
+        counter = 0
         textLines = []
         formatted = ''
         blockNumber = 0
@@ -865,11 +865,11 @@ class AnalysisManager(QDialog, Ui_Dialog):
         self.wordErrorNumber.setText('')
         self.morphErrorNumber.setText('')
         self.lineErrorPrev.setEnabled(0)
-        self.lineErrorNext.setEnabled(0) 
+        self.lineErrorNext.setEnabled(0)
         self.wordErrorPrev.setEnabled(0)
-        self.wordErrorNext.setEnabled(0)    
+        self.wordErrorNext.setEnabled(0)
         self.morphErrorPrev.setEnabled(0)
-        self.morphErrorNext.setEnabled(0) 
+        self.morphErrorNext.setEnabled(0)
         for i in range(0, text.blockCount()):
             blockNumber += 1
             if len(block.text()) <= 1:
@@ -889,11 +889,11 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     ilegLine += '\t' + ilegPart2
                     ilegLine = self.cleanText(ilegLine)
                     textLines[2] = ilegLine
-                    
+
                 textLine = ''
                 for line in textLines:
                     textLine += line + '\n'
-                formatted += textLine +"\n"
+                formatted += textLine + "\n"
                 block = block.next().next()
                 counter = 0
                 blockNumber += 1
@@ -903,14 +903,14 @@ class AnalysisManager(QDialog, Ui_Dialog):
         formatted = formatted.strip()
         self.portal.setText(formatted)
         text.blockCountChanged.connect(self.newBlock)
-        self.tNumberBox.number_bar.update()    
+        self.tNumberBox.number_bar.update()
         QtWidgets.QApplication.restoreOverrideCursor()
-    
+
     @pyqtSlot()
     def on_tLoadNewTextBtn_released(self):
-        '''
+        """
         loads UTF-8 file into portal field for manual editing
-        '''
+        """
         openFileDialog = QtWidgets.QFileDialog(self)
         filePath = path.dirname(openFileDialog.directory().currentPath())
         fileDir = path.split(filePath)
@@ -932,19 +932,19 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 text = self.cleanText(pieces[2])
             else:
                 text = self.cleanText(loaded)
-            self.portal.setText(text)  
+            self.portal.setText(text)
             self.portal.document().blockCountChanged.connect(self.newBlock)
             self.tNumberBox.number_bar.update()
             self.tNumberBox.editorBlockCount = self.portal.document().blockCount()
             self.tLinesValidBtn.setChecked(0)
             self.tWordsValidBtn.setChecked(0)
             self.tMorphsValidBtn.setChecked(0)
-    
+
     @pyqtSlot()
     def on_tFormatNewTextBtn_released(self):
-        '''
+        """
         makes sure that the text in the portal is formatted correctly
-        '''
+        """
         self.validateNewText()
 
     @pyqtSlot()
@@ -953,25 +953,25 @@ class AnalysisManager(QDialog, Ui_Dialog):
         clear fields, etc.
         """
         self.clearNewText()
-    
+
     @pyqtSlot()
     def on_lineErrorPrev_released(self):
         """
         find prev line error.
         """
         errors = self.tNumberBox
-        if errors.lineErrorIndex == None:
+        if errors.lineErrorIndex is None:
             errors.lineErrorIndex = 0
         else:
             errors.lineErrorIndex -= 1
             if errors.lineErrorIndex < 0:
                 errors.lineErrorIndex = len(errors.lineErrors) - 1
-        try: 
+        try:
             targetLine = errors.lineErrors[errors.lineErrorIndex]
             text = self.portal.document()
             block = text.findBlockByNumber(targetLine)
             position = text.documentLayout().blockBoundingRect(block).topLeft()
-            self.portal.verticalScrollBar().setValue(position.y()-220)
+            self.portal.verticalScrollBar().setValue(position.y() - 220)
             self.portal.horizontalScrollBar().setValue(0)
             errors.number_bar.update()
         except IndexError:
@@ -983,30 +983,30 @@ class AnalysisManager(QDialog, Ui_Dialog):
         find next line error.
         """
         errors = self.tNumberBox
-        if errors.lineErrorIndex == None:
+        if errors.lineErrorIndex is None:
             errors.lineErrorIndex = 0
         else:
-            errors.lineErrorIndex +=1
+            errors.lineErrorIndex += 1
             if errors.lineErrorIndex > len(errors.lineErrors) - 1:
-                errors.lineErrorIndex = 0   
+                errors.lineErrorIndex = 0
         try:
             targetLine = errors.lineErrors[errors.lineErrorIndex]
             text = self.portal.document()
             block = text.findBlockByNumber(targetLine)
             position = text.documentLayout().blockBoundingRect(block).topLeft()
-            self.portal.verticalScrollBar().setValue(position.y()-220)
+            self.portal.verticalScrollBar().setValue(position.y() - 220)
             self.portal.horizontalScrollBar().setValue(0)
             errors.number_bar.update()
         except IndexError:
             pass
-    
+
     @pyqtSlot()
     def on_wordErrorPrev_released(self):
         """
         find prev word error.
         """
         errors = self.tNumberBox
-        if errors.wordErrorIndex == None:
+        if errors.wordErrorIndex is None:
             errors.wordErrorIndex = 0
         else:
             errors.wordErrorIndex -= 1
@@ -1016,37 +1016,37 @@ class AnalysisManager(QDialog, Ui_Dialog):
         text = self.portal.document()
         block = text.findBlockByNumber(targetLine)
         position = text.documentLayout().blockBoundingRect(block).topLeft()
-        self.portal.verticalScrollBar().setValue(position.y()-220)
+        self.portal.verticalScrollBar().setValue(position.y() - 220)
         self.portal.horizontalScrollBar().setValue(0)
         errors.number_bar.update()
-    
+
     @pyqtSlot()
     def on_wordErrorNext_released(self):
         """
         find next word error.
         """
         errors = self.tNumberBox
-        if errors.wordErrorIndex == None:
+        if errors.wordErrorIndex is None:
             errors.wordErrorIndex = 0
         else:
-            errors.wordErrorIndex +=1
+            errors.wordErrorIndex += 1
             if errors.wordErrorIndex > len(errors.wordErrors) - 1:
-                errors.wordErrorIndex = 0   
+                errors.wordErrorIndex = 0
         targetLine = errors.wordErrors[errors.wordErrorIndex]
         text = self.portal.document()
         block = text.findBlockByNumber(targetLine)
         position = text.documentLayout().blockBoundingRect(block).topLeft()
-        self.portal.verticalScrollBar().setValue(position.y()-220)
+        self.portal.verticalScrollBar().setValue(position.y() - 220)
         self.portal.horizontalScrollBar().setValue(0)
         errors.number_bar.update()
-    
+
     @pyqtSlot()
     def on_morphErrorPrev_released(self):
         """
         find prev morph error.
         """
         errors = self.tNumberBox
-        if errors.morphErrorIndex == None:
+        if errors.morphErrorIndex is None:
             errors.morphErrorIndex = 0
         else:
             errors.morphErrorIndex -= 1
@@ -1056,37 +1056,37 @@ class AnalysisManager(QDialog, Ui_Dialog):
         text = self.portal.document()
         block = text.findBlockByNumber(targetLine)
         position = text.documentLayout().blockBoundingRect(block).topLeft()
-        self.portal.verticalScrollBar().setValue(position.y()-220)
+        self.portal.verticalScrollBar().setValue(position.y() - 220)
         self.portal.horizontalScrollBar().setValue(0)
         errors.number_bar.update()
-    
+
     @pyqtSlot()
     def on_morphErrorNext_released(self):
         """
         find next morph error.
         """
         errors = self.tNumberBox
-        if errors.morphErrorIndex == None:
+        if errors.morphErrorIndex is None:
             errors.morphErrorIndex = 0
         else:
-            errors.morphErrorIndex +=1
+            errors.morphErrorIndex += 1
             if errors.morphErrorIndex > len(errors.morphErrors) - 1:
-                errors.morphErrorIndex = 0   
+                errors.morphErrorIndex = 0
         targetLine = errors.morphErrors[errors.morphErrorIndex]
         text = self.portal.document()
         block = text.findBlockByNumber(targetLine)
         position = text.documentLayout().blockBoundingRect(block).topLeft()
-        self.portal.verticalScrollBar().setValue(position.y()-220)
+        self.portal.verticalScrollBar().setValue(position.y() - 220)
         self.portal.horizontalScrollBar().setValue(0)
         errors.number_bar.update()
-        
+
     @pyqtSlot()
     def on_cancelNewTextBtn_released(self):
         """
         quit this window without comitting results.
         """
         self.reject()
-    
+
     @pyqtSlot()
     def on_okayNewTextBtn_released(self):
         """
@@ -1096,24 +1096,24 @@ class AnalysisManager(QDialog, Ui_Dialog):
         if len(self.tTitle.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please give this text a working title.', 'Missing title.')
-            warning.exec_()
+            warning.exec()
             return
         if len(self.tNewSource.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please provide a source for this text.', 'Missing source.')
-            warning.exec_()
-            return        
+            warning.exec()
+            return
         if len(self.tNewResearcher.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please provide the name of the researcher.', 'Missing researcher.')
-            warning.exec_()
+            warning.exec()
             return
         if len(self.tNewDate.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please provide the date this text was recorded.', 'Missing date.')
-            warning.exec_()
+            warning.exec()
             return
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         validate = self.validateNewText()
         if validate == 'okay':
             try:
@@ -1123,22 +1123,22 @@ class AnalysisManager(QDialog, Ui_Dialog):
             except KeyError:
                 pass
             textNode = dataIndex.textDict[dataIndex.currentCard]
-            if textNode.find('Ln') == None:
+            if textNode.find('Ln') is None:
                 noText = 1
             else:
                 noText = None
-            if noText: 
+            if noText:
                 newTextID = "TX001"
                 newTextNode = dataIndex.root.find('Text[@TextID="TX001"]')
                 self.tTextNav.model().removeRow(0)
                 title = newTextNode.find("Title")
                 newTextNode.remove(title)
             else:
-                newTextID = idGenerator.generateID('TX',dataIndex.textDict)
+                newTextID = idGenerator.generateID('TX', dataIndex.textDict)
                 newTextNode = etree.Element('Text', attrib={'TextID': newTextID})
                 k = dataIndex.root.find('Dset')
                 d = list(dataIndex.root).index(k)
-                dataIndex.root.insert(d,newTextNode)
+                dataIndex.root.insert(d, newTextNode)
             newTextNode.set('Rschr', self.tNewResearcher.toPlainText())
             newTextNode.set('Spkr', self.tNewSource.toPlainText())
             newTextNode.set('Date', self.tNewDate.toPlainText())
@@ -1157,11 +1157,11 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 title.text = "new text"
             text = self.portal.document()
             block = text.begin()
-            counter = 0   
+            counter = 0
             blockNumber = 0
             if self.tNewAutoparseBtn.isChecked():
                 if len(dataIndex.fldbk.iIndex.toPlainText()) == 0:
-                    parse = autoparsing.askToBuildIndex()   
+                    parse = autoparsing.askToBuildIndex()
             else:
                 parse = False
             for i in range(0, text.blockCount()):
@@ -1174,7 +1174,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 counter += 1
                 if len(block.next().text()) <= 1:
                     if counter == 4:
-                        #if this is a 4-line block
+                        # if this is a 4-line block
                         textLine = text.findBlockByNumber(blockNumber - 4).text()
                         textLine, speaker, tCode, eTime = update.fixGlosses(textLine)
                         parseLine = text.findBlockByNumber(blockNumber - 3).text()
@@ -1183,17 +1183,18 @@ class AnalysisManager(QDialog, Ui_Dialog):
                         ilegLine = self.cleanText(ilegLine)
                         glossLine = text.findBlockByNumber(blockNumber - 1).text()
                         glossLine, spokenBy, timeCode, endTime = update.fixGlosses(glossLine)
-                        if speaker != None and spokenBy == None:
+                        if speaker is not None and spokenBy is None:
                             spokenBy = speaker
-                        if tCode != None and timeCode == None:
+                        if tCode is not None and timeCode is None:
                             timeCode = tCode
-                        if eTime != None and endTime == None:
+                        if eTime is not None and endTime is None:
                             endTime = tCode
                     elif counter == 2:
-                        #if this is a 2-line block without an interlinear gloss
-                        textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime = self.twoLineTextHandler(text, blockNumber, parse)
+                        # if this is a 2-line block without an interlinear gloss
+                        textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime = self.twoLineTextHandler(
+                            text, blockNumber, parse)
                     elif counter == 1:
-                        #if this is an unglossed (untranslated) text
+                        # if this is an unglossed (untranslated) text
                         textLine = text.findBlockByNumber(blockNumber - 1).text()
                         textLine, spokenBy, timeCode, endTime = update.fixGlosses(textLine)
                         parseLine = ''
@@ -1210,20 +1211,22 @@ class AnalysisManager(QDialog, Ui_Dialog):
                         if noEG:
                             newExID = 'EX001'
                             newEx = dataIndex.root.find('Ex[@ExID="EX001"]')
-                            newEx.set('Rschr',  self.tNewResearcher.toPlainText())
-                            newEx.set('Spkr',  self.tNewSource.toPlainText())
-                            newEx.set('Date',  self.tNewDate.toPlainText())
-                            newEx.set('Update',  tDate)
-                            newEx.set('SourceText',  newTextID)
+                            newEx.set('Rschr', self.tNewResearcher.toPlainText())
+                            newEx.set('Spkr', self.tNewSource.toPlainText())
+                            newEx.set('Date', self.tNewDate.toPlainText())
+                            newEx.set('Update', tDate)
+                            newEx.set('SourceText', newTextID)
                             newLine = newEx.find('Line')
                             newMorph = newEx.find('Mrph')
                             newILEG = newEx.find('ILEG')
-                            newL1Gloss = newEx.find('L1Gloss')                
+                            newL1Gloss = newEx.find('L1Gloss')
                         else:
-                            newExID = idGenerator.generateID('EX',dataIndex.exDict)
-                            newEx = etree.Element('Ex', attrib={'ExID' : newExID, 'Rschr' : self.tNewResearcher.toPlainText(),
-                                                                'Spkr' : self.tNewSource.toPlainText(), 'Date': self.tNewDate.toPlainText(), 
-                                                                'Update' : tDate, 'SourceText' : newTextID})
+                            newExID = idGenerator.generateID('EX', dataIndex.exDict)
+                            newEx = etree.Element('Ex',
+                                                  attrib={'ExID': newExID, 'Rschr': self.tNewResearcher.toPlainText(),
+                                                          'Spkr': self.tNewSource.toPlainText(),
+                                                          'Date': self.tNewDate.toPlainText(),
+                                                          'Update': tDate, 'SourceText': newTextID})
                             newLine = etree.SubElement(newEx, 'Line')
                             newMorph = etree.SubElement(newEx, 'Mrph')
                             newILEG = etree.SubElement(newEx, 'ILEG')
@@ -1232,8 +1235,8 @@ class AnalysisManager(QDialog, Ui_Dialog):
                                 newL2Gloss = etree.SubElement(newEx, 'L2Gloss')
                             dataIndex.exDict[newExID] = newEx
                             k = dataIndex.root.find('Speaker')
-                            d = list(dataIndex.root).index(k) 
-                            dataIndex.root.insert(d,newEx)
+                            d = list(dataIndex.root).index(k)
+                            dataIndex.root.insert(d, newEx)
                         newLine.text = textLine
                         newMorph.text = parseLine
                         newILEG.text = ilegLine
@@ -1241,44 +1244,45 @@ class AnalysisManager(QDialog, Ui_Dialog):
                             newL2Gloss.text = glossLine
                         else:
                             newL1Gloss.text = glossLine
-                        newLineElement = etree.SubElement(newTextNode, "Ln", attrib={'LnRef' : newExID})
-                        if timeCode != None:
+                        newLineElement = etree.SubElement(newTextNode, "Ln", attrib={'LnRef': newExID})
+                        if timeCode is not None:
                             newLineElement.set('Time', timeCode)
-                        if endTime != None:
+                        if endTime is not None:
                             newLineElement.set('EndTime', endTime)
-                        if spokenBy != None:
-                            newLineElement.set('SpokenBy', spokenBy)  
+                        if spokenBy is not None:
+                            newLineElement.set('SpokenBy', spokenBy)
                             for speaker in dataIndex.root.iter("Speaker"):
                                 if speaker.attrib.get('SCode') == spokenBy:
                                     newEx.set('Spkr', spokenBy)
                                     break
-                    #TODO: ??use case with gloss in two languages? this would involve changing the setLangBtn to tristate
+                    """TODO: ??use case with gloss in two languages? this would involve changing the setLangBtn to tristate"""
                     block = block.next().next()
                     counter = 0
                     blockNumber += 1
                 else:
-                    block = block.next()       
-            #set new text as current text, add new text to navList, restore card
+                    block = block.next()
+                    """set new text as current text, add new text to navList, restore card"""
             dataIndex.currentCard = newTextID
             dataIndex.lastText = newTextID
             dataIndex.root.set('LastText', newTextID)
             dataIndex.newText = True
-            if dataIndex.currentText != True:
+            if dataIndex.currentText is not True:
                 item = QtGui.QStandardItem(plainTextTitle)
                 item.setData(newTextID, 32)
                 dataIndex.fldbk.tTextNav.model().sourceModel().appendRow(item)
-                for i in range(0,dataIndex.fldbk.tTextNav.model().rowCount()):
+                for i in range(0, dataIndex.fldbk.tTextNav.model().rowCount()):
                     if dataIndex.fldbk.tTextNav.model().index(i, 0).data(32) == newTextID:
                         theItem = i
-                        break                    
-                dataIndex.fldbk.tTextNav.setCurrentIndex(dataIndex.fldbk.tTextNav.model().index(theItem,0))
-            dataIndex.fldbk.tTextNav.scrollTo(dataIndex.fldbk.tTextNav.currentIndex(), QtWidgets.QAbstractItemView.PositionAtCenter)   
+                        break
+                dataIndex.fldbk.tTextNav.setCurrentIndex(dataIndex.fldbk.tTextNav.model().index(theItem, 0))
+            dataIndex.fldbk.tTextNav.scrollTo(dataIndex.fldbk.tTextNav.currentIndex(),
+                                              QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
             self.tTitle.setText(title.text)
             cardLoader.loadTextCard(newTextNode)
             self.clearNewText()
             QtWidgets.QApplication.restoreOverrideCursor()
             self.accept()
-    
+
     @pyqtSlot()
     def on_parserBtn_released(self):
         """
@@ -1292,21 +1296,21 @@ class AnalysisManager(QDialog, Ui_Dialog):
         find item in findItem LineEdit going backwards.
         """
         self.findItem(QtGui.QTextDocument.FindBackward)
-    
+
     @pyqtSlot()
     def on_findNextBtn_released(self):
         """
         find item in findItem LineEdit going forewards.
         """
         self.findItem()
-    
+
     @pyqtSlot()
     def on_replaceAllBtn_released(self):
         """
         global search and replace.
         """
         self.replaceAll()
-    
+
     @pyqtSlot()
     def on_saveDraftBtn_released(self):
         """
@@ -1327,39 +1331,39 @@ class AnalysisManager(QDialog, Ui_Dialog):
             openFileDialog.setDirectory(dataIndex.homePath)
         fname = openFileDialog.getSaveFileName(dataIndex.fldbk, "Save As...")[0]
         if fname:
-            saveFile = open(fname, "w", encoding = "UTF-8")
+            saveFile = open(fname, "w", encoding="UTF-8")
             saveFile.write(saveDoc)
             saveFile.close()
         self.raise_()
- 
+
     @pyqtSlot()
     def on_findAllBtn_released(self):
         """
         find and highlight all.
         """
         self.findAll()
-    
+
     @pyqtSlot()
     def on_findTerm_returnPressed(self):
         """
         find once.
         """
         self.findItem()
-    
+
     @pyqtSlot()
     def on_replaceBtn_released(self):
         """
         replace once.
         """
         self.replaceOnce()
-    
+
     @pyqtSlot()
     def on_findReplaceBtn_released(self):
         """
         replace current selection and find next
         """
         self.replaceFind()
-    
+
     @pyqtSlot(bool)
     def on_activateReplace_toggled(self, checked):
         """
@@ -1369,21 +1373,21 @@ class AnalysisManager(QDialog, Ui_Dialog):
         @type bool
         """
         self.toggleActivation(checked)
-    
+
     @pyqtSlot()
     def on_removeHiliteBtn_released(self):
         """
         remove highlighting.
         """
         self.removeHiliting()
-    
+
     @pyqtSlot()
     def on_alignTextBtn_released(self):
         """
         align whole text.
         """
         self.alignText()
-    
+
     @pyqtSlot(str)
     def on_importSelector_activated(self, p0):
         """
@@ -1393,7 +1397,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
         @type str
         """
         self.importFiles(p0)
-    
+
     @pyqtSlot()
     def on_helpBtn_released(self):
         """
@@ -1402,20 +1406,20 @@ class AnalysisManager(QDialog, Ui_Dialog):
         helpBox = QtWidgets.QMessageBox(self)
         helpBox.setText("<center><b>Entering a new text</b></center>")
         helpBox.setInformativeText("Enter or paste text in the field or load a new text in "
-                        "2- or 4-line format by clicking “Open”. This window "
-                        "can validate the text format and glossing, and "
-                        "provides rudimentary editing and parsing tools. "
-                        "It is good for making global speling changes, but "
-                        "it is better to work on new analyses in the Examples "
-                        "tab, after committing the validated text by pressing "
-                        "“Okay”. Transcription files in some formats can be "
-                        "imported automatically using the “Import file:” pulldown "
-                        "menu. Time codes can be entered following the gloss, in "
-                        "“[MM:SS(.SS)]” format. Indicate change of speaker by "
-                        "adding a speaker code of 1–3 characters followed by a "
-                        "colon and a space or tab before the translation.")
-        helpBox.exec_()
-    
+                                   "2- or 4-line format by clicking “Open”. This window "
+                                   "can validate the text format and glossing, and "
+                                   "provides rudimentary editing and parsing tools. "
+                                   "It is good for making global speling changes, but "
+                                   "it is better to work on new analyses in the Examples "
+                                   "tab, after committing the validated text by pressing "
+                                   "“Okay”. Transcription files in some formats can be "
+                                   "imported automatically using the “Import file:” pulldown "
+                                   "menu. Time codes can be entered following the gloss, in "
+                                   "“[MM:SS(.SS)]” format. Indicate change of speaker by "
+                                   "adding a speaker code of 1–3 characters followed by a "
+                                   "colon and a space or tab before the translation.")
+        helpBox.exec()
+
     @pyqtSlot(int)
     def on_tSetLangBtn_stateChanged(self, p0):
         """
@@ -1426,8 +1430,9 @@ class AnalysisManager(QDialog, Ui_Dialog):
         """
         self.L2Gloss = p0
 
+
 class ExampleManager(AnalysisManager):
-    
+
     def __init__(self, parent=None):
         """
         provides tools for adding multiple examples not necessarily in a text
@@ -1454,21 +1459,21 @@ class ExampleManager(AnalysisManager):
         self.replaceTerm.setEnabled(0)
         self.rpcLabel.setStyleSheet('color: gray;')
         self.removeHiliteBtn.setEnabled(0)
-        
+
     def clearNewExamples(self):
         self.portal.clear()
         self.tNumberBox.number_bar.update()
         self.tNewSource.clear()
         self.tNewResearcher.clear()
         self.tNewDate.clear()
-        self.tNewUpdated.clear()    
+        self.tNewUpdated.clear()
         self.lineErrorNumber.setText('')
         self.wordErrorNumber.setText('')
         self.morphErrorNumber.setText('')
         self.tLinesValidBtn.setChecked(0)
         self.tWordsValidBtn.setChecked(0)
-        self.tMorphsValidBtn.setChecked(0)    
-        
+        self.tMorphsValidBtn.setChecked(0)
+
     @pyqtSlot()
     def on_saveDraftBtn_released(self):
         """
@@ -1478,7 +1483,7 @@ class ExampleManager(AnalysisManager):
         source = self.tNewSource.toPlainText()
         researcher = self.tNewResearcher.toPlainText()
         tDate = self.tNewDate.toPlainText()
-        metaData = 'HEADER:' + source + ':' + researcher + ':' + tDate 
+        metaData = 'HEADER:' + source + ':' + researcher + ':' + tDate
         saveDoc = metaData + '\n' + self.portal.toPlainText()
         openFileDialog = QtWidgets.QFileDialog(dataIndex.fldbk)
         filePath = path.dirname(openFileDialog.directory().currentPath())
@@ -1487,16 +1492,16 @@ class ExampleManager(AnalysisManager):
             openFileDialog.setDirectory(dataIndex.homePath)
         fname = openFileDialog.getSaveFileName(dataIndex.fldbk, "Save As...")[0]
         if fname:
-            saveFile = open(fname, "w", encoding = "UTF-8")
+            saveFile = open(fname, "w", encoding="UTF-8")
             saveFile.write(saveDoc)
             saveFile.close()
         self.raise_()
-        
+
     @pyqtSlot()
     def on_tLoadNewTextBtn_released(self):
-        '''
+        """
         loads UTF-8 file into portal field for manual editing
-        '''
+        """
         openFileDialog = QtWidgets.QFileDialog(self)
         filePath = path.dirname(openFileDialog.directory().currentPath())
         fileDir = path.split(filePath)
@@ -1516,14 +1521,14 @@ class ExampleManager(AnalysisManager):
                 text = self.cleanText(pieces[2])
             else:
                 text = self.cleanText(loaded)
-            self.portal.setText(text)  
+            self.portal.setText(text)
             self.portal.document().blockCountChanged.connect(self.newBlock)
             self.tNumberBox.number_bar.update()
             self.tNumberBox.editorBlockCount = self.portal.document().blockCount()
             self.tLinesValidBtn.setChecked(0)
             self.tWordsValidBtn.setChecked(0)
             self.tMorphsValidBtn.setChecked(0)
-    
+
     @pyqtSlot()
     def on_okayNewTextBtn_released(self):
         """
@@ -1532,30 +1537,30 @@ class ExampleManager(AnalysisManager):
         if len(self.tNewSource.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please provide a source for these examples.', 'Missing source.')
-            warning.exec_()
-            return        
+            warning.exec()
+            return
         if len(self.tNewResearcher.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please provide the name of the researcher.', 'Missing researcher.')
-            warning.exec_()
+            warning.exec()
             return
         if len(self.tNewDate.toPlainText()) == 0:
             warning = MissingDataBox.MissingDataBox(self)
             warning.setWarningText('Please provide the date these examples were collected.', 'Missing date.')
-            warning.exec_()
+            warning.exec()
             return
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         validate = self.validateNewText()
-        #this will be differen, starting here
+        # this will be differen, starting here
         if validate == 'okay':
             tDate = SessionDate.dateFinder()
             text = self.portal.document()
             block = text.begin()
-            counter = 0   
+            counter = 0
             blockNumber = 0
             if self.tNewAutoparseBtn.isChecked():
                 if len(dataIndex.fldbk.iIndex.toPlainText()) == 0:
-                    parse = autoparsing.askToBuildIndex()   
+                    parse = autoparsing.askToBuildIndex()
             else:
                 parse = False
             for i in range(0, text.blockCount()):
@@ -1567,7 +1572,7 @@ class ExampleManager(AnalysisManager):
                 counter += 1
                 if len(block.next().text()) <= 1:
                     if counter == 4:
-                        #if this is a 4-line block
+                        # if this is a 4-line block
                         textLine = text.findBlockByNumber(blockNumber - 4).text()
                         textLine, speaker, tCode, eTime = update.fixGlosses(textLine)
                         parseLine = text.findBlockByNumber(blockNumber - 3).text()
@@ -1576,17 +1581,19 @@ class ExampleManager(AnalysisManager):
                         ilegLine = self.cleanText(ilegLine)
                         glossLine = text.findBlockByNumber(blockNumber - 1).text()
                         glossLine, spokenBy, timeCode, endTime = update.fixGlosses(glossLine)
-                        if speaker != None and spokenBy == None:
+                        if speaker is not None and spokenBy is None:
                             spokenBy = speaker
-                        if tCode != None and timeCode == None:
+                        if tCode is not None and timeCode is None:
                             timeCode = tCode
-                        if eTime != None and endTime == None:
+                        if eTime is not None and endTime is None:
                             endTime = tCode
                     elif counter == 2:
-                        #if this is a 2-line block without an interlinear gloss
-                        textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy = self.twoLineTextHandler(text, blockNumber, parse)
+                        # if this is a 2-line block without an interlinear gloss
+                        textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy = self.twoLineTextHandler(text,
+                                                                                                               blockNumber,
+                                                                                                               parse)
                     elif counter == 1:
-                        #if this is an unglossed (untranslated) text
+                        # if this is an unglossed (untranslated) text
                         textLine = text.findBlockByNumber(blockNumber - 1).text()
                         textLine, spokenBy, timeCode, endTime = update.fixGlosses(textLine)
                         parseLine = ''
@@ -1602,45 +1609,45 @@ class ExampleManager(AnalysisManager):
                     if noEG:
                         newExID = 'EX001'
                         newEx = dataIndex.root.find('Ex[@ExID="EX001"]')
-                        newEx.set('Rschr',  self.tNewResearcher.toPlainText())
-                        newEx.set('Spkr',  self.tNewSource.toPlainText())
-                        newEx.set('Date',  self.tNewDate.toPlainText())
-                        newEx.set('Update',  tDate)
+                        newEx.set('Rschr', self.tNewResearcher.toPlainText())
+                        newEx.set('Spkr', self.tNewSource.toPlainText())
+                        newEx.set('Date', self.tNewDate.toPlainText())
+                        newEx.set('Update', tDate)
                         newLine = newEx.find('Line')
                         newMorph = newEx.find('Mrph')
                         newILEG = newEx.find('ILEG')
-                        newL1Gloss = newEx.find('L1Gloss')                
+                        newL1Gloss = newEx.find('L1Gloss')
                     else:
-                        newExID = idGenerator.generateID('EX',dataIndex.exDict)
-                        newEx = etree.Element('Ex', attrib={'ExID' : newExID, 'Rschr' : self.tNewResearcher.toPlainText(),
-                                                            'Spkr' : self.tNewSource.toPlainText(), 'Date': self.tNewDate.toPlainText(), 
-                                                            'Update' : tDate})
-#                        if timeCode != None:
-#                            newEx.set('Time', timeCode)
+                        newExID = idGenerator.generateID('EX', dataIndex.exDict)
+                        newEx = etree.Element('Ex', attrib={'ExID': newExID, 'Rschr': self.tNewResearcher.toPlainText(),
+                                                            'Spkr': self.tNewSource.toPlainText(),
+                                                            'Date': self.tNewDate.toPlainText(),
+                                                            'Update': tDate})
+                        #                        if timeCode is not None:
+                        #                            newEx.set('Time', timeCode)
                         newLine = etree.SubElement(newEx, 'Line')
                         newMorph = etree.SubElement(newEx, 'Mrph')
                         newILEG = etree.SubElement(newEx, 'ILEG')
                         newL1Gloss = etree.SubElement(newEx, 'L1Gloss')
                         dataIndex.exDict[newExID] = newEx
                         k = dataIndex.root.find('Speaker')
-                        d = list(dataIndex.root).index(k) 
-                        dataIndex.root.insert(d,newEx)
+                        d = list(dataIndex.root).index(k)
+                        dataIndex.root.insert(d, newEx)
                         newLine.text = textLine
                         newMorph.text = parseLine
                         newILEG.text = ilegLine
                         newL1Gloss.text = glossLine
-                    #TODO: ??use case with gloss in two languages?
+                    # TODO: ??use case with gloss in two languages?
                     block = block.next().next()
                     counter = 0
                     blockNumber += 1
                 else:
-                    block = block.next()       
+                    block = block.next()
             self.clearNewExamples()
             cardLoader.loadExCard(newEx)
             QtWidgets.QApplication.restoreOverrideCursor()
             self.accept()
-            
-    
+
     @pyqtSlot()
     def on_tClearNewTextBtn_released(self):
         """

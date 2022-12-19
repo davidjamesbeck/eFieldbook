@@ -4,8 +4,8 @@
 Module implementing NewLexDialog.
 """
 
-from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QDialog
+from PyQt6 import QtCore, QtWidgets
+from PyQt6.QtWidgets import QDialog
 from ELFB import dataIndex
 
 from .Ui_NewLexDialog import Ui_NewLexDialog
@@ -32,15 +32,15 @@ class NewLexDialog(QDialog, Ui_NewLexDialog):
                 codeList[index] = item
             except TypeError:
                 pass
-        self.speakerCode.insertItems(0,codeList)
+        self.speakerCode.insertItems(0, codeList)
         if dataIndex.lastSpeaker:
-            j = self.speakerCode.findText(dataIndex.lastSpeaker,QtCore.Qt.MatchStartsWith)
+            j = self.speakerCode.findText(dataIndex.lastSpeaker, QtCore.Qt.MatchFlag.MatchStartsWith)
             self.speakerCode.setCurrentIndex(j)        
         
         codeList = sorted(dataIndex.rschrDict.keys())
-        self.researcherCode.insertItems(0,codeList)                                
+        self.researcherCode.insertItems(0, codeList)                                
         if dataIndex.lastRschr:
-            j = self.researcherCode.findText(dataIndex.lastRschr,QtCore.Qt.MatchExactly)
+            j = self.researcherCode.findText(dataIndex.lastRschr, QtCore.Qt.MatchFlag.MatchExactly)
             self.researcherCode.setCurrentIndex(j)
 
         self.retranslateUi(self)
@@ -50,18 +50,18 @@ class NewLexDialog(QDialog, Ui_NewLexDialog):
         self.entryWord.setFocus()
 
     def setSpeaker(self):
-        lastSpeaker = self.speakerCode.currentText().split(None,1)
+        lastSpeaker = self.speakerCode.currentText().split(None, 1)
         dataIndex.lastSpeaker = lastSpeaker[0]
         dataIndex.unsavedEdit = 1
 
     def setRschr(self):
-        lastRschr = self.researcherCode.currentText().split(None,1)
+        lastRschr = self.researcherCode.currentText().split(None, 1)
         dataIndex.lastRschr = lastRschr[0]
         dataIndex.unsavedEdit = 1
 
     def getData(self):
         metaData = []
-        speaker = self.speakerCode.currentText().split(None,1)
+        speaker = self.speakerCode.currentText().split(None, 1)
         metaData.append(speaker[0])
         metaData.append(self.researcherCode.currentText())
         metaData.append(self.entryWord.toPlainText())
@@ -72,13 +72,13 @@ class NewLexDialog(QDialog, Ui_NewLexDialog):
     def on_buttonBox_accepted(self):
         if len(self.entryWord.toPlainText()) == 0 or len(self.gloss.toPlainText()) == 0:
             self.badBox = QtWidgets.QMessageBox()
-            self.badBox.setIcon(QtWidgets.QMessageBox.Warning)
-            self.badBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-            self.badBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+            self.badBox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            self.badBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+            self.badBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
             self.badBox.setText('Incomplete entry.')
             self.badBox.setInformativeText('Provide a form and a gloss '
                                            'in the primary working language.')
-            self.badBox.exec_()
+            self.badBox.exec()
             return
         dataIndex.unsavedEdit = 1
         self.accept()

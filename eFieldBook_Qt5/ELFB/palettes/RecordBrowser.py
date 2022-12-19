@@ -4,23 +4,21 @@
 Module implementing RecordBrowser.
 """
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 from ELFB import dataIndex, cardLoader, menus
 from ELFB.palettes import StyledInputDialog
 from ELFB.outputFilters import lexToText, egToText
 
 from .Ui_RecordBrowser import Ui_Dialog
 
+
 class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
     """
     Class documentation goes here.
     """
-    def __init__(self, parent, selection = None):
-        """
-        Constructor
-        
-        @param parent reference to the parent widget (QWidget)
-        """
+
+    def __init__(self, parent, selection=None):
+
         super(RecordBrowser, self).__init__(parent)
         self.setupUi(self)
         iconSize = QtCore.QSize(40, 40)
@@ -39,7 +37,7 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
         self.scratchPadName = None
         self.progressBar.setMinimum(-1)
         self.progressBar.setMaximum(0)
-        if selection == None:
+        if selection is None:
             results = self.fldbk.cSearchResults.model()
         else:
             results = None
@@ -56,7 +54,7 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
             for i in range(0, results.rowCount()):
                 self.hitList.append(results.item(i, 0).data(35))
                 self.progressBar.setMaximum(len(self.hitList))
-    
+
     @QtCore.pyqtSlot()
     def on_PrevBtn_released(self):
         """
@@ -67,11 +65,11 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
         if self.fldbk.tabWidget.currentIndex() < 5:
             self.listIndex -= 1
             if self.listIndex < 0:
-                self.listIndex = len(self.hitList)-1
+                self.listIndex = len(self.hitList) - 1
         tCard = self.hitList[self.listIndex]
         dataIndex.currentCard = tCard
         self.showCards(tCard)
-    
+
     @QtCore.pyqtSlot()
     def on_NextBtn_released(self):
         """
@@ -88,33 +86,33 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
             tCard = self.hitList[self.listIndex]
         dataIndex.currentCard = tCard
         self.showCards(tCard)
-        
+
     def showCards(self, tCard):
         if tCard[0] == "T":
             targetCard = dataIndex.textDict[tCard]
             cardLoader.loadtextCard(targetCard)
-            self.fldbk.tabWidget.setCurrentIndex(2)  
+            self.fldbk.tabWidget.setCurrentIndex(2)
             cardLoader.resetNavBars(self.fldbk.tTextNav, tCard)
         elif tCard[0] == "L":
             targetCard = dataIndex.lexDict[tCard]
             cardLoader.loadLexCard(targetCard)
-            self.fldbk.tabWidget.setCurrentIndex(1) 
+            self.fldbk.tabWidget.setCurrentIndex(1)
             cardLoader.resetNavBars(self.fldbk.lLexNav, tCard)
         elif tCard[0] == "E":
             targetCard = dataIndex.exDict[tCard]
             cardLoader.loadExCard(targetCard)
-            self.fldbk.tabWidget.setCurrentIndex(3) 
+            self.fldbk.tabWidget.setCurrentIndex(3)
         elif tCard[0] == "D":
             targetCard = dataIndex.dataDict[tCard]
             cardLoader.loadDataCard(targetCard)
-            self.fldbk.tabWidget.setCurrentIndex(4) 
+            self.fldbk.tabWidget.setCurrentIndex(4)
             cardLoader.resetNavBars(self.fldbk.dDataNav, tCard)
         self.progressBar.setValue(self.listIndex)
         if tCard in self.earmarks:
             self.Select.setChecked(1)
         else:
             self.Select.setChecked(0)
-        
+
     @QtCore.pyqtSlot()
     def on_NewList_released(self):
         """
@@ -124,13 +122,13 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
             saveDoc = ''
         else:
             saveDoc = self.makeSaveDoc()
-            '''need to check to see if existing earmarks have to be saved first separately'''
-            if self.scratchPadName != None:
+            """need to check to see if existing earmarks have to be saved first separately"""
+            if self.scratchPadName is not None:
                 if self.oldEarmarks != self.earmarks:
                     if self.scratchPadName[1] == 'file':
                         self.saveAsFile(self.scratchPadName[0], saveDoc)
                     else:
-                        self.saveAsDataset(self.scratchPadName[0], saveDoc)                    
+                        self.saveAsDataset(self.scratchPadName[0], saveDoc)
                 saveDoc = ''
                 self.earmarks = []
                 self.Select.setChecked(0)
@@ -138,20 +136,20 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
 
     def chooseTypeAndSave(self, saveDoc):
         mbox = QtWidgets.QMessageBox()
-        mbox.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        mbox.setWindowFlags(QtCore.Qt.WindowType.WindowStaysOnTopHint)
         mbox.setText("Scratch pad.")
         mbox.setInformativeText('Save scratch pad as a dataset or a file?')
-        mbox.setStandardButtons(QtWidgets.QMessageBox.Cancel)
+        mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Cancel)
         datasetButton = QtWidgets.QPushButton()
         datasetButton.setText('Dataset')
-        mbox.addButton(datasetButton, QtWidgets.QMessageBox.ActionRole)
+        mbox.addButton(datasetButton, QtWidgets.QMessageBox.ButtonRole.ActionRole)
         fileButton = QtWidgets.QPushButton()
         fileButton.setText('File')
-        mbox.addButton(fileButton, QtWidgets.QMessageBox.ActionRole)
-        mbox.exec_()
+        mbox.addButton(fileButton, QtWidgets.QMessageBox.ButtonRole.ActionRole)
+        mbox.exec()
         if mbox.clickedButton() == fileButton:
             fileDialog = QtWidgets.QFileDialog()
-            fileDialog.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+            fileDialog.setWindowFlags(QtCore.Qt.WindowType.WindowStaysOnTopHint)
             self.setVisible(0)
             fname = fileDialog.getSaveFileName(self.fldbk, "Save Scratchpad As...")[0]
             if fname:
@@ -163,10 +161,10 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
                 return
         elif mbox.clickedButton() == datasetButton:
             nameBox = StyledInputDialog.StyledInputDialog(self.fldbk)
-            nameBox.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint) 
+            nameBox.setWindowFlags(QtCore.Qt.WindowType.WindowStaysOnTopHint)
             nameBox.setWindowTitle('Scratchpad')
             nameBox.inputLabel.setText('Give the scratchpad a name.')
-            if nameBox.exec_():
+            if nameBox.exec():
                 fname = nameBox.returnInput()
                 self.scratchPadName = [fname, 'dataset']
                 menus.newDataset(self.fldbk, fname, saveDoc)
@@ -174,19 +172,19 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
                 return
         else:
             return
-            
+
     def saveAsFile(self, fname, saveDoc=''):
         saveDoc = saveDoc.replace('<p>', '')
         saveDoc = saveDoc.replace('</p>', '\n')
-        saveFile = open(fname, "w", encoding = "UTF-8")
+        saveFile = open(fname, "w", encoding="UTF-8")
         saveFile.write(saveDoc)
-        saveFile.close()  
-        
+        saveFile.close()
+
     def saveAsDataset(self, saveDoc):
         DSetID = dataIndex.lastDset
         DSet = dataIndex.dataDict[DSetID]
         DSet.find('Data').text = saveDoc
-        
+
     def makeSaveDoc(self):
         saveDoc = ''
         for item in self.earmarks:
@@ -200,14 +198,14 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
                 saveDoc += '<p>example in Dataset “' + reference + '”</p>'
             saveDoc += '<p>' + newText + '</p>'
         return saveDoc
-    
+
     @QtCore.pyqtSlot()
     def on_Save_released(self):
         """
         Saves existing scratchpad.
         First checks to make sure one exists.
         """
-        if self.scratchPadName == None:
+        if self.scratchPadName is None:
             self.on_NewList_released()
         elif self.scratchPadName[1] == 'file':
             saveDoc = self.makeSaveDoc()
@@ -215,7 +213,7 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
         else:
             saveDoc = self.makeSaveDoc()
             self.saveAsDataset(saveDoc)
-        
+
     @QtCore.pyqtSlot()
     def on_Discard_released(self):
         """
@@ -232,7 +230,7 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
         self.progressBar.setValue(self.listIndex)
         prevCard = self.hitList[self.listIndex]
         self.showCards(prevCard)
-    
+
     @QtCore.pyqtSlot()
     def on_Select_released(self):
         """
@@ -249,7 +247,7 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
                 pass
             except IndexError:
                 pass
-        else: 
+        else:
             self.oldEarmarks = self.earmarks
             self.earmarks.append(self.hitList[self.listIndex])
             self.Save.setEnabled(1)
@@ -259,14 +257,14 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
             mbox = QtWidgets.QMessageBox()
             mbox.setText("Keep scratch pad.")
             mbox.setInformativeText('Scratchpad will be reloaded next time the browser is opened.')
-            mbox.setStandardButtons(QtWidgets.QMessageBox.Cancel | QtWidgets.QMessageBox.No | QtWidgets.QMessageBox.Yes)
-            mbox.setDefaultButton(QtWidgets.QMessageBox.Yes)
-            mbox.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-            mbox.exec_()
-            if mbox.result() == QtWidgets.QMessageBox.Ok:
+            mbox.setStandardButtons(
+                QtWidgets.QMessageBox.StandardButton.Cancel | QtWidgets.QMessageBox.StandardButton.No | QtWidgets.QMessageBox.StandardButton.Yes)
+            mbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Yes)
+            mbox.setWindowFlags(QtCore.Qt.WindowType.WindowStaysOnTopHint)
+            mbox.exec()
+            if mbox.result() == QtWidgets.QMessageBox.StandardButton.Ok:
                 saveDoc = self.makeSaveDoc()
                 self.chooseTypeAndSave(saveDoc)
-            elif mbox.result() == QtWidgets.QMessageBox.Cancel:
+            elif mbox.result() == QtWidgets.QMessageBox.StandardButton.Cancel:
                 event.ignore()
         pass
-        

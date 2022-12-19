@@ -1,22 +1,23 @@
-from PyQt5 import QtGui, QtCore, QtWidgets
+from PyQt6 import QtGui, QtCore, QtWidgets
 from ELFB import dataIndex, cardLoader, formattingHandlers, autoparsing
 from ELFB.searchClasses import SearchEngine
 from ELFB.palettes import RecordBrowser
+
 
 def buildIndex():
     fldbk = dataIndex.fldbk
     indexList = []
     errorList = []
-    dict = dataIndex.exDict
+    examplelist = dataIndex.exDict
     fldbk.iErrorBox.clear()
     fldbk.iSortingBox.setCurrentIndex(0)
     tokenCount = 0
-    for key in dict:
+    for key in examplelist:
         try:
-            line = dict[key].find('Line').text
+            line = examplelist[key].find('Line').text
             lineList = autoparsing.cleanLine(line)
-            morphList = dict[key].find('Mrph').text.split('\t')
-            glossList = dict[key].find('ILEG').text.split('\t')
+            morphList = examplelist[key].find('Mrph').text.split('\t')
+            glossList = examplelist[key].find('ILEG').text.split('\t')
             for i in range(0, len(morphList)):
                 morph = morphList[i]
                 if len(morph) == 0:
@@ -24,7 +25,7 @@ def buildIndex():
                 gloss = glossList[i]
                 if len(gloss) == 0:
                     gloss = '[-]'
-                indexList.append(lineList[i] + '\t' + morph + '\t' + gloss + '\t' + key + ':' + str(i+1) + '\n')
+                indexList.append(lineList[i] + '\t' + morph.strip() + '\t' + gloss.strip() + '\t' + key + ':' + str(i+1) + '\n')
                 tokenCount +=1
         except (TypeError, AttributeError):
             pass
@@ -44,9 +45,9 @@ def buildIndex():
             prevMorph = item[:index-1]
             trimmedList.append(item)
         else:
-            trimmedList[-1] = trimmedList[-1][:-1] + item[index:]
-    
+            trimmedList[-1] += item[index:]
     indexString = ''.join(trimmedList)[:-1]
+    indexString = indexString.replace('\n\t', '\t')
     wordformCount = formattingHandlers.addCommas(len(trimmedList))
     tokenCount = formattingHandlers.addCommas(tokenCount)
     fldbk.iIndex.setText(indexString)
@@ -55,8 +56,9 @@ def buildIndex():
     fldbk.iTokensLbl.setText("Tokens: " + str(tokenCount))
     fldbk.iSortNowBtn.setStyleSheet('background: #6698FF;')
     
+
 def iDelAbbr(fldbk):
-    '''remove abbreviation from list'''
+    """remove abbreviation from list"""
     try:
         badNode = fldbk.iAbbreviations.currentItem().data(36)
         badRow = fldbk.iAbbreviations.currentRow()
@@ -64,16 +66,17 @@ def iDelAbbr(fldbk):
         fldbk.eAbbreviations.removeRow(badRow)
     except AttributeError:
         return
-    ##update XML
+    """update XML"""
     dataIndex.root.find('Abbreviations').remove(badNode)
     dataIndex.unsavedEdit = 1
+
 
 def indexBrowser(fldbk):
     if len(fldbk.iIndex.toPlainText()) != 0:
         cursor = fldbk.iIndex.textCursor()
         if cursor.selectedText():
             cursor.clearSelection()
-        cursor.select(QtGui.QTextCursor.LineUnderCursor)
+        cursor.select(QtGui.QTextCursor.SelectionType.LineUnderCursor)
         selection = cursor.selectedText()
         try:
             fldbk.recordBrowser.close()
@@ -83,16 +86,17 @@ def indexBrowser(fldbk):
         fldbk.recordBrowser.setObjectName('recordBrowser')
         fldbk.recordBrowser.setWindowTitle('Browse index')
         fldbk.recordBrowser.setModal(0)
-        fldbk.recordBrowser.setWindowFlags(QtCore.Qt.Dialog | QtCore.Qt.WindowStaysOnTopHint)
+        fldbk.recordBrowser.setWindowFlags(QtCore.Qt.WindowType.Dialog | QtCore.Qt.WindowType.WindowStaysOnTopHint)
         fldbk.recordBrowser.show()
         fldbk.recordBrowser.raise_()
 
+
 def findForm(fldbk):
-    '''go to the example selected'''
+    """go to the example selected"""
     cursor = fldbk.iIndex.textCursor()
     if cursor.selectedText():
         cursor.clearSelection()
-    cursor.select(QtGui.QTextCursor.WordUnderCursor)
+    cursor.select(QtGui.QTextCursor.SelectionType.WordUnderCursor)
     selection = cursor.selectedText()
     try:
         tEntry = dataIndex.exDict[selection]
@@ -101,33 +105,35 @@ def findForm(fldbk):
     except KeyError:
         pass
         
+
 def makeSet(fldbk):
     cursor = fldbk.iIndex.textCursor()
     if cursor.selectedText():
         cursor.clearSelection()
-    cursor.select(QtGui.QTextCursor.LineUnderCursor)
+    cursor.select(QtGui.QTextCursor.SelectionType.LineUnderCursor)
     selection = cursor.selectedText()
-    list = selection.split('\t')
-    list = list[3:]
+    termlist = selection.split('\t')
+    termlist = termlist[3:]
     searchEngine = SearchEngine(fldbk)
-    for item in list:
+    for item in termlist:
         index = item.index(':')
         newItem = item[:index]
         hit = dataIndex.exDict[newItem]
         SearchEngine.displayExResults(searchEngine, hit)
     fldbk.tabWidget.setCurrentIndex(5)
     
+
 def updateWordForms(fldbk):
     cursor = fldbk.iIndex.textCursor()
     if cursor.selectedText():
         cursor.clearSelection()
-    cursor.select(QtGui.QTextCursor.LineUnderCursor)
+    cursor.select(QtGui.QTextCursor.SelectionType.LineUnderCursor)
     selection = cursor.selectedText()
-    list = selection.split('\t')
-    morphs = list[1]
-    analysis = list[2]
-    list = list[3:]
-    for item in list:
+    wordform = selection.split('\t')
+    morphs = wordform[1]
+    analysis = wordform[2]
+    wordform = wordform[3:]
+    for item in wordform:
         parts = item.split(':')
         ID = parts[0]
         stringIndex = parts[1]
@@ -144,11 +150,13 @@ def updateWordForms(fldbk):
         node.find('Mrph').text = morphNode
         node.find('ILEG').text = glossNode
 
+
 def findFirst(fldbk):
     if len(fldbk.iFindInIndex.text()) != 0:
-        if fldbk.iIndex.find(fldbk.iFindInIndex.text()) == False:
-            fldbk.iIndex.moveCursor(QtGui.QTextCursor.Start)
+        if not fldbk.iIndex.find(fldbk.iFindInIndex.text()):
+            fldbk.iIndex.moveCursor(QtGui.QTextCursor.MoveOperation.Start)
             fldbk.iIndex.find(fldbk.iFindInIndex.text())
+
 
 def sortNow(fldbk):
     index = fldbk.iSortingBox.currentIndex()
@@ -158,9 +166,10 @@ def sortNow(fldbk):
     indexString = fldbk.iIndex.toPlainText()
     sortIndex(fldbk, indexString, index)
     
-def sortIndex(fldbk,indexString,index=0):
-    '''have to trap this because fieldbook.py triggers this routine 
-    when it fills the Sorting bos on the index card (and there is no index to sort)'''
+
+def sortIndex(fldbk, indexString, index=0):
+    """have to trap this because fieldbook.py triggers this routine 
+    when it fills the Sorting bos on the index card (and there is no index to sort)"""
     try:
         indexList = indexString.split('\n')
     except AttributeError:
@@ -182,13 +191,14 @@ def sortIndex(fldbk,indexString,index=0):
     wordformCount = formattingHandlers.addCommas(len(indexList))
     fldbk.iWordformLbl.setText("Wordforms: " + str(wordformCount))
     
+
 def showDuplicates(fldbk):
     cursor = fldbk.iIndex.textCursor()
     document = fldbk.iIndex.document()
-    cursor.select(QtGui.QTextCursor.Document)
-    format = QtGui.QTextCharFormat()
-    format.setBackground(QtCore.Qt.white)
-    cursor.setCharFormat(format)    
+    cursor.select(QtGui.QTextCursor.SelectionType.Document)
+    charformat = QtGui.QTextCharFormat()
+    charformat.setBackground(QtCore.Qt.GlobalColor.white)
+    cursor.setCharFormat(charformat)
     if fldbk.iSortingBox.currentIndex() == -1:
         index = 0
     else:
@@ -203,16 +213,17 @@ def showDuplicates(fldbk):
         if lineItemsList[i][index] == lineItemsList[i+1][index]:
             firstBlock = document.findBlockByNumber(i).position()
             cursor.setPosition(firstBlock)
-            cursor.movePosition(QtGui.QTextCursor.NextBlock, QtGui.QTextCursor.KeepAnchor)
-            cursor.movePosition(QtGui.QTextCursor.EndOfBlock, QtGui.QTextCursor.KeepAnchor)
-            format = QtGui.QTextCharFormat()
-            format.setBackground(QtCore.Qt.yellow)
-            cursor.setCharFormat(format)           
+            cursor.movePosition(QtGui.QTextCursor.MoveOperation.NextBlock, QtGui.QTextCursor.MoveMode.KeepAnchor)
+            cursor.movePosition(QtGui.QTextCursor.MoveOperation.EndOfBlock, QtGui.QTextCursor.MoveMode.KeepAnchor)
+            charformat = QtGui.QTextCharFormat()
+            charformat.setBackground(QtCore.Qt.GlobalColor.yellow)
+            cursor.setCharFormat(charformat)
         i += 1
         
+
 def clearHighlighting(fldbk):
     cursor = fldbk.iIndex.textCursor()
-    cursor.select(QtGui.QTextCursor.Document)
-    format = QtGui.QTextCharFormat()
-    format.setBackground(QtCore.Qt.white)
-    cursor.setCharFormat(format)    
+    cursor.select(QtGui.QTextCursor.SelectionType.Document)
+    charformat = QtGui.QTextCharFormat()
+    charformat.setBackground(QtCore.Qt.GlobalColor.white)
+    cursor.setCharFormat(charformat)

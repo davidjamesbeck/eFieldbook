@@ -1,35 +1,40 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt6 import QtGui, QtWidgets, QtCore
 from ELFB import dataIndex, Orthographies, cardLoader, idGenerator, navLists, dictBuilder, metaDataTableFillers
 from ELFB import update, formattingHandlers, textOnlyBtns
 from ELFB.palettes import NewLexDialog, StyledInputDialog, SessionDate
 from ELFB.searchClasses import SearchEngine
 from xml.etree import ElementTree as etree
-import os, re,  copy
+import os
+import re
+import copy
 from os import path
 
-###### Menu action definitions #####
+"""Menu action definitions"""
+
 
 def okToContinue(fldbk):
     if dataIndex.unsavedEdit == 1:
         msgbox = QtWidgets.QMessageBox()
         msgbox.setText("Any unsaved changes will be lost.")
         msgbox.setInformativeText("Do you want to save changes?")
-        msgbox.setStandardButtons(QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
-        msgbox.setDefaultButton(QtWidgets.QMessageBox.Save)
-        reply = msgbox.exec_()
-        if reply == QtWidgets.QMessageBox.Discard:
+        msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Save | QtWidgets.QMessageBox.StandardButton.Discard | QtWidgets.QMessageBox.StandardButton.Cancel)
+        msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Save)
+        reply = msgbox.exec()
+        if reply == QtWidgets.QMessageBox.StandardButton.Discard:
             dataIndex.unsavedEdit = 0
             return True
-        elif reply == QtWidgets.QMessageBox.Save:
+        elif reply == QtWidgets.QMessageBox.StandardButton.Save:
             dataIndex.unsavedEdit = 0
             saveDb(fldbk)
             return True
-        elif reply == QtWidgets.QMessageBox.Cancel:
+        elif reply == QtWidgets.QMessageBox.StandardButton.Cancel:
             return False
     else:
         return True
 
-'''Application menu items'''
+
+"""Application menu items"""
+
 
 def quitApplication(fldbk):
     if okToContinue:
@@ -39,16 +44,17 @@ def quitApplication(fldbk):
         fldbk.settings.setValue('LastFile', dataIndex.sourceFile)
         QtWidgets.QApplication.quit()
 
+
 def showAbout(fldbk):
     GNUfile = QtCore.QFile(dataIndex.rootPath + '/ELFB/GNU.txt')
-    GNUfile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+    GNUfile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text)
     GNUstream = QtCore.QTextStream(GNUfile)
     details = GNUstream.readAll()
     GNUfile.close()
     fldbk.aboutBox = QtWidgets.QMessageBox(fldbk)
     fldbk.aboutBox.setDetailedText(details)
-    fldbk.aboutBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-    fldbk.aboutBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+    fldbk.aboutBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+    fldbk.aboutBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
     fldbk.aboutBox.setText("<center><b>Electronic Fieldbook 3.0</b></center>")
     fldbk.aboutBox.setInformativeText("<center><small>© 2016, David Beck</small></center>"
                                 "<p>This program is free software; you can redistribute it "
@@ -60,11 +66,14 @@ def showAbout(fldbk):
                                 "without even the implied warranty of <i>merchant ability "
                                 "or fitness for a particular purpose</i>. See the GNU General "
                                 "Public License below for more details.</p>")
-    fldbk.aboutBox.exec_()
+    fldbk.aboutBox.exec()
 
-'''File Menu items'''
 
-'''New file'''
+"""File Menu items"""
+
+"""New file"""
+
+
 def newDb(fldbk):
     if not okToContinue(fldbk):
         return
@@ -72,7 +81,10 @@ def newDb(fldbk):
     openDb(fldbk, blankDb)
     saveAsDb(fldbk, newDb)
 
-'''Open'''
+
+"""Open"""
+
+
 def openDb(fldbk, fname=None):
     fldbk.tabWidget.setCurrentIndex(0)
     currentFile = dataIndex.sourceFile
@@ -81,7 +93,7 @@ def openDb(fldbk, fname=None):
             return
         else:
             closeDb(fldbk)
-    if fname == None:
+    if fname is None:
         openFileDialog = QtWidgets.QFileDialog(fldbk)
         filePath = path.dirname(openFileDialog.directory().currentPath())
         fileDir = path.split(filePath)
@@ -91,23 +103,23 @@ def openDb(fldbk, fname=None):
         fname = fname[0]
     if fname:
         xmlFile = QtCore.QFile(fname)
-        xmlFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+        xmlFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text)
         xmlString = xmlFile.readAll()
         xmlFile.close()
         dataIndex.root = etree.XML(xmlString)
-        #rebuild the window contents using the new file
-        fldbk.tabWidget.setTabEnabled(1,1)
-        fldbk.tabWidget.setTabEnabled(2,1)
-        fldbk.tabWidget.setTabEnabled(3,1)
-        fldbk.tabWidget.setTabEnabled(4,1)
-        fldbk.tabWidget.setTabEnabled(5,1)
-        fldbk.tabWidget.setTabEnabled(6,1)
-        fldbk.tabWidget.setTabEnabled(7,1)
-        fldbk.tabWidget.setTabEnabled(8,1)
+        """rebuild the window contents using the new file"""
+        fldbk.tabWidget.setTabEnabled(1, 1)
+        fldbk.tabWidget.setTabEnabled(2, 1)
+        fldbk.tabWidget.setTabEnabled(3, 1)
+        fldbk.tabWidget.setTabEnabled(4, 1)
+        fldbk.tabWidget.setTabEnabled(5, 1)
+        fldbk.tabWidget.setTabEnabled(6, 1)
+        fldbk.tabWidget.setTabEnabled(7, 1)
+        fldbk.tabWidget.setTabEnabled(8, 1)
         dbTitle = dataIndex.root.attrib.get('Dbase')
         dbTitle = formattingHandlers.XMLtoRTF(dbTitle)
         fldbk.hTitle.setText(dbTitle)
-        fldbk.hTitle.setAlignment(QtCore.Qt.AlignHCenter)
+        fldbk.hTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
         lang = dataIndex.root.attrib.get('Language')
         fldbk.hLanguage.setPlainText(lang)
         family = dataIndex.root.attrib.get('Family')
@@ -118,7 +130,7 @@ def openDb(fldbk, fname=None):
         fldbk.hLocation.setPlainText(location)
         iso = dataIndex.root.attrib.get('ISO')
         fldbk.hISO.setPlainText(iso)
-        if dataIndex.sourceFile not in dataIndex.recentFile and dataIndex.sourceFile != None:
+        if dataIndex.sourceFile not in dataIndex.recentFile and dataIndex.sourceFile is not None:
             dataIndex.recentFile.insert(0, dataIndex.sourceFile)
         dataIndex.sourceFile = fname[len(dataIndex.homePath):]
         if fname[len(dataIndex.homePath):] in dataIndex.recentFile:
@@ -131,10 +143,10 @@ def openDb(fldbk, fname=None):
         navLists.navListBuilderLex(fldbk)
         navLists.navListBuilderText(fldbk)
         navLists.navListBuilderData(fldbk)
-        dictBuilder.exDictBuilder(fldbk)
-        dictBuilder.mediaDictBuilder(fldbk)
-        dictBuilder.speakerDictBuilder(fldbk)
-        dictBuilder.rschrDictBuilder(fldbk)
+        dictBuilder.exDictBuilder()
+        dictBuilder.mediaDictBuilder()
+        dictBuilder.speakerDictBuilder()
+        dictBuilder.rschrDictBuilder()
         metaDataTableFillers.fillRTable(fldbk)
         metaDataTableFillers.fillConsultantTable(fldbk)
         metaDataTableFillers.fillMediaTable(fldbk)
@@ -152,18 +164,21 @@ def openDb(fldbk, fname=None):
         except AttributeError:
             fldbk.lAutoBtn.setChecked(0)
 
-'''Close'''
+
+"""Close"""
+
+
 def closeDb(fldbk):
     if okToContinue(fldbk):
         fldbk.tabWidget.setCurrentIndex(0)
-        fldbk.tabWidget.setTabEnabled(1,0)
-        fldbk.tabWidget.setTabEnabled(2,0)
-        fldbk.tabWidget.setTabEnabled(3,0)
-        fldbk.tabWidget.setTabEnabled(4,0)
-        fldbk.tabWidget.setTabEnabled(5,0)
-        fldbk.tabWidget.setTabEnabled(6,0)
-        fldbk.tabWidget.setTabEnabled(7,0)
-        fldbk.tabWidget.setTabEnabled(8,0)
+        fldbk.tabWidget.setTabEnabled(1, 0)
+        fldbk.tabWidget.setTabEnabled(2, 0)
+        fldbk.tabWidget.setTabEnabled(3, 0)
+        fldbk.tabWidget.setTabEnabled(4, 0)
+        fldbk.tabWidget.setTabEnabled(5, 0)
+        fldbk.tabWidget.setTabEnabled(6, 0)
+        fldbk.tabWidget.setTabEnabled(7, 0)
+        fldbk.tabWidget.setTabEnabled(8, 0)
         dataIndex.lexDict.clear()
         dataIndex.textDict.clear()
         dataIndex.dataDict.clear()
@@ -217,32 +232,38 @@ def closeDb(fldbk):
     except AttributeError:
         pass
     fldbk.giveWindowTitle()
+
  
-'''Save'''
+"""Save"""
+
+
 def saveDb(fldbk):
-    if QtWidgets.QApplication.focusWidget() != None:
+    if QtWidgets.QApplication.focusWidget() is not None:
         fieldname = QtWidgets.QApplication.focusWidget().objectName()
         if len(fieldname) != 0:
             try:
                 update.setContents(fldbk, fieldname)
             except IndexError:
                 pass
-    if dataIndex.sourceFile != None:
+    if dataIndex.sourceFile is not None:
         saveDoc = etree.tostring(dataIndex.root, "unicode")
 #        saveFile = QtCore.QFile(dataIndex.sourceFile)
 #        saveFile.open(QtCore.QIODevice.ReadWrite)
-        saveFile = open(dataIndex.homePath + dataIndex.sourceFile, "w", encoding = "UTF-8")
+        saveFile = open(dataIndex.homePath + dataIndex.sourceFile, "w", encoding="UTF-8")
         saveFile.write(saveDoc)
         saveFile.close()
     else:
         saveAsDb(fldbk)
     dataIndex.unsavedEdit = 0
-    fldbk.settings.setValue('LastFile',dataIndex.sourceFile)
-    fldbk.settings.setValue('RecentFile',dataIndex.recentFile)
+    fldbk.settings.setValue('LastFile', dataIndex.sourceFile)
+    fldbk.settings.setValue('RecentFile', dataIndex.recentFile)
  
-'''Save As'''
+
+"""Save As"""
+
+
 def saveAsDb(fldbk, newDb=None):
-    if QtWidgets.QApplication.focusWidget() != None:
+    if QtWidgets.QApplication.focusWidget() is not None:
         fieldname = QtWidgets.QApplication.focusWidget().objectName()
         try:
             update.setContents(fldbk, fieldname)
@@ -254,7 +275,7 @@ def saveAsDb(fldbk, newDb=None):
     fileDir = path.split(filePath)
     if fileDir[1] == 'com.UNTProject.eFieldbook':
         openFileDialog.setDirectory(dataIndex.homePath)
-    if newDb != None:
+    if newDb is not None:
         openFileDialog.setDirectory(dataIndex.homePath)
         openFileDialog.selectFile('*.xml')
         fname = openFileDialog.getSaveFileName(parent, "Create database.")[0]
@@ -262,16 +283,17 @@ def saveAsDb(fldbk, newDb=None):
         fname = openFileDialog.getSaveFileName(parent, "Save As...")[0]
     if fname:
         saveDoc = etree.tostring(dataIndex.root, encoding="unicode")
-        saveFile = open(fname, "w", encoding = "UTF-8")
+        saveFile = open(fname, "w", encoding="UTF-8")
         saveFile.write(saveDoc)
         saveFile.close()
         dataIndex.unsavedEdit = 0
         dataIndex.sourceFile = fname[len(dataIndex.homePath):]
         if dataIndex.sourceFile not in dataIndex.recentFile:
             dataIndex.recentFile.insert(0, dataIndex.sourceFile)
-        fldbk.settings.setValue('LastFile',dataIndex.sourceFile)
-        fldbk.settings.setValue('RecentFile',dataIndex.recentFile)
+        fldbk.settings.setValue('LastFile', dataIndex.sourceFile)
+        fldbk.settings.setValue('RecentFile', dataIndex.recentFile)
         fldbk.giveWindowTitle()
+
 
 def clearCard(fldbk):
     fieldList = fldbk.tabWidget.currentWidget().findChildren(QtWidgets.QTextEdit)
@@ -291,45 +313,47 @@ def clearCard(fldbk):
     for item in listList:
         item.clear()
 
-'''Copy card'''
+
+"""Copy card"""
+
 
 def copyCard(fldbk):
     tDate = setSessionDate()
     dataIndex.unsavedEdit = 1
-    if fldbk.tabWidget.currentIndex() == 1: #lexicon card
+    if fldbk.tabWidget.currentIndex() == 1:  # lexicon card
         cardType = 'LX'
-        newID = idGenerator.generateID(cardType,dataIndex.lexDict)
+        newID = idGenerator.generateID(cardType, dataIndex.lexDict)
         ID = 'LexID'
-        elemListType = 'Lex[@LexID="%s"]'%dataIndex.currentCard
-        dict = dataIndex.lexDict
-    elif fldbk.tabWidget.currentIndex() == 2: #text card
+        elemListType = 'Lex[@LexID="%s"]' %dataIndex.currentCard
+        lexdict = dataIndex.lexDict
+    elif fldbk.tabWidget.currentIndex() == 2:  # text card
         cardType = 'TX'
-        newID = idGenerator.generateID(cardType,dataIndex.lexDict)
+        newID = idGenerator.generateID(cardType, dataIndex.lexDict)
         ID = 'TextID'
         elemListType = 'Text[@TextID="%s"]'%dataIndex.currentCard
-        dict = dataIndex.textDict
-    elif fldbk.tabWidget.currentIndex() == 3: #example card
+        lexdict = dataIndex.textDict
+    elif fldbk.tabWidget.currentIndex() == 3:  # example card
         cardType = 'EX'
-        newID = idGenerator.generateID(cardType,dataIndex.lexDict)
+        newID = idGenerator.generateID(cardType, dataIndex.lexDict)
         ID = 'ExID'
         elemListType = 'Ex[@ExID="%s"]'%dataIndex.currentCard
-        dict = dataIndex.exDict
-    elif fldbk.tabWidget.currentIndex() == 4: #dataset card
+        lexdict = dataIndex.exDict
+    elif fldbk.tabWidget.currentIndex() == 4:  # dataset card
         cardType = 'DS'
-        newID = idGenerator.generateID(cardType,dataIndex.lexDict)
+        newID = idGenerator.generateID(cardType, dataIndex.lexDict)
         ID = 'DsetID'
         elemListType = 'Dset[@DsetID="%s"]'%dataIndex.currentCard
-        dict = dataIndex.dataDict
-    newID = idGenerator.generateID(cardType,dict)
-    sourceCard = dict[dataIndex.currentCard]
+        lexdict = dataIndex.dataDict
+    newID = idGenerator.generateID(cardType, lexdict)
+    sourceCard = lexdict[dataIndex.currentCard]
     newElem = copy.deepcopy(sourceCard)
     newElem.set(ID, newID)
-    newElem.set('Date',tDate)
-    newElem.set('Update',tDate) 
+    newElem.set('Date', tDate)
+    newElem.set('Update', tDate) 
     k = dataIndex.root.find(elemListType)
     i = list(dataIndex.root).index(k) + 1
-    dataIndex.root.insert(i,newElem)
-    ##delink sounds and media files##
+    dataIndex.root.insert(i, newElem)
+    """delink sounds and media files"""
     soundList = newElem.findall('Sound')
     if len(soundList) != 0:
         for sound in soundList:
@@ -344,13 +368,13 @@ def copyCard(fldbk):
         dataIndex.root.set('LastLex', newID)
         fldbk.lSound.Recordings.clear()
         fldbk.lSound.SoundFileMeta.clear()
-        ##clear derivations##
+        """clear derivations"""
         fldbk.lDerivatives.clear()
         drvnList = newElem.findall('Drvn')
         if len(drvnList) != 0:
             for drvn in drvnList:
                 newElem.remove(drvn)
-        ##clear root##
+        """clear root"""
         root = newElem.find('Root')
         try:
             newElem.remove(root)
@@ -358,8 +382,8 @@ def copyCard(fldbk):
             fldbk.lBreakLnkBtn.setEnabled(0)
         except TypeError:
             pass
-        ##deal with existing homonyms##
-        if newElem.attrib.get('Hom') != None:
+        """deal with existing homonyms"""
+        if newElem.attrib.get('Hom') is not None:
             syn = newElem.attrib.get('Hom')
             synList = syn.split(', ')
             synList.append(newID)
@@ -384,9 +408,12 @@ def copyCard(fldbk):
         dataIndex.currentCard = newID
         dataIndex.lastText = newID
         dataIndex.root.set('lastEx', newID)
-        if newElem.attrib['Links'] != None:
-            del newElem.attrib['Links']
-            fldbk.eLinksList.clear()
+        try:
+            if newElem.attrib['Links'] is not None:
+                del newElem.attrib['Links']
+                fldbk.eLinksList.clear()
+        except KeyError:
+            pass
         fldbk.eSound.Recordings.clear()
         fldbk.eSound.SoundFileMeta.clear()
     elif cardType == 'DS':
@@ -400,17 +427,19 @@ def copyCard(fldbk):
         fldbk.dSound.Recordings.clear()
         fldbk.dSound.SoundFileMeta.clear()
         
-'''New card'''
+
+"""New card"""
+
 
 def newCard(fldbk):
     today = SessionDate.dateFinder()
     tDate = setSessionDate()
     dataIndex.unsavedEdit = 1
-    if fldbk.tabWidget.currentIndex() == 1: #lexicon card
-        newID = idGenerator.generateID('LX',dataIndex.lexDict)
+    if fldbk.tabWidget.currentIndex() == 1:  # lexicon card
+        newID = idGenerator.generateID('LX', dataIndex.lexDict)
         newCdWindow = NewLexDialog.NewLexDialog(fldbk)
         navBar = fldbk.lNavBar
-        if newCdWindow.exec_():
+        if newCdWindow.exec():
             clearCard(fldbk)
             fldbk.lL1Definition.clear() 
             fldbk.lL2Definition.clear() 
@@ -419,32 +448,32 @@ def newCard(fldbk):
             fldbk.lSound.SoundFileMeta.clear()
             fldbk.lDoneBtn.setChecked(0)
             data = newCdWindow.getData()
-            '''returns a list [speaker,researcher,entry word,gloss]'''
-            newNode = etree.Element('Lex',{"LexID":newID})
-            newNode.set('Date',tDate)
-            newNode.set('Update',today)
-            newNode.set('Spkr',data[0])
-            newNode.set('Rschr',data[1])
+            """returns a list [speaker, researcher, entry word, gloss]"""
+            newNode = etree.Element('Lex', {"LexID":newID})
+            newNode.set('Date', tDate)
+            newNode.set('Update', today)
+            newNode.set('Spkr', data[0])
+            newNode.set('Rschr', data[1])
             newNode.set('Done', '0')
-            newOrth = etree.SubElement(newNode,'Orth')
+            newOrth = etree.SubElement(newNode, 'Orth')
             newOrth.text = data[2]
-            '''generate IPA node if Auto checked'''
-            if fldbk.lAutoBtn.isChecked() == True:
+            """generate IPA node if Auto checked"""
+            if fldbk.lAutoBtn.isChecked():
                 IPA = Orthographies.toIPA(data[2])
-                newIPA = etree.SubElement(newNode,'IPA')
+                newIPA = etree.SubElement(newNode, 'IPA')
                 newIPA.text = IPA
                 fldbk.lIPA.setText(IPA)
-            newDef = etree.SubElement(newNode,'Def',{'Index':'1'})
-            newL1 = etree.SubElement(newDef,'L1')
+            newDef = etree.SubElement(newNode, 'Def', {'Index':'1'})
+            newL1 = etree.SubElement(newDef, 'L1')
             newL1.text = data[3]
             fldbk.lSource.setPlainText(data[0])
             fldbk.lResearcher.setPlainText(data[1])
             fldbk.lDate.setPlainText(tDate)
             fldbk.lUpdated.setPlainText(tDate)
             fldbk.lOrthography.setText(data[2])
-            '''if new word in data[2] is homophonous with another entry'''
+            """if new word in data[2] is homophonous with another entry"""
             homList = fldbk.lLexNav.findChildren(QtGui.QStandardItem, data[2])
-            if homList != None:
+            if homList is not None:
                 homList.append(newID)
                 update.manageHomonyms(homList)
             cardLoader.loadDefinitions(fldbk, newNode)
@@ -454,7 +483,7 @@ def newCard(fldbk):
                 if badID == 'LX00':
                     dataIndex.root.remove(badNode)
                     del dataIndex.lexDict[badID]
-            dataIndex.root.insert(1,newNode)
+            dataIndex.root.insert(1, newNode)
             dataIndex.lexDict[newID] = newNode
             navLists.navListBuilderLex(fldbk)
             cardLoader.resetNavBars(fldbk.lLexNav, newID)
@@ -463,18 +492,18 @@ def newCard(fldbk):
             dataIndex.lexDict[newID] = newNode
             dataIndex.root.set('LastLex', newID)
 
-    if fldbk.tabWidget.currentIndex() == 2: # text card
+    if fldbk.tabWidget.currentIndex() == 2:  # text card
         textOnlyBtns.enterNewText(fldbk)
         navBar = fldbk.tNavBar
         
-    if fldbk.tabWidget.currentIndex() == 3: # example card
+    if fldbk.tabWidget.currentIndex() == 3:  # example card
         navBar = fldbk.eNavBar
         fldbk.eAnalysis.clear()
         fldbk.eAnalysis.setColumnCount(2)
         fldbk.eAnalysis.setRowCount(2)
         lastHeadWidget = QtWidgets.QTableWidgetItem(1001)
         lastHeadWidget.setText('+')
-        fldbk.eAnalysis.setHorizontalHeaderItem(1,lastHeadWidget)
+        fldbk.eAnalysis.setHorizontalHeaderItem(1, lastHeadWidget)
         fldbk.eAnalysis.resizeColumnToContents(1)
         rowHeader = QtWidgets.QTableWidgetItem(1001)
         rowHeader.setText('Morph')   
@@ -484,18 +513,18 @@ def newCard(fldbk):
         fldbk.eAnalysis.setVerticalHeaderItem(1, rowHeader)
         clearCard(fldbk)
         fldbk.eLinksList.clear()
-        newID = idGenerator.generateID('EX',dataIndex.exDict)
-        newNode = etree.Element('Ex',{"ExID":newID})
-        newNode.set('Date',tDate)
-        newNode.set('Update',today)
-        if dataIndex.lastRschr != None and len(dataIndex.lastRschr) != 0:
-            newNode.set('Rschr',dataIndex.lastRschr)
+        newID = idGenerator.generateID('EX', dataIndex.exDict)
+        newNode = etree.Element('Ex', {"ExID":newID})
+        newNode.set('Date', tDate)
+        newNode.set('Update', today)
+        if dataIndex.lastRschr is not None and len(dataIndex.lastRschr) != 0:
+            newNode.set('Rschr', dataIndex.lastRschr)
         else:
-            newNode.set('Rschr','YYY')
-        if dataIndex.lastSpeaker != None and len(dataIndex.lastSpeaker) != 0:
-            newNode.set('Spkr',dataIndex.lastSpeaker)
+            newNode.set('Rschr', 'YYY')
+        if dataIndex.lastSpeaker is not None and len(dataIndex.lastSpeaker) != 0:
+            newNode.set('Spkr', dataIndex.lastSpeaker)
         else:
-            newNode.set('Spkr','XX')
+            newNode.set('Spkr', 'XX')
         etree.SubElement(newNode, 'Line')
         etree.SubElement(newNode, 'Mrph')
         etree.SubElement(newNode, 'ILEG')
@@ -509,19 +538,19 @@ def newCard(fldbk):
             if badID == 'EX00':
                 dataIndex.root.remove(badNode)
                 del dataIndex.exDict[badID]
-        dataIndex.root.insert(i,newNode)
+        dataIndex.root.insert(i, newNode)
         dataIndex.currentCard = newID
         dataIndex.exDict[newID] = newNode
         dataIndex.lastEx = newID
         dataIndex.root.set('lastEx', newID)
         cardLoader.loadExCard(newNode)
        
-    if fldbk.tabWidget.currentIndex() == 4: # dataset card
+    if fldbk.tabWidget.currentIndex() == 4:  # dataset card
         nameBox = StyledInputDialog.StyledInputDialog(fldbk)
         nameBox.setWindowTitle('New dataset.')
         nameBox.inputLabel.setText('Give the dataset a name.')
         navBar = fldbk.dNavBar
-        if nameBox.exec_():
+        if nameBox.exec():
             title = nameBox.returnInput()
             newNode = newDataset(fldbk, title)
             clearCard(fldbk)
@@ -530,20 +559,21 @@ def newCard(fldbk):
     navBar.stack.append(dataIndex.currentCard)
     navBar.index = navBar.index + 1
     
+
 def newDataset(fldbk, title, newText=''):
-    #1 create DSNode
+    """1 create DSNode"""
     tDate = setSessionDate()
     today = SessionDate.dateFinder()
-    newID = idGenerator.generateID('DS',dataIndex.dataDict)
+    newID = idGenerator.generateID('DS', dataIndex.dataDict)
     newNode = etree.Element('Dset')
     newNode.set('DsetID', newID)
     newNode.set('Date',  tDate)
     newNode.set('Update', today)
-    if dataIndex.lastSpeaker != None:
+    if dataIndex.lastSpeaker is not None:
         newNode.set('Spkr', dataIndex.lastSpeaker)
     else:
         newNode.set('Spkr', '')
-    if dataIndex.lastRschr != None:
+    if dataIndex.lastRschr is not None:
         newNode.set('Rschr', dataIndex.lastRschr)
     else:
         newNode.set('Rschr', '')
@@ -551,7 +581,7 @@ def newDataset(fldbk, title, newText=''):
     etree.SubElement(newNode, 'Data')
     newNode.find('Title').text = title
     newNode.find('Data').text = newText
-    #2 add new DS to XML and dataDict and set current DSet
+    """2 add new DS to XML and dataDict and set current DSet"""
     dataIndex.dataDict[newID] = newNode
     dataIndex.lastDset = newID
     dList = list(dataIndex.dataDict.keys())
@@ -567,8 +597,8 @@ def newDataset(fldbk, title, newText=''):
         if badID == 'DS00':
             dataIndex.root.remove(badNode)
             del dataIndex.dataDict[badID]
-    dataIndex.root.insert(i,newNode)
-    #3 add new DS to listnav
+    dataIndex.root.insert(i, newNode)
+    """3 add new DS to listnav"""
     navLists.navListBuilderData(fldbk)
     cardLoader.resetNavBars(fldbk.dDataNav, newID)
     dataIndex.currentCard = newID  
@@ -576,6 +606,7 @@ def newDataset(fldbk, title, newText=''):
     dataIndex.root.set('LastDset', newID)    
     return newNode
         
+
 def delCard(fldbk):
     target = dataIndex.currentCard
     if fldbk.tabWidget.currentIndex() == 1:
@@ -594,33 +625,33 @@ def delCard(fldbk):
         cardType = "dataset"
         badNode = dataIndex.dataDict[target]
         navBar = fldbk.dNavBar
-    if cardType == "example" and badNode.attrib.get('SourceText') != None:
+    if cardType == "example" and badNode.attrib.get('SourceText') is not None:
         textTitle = "<i>" + fldbk.eSourceText.toPlainText() + "</i>"
         msgbox = QtWidgets.QMessageBox()
-        msgbox.setIcon(QtWidgets.QMessageBox.Critical)
+        msgbox.setIcon(QtWidgets.QMessageBox.Icon.Critical)
         msgbox.setText("Line from text.")
         msgbox.setInformativeText('This is a line from the text %s. Please edit texts from the <b>Texts</b> tab.' %textTitle)
-        msgbox.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msgbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-        reply = msgbox.exec_()
+        msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+        msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+        reply = msgbox.exec()
         return
     else:
         msgbox = QtWidgets.QMessageBox()
-        msgbox.setIcon(QtWidgets.QMessageBox.Warning)
+        msgbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
         msgbox.setText("Delete card?")
         msgbox.setInformativeText("This will remove the current %s and all cross-references to it from the database." %cardType)
-        msgbox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
-        msgbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-        reply = msgbox.exec_()
-        if reply == QtWidgets.QMessageBox.Ok:
+        msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok | QtWidgets.QMessageBox.StandardButton.Cancel)
+        msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+        reply = msgbox.exec()
+        if reply == QtWidgets.QMessageBox.StandardButton.Ok:
             if cardType == "lexical entry":
-                if badNode.attrib.get('Hom') != None:
+                if badNode.attrib.get('Hom') is not None:
                     homs = badNode.attrib.get('Hom')
                     homList = homs.split(', ')
                     update.manageHomonyms(homList)
                 if len(dataIndex.lexDict) != 1:
                     for i in range(fldbk.lLexNav.model().rowCount()):
-                        if fldbk.lLexNav.model().index(i,0).data(32) == target:
+                        if fldbk.lLexNav.model().index(i, 0).data(32) == target:
                             fldbk.lLexNav.model().removeRow(i)
                             break                     
                     update.cleanUpIDs(target)
@@ -636,7 +667,7 @@ def delCard(fldbk):
                     node.set("LexID", target)
                     node.set("Date", tDate)
                     node.set("Update", today)
-                    etree.SubElement(node,"Orth")
+                    etree.SubElement(node, "Orth")
                     defNode = etree.SubElement(node, "Def", attrib={"Index" : "1"})
                     dummyDef = etree.SubElement(defNode, "L1")
                     dummyDef.text = 'new word'
@@ -650,7 +681,7 @@ def delCard(fldbk):
                     purgeTexts(target)
                     del dataIndex.textDict[target]
                     for i in range(fldbk.tTextNav.model().rowCount()):
-                        if fldbk.tTextNav.model().index(i,0).data(32) == target:
+                        if fldbk.tTextNav.model().index(i, 0).data(32) == target:
                             fldbk.tTextNav.model().removeRow(i)
                             break
                     update.cleanUpIDs(target)
@@ -663,14 +694,14 @@ def delCard(fldbk):
                     while fldbk.textLayout.count():
                         item = fldbk.textLayout.takeAt(0)
                         widget = item.widget()
-                        if widget != None:
+                        if widget is not None:
                             widget.deleteLater()
                     node = dataIndex.textDict[target]
                     node.clear()
                     node.set("TextID", target)
                     node.set("Date", tDate)
                     node.set("Update", today)
-                    dummyTitle = etree.SubElement(node,"Title")
+                    dummyTitle = etree.SubElement(node, "Title")
                     dummyTitle.text = "new text"
                     fldbk.tTitle.setText(dummyTitle.text)
                     fldbk.tNewTitle.setText(dummyTitle.text)
@@ -694,16 +725,16 @@ def delCard(fldbk):
                     node.set("ExID", target)
                     node.set("Date", tDate)
                     node.set("Update", today)
-                    etree.SubElement(node,"Line")
-                    etree.SubElement(node,"Mrph")
-                    etree.SubElement(node,"ILEG")
-                    etree.SubElement(node,"L1Gloss")
+                    etree.SubElement(node, "Line")
+                    etree.SubElement(node, "Mrph")
+                    etree.SubElement(node, "ILEG")
+                    etree.SubElement(node, "L1Gloss")
                     dataIndex.currentCard = target
             elif cardType == "dataset":
                 if len(dataIndex.dataDict) != 1:
                     del dataIndex.dataDict[target]
                     for i in range(fldbk.dDataNav.model().rowCount()):
-                        if fldbk.dDataNav.model().index(i,0).data(32) == target:
+                        if fldbk.dDataNav.model().index(i, 0).data(32) == target:
                             fldbk.dDataNav.model().removeRow(i)
                             break
                     update.cleanUpIDs(target)
@@ -717,8 +748,8 @@ def delCard(fldbk):
                     node.set("DSetID", target)
                     node.set("Date", tDate)
                     node.set("Update", today)
-                    etree.SubElement(node,"Title")
-                    etree.SubElement(node,"Data")
+                    etree.SubElement(node, "Title")
+                    etree.SubElement(node, "Data")
                     currentProxyIndex = fldbk.dDataNav.currentIndex()
                     currentSourceIndex = fldbk.dDataNav.model().mapToSource(currentProxyIndex)
                     fldbk.dDataNav.model().sourceModel().itemFromIndex(currentSourceIndex).setText("") 
@@ -730,16 +761,17 @@ def delCard(fldbk):
             navBar.stack.remove(target)
             navBar.index = navBar.index - 1
 
+
 def purgeTexts(badTextID):
     msgbox = QtWidgets.QMessageBox()
-    msgbox.setIcon(QtWidgets.QMessageBox.Question)
+    msgbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
     msgbox.setText("Remove examples?")
     msgbox.setInformativeText("Remove all the lines in this text from the database as well?")
-    msgbox.setStandardButtons(QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
-    msgbox.setDefaultButton(QtWidgets.QMessageBox.Yes)
-    reply = msgbox.exec_()
-    if reply == QtWidgets.QMessageBox.Yes:
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+    msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+    msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Yes)
+    reply = msgbox.exec()
+    if reply == QtWidgets.QMessageBox.StandardButton.Yes:
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         node = dataIndex.textDict[badTextID]
         lineList = node.findall('Ln')
         for line in lineList:
@@ -747,7 +779,7 @@ def purgeTexts(badTextID):
             badNode = dataIndex.root.find('Ex[@ExID="%s"]'%exID)
             dataIndex.root.remove(badNode)
             update.cleanUpIDs(exID)
-        if dataIndex.root.find('Ex') == None:
+        if dataIndex.root.find('Ex') is None:
             soloEx = etree.Element('Ex', {'ExID':'EX001',  'Date':'2000-01-01',  'Update':"2015-05-07"})
             etree.SubElement(soloEx, 'Line')
             etree.SubElement(soloEx, 'Mrph')
@@ -758,10 +790,11 @@ def purgeTexts(badTextID):
             dataIndex.root.insert(d, soloEx)
         QtWidgets.QApplication.restoreOverrideCursor()
 
+
 def updateRecentFile(fldbk):
-    '''update for Open Recent file menu'''
+    """update for Open Recent file menu"""
     fileList = dataIndex.recentFile
-    if fileList == None:
+    if fileList is None:
         return
     topMenu = fldbk.menuBar
     for item in topMenu.children():
@@ -777,7 +810,7 @@ def updateRecentFile(fldbk):
         if tPath != dataIndex.sourceFile:
             if QtCore.QFile.exists(dataIndex.homePath + tPath):
                 shortName = os.path.basename(tPath)
-                shortNameList.append((shortName,tPath))
+                shortNameList.append((shortName, tPath))
     if len(shortNameList) == 0:
         recentMenu.setEnabled(False)
         return
@@ -787,19 +820,21 @@ def updateRecentFile(fldbk):
         menuAction = recentMenu.addAction(
                 '{0}'.format(shortName)
                 )
-        menuAction.triggered.connect( lambda: openRecent(fldbk))
+        menuAction.triggered.connect(lambda: openRecent(fldbk))
         menuAction.setObjectName(tPath)
-        #TODO: need to add a path to file names that are duplicated in the list
+        """TODO: need to add a path to file names that are duplicated in the list"""
+
 
 def openRecent(fldbk):
     fname = dataIndex.homePath + QtCore.QObject.objectName(fldbk.sender())
     openDb(fldbk, fname)
 
+
 def findByID(fldbk):
     inputBox = StyledInputDialog.StyledInputDialog(fldbk)
     inputBox.setWindowTitle('Find by ID')
     inputBox.inputLabel.setText('Enter unique ID for entry.')
-    if inputBox.exec_():
+    if inputBox.exec():
         ID = inputBox.returnInput()
     if ID[0] == 'L':
         try:
@@ -825,21 +860,24 @@ def findByID(fldbk):
     else:
         QtWidgets.QApplication.beep()
 
-'''Search menu'''
 
-'''Find'''
+"""Search menu"""
+
+"""Find"""
+
 
 def findMenu(fldbk):
-    target = QtWidgets.QInputDialog().getText(fldbk, "Find", "Enter text to find." )
-    if target[1] == True and len(target[0]) != 0: 
-        regExp = QtCore.QRegularExpression(target[0], QtCore.QRegularExpression.CaseInsensitiveOption)
-        hits = searchXML(fldbk, regExp)
+    target = QtWidgets.QInputDialog().getText(fldbk, "Find", "Enter text to find.")
+    if target[1] is True and len(target[0]) != 0:
+        regExp = QtCore.QRegularExpression(target[0], QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption)
+        hits = searchXML(regExp)
         if hits:
             dataIndex.searchResults = hits
             dataIndex.searchPointer = 1
     
-def findAgain(fldbk):
-    if dataIndex.searchResults != None:
+
+def findAgain():
+    if dataIndex.searchResults is not None:
         dataIndex.searchPointer += 1
         if dataIndex.searchPointer > len(dataIndex.searchResults):
             dataIndex.searchPointer = 1
@@ -851,21 +889,23 @@ def findAgain(fldbk):
         elif tCard[0] == 'E':
             cardLoader.loadExCard(dataIndex.exDict[tCard])
     
+
 def fuzzyFind(fldbk):
-    target = QtWidgets.QInputDialog().getText(fldbk, "Fuzzy find", "Enter text to find. Accents, caps,\n"
-                                                    "and diacrits will be ignored." )
-    if target[1] == True and len(target[0]) != 0:
+    target = QtWidgets.QInputDialog().getText(fldbk, "Fuzzy find", "Enter text to find. Accents, caps, \n"
+                                                    "and diacrits will be ignored.")
+    if target[1] is True and len(target[0]) != 0:
         lookFor = target[0]
         lookFor = SearchEngine.removeDiacrits(SearchEngine, lookFor)
         lookFor = SearchEngine.removeAccents(SearchEngine, lookFor)  
-        regExp = QtCore.QRegularExpression(lookFor, QtCore.QRegularExpression.CaseInsensitiveOption)  
-        hits = searchXML(fldbk, regExp)
+        regExp = QtCore.QRegularExpression(lookFor, QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption)  
+        hits = searchXML(regExp)
         if hits:
             dataIndex.fuzzyResults = hits
             dataIndex.fuzzyPointer = 1
 
-def fuzzyAgain(fldbk):
-    if dataIndex.fuzzyResults != None:
+
+def fuzzyAgain():
+    if dataIndex.fuzzyResults is not None:
         dataIndex.fuzzyPointer += 1
         if dataIndex.fuzzyPointer > len(dataIndex.fuzzyResults):
             dataIndex.fuzzyPointer = 1
@@ -877,7 +917,8 @@ def fuzzyAgain(fldbk):
         elif tCard[0] == 'E':
             cardLoader.loadExCard(dataIndex.exDict[tCard])
 
-def searchXML(fldbk, regExp):
+
+def searchXML(regExp):
     resultsDict = {}
     matchObject = QtCore.QRegularExpressionMatch()
     if dataIndex.currentCard[0] == "L":
@@ -912,13 +953,14 @@ def searchXML(fldbk, regExp):
     else:
         notFoundBox = QtWidgets.QMessageBox()
         notFoundBox.setText('Text not found.')
-        notFoundBox.exec_()
+        notFoundBox.exec()
         return False
+
 
 def lookUp(fldbk):
     inputBox = QtWidgets.QInputDialog()
     result = inputBox.getText(fldbk, 'Look up … ?', 'Type search term in the box.')
-    if result[1] == True:
+    if result[1] is True:
         tTerm = result[0]
     else:
         return
@@ -949,18 +991,19 @@ def lookUp(fldbk):
             if child.findtext('Orth') == tTerm: 
                 tEntry = child
                 break
-        if tEntry != None:
+        if tEntry is not None:
             cardLoader.loadLexCard(tEntry)
             fldbk.tabWidget.setCurrentIndex(1)
             
-    if tEntry == None:
+    if tEntry is None:
         QtWidgets.QApplication.beep()
 
+
 def setSessionDate():
-    '''sets a default date for new cards'''
-    if dataIndex.sessionDate == None:
+    """sets a default date for new cards"""
+    if dataIndex.sessionDate is None:
         dialog = SessionDate.SessionDateManager()
-        if dialog.exec_():
+        if dialog.exec():
             tDate = dialog.getSessionDate()
             dataIndex.sessionDate = tDate
             dataIndex.fldbk.actionSession_Date.setChecked(1)
@@ -971,12 +1014,14 @@ def setSessionDate():
     if dataIndex.sessionDate == 'today':
         tDate = SessionDate.dateFinder()
         dataIndex.fldbk.actionSession_Date.setChecked(0)
+    dataIndex.lastDate = dataIndex.sessionDate
     return tDate
 
+
 def setSessionSpeaker(p0):
-    if p0 == True:
+    if p0 is True:
         dialog = SessionDate.SessionSpeakerManager()
-        if dialog.exec_():
+        if dialog.exec():
             speaker = dialog.getSessionSpeaker()
             dataIndex.sessionSpeaker = speaker
             dataIndex.lastSpeaker = speaker
@@ -984,10 +1029,11 @@ def setSessionSpeaker(p0):
         else:
             dataIndex.sessionSpeaker = None
     
+
 def setSessionResearcher(p0):
-    if p0 == True:
+    if p0 is True:
         dialog = SessionDate.SessionResearcherManager()
-        if dialog.exec_():
+        if dialog.exec():
             researcher = dialog.getSessionResearcher()
             dataIndex.sessionResearcher = researcher
             dataIndex.lastRschr = researcher

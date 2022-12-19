@@ -4,10 +4,10 @@
 Module implementing navigation bar for data cards.
 """
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 from ELFB import dataIndex, cardLoader
-#from xml.etree import ElementTree as etree
-#import re
+# from xml.etree import ElementTree as etree
+# import re
 from .Ui_NavBar import Ui_NavBar
 
 
@@ -15,29 +15,25 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
     """
     Class documentation goes here.
     """
+
     def __init__(self, parent=None):
-        """
-        Constructor
-        
-        @param parent reference to the parent widget
-        @type QWidget
-        """
+
         super(NavBar, self).__init__(parent)
         self.setupUi(self)
         self.stack = []
         self.index = 0
         controlBar = ':ControlPanel.png'
         self.ControlBar.setStyleSheet('QToolButton {background: transparent;'
-                'min-width: 32px;'
-                'min-height: 32px;'
-                'max-width: 32px;'
-                'max-height: 32px;'
-                'padding: 0px;}'
-            'QFrame {border: 1px solid gray; '
-                'border: 0px solid black;'
-                'border-radius: 8px;'
-                'padding: 0px;'
-                'background-image: url("%s");}' %controlBar)
+                                      'min-width: 32px;'
+                                      'min-height: 32px;'
+                                      'max-width: 32px;'
+                                      'max-height: 32px;'
+                                      'padding: 0px;}'
+                                      'QFrame {border: 1px solid gray; '
+                                      'border: 0px solid black;'
+                                      'border-radius: 8px;'
+                                      'padding: 0px;'
+                                      'background-image: url("%s");}' % controlBar)
         navIconSize = QtCore.QSize(32, 32)
         rtnIcon = QtGui.QIcon(':RtnBtn.png')
         self.RtnBtn.setIcon(rtnIcon)
@@ -57,7 +53,7 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
         endIcon = QtGui.QIcon(':EndBtn.png')
         self.EndBtn.setIcon(endIcon)
         self.EndBtn.setIconSize(navIconSize)
-        
+
     def goPrev(self):
         navBar = self.navIndex
         try:
@@ -65,60 +61,63 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
                 current = navBar.model().rowCount() - 1
             else:
                 current = navBar.currentIndex().row() - 1
-            navBar.setCurrentIndex(navBar.model().index(current,0))
-            navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+            navBar.setCurrentIndex(navBar.model().index(current, 0))
+            navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
             data = navBar.currentIndex().data(32)
             targetCard = self.dict[data]
             self.loader(targetCard)
         except AttributeError:
-            pass 
-        
+            pass
+
     def goNext(self):
         navBar = self.navIndex
         if navBar.currentIndex().row() == navBar.model().rowCount() - 1:
             current = 0
         else:
             current = navBar.currentIndex().row() + 1
-        navBar.setCurrentIndex(navBar.model().index(current,0))
-        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+        navBar.setCurrentIndex(navBar.model().index(current, 0))
+        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
         data = navBar.currentIndex().data(32)
-        targetCard = self.dict[data]   
+        targetCard = self.dict[data]
         self.loader(targetCard)
-        
+
     def goFirstCard(self):
         navBar = self.navIndex
-        data = navBar.model().index(0,0).data(32)
+        data = navBar.model().index(0, 0).data(32)
         targetCard = self.dict[data]
-        navBar.setCurrentIndex(navBar.model().index(0,0))
-        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
-        self.loader(targetCard)    
-        
+        navBar.setCurrentIndex(navBar.model().index(0, 0))
+        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
+        self.loader(targetCard)
+
     def goLastCard(self):
         navBar = self.navIndex
         lastItem = navBar.model().rowCount() - 1
-        data = navBar.model().index(lastItem,0).data(32)
+        data = navBar.model().index(lastItem, 0).data(32)
         targetCard = self.dict[data]
-        navBar.setCurrentIndex(navBar.model().index(lastItem,0))
-        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
-        self.loader(targetCard)    
-        
+        navBar.setCurrentIndex(navBar.model().index(lastItem, 0))
+        navBar.scrollTo(navBar.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
+        self.loader(targetCard)
+
     def goBackwards(self):
-        '''NavBtn prevents this operation changing the stack'''
+        """NavBtn prevents this operation changing the stack"""
         if len(self.stack) <= 1:
             return
         if self.index == 0:
             return
         self.index = self.index - 1
-        data = self.stack[self.index]
+        try:
+            data = self.stack[self.index]
+        except IndexError:
+            data = self.index
         if data == dataIndex.currentCard:
             self.index = self.index - 1
             data = self.stack[self.index]
         targetCard = self.dict[data]
         navBtn = True
         self.loader(targetCard, navBtn)
-        
+
     def goForward(self):
-        '''NavBtn prevents this operation changing the stack'''
+        """NavBtn prevents this operation changing the stack"""
         if len(self.stack) <= 1:
             return
         if self.index == len(self.stack) - 1:
@@ -131,14 +130,14 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
         targetCard = self.dict[data]
         navBtn = True
         self.loader(targetCard, navBtn)
-        
+
     @QtCore.pyqtSlot()
     def on_RtnBtn_released(self):
         """
         go back in the queue of recent cards
         """
         self.goBackwards()
-        
+
     @QtCore.pyqtSlot()
     def on_PrevBtn_released(self):
         """
@@ -146,7 +145,7 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
         (as sorted in the nav bar)
         """
         self.goPrev()
-        
+
     @QtCore.pyqtSlot()
     def on_BeginBtn_released(self):
         """
@@ -161,7 +160,7 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
         go to the next data card in the queue of recent cards
         """
         self.goForward()
-        
+
     @QtCore.pyqtSlot()
     def on_NextBtn_released(self):
         """
@@ -169,7 +168,7 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
         (as sorted in the nav bar)
         """
         self.goNext()
-        
+
     @QtCore.pyqtSlot()
     def on_EndBtn_released(self):
         """
@@ -178,10 +177,11 @@ class NavBar(QtWidgets.QWidget, Ui_NavBar):
         """
         self.goLastCard()
 
+
 class ExampleNavBar(NavBar, Ui_NavBar):
-    
+
     def goPrev(self):
-        currentID = dataIndex.currentCard               
+        currentID = dataIndex.currentCard
         i = 1
         for child in dataIndex.root.iter('Ex'):
             if child.attrib.get('ExID') != currentID:
@@ -194,7 +194,7 @@ class ExampleNavBar(NavBar, Ui_NavBar):
                     prevID = currentID
         targetCard = dataIndex.exDict[prevID]
         cardLoader.loadExCard(targetCard)
-        
+
     def goNext(self):
         currentID = dataIndex.currentCard
         getNextCard = 0
@@ -211,13 +211,13 @@ class ExampleNavBar(NavBar, Ui_NavBar):
             nextID = dataIndex.root.find('Ex').attrib.get('ExID')
             targetCard = dataIndex.exDict[nextID]
         cardLoader.loadExCard(targetCard)
-        
+
     def goFirstCard(self):
         egList = list(dataIndex.exDict.keys())
         targetCard = dataIndex.exDict[egList[0]]
         cardLoader.loadExCard(targetCard)
-        
+
     def goLastCard(self):
         egList = list(dataIndex.exDict.keys())
-        targetCard = dataIndex.exDict[egList[len(dataIndex.exDict)-1]]
+        targetCard = dataIndex.exDict[egList[len(dataIndex.exDict) - 1]]
         cardLoader.loadExCard(targetCard)

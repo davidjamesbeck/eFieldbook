@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/LinkToLexicon.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_EntryManager(object):
     def setupUi(self, EntryManager):
@@ -19,14 +19,14 @@ class Ui_EntryManager(object):
         self.groupBox.setObjectName("groupBox")
         self.lexList = QtWidgets.QTreeWidget(self.groupBox)
         self.lexList.setGeometry(QtCore.QRect(3, 3, 374, 394))
-        self.lexList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.lexList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.lexList.setAlternatingRowColors(True)
         self.lexList.setObjectName("lexList")
         self.lexList.headerItem().setText(0, "1")
         self.lexList.header().setVisible(False)
         self.buttonBox = QtWidgets.QDialogButtonBox(EntryManager)
         self.buttonBox.setGeometry(QtCore.QRect(223, 415, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(EntryManager)
@@ -44,5 +44,5 @@ if __name__ == "__main__":
     ui = Ui_EntryManager()
     ui.setupUi(EntryManager)
     EntryManager.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

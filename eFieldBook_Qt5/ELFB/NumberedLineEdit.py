@@ -1,6 +1,7 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt6 import QtGui, QtWidgets, QtCore
 from ELFB import dataIndex
  
+
 class LineTextWidget(QtWidgets.QFrame):
  
     class NumberBar(QtWidgets.QWidget):
@@ -15,10 +16,10 @@ class LineTextWidget(QtWidgets.QFrame):
             self.edit = edit
  
         def update(self, *args):
-            '''
+            """
             Updates the number bar to display the current set of numbers.
             Also, adjusts the width of the number bar if necessary.
-            '''
+            """
             width = self.fontMetrics().width(str(self.highest_line)) + 14
             if self.width() != width:
                 self.setFixedWidth(width)
@@ -50,27 +51,27 @@ class LineTextWidget(QtWidgets.QFrame):
  
     def __init__(self, *args):
         QtWidgets.QFrame.__init__(self, *args)
-        self.setFrameStyle(QtWidgets.QFrame.StyledPanel | QtWidgets.QFrame.Sunken)
+        self.setFrameStyle(QtWidgets.QFrame.Shape.StyledPanel | QtWidgets.QFrame.Shadow.Sunken)
 
     def sliderMoved(self):
-        '''
+        """
         makes sure the number box scrolls in synch with the editing field
         (self.edit) and adjusts the width when necessary
-        '''
+        """
         vPosition = self.edit.verticalScrollBar().value()
         self.number_bar.scroll(0, vPosition)
         width = self.number_bar.fontMetrics().width(str(self.number_bar.highest_line)) + 14
         if self.number_bar.width() != width:
             self.number_bar.setFixedWidth(width)
  
-    def eventFilter(self, object, event):
+    def eventFilter(self, sender, event):
         # Update the line numbers for all KeyPress events.
-        if object in (self.edit, self.edit.viewport()):
-            if event.type() == QtCore.QEvent.KeyPress:
+        if sender in (self.edit, self.edit.viewport()):
+            if event.type() == QtCore.QEvent.Type.KeyPress:
                 self.number_bar.update()
             return False
         try:
-            return QtWidgets.QFrame.eventFilter(object, event)
+            return QtWidgets.QFrame.eventFilter(sender, event)
         except TypeError:
             return False
         return False
@@ -78,6 +79,7 @@ class LineTextWidget(QtWidgets.QFrame):
     def getTextEdit(self):
         return self.edit
         
+
 class DataNumberWidget(LineTextWidget):
     def __init__(self, parent, *args):
         super(DataNumberWidget, self).__init__(parent)
@@ -91,6 +93,7 @@ class DataNumberWidget(LineTextWidget):
         hbox.addWidget(self.edit) 
         self.edit.installEventFilter(self)
         self.edit.viewport().installEventFilter(self)
+
 
 class TextNumberWidget(LineTextWidget):
     def __init__(self, parent, portal):

@@ -1,11 +1,14 @@
-import re, locale
+import re
+import locale
 from ELFB import dataIndex
 
+
 def addCommas(number):
-    #TODO we can set locales in preferences
+    """TODO we can set locales in preferences"""
     locale.setlocale(locale.LC_ALL, 'en_CA')
-    number = locale.format("%d", number, grouping=True)
+    number = locale.format_string("%d", number, grouping=True)
     return number
+
 
 def textStyleHandler(html):
     utag = '<span style=" text-decoration: underline;">'
@@ -75,10 +78,10 @@ def textStyleHandler(html):
     return html   
     
 def smallCapsConverter(newContent):
-    '''handles small caps for the literal field on lex cards,
+    """handles small caps for the literal field on lex cards, 
     applies formatting when user types in abbreviations
     newContent = contents of Lit field sans formatting
-    newText = text to put into view'''
+    newText = text to put into view"""
     abbNode = dataIndex.root.find('Abbreviations')
     newText = newContent
     abbrList = []
@@ -89,7 +92,7 @@ def smallCapsConverter(newContent):
         if "." in gloss:
             glossList = gloss.split(".")
             for abbr in glossList:
-                if not abbr in abbrList:
+                if abbr not in abbrList:
                     abbrList.append(abbr)
         else:
             if not gloss in abbrList:
@@ -97,23 +100,23 @@ def smallCapsConverter(newContent):
         termList.append([term, gloss])
     sortedTermList = sorted(termList, key=lambda x:len(x[0]), reverse=True)
     for term, gloss in sortedTermList:
-        #convert long forms to small caps abbreviations
-        regexTerm = re.compile('(?<=\W)%s(?=\W)'%term)        
+        """convert long forms to small caps abbreviations"""
+        regexTerm = re.compile('(?<=\W)%s(?=\W)'%term)
         if regexTerm.search(newContent):
             newGloss = "<small>" + gloss.upper() + "</small>"
-            newContent = regexTerm.sub(gloss,newContent)
-            newText = regexTerm.sub(newGloss,newText)
+            newContent = regexTerm.sub(gloss, newContent)
+            newText = regexTerm.sub(newGloss, newText)
     for gloss in abbrList:    
-        #format abbreviations in small caps
+        """format abbreviations in small caps"""
         newGloss = "<small>" + gloss.upper() + "</small>"
         regexAbbr = re.compile('(?<!\w)%s(?!\w)'%gloss) #handles abbreviations not yet in caps
         regexAbbrCaps = re.compile('(?<!\w)%s(?!\w)'%gloss.upper()) #handles abbreviations already in caps
         if regexAbbrCaps.search(newContent): #this condition is needed because the field holds caps versions of the abbreviations
-            newContent = regexAbbrCaps.sub(gloss,newContent)
-            newText = regexAbbrCaps.sub(newGloss,newText)
+            newContent = regexAbbrCaps.sub(gloss, newContent)
+            newText = regexAbbrCaps.sub(newGloss, newText)
         elif regexAbbr.search(newContent):
-            newContent = regexAbbr.sub(gloss,newContent)
-            newText = regexAbbr.sub(newGloss,newText)
+            newContent = regexAbbr.sub(gloss, newContent)
+            newText = regexAbbr.sub(newGloss, newText)
     return newContent, newText
     
 def XMLtoRTF(string):
@@ -136,19 +139,19 @@ def XMLtoPlainText(string):
     return string
     
 def RTFtoXML(string):
-    string = string.replace('<i>','{i}')
-    string = string.replace('</i>','{/i}')
-    string = string.replace('<b>','{b}')
-    string = string.replace('</b>','{/b}')
-    string = string.replace('<u>','{u}')
-    string = string.replace('</u>','{/u}')
+    string = string.replace('<i>', '{i}')
+    string = string.replace('</i>', '{/i}')
+    string = string.replace('<b>', '{b}')
+    string = string.replace('</b>', '{/b}')
+    string = string.replace('<u>', '{u}')
+    string = string.replace('</u>', '{/u}')
     return string
 
 def HighASCIItoHTML(string):
-    string = string.replace('á','&aacute;')
-    string = string.replace('é','&eacute;')
-    string = string.replace('í','&iacute;')
-    string = string.replace('ó','&oacute;')
-    string = string.replace('ú','&uacute;')
+    string = string.replace('á', '&aacute;')
+    string = string.replace('é', '&eacute;')
+    string = string.replace('í', '&iacute;')
+    string = string.replace('ó', '&oacute;')
+    string = string.replace('ú', '&uacute;')
 #    string = string.replace('\t', '&#9;')
     return string

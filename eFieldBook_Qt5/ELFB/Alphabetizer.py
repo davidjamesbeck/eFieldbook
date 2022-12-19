@@ -1,26 +1,26 @@
-from PyQt5 import QtWidgets,  QtCore
+from PyQt6 import QtWidgets,  QtCore
 from ELFB import dataIndex
 
 class Alphabetizer(QtCore.QSortFilterProxyModel):
     
     def __init__(self,  parent):
         super(Alphabetizer, self).__init__(parent)
-        self.setSortCaseSensitivity(0)
-        self.sort(0,QtCore.Qt.AscendingOrder)
+        self.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+        self.sort(0, QtCore.Qt.SortOrder.AscendingOrder)
         self.fldbk = dataIndex.fldbk
         accents = "áéíóú"
         plains = "aeiou"
         self.transTable = accents.maketrans(accents, plains)        
         self.buildOrder()
-        self.fldbk.lLexNav.scrollTo(self.fldbk.lLexNav.currentIndex(),QtWidgets.QAbstractItemView.EnsureVisible)
-        self.fldbk.hLexNav.scrollTo(self.fldbk.hLexNav.currentIndex(),QtWidgets.QAbstractItemView.EnsureVisible)
+        self.fldbk.lLexNav.scrollTo(self.fldbk.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
+        self.fldbk.hLexNav.scrollTo(self.fldbk.hLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
 
     def buildOrder(self):
         defaultFile = QtCore.QFile(dataIndex.rootPath + '/ELFB/default.txt')
-        if dataIndex.root.attrib.get('SortKey') == None:
+        if dataIndex.root.attrib.get('SortKey') is None:
             dataIndex.root.set('SortKey', 'Built-In')
         if dataIndex.root.attrib.get('SortKey') == "Built-In":
-            defaultFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+            defaultFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text)
             defaultString = QtCore.QTextStream(defaultFile)
             sortOrder = defaultString.readAll()
         else:
@@ -31,9 +31,9 @@ class Alphabetizer(QtCore.QSortFilterProxyModel):
                     break
         sortOrder = sortOrder.strip()
         twoLists = sortOrder.split(';')        
-        orderList = twoLists[0].split(',')
+        orderList = twoLists[0].split(', ')
         if len(twoLists) == 3:
-            exclusionList = twoLists[1].split(',')
+            exclusionList = twoLists[1].split(', ')
         else:
             exclusionList = None
         if twoLists[-1] == ' exclude accents':
@@ -44,7 +44,7 @@ class Alphabetizer(QtCore.QSortFilterProxyModel):
         sortOrderList = []
         excludeString = ''
         sortString = ''
-        if exclusionList != None:
+        if exclusionList is not None:
             for item in exclusionList:
                 newItem = item.strip()
                 self.exclusions.append(newItem)
@@ -76,7 +76,7 @@ class Alphabetizer(QtCore.QSortFilterProxyModel):
             return False
   
     def transform(self, string):
-        '''removes character to be excluded from sorting'''
+        """removes character to be excluded from sorting"""
         if self.fldbk.sAccentBtn.isChecked():
             string = string.translate(self.transTable)
         if string[-1] == '-':
@@ -90,13 +90,13 @@ class Alphabetizer(QtCore.QSortFilterProxyModel):
         return string
 
 class AlphaTester(Alphabetizer):
-    '''class for testing sorting orders without implementing them'''
+    """class for testing sorting orders without implementing them"""
     def buildOrder(self):
-        orderList = self.fldbk.sOrder.toPlainText().split(',')
-        exclusionList = self.fldbk.sExclusions.toPlainText().split(",")
+        orderList = self.fldbk.sOrder.toPlainText().split(', ')
+        exclusionList = self.fldbk.sExclusions.toPlainText().split(", ")
         self.exclusions = []
         sortOrderList = []
-        if exclusionList != None:
+        if exclusionList is not None:
             for item in exclusionList:
                 newItem = item.strip()
                 self.exclusions.append(newItem)         

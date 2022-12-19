@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/NewLexDialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_NewLexDialog(object):
     def setupUi(self, NewLexDialog):
@@ -43,7 +43,7 @@ class Ui_NewLexDialog(object):
         self.groupBox_2.setGeometry(QtCore.QRect(10, 150, 380, 142))
         self.groupBox_2.setMinimumSize(QtCore.QSize(380, 142))
         self.groupBox_2.setMaximumSize(QtCore.QSize(380, 142))
-        self.groupBox_2.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
+        self.groupBox_2.setContextMenuPolicy(QtCore.Qt.ContextMenuPolicy.CustomContextMenu)
         self.groupBox_2.setObjectName("groupBox_2")
         self.label_4 = QtWidgets.QLabel(self.groupBox_2)
         self.label_4.setGeometry(QtCore.QRect(48, 89, 34, 16))
@@ -62,7 +62,7 @@ class Ui_NewLexDialog(object):
         self.gloss.setGeometry(QtCore.QRect(90, 70, 280, 60))
         self.gloss.setMinimumSize(QtCore.QSize(280, 60))
         self.gloss.setMaximumSize(QtCore.QSize(280, 60))
-        self.gloss.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.gloss.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.gloss.setObjectName("gloss")
         self.label_3 = QtWidgets.QLabel(self.groupBox_2)
         self.label_3.setGeometry(QtCore.QRect(17, 37, 65, 16))
@@ -74,7 +74,7 @@ class Ui_NewLexDialog(object):
         self.label_3.setObjectName("label_3")
         self.buttonBox = QtWidgets.QDialogButtonBox(NewLexDialog)
         self.buttonBox.setGeometry(QtCore.QRect(224, 306, 164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(NewLexDialog)
@@ -100,5 +100,5 @@ if __name__ == "__main__":
     ui = Ui_NewLexDialog()
     ui.setupUi(NewLexDialog)
     NewLexDialog.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

@@ -1,17 +1,17 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 from xml.etree import ElementTree as etree
-from ELFB import cardLoader, textTable, dataIndex, EgTable, Orthographies, formattingHandlers
+from ELFB import cardLoader, textTable, dataIndex, EgTable, Orthographies, formattingHandlers,  indexOnlyBtns
 from ELFB.palettes import AbbrManager, LineSplitter, LinkToLexicon, TierManager, AnalysisManager
-from ELFB import searchClasses, idGenerator, autoparsing
+from ELFB import searchClasses, idGenerator#, autoparsing
 from copy import deepcopy
 import re
 
-'''abbreviation data on example cards'''
+"""abbreviation data on example cards"""
 
 def addAbbr(fldbk):
-    '''add a new abbreviation to list'''
+    """add a new abbreviation to list"""
     aManager = AbbrManager.AbbrManager(fldbk)
-    if aManager.exec_():
+    if aManager.exec():
         newData = aManager.setData()
         topNode = dataIndex.root.find('Abbreviations')
         abbrList = []
@@ -25,22 +25,22 @@ def addAbbr(fldbk):
         else:
             lastNumber = 1
         newCode = 'AC' + str(lastNumber)
-        abbrev = etree.SubElement(topNode,'Abbr')
-        abbrev.set('Abv',newData[0])
-        abbrev.set('Term',newData[1])
+        abbrev = etree.SubElement(topNode, 'Abbr')
+        abbrev.set('Abv', newData[0])
+        abbrev.set('Term', newData[1])
         itemText = '<small>' + newData[0].swapcase() + '</small>&emsp;‘' + newData[1] + '’'
-        if newData[2] != None:
-            abbrev.set('Form',newData[2])
+        if not newData[2] is None:
+            abbrev.set('Form', newData[2])
             itemText += ' (' + newData[2] + ')'
         ##generate ACode
-        abbrev.set('ACode',newCode)
+        abbrev.set('ACode', newCode)
         
         #add item to model and sort
         newItem = QtGui.QStandardItem()
         newItem.setData(newCode, 35)
         newItem.setData(abbrev, 36)
         newItem.setText(itemText)
-        newItem.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable)   
+        newItem.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable)   
         abbrModelProxy = fldbk.eAbbreviations.model()
         abbrModel = abbrModelProxy.sourceModel()
         abbrModel.appendRow(newItem)
@@ -48,24 +48,24 @@ def addAbbr(fldbk):
         fldbk.eAbbreviations.resizeRowsToContents()        
         fldbk.iAbbreviations.resizeColumnToContents(0)
         fldbk.iAbbreviations.resizeRowsToContents()
-        for i in range(0,abbrModelProxy.rowCount()):
-            if fldbk.eAbbreviations.model().index(i,0).data(35) == newCode:
+        for i in range(0, abbrModelProxy.rowCount()):
+            if fldbk.eAbbreviations.model().index(i, 0).data(35) == newCode:
                 theItem = i
                 break  
-        fldbk.eAbbreviations.setCurrentIndex(fldbk.eAbbreviations.model().index(theItem,0))
-        fldbk.eAbbreviations.scrollTo(fldbk.eAbbreviations.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)        
-        fldbk.iAbbreviations.setCurrentIndex(fldbk.iAbbreviations.model().index(theItem,0))
-        fldbk.iAbbreviations.scrollTo(fldbk.iAbbreviations.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+        fldbk.eAbbreviations.setCurrentIndex(fldbk.eAbbreviations.model().index(theItem, 0))
+        fldbk.eAbbreviations.scrollTo(fldbk.eAbbreviations.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)        
+        fldbk.iAbbreviations.setCurrentIndex(fldbk.iAbbreviations.model().index(theItem, 0))
+        fldbk.iAbbreviations.scrollTo(fldbk.iAbbreviations.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
         dataIndex.unsavedEdit = 1
 
 def delAbbr(fldbk):
-    '''remove abbreviation from list'''
+    """remove abbreviation from list"""
     badNode = fldbk.eAbbreviations.currentIndex().data(36)
     badAbbr = badNode.attrib.get('ACode')
     proxyModel = fldbk.eAbbreviations.model()
     model = proxyModel.sourceModel()
     for i in range(model.rowCount()):
-        if model.index(i,0).data(35) == badAbbr:
+        if model.index(i, 0).data(35) == badAbbr:
             model.removeRow(i)
             break
     ##update XML
@@ -75,7 +75,7 @@ def delAbbr(fldbk):
     dataIndex.unsavedEdit = 1
 
 def editAbbr(fldbk, card):
-    '''edit abbreviation in list'''
+    """edit abbreviation in list"""
     if card == 'eg':
         view = fldbk.eAbbreviations
     else:
@@ -92,20 +92,20 @@ def editAbbr(fldbk, card):
         c = abbrev.attrib.get('Form')
     except AttributeError:
         c = None
-    oldData = [a,b,c]
+    oldData = [a, b, c]
     aManager = AbbrManager.AbbrManager(fldbk)
     aManager.setAbbr(abbrev)
-    if aManager.exec_():
+    if aManager.exec():
         newData = aManager.setData()
         checked = aManager.checkUpdate()
         if oldData == newData:
             return
         else:
-            abbrev.set('Abv',newData[0])
-            abbrev.set('Term',newData[1])
+            abbrev.set('Abv', newData[0])
+            abbrev.set('Term', newData[1])
             itemText = '<small>' + newData[0].swapcase() + '</small>&emsp;‘' + newData[1] + '’'
-            if newData[2] != None:
-                abbrev.set('Form',newData[2])
+            if newData[2] is not None:
+                abbrev.set('Form', newData[2])
                 itemText += ' (' + newData[2] + ')'
             else:
                 try:
@@ -127,16 +127,17 @@ def editAbbr(fldbk, card):
                 if oldLitAbbr in child.text:
                     child.text = regex.sub(newAbbr, child.text)                   
             for child in dataIndex.root.iter('ILEG'):
-                if child.text != None:
+                if child.text is not None:
                     if regex.search(child.text):
                         child.text = regex.sub(newAbbr, child.text)
 
-'''other buttons on example cards'''
+"""other buttons on example cards"""
 
 def toggleParse(fldbk):
     if fldbk.eAutoParsingBtn.isChecked():
         if len(fldbk.iIndex.toPlainText()) == 0:
-            autoparsing.askToBuildIndex()
+            indexOnlyBtns.buildIndex()
+#            autoparsing.askToBuildIndex()
             fldbk.tabWidget.setCurrentIndex(3)
 
 def eAddColumn(fldbk):
@@ -145,11 +146,11 @@ def eAddColumn(fldbk):
 
 def eAddTier(fldbk):
     trManager = TierManager.TierManager(fldbk)
-    if trManager.exec_():
+    if trManager.exec():
         nameList = trManager.newTierName
-        if nameList == None:
+        if nameList is None:
             return
-        if dataIndex.root.attrib.get('Tiers') == None:
+        if dataIndex.root.attrib.get('Tiers') is None:
             tierList = ''
         else:
             tierList = dataIndex.root.attrib.get('Tiers')
@@ -178,7 +179,7 @@ def eAddTier(fldbk):
     
 def eDelTier(fldbk):
     theRow = fldbk.eAnalysis.currentRow()
-    if theRow == None:
+    if theRow is None:
         return
     elif theRow <= 1:
         return
@@ -188,7 +189,7 @@ def eDelTier(fldbk):
     egNode = dataIndex.exDict[dataIndex.currentCard]
     syntNode = egNode.find('Synt[@Tier="%s"]' %tierLabel)
     egNode.remove(syntNode)
-    if dataIndex.root.find('Ex/Synt[@Tier="%s"]' %tierLabel) == None:
+    if dataIndex.root.find('Ex/Synt[@Tier="%s"]' %tierLabel) is None:
         tiers = dataIndex.root.attrib.get('Tiers')
         tierList = tiers.split(', ')
         tiers = ''
@@ -207,7 +208,7 @@ def eDelTier(fldbk):
     dataIndex.unsavedEdit = 1
 
 def eRemoveColumn(fldbk):
-    '''removes columns from analysis table'''
+    """removes columns from analysis table"""
     if fldbk.eAnalysis.columnCount() == 1:
         return    
     fldbk.eAnalysis.removeColumn(fldbk.eAnalysis.currentColumn())
@@ -215,20 +216,20 @@ def eRemoveColumn(fldbk):
     ilegList = []
     mrph = None
     ileg = None
-    for i in range(0,fldbk.eAnalysis.columnCount()):
+    for i in range(0, fldbk.eAnalysis.columnCount()):
         try:
-            mrphList.append(fldbk.eAnalysis.item(0,i).text())
-            ilegList.append(fldbk.eAnalysis.item(1,i).text())
+            mrphList.append(fldbk.eAnalysis.item(0, i).text())
+            ilegList.append(fldbk.eAnalysis.item(1, i).text())
         except AttributeError:
             mrphList.append('[—]')
             ilegList.append('[—]')
     for item in mrphList:
-        if mrph == None:
+        if mrph is None:
             mrph = item
         else:
             mrph += '\t' + item
     for item in ilegList:
-        if ileg == None:
+        if ileg is None:
             ileg = item
         else:
             ileg += '\t' + item
@@ -244,11 +245,11 @@ def eRemoveColumn(fldbk):
     dataIndex.unsavedEdit = 1
 
 def eSplitEg(fldbk):
-    '''splits example between two cards'''
+    """splits example between two cards"""
     oldID = dataIndex.currentCard
     tSplitter = LineSplitter.LineSplitter(fldbk)
     tSplitter.fillForm(oldID)
-    tSplitter.exec_()
+    tSplitter.exec()
     if tSplitter.result() == 0:
         return
     else:
@@ -259,29 +260,29 @@ def eSplitEg(fldbk):
     except KeyError:
         source = None
     ##update XML if this is from a text
-    if source != None:
+    if source is not None:
         lineList = source.findall('Ln')
         i = 2
         for line in lineList:
             if line.attrib.get('LnRef') == oldID:
-                newNode = etree.Element('Ln',{'LnRef':idList[1]})
-                source.insert(i,newNode)
+                newNode = etree.Element('Ln', {'LnRef':idList[1]})
+                source.insert(i, newNode)
             else:
                 i += 1
         ##update Text card if that text is open
-        if oldRoot.get('SourceText') == dataIndex.lastText and fldbk.tText.findChildren(textTable) != None:
+        if oldRoot.get('SourceText') == dataIndex.lastText and fldbk.tText.findChildren(textTable) is not None:
             cardLoader.loadTextCard(source)                
     cardLoader.loadExCard(oldRoot)
     dataIndex.unsavedEdit = 1
         
 def eLocateEg(fldbk):
-    '''goes to example in context (text or, eventually, dataset)'''
+    """goes to example in context (text or, eventually, dataset)"""
     #TODO: link up with datasets
     egNode = dataIndex.exDict[dataIndex.currentCard]
     lineLabel = fldbk.eLineNumber.toPlainText()
     lineNo = int(lineLabel[5:])
     text = egNode.attrib.get('SourceText')
-    if text == None:
+    if text is None:
         return
     try:
         if text == dataIndex.currentText.attrib.get('TextID'):
@@ -302,14 +303,14 @@ def eLocateEg(fldbk):
     fldbk.tFullText.horizontalScrollBar().setValue(0)
 
 def eAdd2Lex(fldbk):
-    '''adds example to a lexical entry'''
+    """adds example to a lexical entry"""
     eManager = LinkToLexicon.EntryManager(fldbk)
     eManager.listEntries()
-    if eManager.exec_():
+    if eManager.exec():
         data = eManager.setData() 
         node = dataIndex.lexDict[data[0]]
         definition = node.find('Def[@Index="%s"]' %str(data[1]))
-        etree.SubElement(definition,'Ln',{'LnRef':dataIndex.currentCard})
+        etree.SubElement(definition, 'Ln', {'LnRef':dataIndex.currentCard})
         fldbk.eLinksList.insertItem (-1, data[0])
         fldbk.eLinksList.setCurrentIndex(fldbk.eLinksList.findText(data[0]))
         example = dataIndex.root.find('Ex[@ExID="%s"]' %dataIndex.currentCard)
@@ -325,7 +326,7 @@ def eAdd2Lex(fldbk):
         dataIndex.unsavedEdit = 1
     
 def eBreakLink(fldbk):
-    '''removes a link to a lex card ONLY—need to consider the breaking of a link to a text'''
+    """removes a link to a lex card ONLY—need to consider the breaking of a link to a text"""
     targetNumber = fldbk.eLinksList.currentIndex()
     if targetNumber == -1:
         return
@@ -335,13 +336,13 @@ def eBreakLink(fldbk):
         lexNode = dataIndex.lexDict[target]
         name = 'the lexical entry <i>'+ lexNode.findtext("Orth") + "</i>"
         breakbox = QtWidgets.QMessageBox()
-        breakbox.setIcon(QtWidgets.QMessageBox.Warning)
+        breakbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
         breakbox.setText("Break link?")
         breakbox.setInformativeText('This will remove the link to %s' %name)
-        breakbox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
-        breakbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-        breakbox.exec_()
-        if breakbox.result() == QtWidgets.QMessageBox.Ok:    
+        breakbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok | QtWidgets.QMessageBox.StandardButton.Cancel)
+        breakbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+        breakbox.exec()
+        if breakbox.result() == QtWidgets.QMessageBox.StandardButton.Ok:    
             fldbk.eLinksList.removeItem(fldbk.eLinksList.findText(target))
             line = lexNode.find('Def/Ln[@LnRef="%s"]' %dataIndex.currentCard)
             defNode = lexNode.find('.//Ln[@LnRef="%s"]/..' %dataIndex.currentCard )
@@ -365,7 +366,7 @@ def eAdvancedSearch(fldbk):
     engine.doSearch()
 
 def copyLine(node, outputLanguage='L1'):
-    '''copy example to clipboard'''
+    """copy example to clipboard"""
     fldbk = dataIndex.fldbk
     L2Flag = 1
     entryRow0 = node.findtext('Line')
@@ -404,14 +405,14 @@ def copyLine(node, outputLanguage='L1'):
     return exampleP
 
 def eDuplicate(fldbk):
-    '''duplicate entry'''
+    """duplicate entry"""
     oldNode = dataIndex.exDict[dataIndex.currentCard]
-    newID = idGenerator.generateID('EX',dataIndex.exDict)
+    newID = idGenerator.generateID('EX', dataIndex.exDict)
     newNode = deepcopy(oldNode)
     newNode.set('ExID', newID)
     k = dataIndex.root.find('Ex[@ExID="%s"]'%dataIndex.currentCard)
     i = list(dataIndex.root).index(k) + 1
-    dataIndex.root.insert(i,newNode)
+    dataIndex.root.insert(i, newNode)
     dataIndex.currentCard = newID
     dataIndex.exDict[newID] = newNode
     cardLoader.loadExCard(newNode)
@@ -439,12 +440,12 @@ def delColumn(fldbk):
         badColumn = fldbk.eAnalysis.currentColumn()
         colNumber = str(fldbk.eAnalysis.currentColumn() + 1)
         queryBox = QtWidgets.QMessageBox()
-        queryBox.setIcon(QtWidgets.QMessageBox.Question)
-        queryBox.setStandardButtons(QtWidgets.QMessageBox.Cancel | QtWidgets.QMessageBox.Ok)
-        queryBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+        queryBox.setIcon(QtWidgets.QMessageBox.Icon.Question)
+        queryBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Cancel | QtWidgets.QMessageBox.StandardButton.Ok)
+        queryBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
         queryBox.setText('Delete column %s and its contents?' %colNumber)
-        queryBox.exec_()
-        if queryBox.result() == QtWidgets.QMessageBox.Ok:                            
+        queryBox.exec()
+        if queryBox.result() == QtWidgets.QMessageBox.StandardButton.Ok:                            
             fldbk.eAnalysis.removeColumn(badColumn)
             fldbk.eAnalysis.delegate.updateExample()
         else:
@@ -458,7 +459,7 @@ def findUnparsed(fldbk):
     for node in exList:
         if node.attrib.get('ExID') == dataIndex.currentCard:
             start = 1
-        elif node.find('Mrph') == None or len(node.findtext('Mrph')) == 0:
+        elif node.find('Mrph') is None or len(node.findtext('Mrph')) == 0:
             if start == 1:
                 nextUnparsed = node.attrib.get('ExID')
                 break
@@ -475,7 +476,7 @@ def clearAnalysis(fldbk):
     fldbk.eAnalysis.insertColumn(0)
     lastHeadWidget = QtWidgets.QTableWidgetItem(1001)
     lastHeadWidget.setText('+')
-    fldbk.eAnalysis.setHorizontalHeaderItem(0,lastHeadWidget)
+    fldbk.eAnalysis.setHorizontalHeaderItem(0, lastHeadWidget)
     fldbk.eAnalysis.resizeColumnToContents(0)
     
 def addMulti(fldbk):

@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/HomophoneManager.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -54,7 +54,7 @@ class Ui_Dialog(object):
         self.verticalLayout.addWidget(self.gloss)
         self.hboxlayout = QtWidgets.QHBoxLayout()
         self.hboxlayout.setObjectName("hboxlayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.hboxlayout.addItem(spacerItem)
         self.defaultSelect = QtWidgets.QCheckBox(Dialog)
         font = QtGui.QFont()
@@ -63,7 +63,7 @@ class Ui_Dialog(object):
         self.defaultSelect.setFont(font)
         self.defaultSelect.setObjectName("defaultSelect")
         self.hboxlayout.addWidget(self.defaultSelect)
-        spacerItem1 = QtWidgets.QSpacerItem(131, 31, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(131, 31, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.hboxlayout.addItem(spacerItem1)
         self.cancelButton = QtWidgets.QPushButton(Dialog)
         self.cancelButton.setObjectName("cancelButton")
@@ -98,5 +98,5 @@ if __name__ == "__main__":
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     Dialog.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

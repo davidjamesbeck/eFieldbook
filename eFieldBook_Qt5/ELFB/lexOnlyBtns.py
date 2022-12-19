@@ -1,10 +1,11 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt6 import QtWidgets, QtCore
 from ELFB import dataIndex, formattingHandlers
 from ELFB.palettes import DerivationManager
 from xml.etree import ElementTree as etree
 
+
 def delDrvn(fldbk):
-    if fldbk.lDerivatives.currentItem() == None:
+    if fldbk.lDerivatives.currentItem() is None:
         return
     derivative = fldbk.lDerivatives.currentItem().data(32)
     current = dataIndex.currentCard
@@ -18,35 +19,37 @@ def delDrvn(fldbk):
             badNode = item
             break
     child.remove(badNode)
-    for i in range(0,fldbk.lDerivatives.count()):
+    for i in range(0, fldbk.lDerivatives.count()):
         if fldbk.lDerivatives.item(i).data(32) == derivative:
             badNode = fldbk.lDerivatives.takeItem(i)
-            del(badNode)
+            del badNode
             break
     dataIndex.unsavedEdit = 1
     if fldbk.lDerivatives.count() == 0:
         fldbk.lRemoveDerBtn.setEnabled(0)
 
-'''buttons on lexicon card'''
+
+"""buttons on lexicon card"""
+
 
 def addDrvn(fldbk):
     dManager = DerivationManager.DerivationManager(fldbk)
     dManager.listEntries()
     exitFlag = 0
-    if dManager.exec_():
+    if dManager.exec():
         derivative = dManager.setData()
         current = dataIndex.currentCard
         child = dataIndex.lexDict[derivative]        
-        if child.find('Root') != None:
+        if not child.find('Root') is None:
             queryBox = QtWidgets.QMessageBox()
-            queryBox.setIcon(QtWidgets.QMessageBox.Question)
-            queryBox.setStandardButtons(QtWidgets.QMessageBox.Cancel | QtWidgets.QMessageBox.Ok)
-            queryBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+            queryBox.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            queryBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Cancel | QtWidgets.QMessageBox.StandardButton.Ok)
+            queryBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
             queryBox.setText('Replace base?')
             queryBox.setInformativeText('This derivative was attributed to another base.\n'
                                                         'Are you sure you want to replace this link?')
-            queryBox.exec_()
-            if queryBox.result() == QtWidgets.QMessageBox.Ok:                            
+            queryBox.exec()
+            if queryBox.result() == QtWidgets.QMessageBox.StandardButton.Ok:                            
                 try:                                   
                     child.remove(child.find('Root'))
                 except TypeError:
@@ -66,8 +69,8 @@ def addDrvn(fldbk):
             i += 1
         while child[i].tag == 'Drvn':
             i += 1
-        newBase = etree.Element('Root',{"LexIDREF":current})
-        child.insert(i,newBase)
+        newBase = etree.Element('Root', {"LexIDREF":current})
+        child.insert(i, newBase)
         item = QtWidgets.QListWidgetItem()
         item.setData(32, derivative)
         try:
@@ -76,11 +79,11 @@ def addDrvn(fldbk):
             text = child.findtext('Orth') + " " + child.findtext('Def/L1')                        
         item.setText(text)
         fldbk.lDerivatives.addItem(item)
-        fldbk.lDerivatives.sortItems(QtCore.Qt.AscendingOrder)
+        fldbk.lDerivatives.sortItems(QtCore.Qt.SortOrder.AscendingOrder)
         dataIndex.unsavedEdit = 1  
         child = dataIndex.lexDict[current]
         elemList = list(child)
-        newDrvn = etree.Element('Drvn',{"LexIDREF":derivative})
+        newDrvn = etree.Element('Drvn', {"LexIDREF":derivative})
         i = 0
         for item in elemList:
             if item.tag != 'Def':
@@ -92,37 +95,38 @@ def addDrvn(fldbk):
                 i += 1
         except IndexError:
             pass
-        child.insert(i,newDrvn)  
+        child.insert(i, newDrvn)  
         fldbk.lRemoveDerBtn.setEnabled(1)
 
 def addRoot(fldbk):
     if fldbk.lBase.count() != 0:
         queryBox = QtWidgets.QMessageBox()
-        queryBox.setIcon(QtWidgets.QMessageBox.Question)
-        queryBox.setStandardButtons(QtWidgets.QMessageBox.Cancel | QtWidgets.QMessageBox.Ok)
-        queryBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+        queryBox.setIcon(QtWidgets.QMessageBox.Icon.Question)
+        queryBox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Cancel | QtWidgets.QMessageBox.StandardButton.Ok)
+        queryBox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
         queryBox.setText('Replace base?')
         queryBox.setInformativeText('Are you sure you want to replace this link?')
-        queryBox.exec_()
-        if queryBox.result() == QtWidgets.QMessageBox.Ok:
+        queryBox.exec()
+        if queryBox.result() == QtWidgets.QMessageBox.StandardButton.Ok:
             removeRoot(fldbk)
             makeDManager(fldbk)
     else:
         makeDManager(fldbk)
         fldbk.lBreakLnkBtn.setEnabled(1)
 
+
 def makeDManager(fldbk):
-    '''
+    """
     run the window for making derivations.
     adds current card to list of derivations on the base card
-    '''
+    """
     dManager = DerivationManager.DerivationManager(fldbk)
     dManager.listEntries()
-    if dManager.exec_():
+    if dManager.exec():
         base = dManager.setData()
         current = dataIndex.currentCard
         child = dataIndex.lexDict[base]
-        ##check to make sure derviation isn't already there for some reason##
+        """check to make sure derviation isn't already there for some reason##"""
         drvnList = child.findall('Drvn')
         if len(drvnList) != 0:
             for drvn in drvnList:
@@ -136,8 +140,8 @@ def makeDManager(fldbk):
         except IndexError:
             pass
         i += 1
-        newDrvn = etree.Element('Drvn',{"LexIDREF":current})
-        child.insert(i,newDrvn)
+        newDrvn = etree.Element('Drvn', {"LexIDREF":current})
+        child.insert(i, newDrvn)
         text = child.findtext('Orth')        
         child = dataIndex.lexDict[current]
         fldbk.lBase.clear()
@@ -154,8 +158,8 @@ def makeDManager(fldbk):
                 i += 1
         except IndexError:
             pass
-        newBase = etree.Element('Root',{"LexIDREF":base})
-        child.insert(i,newBase)
+        newBase = etree.Element('Root', {"LexIDREF":base})
+        child.insert(i, newBase)
         item = QtWidgets.QListWidgetItem()
         item.setData(32, base)
         item.setText(text)
@@ -163,17 +167,17 @@ def makeDManager(fldbk):
         dataIndex.unsavedEdit = 1
 
 def removeRoot(fldbk):
-    '''
+    """
     removes the current card from the list of the root's derivations
-    '''
+    """
     child = dataIndex.lexDict[fldbk.lBase.item(0).data(32)]
     for item in child.iter('Drvn'):
         if item.get('LexIDREF') == dataIndex.currentCard:
             child.remove(item)
             break
-    '''
+    """
     removes the root from the Lex entry of the current card
-    '''
+    """
     child = dataIndex.lexDict[dataIndex.currentCard]
     root = child.find('Root')
     child.remove(root)
@@ -183,23 +187,27 @@ def removeRoot(fldbk):
 
 def toggleAuto(fldbk):
     if fldbk.lAutoBtn.isChecked():
-        dataIndex.root.set('lAuto','on')
+        dataIndex.root.set('lAuto', 'on')
         fldbk.lIPA.setEnabled(0)
     else:
-        dataIndex.root.set('lAuto','off')
+        dataIndex.root.set('lAuto', 'off')
         fldbk.lIPA.setEnabled(1)
     dataIndex.unsavedEdit = 1
 
-def clipEG(fldbk, outputLanguage):
+
+def clipEG():
+    """need to write an if Opt pressed to make outputlanguage L2"""
+    outputLanguage = 'L1'
     lex = dataIndex.lexDict[dataIndex.currentCard]
     datum = lex.find('Orth').text + " "
-    if lex.find('POS') != None:
+    if lex.find('POS') is not None:
         datum += "(" + lex.find('POS').text + ") "
-    if lex.find('Lit') != None:
+    if lex.find('Lit') is not None:
         datum += "<" + lex.find('Lit').text + "> "
     defList = lex.findall('Def')
 
-    for i in range(0,len(defList)):
+    for i in range(0, len(defList)):
+        """need to expand to include dialect, variant, alternative"""
         entry = ''
         dialect = ''
         variant = ''
@@ -210,7 +218,7 @@ def clipEG(fldbk, outputLanguage):
             entry = "(" + POS + ") "
         Reg = defList[i].findtext('Reg')
         dNode = defList[i].find('Dia')
-        if dNode != None:
+        if dNode is not None:
             dialect = dNode.attrib.get('Dialect')
             entry = entry + dialect + " "
             aNodeList = dNode.findall('Alternative')
@@ -257,7 +265,7 @@ def clipEG(fldbk, outputLanguage):
         else: 
             datum += " ♢ "
             L2Flag = 1
-            for j in range(0,len(examples)):
+            for j in range(0, len(examples)):
                 egID = examples[j].attrib.get('LnRef')
                 egElement = dataIndex.exDict[egID]
                 eg = egElement.findtext('Line') + ' '
@@ -265,7 +273,7 @@ def clipEG(fldbk, outputLanguage):
                     L2Gloss = egElement.findtext('L2Gloss')
                 except AttributeError:
                     L2Flag = 0                
-                if  outputLanguage == 'L2' and L2Flag != 0:
+                if outputLanguage == 'L2' and L2Flag != 0:
                     gloss = L2Gloss
                 elif len(egElement.findtext('L1Gloss')) == 0:
                     gloss = L2Gloss
@@ -278,18 +286,19 @@ def clipEG(fldbk, outputLanguage):
                     datum += ", "
             if len(defList) != 1 and i != len(defList) - 1:
                 datum += "; "
-    datum = datum.replace('<i>','')
-    datum = datum.replace('</i>','')
-    datum = datum.replace('<br />',' ')
-    datum = datum.replace('{i}','')
-    datum = datum.replace('{/i}','')
+    datum = datum.replace('<i>', '')
+    datum = datum.replace('</i>', '')
+    datum = datum.replace('<br />', ' ')
+    datum = datum.replace('{i}', '')
+    datum = datum.replace('{/i}', '')
     clipboard = QtWidgets.QApplication.clipboard()
     clipping = QtCore.QMimeData()
     clipping.setText(datum)
     clipboard.setMimeData(clipping)
 
-def doneBtn(fldbk, state):
-    '''updates the XML to reflect the state of the "Done" button'''
+
+def doneBtn(state):
+    """updates the XML to reflect the state of the "Done" button"""
     dataIndex.unsavedEdit = 1
     lexNode = dataIndex.lexDict[dataIndex.currentCard]
     if state == 2:

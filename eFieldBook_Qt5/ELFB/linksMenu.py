@@ -1,5 +1,6 @@
-from PyQt5 import QtWidgets
+from PyQt6 import QtWidgets
 from ELFB import cardLoader,  dataIndex
+
 
 class linksMenu(QtWidgets.QMenu):
     def __init__(self, parent):
@@ -15,5 +16,4 @@ class linksMenu(QtWidgets.QMenu):
             fldbk.lSound.playSound()
         else:
             lexRoot = dataIndex.lexDict[link]
-            cardLoader.loadLexCard(lexRoot)        
-
+            cardLoader.loadLexCard(lexRoot)

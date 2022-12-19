@@ -4,7 +4,8 @@
 Module implementing Missing data warning.
 """
 
-from PyQt5 import QtWidgets
+from PyQt6 import QtWidgets
+
 
 class MissingDataBox(QtWidgets.QMessageBox):
     
@@ -15,10 +16,10 @@ class MissingDataBox(QtWidgets.QMessageBox):
         @param parent reference to the parent widget
         @type QWidget
         """        
-        super(MissingDataBox,self).__init__(parent)
-        QtWidgets.QDialog.__init__(self,parent)
+        super(MissingDataBox, self).__init__(parent)
+        QtWidgets.QDialog.__init__(self, parent)
         self.setStyleSheet('font-size: 18pts;')
 
-    def setWarningText(self, text,title):
+    def setWarningText(self, text, title):
         self.setWindowTitle(title)
         self.setText(text)

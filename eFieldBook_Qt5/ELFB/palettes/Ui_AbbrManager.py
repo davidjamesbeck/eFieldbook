@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/AbbrManager.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_AbbrManager(object):
     def setupUi(self, AbbrManager):
@@ -15,7 +15,7 @@ class Ui_AbbrManager(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(AbbrManager)
         self.buttonBox.setGeometry(QtCore.QRect(140, 141, 202, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.groupBox = QtWidgets.QGroupBox(AbbrManager)
         self.groupBox.setGeometry(QtCore.QRect(10, 9, 330, 125))
@@ -87,5 +87,5 @@ if __name__ == "__main__":
     ui = Ui_AbbrManager()
     ui.setupUi(AbbrManager)
     AbbrManager.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

@@ -11,8 +11,8 @@ from .Ui_mainwindow import Ui_MainWindow
 class Alphabetizer(QtGui.QSortFilterProxyModel):
     def __init__(self, parent=None):
         super(Alphabetizer, self).__init__(parent)
-        self.setSortCaseSensitivity(0)
-        self.sort(0,QtCore.Qt.AscendingOrder)
+        self.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+        self.sort(0,QtCore.Qt.SortOrder.AscendingOrder)
         self.buildOrder()
         
     def buildOrder(self):    

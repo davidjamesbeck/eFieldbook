@@ -1,4 +1,4 @@
-from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt6 import QtGui, QtWidgets, QtCore
 from ELFB import dataIndex, cardLoader, searchClasses, HTMLDelegate
 
 def lAdvancedSearch(fldbk):
@@ -34,7 +34,7 @@ def lAdvancedSearch(fldbk):
     fldbk.sDoneBtn.setStyleSheet('QCheckBox {font-size: 9pt; font-style: italic;}')
     fldbk.sDoneBtn.setToolTip('Check box to search only completed entries.\nClear box to search for unfinished entries.')
     fldbk.sDoneBtn.setTristate(1)
-    fldbk.sDoneBtn.setCheckState(1)
+    fldbk.sDoneBtn.setCheckState(QtCore.Qt.CheckState.Checked)
     fldbk.sDoneBtn.setVisible(1)
     
     fldbk.lSearchHeader = QtWidgets.QGroupBox(fldbk.lexicon)
@@ -101,10 +101,10 @@ def lAdvancedSearch(fldbk):
     fldbk.lDialectSearch.verticalHeader().hide()
     item1 = QtWidgets.QTableWidgetItem()
     item1.setToolTip('search by dialect name')
-    item1.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable)
+    item1.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEditable)
     item2 = QtWidgets.QTableWidgetItem()
     item2.setToolTip('search for forms')
-    item2.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable)
+    item2.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEditable)
     fldbk.lDialectSearch.setItem(0, 0, item1)
     fldbk.lDialectSearch.setItem(0, 1, item2)
     fldbk.lDialectSearch.setVisible(1)   
@@ -118,8 +118,8 @@ def lAdvancedSearch(fldbk):
     fldbk.lGrammarSearch.setItemDelegate(delegate)
     fldbk.lGrammarSearch.setGeometry(QtCore.QRect(4, 3, 186, 29))
     fldbk.lGrammarSearch.setStyleSheet('QTableWidget {gridline-color: white; border-radius: 8px;}')
-    fldbk.lGrammarSearch.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-    fldbk.lGrammarSearch.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+    fldbk.lGrammarSearch.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+    fldbk.lGrammarSearch.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
     fldbk.lGrammarSearch.setRowCount(1)
     fldbk.lGrammarSearch.setColumnCount(2)
     fldbk.lGrammarSearch.setColumnWidth(0, 40)
@@ -128,10 +128,10 @@ def lAdvancedSearch(fldbk):
     fldbk.lGrammarSearch.verticalHeader().hide()
     item1 = QtWidgets.QTableWidgetItem()
     item1.setToolTip('search grammatical labels (e.g., "pl.")')
-    item1.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable)
+    item1.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEditable)
     item2 = QtWidgets.QTableWidgetItem()
     item2.setToolTip('search for forms')
-    item2.setFlags(QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEditable)
+    item2.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled | QtCore.Qt.ItemFlag.ItemIsSelectable | QtCore.Qt.ItemFlag.ItemIsEditable)
     fldbk.lGrammarSearch.setItem(0, 0, item1)
     fldbk.lGrammarSearch.setItem(0, 1, item2)
     fldbk.lGrammarSearch.setVisible(1)
@@ -165,8 +165,8 @@ def lAdvancedSearch(fldbk):
     font.setItalic(False)
     font.setWeight(50)
     fldbk.lSearchUpdate.setFont(font)
-    fldbk.lSearchUpdate.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-    fldbk.lSearchUpdate.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+    fldbk.lSearchUpdate.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+    fldbk.lSearchUpdate.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
     fldbk.lSearchUpdate.setObjectName("lSearchUpdate")
     fldbk.lSearchUpdate.setVisible(1)
     
@@ -180,7 +180,7 @@ def lAdvancedSearch(fldbk):
     fldbk.lL2Search.setVisible(1)   
     fldbk.lSearchControlBar = QtWidgets.QFrame(fldbk.lexicon)
     fldbk.lSearchControlBar.setGeometry(QtCore.QRect(167, 594, 342, 56))
-    sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+    sizePolicy = QtWidgets.QSizePolicy()
     sizePolicy.setHorizontalStretch(0)
     sizePolicy.setVerticalStretch(0)
     sizePolicy.setHeightForWidth(fldbk.lSearchControlBar.sizePolicy().hasHeightForWidth())
@@ -200,8 +200,8 @@ def lAdvancedSearch(fldbk):
         "border-radius: 8px;"
         "padding: 0px;"
         "background-image: url('%s');}" %controlBar)
-    fldbk.lSearchControlBar.setFrameShape(QtWidgets.QFrame.StyledPanel)
-    fldbk.lSearchControlBar.setFrameShadow(QtWidgets.QFrame.Sunken)  
+    fldbk.lSearchControlBar.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+    fldbk.lSearchControlBar.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)  
     fldbk.lSearchControlBar.setVisible(1)
     barLayout = QtWidgets.QHBoxLayout()
     fldbk.lSearchControlBar.setLayout(barLayout)

@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt6 import QtGui
 from ELFB import dataIndex, linksMenu
 
 def __init__(self, parent=dataIndex.fldbk):
@@ -25,10 +25,10 @@ def updateContextMenu(fldbk, field, linksList, altList=None):
               fldbk.lDialect.dialectMenu = linksMenu.linksMenu(fldbk)
           actionHeader = 'Find...'
           fldbk.lDialect.dialectMenu.addAction(actionHeader)
-          for i in range(0,len(linksList)):
+          for i in range(0, len(linksList)):
               actionLink = 'action' + linksList[i]
               alternate = "   " + altList[i]
-              setattr(fldbk, actionLink, QtWidgets.QAction(alternate, fldbk.lDialect.dialectMenu))
+              setattr(fldbk, actionLink, QtGui.QAction(alternate, fldbk.lDialect.dialectMenu))
               action = getattr(fldbk, actionLink)
               fldbk.lDialect.dialectMenu.addAction(action)
               action.setData(linksList[i])
@@ -41,10 +41,10 @@ def updateContextMenu(fldbk, field, linksList, altList=None):
               fldbk.lL1Definition.L1DefinitionMenu = linksMenu.linksMenu(fldbk)
           actionHeader = 'Find...'
           fldbk.lL1Definition.L1DefinitionMenu.addAction(actionHeader)
-          for i in range(0,len(linksList)):
+          for i in range(0, len(linksList)):
               actionLink = 'action' + linksList[i]
               alternate = "   " + altList[i]
-              setattr(fldbk, actionLink, QtWidgets.QAction(alternate, fldbk.lL1Definition.L1DefinitionMenu))
+              setattr(fldbk, actionLink, QtGui.QAction(alternate, fldbk.lL1Definition.L1DefinitionMenu))
               action = getattr(fldbk, actionLink)
               fldbk.lL1Definition.L1DefinitionMenu.addAction(action)
               action.setData(linksList[i])
@@ -56,10 +56,10 @@ def updateContextMenu(fldbk, field, linksList, altList=None):
               fldbk.lL2Definition.L2DefinitionMenu = linksMenu.linksMenu(fldbk)
           actionHeader = 'Find...'
           fldbk.lL2Definition.L2DefinitionMenu.addAction(actionHeader)
-          for i in range(0,len(linksList)):
+          for i in range(0, len(linksList)):
               actionLink = 'action' + linksList[i]
               alternate = "   " + altList[i]
-              setattr(fldbk, actionLink, QtWidgets.QAction(alternate, fldbk.lL2Definition.L2DefinitionMenu))
+              setattr(fldbk, actionLink, QtGui.QAction(alternate, fldbk.lL2Definition.L2DefinitionMenu))
               action = getattr(fldbk, actionLink)
               fldbk.lL2Definition.L2DefinitionMenu.addAction(action)
               action.setData(linksList[i])
@@ -74,7 +74,7 @@ def updateContextMenu(fldbk, field, linksList, altList=None):
           soundName = []
           refList = []
           refName = []
-          for i in range(0,len(linksList)):             
+          for i in range(0, len(linksList)):             
               if 'M' in linksList[i]:
                   soundsList.append(linksList[i])
                   soundName.append(altList[i])
@@ -84,11 +84,11 @@ def updateContextMenu(fldbk, field, linksList, altList=None):
           if len(soundsList) != 0:
               actionHeader = 'Play...'
               fldbk.lGrammar.crossrefMenu.addAction(actionHeader)
-              for j in range(0,len(soundsList)):
+              for j in range(0, len(soundsList)):
                   if soundsList[j]:
                       actionLink = 'action' + soundsList[j]
                       alternative = "   " + soundName[j]
-                      setattr(fldbk, actionLink, QtWidgets.QAction(alternative, fldbk.lGrammar.crossrefMenu))
+                      setattr(fldbk, actionLink, QtGui.QAction(alternative, fldbk.lGrammar.crossrefMenu))
                       action = getattr(fldbk, actionLink)
                       fldbk.lGrammar.crossrefMenu.addAction(action)
                       action.setData(soundsList[j])
@@ -96,11 +96,11 @@ def updateContextMenu(fldbk, field, linksList, altList=None):
           if len(refList) != 0:
               actionHeader = 'Find...'
               fldbk.lGrammar.crossrefMenu.addAction(actionHeader)
-              for k in range(0,len(refList)):
+              for k in range(0, len(refList)):
                   if refList[k]:
                       actionLink = 'action' + refList[k]
                       alternative = "   " + refName[k]
-                      setattr(fldbk, actionLink, QtWidgets.QAction(alternative, fldbk.lGrammar.crossrefMenu))
+                      setattr(fldbk, actionLink, QtGui.QAction(alternative, fldbk.lGrammar.crossrefMenu))
                       action = getattr(fldbk, actionLink)
                       fldbk.lGrammar.crossrefMenu.addAction(action)
                       action.setData(refList[k])

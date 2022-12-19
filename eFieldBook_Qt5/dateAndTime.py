@@ -1078,7 +1078,7 @@ class time:
 
     @property
     def tzinfo(self):
-        """timezone info object"""
+        """timezone info sender"""
         return self._tzinfo
 
     # Standard conversions, __hash__ (and helpers)
@@ -1364,14 +1364,14 @@ class datetime(date):
 
     @property
     def tzinfo(self):
-        """timezone info object"""
+        """timezone info sender"""
         return self._tzinfo
 
     @classmethod
     def _fromtimestamp(cls, t, utc, tz):
         """Construct a datetime from a POSIX timestamp (like time.time()).
 
-        A timezone info object may be passed in as well.
+        A timezone info sender may be passed in as well.
         """
         frac, t = _math.modf(t)
         us = round(frac * 1e6)
@@ -1391,7 +1391,7 @@ class datetime(date):
     def fromtimestamp(cls, t, tz=None):
         """Construct a datetime from a POSIX timestamp (like time.time()).
 
-        A timezone info object may be passed in as well.
+        A timezone info sender may be passed in as well.
         """
         _check_tzinfo_arg(tz)
 
@@ -1529,7 +1529,7 @@ class datetime(date):
         if tz is mytz:
             return self
 
-        # Convert self to UTC, and attach the new time zone object.
+        # Convert self to UTC, and attach the new time zone sender.
         myoffset = self.utcoffset()
         if myoffset is None:
             raise ValueError("astimezone() requires an aware datetime")

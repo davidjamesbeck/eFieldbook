@@ -1,160 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-6.0.dtd">
 <!-- eric6 tasks file for project eFieldbook -->
-<!-- Saved: 2019-11-02, 14:36:12 -->
+<!-- Saved: 2020-07-17, 11:08:25 -->
 <Tasks version="6.0">
   <ProjectScanFilter></ProjectScanFilter>
-  <Task priority="1" completed="False" type="1" uid="{f0aa70dd-6e6c-478a-9a0c-5da9cc1d8780}">
+  <Task priority="1" completed="False" type="1" uid="{74f822a9-afa3-493a-8b6d-7b5f1d9847cd}">
     <Summary>TODO: make it possible for users to define punctuation characters</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/autoparsing.py</Filename>
-      <Linenumber>127</Linenumber>
+      <Linenumber>128</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{3e207027-1b5a-43cc-9940-3df9d2ea1937}">
+  <Task priority="1" completed="False" type="1" uid="{6bfcbd3e-9c8f-4669-bf59-2b113ce92e19}">
     <Summary>TODO: the above is a hack in case we have a &lt;Grm /&gt;, need to delete instead</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/cardLoader.py</Filename>
-      <Linenumber>810</Linenumber>
+      <Linenumber>811</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{95923a23-f9c4-4866-ab13-edda508ed408}">
+  <Task priority="1" completed="False" type="1" uid="{e4d9f21a-2b55-44ba-b3de-fe6705060fae}">
     <Summary>TODO: link up with datasets</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/egOnlyBtns.py</Filename>
-      <Linenumber>279</Linenumber>
+      <Linenumber>280</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{9b89bfff-fa45-4b0f-8e03-000af7ba414f}">
+  <Task priority="1" completed="False" type="1" uid="{f5838fa3-c184-4893-9b27-a9ef7d9cb19c}">
     <Summary>TODO: set up output of examples in IPA</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/egOnlyBtns.py</Filename>
-      <Linenumber>383</Linenumber>
+      <Linenumber>384</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{7d618d4f-3fa3-4b5a-a7de-e7ffcf83c187}">
-    <Summary>TODO: need to add a path to file names that are duplicated in the list</Summary>
-    <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
-    <Resource>
-      <Filename>ELFB/menus.py</Filename>
-      <Linenumber>792</Linenumber>
-    </Resource>
-  </Task>
-  <Task priority="1" completed="False" type="1" uid="{a6c93f35-e626-424a-8072-fb9762af63c4}">
+  <Task priority="1" completed="False" type="1" uid="{6e43947e-90f4-4720-ac5b-dd93aa45557d}">
     <Summary>TODO: need to tweak this to allow multiple fields to be selected</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/metaDataBtns.py</Filename>
       <Linenumber>807</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{3248b065-28e1-4b6b-b467-df687d489384}">
+  <Task priority="1" completed="False" type="1" uid="{58a62035-b59b-4b95-8ea0-7975cdf4c4ad}">
     <Summary>TODO: ??use case with gloss in two languages? this would involve changing the setLangBtn to tristate</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/AnalysisManager.py</Filename>
       <Linenumber>1255</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{7b29d0b4-5649-40bd-b5d4-bb73cd04ed52}">
+  <Task priority="1" completed="False" type="1" uid="{86137e53-1f98-4199-8c77-259959f61e43}">
     <Summary>TODO: ??use case with gloss in two languages?</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/AnalysisManager.py</Filename>
       <Linenumber>1632</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{01c5d343-b083-4750-af02-40f206041501}">
+  <Task priority="1" completed="False" type="1" uid="{80a3e9b8-469b-4f35-9189-b645c705176f}">
     <Summary>TODO: you might want to gather all the time formatting routines into a parameterizable module for Preferences</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/ElanImporter.py</Filename>
       <Linenumber>315</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{5a781b18-177f-4bd4-a374-e19a72cefc8f}">
+  <Task priority="1" completed="False" type="1" uid="{0c6fd09d-80df-480e-b318-efdc2cbe352e}">
     <Summary>TODO: this script removes final punctuation from texts that have it outside close quotes</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/ElanImporter.py</Filename>
       <Linenumber>344</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{9cd015a3-bf21-42da-9fa4-2431bc486be9}">
+  <Task priority="1" completed="False" type="1" uid="{ac0263fa-6045-42a9-a4f7-ef2c528e8e95}">
     <Summary>TODO: fix so you see definitions with alternatives</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/GrammarManager.py</Filename>
       <Linenumber>265</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{c7acb940-5a35-494b-a686-c7d5bbfb40a7}">
+  <Task priority="1" completed="False" type="1" uid="{a2aa796b-959e-45d3-9271-af84fff20a80}">
     <Summary>TODO: move this back into the calling routine in metaDataBtns?</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/MediaManager.py</Filename>
-      <Linenumber>146</Linenumber>
+      <Linenumber>152</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{0770cde3-8a04-4544-a19a-50ee2215c946}">
+  <Task priority="1" completed="False" type="1" uid="{980811e9-497e-455b-887b-71b9086a6f2c}">
     <Summary>TODO: write a more complete help text</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/SearchHelp.py</Filename>
       <Linenumber>62</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{602a5dd5-066f-4bf1-b222-597ce7f774f1}">
+  <Task priority="1" completed="False" type="1" uid="{9791d7e2-3ea5-4dc9-b520-555746098ffc}">
     <Summary>TODO: custom search outputs not implemented yet</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/palettes/SearchResultsToFile.py</Filename>
       <Linenumber>76</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{ecda5d10-9e00-4bad-ad96-114eadff32d5}">
+  <Task priority="1" completed="False" type="1" uid="{379ae63e-c603-4c52-9743-0f29d43b2ee0}">
     <Summary>TODO: this does not take into account any additional Synt tiers the user defines</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:07</Created>
     <Resource>
       <Filename>ELFB/searchClasses.py</Filename>
-      <Linenumber>787</Linenumber>
+      <Linenumber>788</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{f3689dc9-0c75-46c0-91c5-428d7bd53b90}">
+  <Task priority="1" completed="False" type="1" uid="{e2f69410-77dc-4cb3-8065-222ef18e8a6e}">
     <Summary>TODO: this is just a temporary fix</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:32</Created>
+    <Created>2020-07-17, 10:20:08</Created>
     <Resource>
       <Filename>ELFB/ui/fieldbook.py</Filename>
       <Linenumber>2125</Linenumber>
     </Resource>
   </Task>
-  <Task priority="1" completed="False" type="1" uid="{3f50f4be-ffb6-4ad3-afb2-537b5819381f}">
+  <Task priority="1" completed="False" type="1" uid="{41180423-b806-4a0d-b0b1-79ba45795ffe}">
     <Summary>TODO: fix so you can see defs as well as forms?</Summary>
     <Description></Description>
-    <Created>2019-11-02, 14:35:33</Created>
+    <Created>2020-07-17, 10:20:08</Created>
     <Resource>
       <Filename>ELFB/update.py</Filename>
       <Linenumber>309</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" type="1" uid="{8b0b18f7-0d30-4ba0-93cd-a6e77cad03b3}">
+    <Summary>TODO: need to add a path to file names that are duplicated in the list</Summary>
+    <Description></Description>
+    <Created>2020-07-17, 10:59:38</Created>
+    <Resource>
+      <Filename>ELFB/menus.py</Filename>
+      <Linenumber>795</Linenumber>
     </Resource>
   </Task>
 </Tasks>

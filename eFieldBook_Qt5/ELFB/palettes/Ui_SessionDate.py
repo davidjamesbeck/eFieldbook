@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/SessionDate.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_SessionDateManager(object):
     def setupUi(self, SessionDateManager):
@@ -23,7 +23,7 @@ class Ui_SessionDateManager(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(SessionDateManager)
         self.buttonBox.setMinimumSize(QtCore.QSize(164, 32))
         self.buttonBox.setMaximumSize(QtCore.QSize(164, 32))
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
         self.horizontalLayout_2.addLayout(self.verticalLayout)
@@ -47,5 +47,5 @@ if __name__ == "__main__":
     ui = Ui_SessionDateManager()
     ui.setupUi(SessionDateManager)
     SessionDateManager.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

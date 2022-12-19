@@ -43,7 +43,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             fname = self.settings.value('LastFile')
             dataIndex.sourceFile = fname
             xmlFile = QtCore.QFile(fname)
-            if xmlFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):
+            if xmlFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text):
                 '''tries to open file using QFile'''
                 xmlStream = QtCore.QTextStream(xmlFile)
                 xmlString = xmlStream.readAll()
@@ -52,7 +52,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             else:
                 '''QFile.open() fails, fname reset to None'''
                 fname = None
-        if fname == None:
+        if fname is None:
             '''if there is no file specified, ask for a file to open'''
             openFileDialog = QtWidgets.QFileDialog(self)
             filePath = openFileDialog.directory().currentPath()
@@ -70,7 +70,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             else:
                 '''user presses 'Cancel' on the FileDialog'''
                 blankDbFile = QtCore.QFile(dataIndex.rootPath + '/ELFB/newFileTemplate.xml')
-                blankDbFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+                blankDbFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text)
                 blankDbString = blankDbFile.readAll()
                 blankDbFile.close()
                 dataIndex.root = etree.XML(blankDbString)

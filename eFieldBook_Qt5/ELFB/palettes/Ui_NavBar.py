@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/NavBar.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_NavBar(object):
     def setupUi(self, NavBar):
@@ -14,7 +14,7 @@ class Ui_NavBar(object):
         NavBar.resize(258, 56)
         self.ControlBar = QtWidgets.QFrame(NavBar)
         self.ControlBar.setGeometry(QtCore.QRect(0, 0, 258, 56))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ControlBar.sizePolicy().hasHeightForWidth())
@@ -31,12 +31,12 @@ class Ui_NavBar(object):
 "     max-height: 32px;\n"
 "}\n"
 "")
-        self.ControlBar.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.ControlBar.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.ControlBar.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.ControlBar.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.ControlBar.setObjectName("ControlBar")
         self.BeginBtn = QtWidgets.QToolButton(self.ControlBar)
         self.BeginBtn.setGeometry(QtCore.QRect(13, 13, 34, 34))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.BeginBtn.sizePolicy().hasHeightForWidth())
@@ -47,7 +47,7 @@ class Ui_NavBar(object):
         self.BeginBtn.setFont(font)
         self.BeginBtn.setAutoFillBackground(False)
         self.BeginBtn.setText("")
-        self.BeginBtn.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self.BeginBtn.setToolButtonStyle(QtCore.Qt.ToolButtonStyle.ToolButtonIconOnly)
         self.BeginBtn.setObjectName("BeginBtn")
         self.PrevBtn = QtWidgets.QToolButton(self.ControlBar)
         self.PrevBtn.setGeometry(QtCore.QRect(53, 13, 34, 34))
@@ -65,8 +65,8 @@ class Ui_NavBar(object):
         self.NextBtn.setGeometry(QtCore.QRect(175, 13, 34, 34))
         self.NextBtn.setMinimumSize(QtCore.QSize(12, 12))
         self.NextBtn.setText("")
-        self.NextBtn.setPopupMode(QtWidgets.QToolButton.DelayedPopup)
-        self.NextBtn.setArrowType(QtCore.Qt.NoArrow)
+        self.NextBtn.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.DelayedPopup)
+        self.NextBtn.setArrowType(QtCore.Qt.ArrowType.NoArrow)
         self.NextBtn.setObjectName("NextBtn")
         self.EndBtn = QtWidgets.QToolButton(self.ControlBar)
         self.EndBtn.setGeometry(QtCore.QRect(213, 13, 34, 34))
@@ -101,5 +101,5 @@ if __name__ == "__main__":
     ui = Ui_NavBar()
     ui.setupUi(NavBar)
     NavBar.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

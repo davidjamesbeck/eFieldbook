@@ -1,17 +1,18 @@
-
 """
 Module implementing EgSearchDialog.
 """
 
-from PyQt5.QtWidgets import QDialog
-from PyQt5 import QtCore
+from PyQt6.QtWidgets import QDialog
+from PyQt6 import QtCore
 from .Ui_EgSearchDialog import Ui_SearchExamples
 from ELFB.palettes import SearchHelp
+
 
 class EgSearchDialog(QDialog, Ui_SearchExamples):
     """
     Class documentation goes here.
     """
+
     def __init__(self, parent):
         """
         Constructor
@@ -20,15 +21,15 @@ class EgSearchDialog(QDialog, Ui_SearchExamples):
         """
         super(EgSearchDialog, self).__init__(parent)
         self.setupUi(self)
-    
+
     @QtCore.pyqtSlot()
     def on_egSearchHelpBtn_released(self):
         """
         Slot documentation goes here.
         """
         helpDialog = SearchHelp.EgSearchHelpDialog(self)
-        helpDialog.exec_()
-    
+        helpDialog.exec()
+
     @QtCore.pyqtSlot()
     def on_clearBtn_released(self):
         """

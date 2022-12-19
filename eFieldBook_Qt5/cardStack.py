@@ -1,4 +1,4 @@
-##from PyQt5 import QtWidgets
+##from PyQt6 import QtWidgets
 from ELFB import cardStackVar, dataIndex, cardLoader
 
 '''class for moving forward and back'''

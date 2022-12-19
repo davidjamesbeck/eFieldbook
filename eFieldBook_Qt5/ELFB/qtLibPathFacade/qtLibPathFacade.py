@@ -1,12 +1,12 @@
-'''
+"""
 Copyright 2014 Lloyd Konneker
 
 Released under GPLv3
-'''
+"""
 
 import sys, syslog
 
-from PyQt5.QtCore import QCoreApplication, QDir
+from PyQt6.QtCore import QCoreApplication, QDir
 
 
 
@@ -17,14 +17,14 @@ def logAlert(message):
 
 
 class QtLibPathFacade(object):
-  '''
+  """
   Hides Qt dynamic library path.
   
   This addresses these Qt design issues :
   - default Qt library search path won't find platform plugins when app is sandboxed
   - qt.conf is not read before platform plugin is needed
   - chicken and egg issue setting up library path to find platform abstraction plugin:
-    you can't create your QApplication before the platform plugin is loaded,
+    you can't create your QApplication before the platform plugin is loaded, 
     but you can't use QCoreApplication.applicationDirPath() before you have an instance knowing sys.argv
     
   It logs to syslog:
@@ -45,11 +45,11 @@ class QtLibPathFacade(object):
   At the time when this class is needed, the Qt frameworks (dynamic libraries) have already been loaded by OS machinery.
   So this does not add any dirs except .app/Contents/PlugIns, e.g. not /Frameworks.
   And just after this, Qt reads qt.conf and further adjusts the library path?
-  '''
+  """
   
   @classmethod
   def addBundledPluginsPath(cls):
-    '''
+    """
     Set library path so bundled plugins are found on OSX.
     You should call this before instantiating QApplication if the platform abstraction plugin is not statically linked
     and the app is sandboxed (plugins in the bundle.)
@@ -58,7 +58,7 @@ class QtLibPathFacade(object):
     On OSX, when the platform plugin libqcocoa.dylib is in the PlugIns dir  of the app bundle (.app) , 
     this prepends to Qt's library path.
     On other platforms, it usually has no effect on Qt's library path.
-    '''
+    """
     aAppDirPath = cls._appDirPath()
     # assert not exist an instance of QApplication, else the following addLibraryPath() is specific to that instance?
     
@@ -74,13 +74,13 @@ class QtLibPathFacade(object):
   
   @classmethod
   def _appDirPath(cls):
-    '''
+    """
     string path to app's dir.
     
     This wraps Qt method of same name, but succeeds even if not exist a QApplication instance.
     
     Credit K.Knowles see http://qt-project.org/forums/viewthread/20672
-    '''
+    """
     # temp instance because applicationDirPath requires it and sys.argv
     _ = QCoreApplication(sys.argv)
     result = QCoreApplication.applicationDirPath()
@@ -92,7 +92,7 @@ class QtLibPathFacade(object):
     
   @classmethod
   def _appBundlePluginsPath(cls, appDirPath):
-    '''
+    """
     path to plugin directory of OSX app's bundle 
     (especially when sandboxed, i.e. in a cls-contained bundle w/o shared libraries)
     If not (platform is OSX and app has PlugIns dir in the bundle), returns None.
@@ -103,7 +103,7 @@ class QtLibPathFacade(object):
     Implementation: use Qt since it understands colons (e.g. ':/') for resource paths.
     (Instead of Python os.path, which is problematic.)
     Convert string to QDir, move it around, convert back to string of abs path without colons.
-    '''
+    """
     # appDirPath typically "/Users/<user>/Library/<appName>.app/Contents/MacOS" on OSX.
     appDir = QDir(appDirPath)
     if not appDir.cdUp():
@@ -121,9 +121,9 @@ class QtLibPathFacade(object):
   
   @classmethod
   def dump(cls):
-    '''
+    """
     For debugging fail to load plugins, mainly OSX.
-    '''
+    """
     logAlert("Qt Library/plugin search paths:")
     for path in QCoreApplication.libraryPaths():
       logAlert("  Path: {}".format(path))

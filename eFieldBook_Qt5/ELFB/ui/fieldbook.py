@@ -5,14 +5,14 @@ Module implementing MainWindow.
 """
 
 import os
-from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QMainWindow
+from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtWidgets import QMainWindow
 from .Ui_fieldbook import Ui_Fieldbook
 from ELFB import dataIndex, cardLoader, Alphabetizer, menus, navLists, dictBuilder, contextMenus
 from ELFB import lexOnlyBtns, textOnlyBtns, egOnlyBtns, metaDataBtns, tabConstructors
 from ELFB import indexOnlyBtns, searchOnlyBtns, dsetOnlyBtns, Orthographies, exports
 from ELFB import NumberedLineEdit, metaDataTableFillers, formattingHandlers, update
-from ELFB.focusOutFilter import focusOutFilter, dialectFilter, borrowFilter, exLineFilter
+from ELFB.FocusOutFilter import FocusOutFilter, DialectFilter, BorrowFilter, ExLineFilter
 from ELFB.palettes import LexSearchForm
 from xml.etree import ElementTree as etree
 from ELFB.ui.rsrc import images_rc
@@ -38,7 +38,8 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         font.setWeight(50)
         QtWidgets.QApplication.setFont(font)
         self.ui = Ui_Fieldbook
-        self.settings = QtCore.QSettings(QtCore.QSettings.NativeFormat, QtCore.QSettings.UserScope, 'UNTProject', 'eFieldbook')
+        # self.settings = QtCore.QSettings('UNTProject', 'eFieldbook')
+        self.settings = QtCore.QSettings(QtCore.QSettings.Format.NativeFormat, QtCore.QSettings.Scope.UserScope, 'UNTProject', 'eFieldbook')
         self.Alphabetizer = Alphabetizer
         self.setupUi(self)
         dataIndex.fldbk = self
@@ -60,47 +61,47 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         tabConstructors.soundPanelBuilder(self)
         tabConstructors.navBarBuilder(self)
                 
-        '''Load XML'''
-        '''determine the file to be opened on startup'''
+        """Load XML"""
+        """determine the file to be opened on startup"""
         fname = None
         if self.settings.value('LastFile'):
             longName = dataIndex.homePath + self.settings.value('LastFile')
             if QtCore.QFile.exists(longName):
-                '''previously open file in QSettings exists, fname is set'''
+                """previously open file in QSettings exists, fname is set"""
                 dataIndex.sourceFile = self.settings.value('LastFile')
                 fname = longName
             try:
                 xmltree = etree.parse(fname)
                 dataIndex.root = xmltree.getroot()
             except (TypeError, PermissionError, FileNotFoundError) as err:
-                '''error arises if xml file can't be parsed by ElementTree'''
+                """error arises if xml file can't be parsed by ElementTree"""
                 print(err)
                 xmlFile = QtCore.QFile(fname)
-                if xmlFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):
-                    '''tries to open file using QFile'''
+                if xmlFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text):
+                    """tries to open file using QFile"""
                     xmlStream = QtCore.QTextStream(xmlFile)
                     xmlString = xmlStream.readAll()
                     dataIndex.root = etree.XML(xmlString)
                     xmlFile.close()
                 else:
-                    '''QFile.open() fails, fname reset to None'''
+                    """QFile.open() fails, fname reset to None"""
                     fname = None
-        if fname == None:
-            '''if there is no file specified, ask for a file to open'''
+        if fname is None:
+            """if there is no file specified, ask for a file to open"""
             openFileDialog = QtWidgets.QFileDialog(self)
             filePath = openFileDialog.directory().currentPath()
             openFileDialog.setDirectory(filePath)
-            fname = openFileDialog.getOpenFileName(self, "Open...","","XML (*.xml)")
+            fname = openFileDialog.getOpenFileName(self, "Open...", "", "XML (*.xml)")
             if len(fname[0]) != 0:
-                '''user selects file in FileDialog'''
+                """user selects file in FileDialog"""
                 fname = fname[0]
                 dataIndex.sourceFile = fname[len(dataIndex.homePath):]
                 xmltree = etree.parse(fname)
                 dataIndex.root = xmltree.getroot()
             else:
-                '''user presses 'Cancel' on the FileDialog'''
+                """user presses 'Cancel' on the FileDialog"""
                 blankDbFile = QtCore.QFile(dataIndex.rootPath + '/ELFB/newFileTemplate.xml')
-                blankDbFile.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text)
+                blankDbFile.open(QtCore.QIODevice.OpenModeFlag.ReadOnly | QtCore.QIODevice.OpenModeFlag.Text)
                 blankDbString = blankDbFile.readAll()
                 blankDbFile.close()
                 dataIndex.root = etree.XML(blankDbString)
@@ -112,12 +113,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         navLists.navListBuilderLex(self)
         navLists.navListBuilderText(self)
         navLists.navListBuilderData(self)
-        dictBuilder.exDictBuilder(self)
-        dictBuilder.mediaDictBuilder(self)
-        dictBuilder.speakerDictBuilder(self)
-        dictBuilder.rschrDictBuilder(self)
+        dictBuilder.exDictBuilder()
+        dictBuilder.mediaDictBuilder()
+        dictBuilder.speakerDictBuilder()
+        dictBuilder.rschrDictBuilder()
         
-        '''SET UP MENUS'''
+        """SET UP MENUS"""
         self.actionFind.setEnabled(0)
         self.actionFind_Again.setEnabled(0)
         self.actionFuzzy_Find.setEnabled(0)
@@ -125,9 +126,9 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.actionNewCard.setEnabled(0)
         self.actionCopyCard.setEnabled(0)
         self.actionDelCard.setEnabled(0)
-        self.actionQuit.setShortcut(QtCore.Qt.Key_Control + QtCore.Qt.Key_Q)
+        self.actionQuit.setShortcut(QtGui.QKeySequence("Ctrl+Q"))
         
-        '''BUILD ICONS AND RESOURCES'''
+        """BUILD ICONS AND RESOURCES"""
         AdvSearchIconSize = QtCore.QSize(50, 50)
         AdvSearchIcon = QtGui.QIcon(':AdvSearch.png')
         self.lAdvancedSearchBtn.setStyleSheet('background: transparent; padding: 0px; min-width: 23px; min-height: 23px;')
@@ -232,73 +233,73 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.eFindUnparsedBtn.setIcon(findUnparsedIcon)  
         self.eFindUnparsedBtn.setIconSize(newCardIconSize)         
         
-        '''SET UP TABS AND SUB-CLASSED WIDGETS'''
+        """SET UP TABS AND SUB-CLASSED WIDGETS"""
         
-        '''TextEdits'''
+        """TextEdits"""
         
-        '''Home tab'''
+        """Home tab"""
         dbTitle = dataIndex.root.attrib.get('Dbase')
         dbTitle = formattingHandlers.XMLtoRTF(dbTitle)
         self.hTitle.setText(dbTitle)
-        self.hTitle.setAlignment(QtCore.Qt.AlignHCenter)
-        self.filter = focusOutFilter(self.hTitle)
+        self.hTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.filter = FocusOutFilter(self.hTitle)
         self.hTitle.installEventFilter(self.filter)
         self.hTitle.textChanged.connect(self.flagUnsavedEdits)
     
         lang = dataIndex.root.attrib.get('Language')
         self.hLanguage.setPlainText(lang)
-        self.filter = focusOutFilter(self.hLanguage)
+        self.filter = FocusOutFilter(self.hLanguage)
         self.hLanguage.installEventFilter(self.filter)
         self.hLanguage.textChanged.connect(self.flagUnsavedEdits)
     
         family = dataIndex.root.attrib.get('Family')
         self.hFamily.setPlainText(family)
-        self.filter = focusOutFilter(self.hFamily)
+        self.filter = FocusOutFilter(self.hFamily)
         self.hFamily.installEventFilter(self.filter)
         self.hFamily.textChanged.connect(self.flagUnsavedEdits)
         
         population = dataIndex.root.attrib.get('Population')
         self.hPopulation.setPlainText(population)
-        self.filter = focusOutFilter(self.hPopulation)
+        self.filter = FocusOutFilter(self.hPopulation)
         self.hPopulation.installEventFilter(self.filter)
         self.hPopulation.textChanged.connect(self.flagUnsavedEdits)
         
         location = dataIndex.root.attrib.get('Location')
         self.hLocation.setPlainText(location)
-        self.filter = focusOutFilter(self.hLocation)
+        self.filter = FocusOutFilter(self.hLocation)
         self.hLocation.installEventFilter(self.filter)
         self.hLocation.textChanged.connect(self.flagUnsavedEdits)
         
         iso = dataIndex.root.attrib.get('ISO')
         self.hISO.setPlainText(iso)
-        self.filter = focusOutFilter(self.hISO)
+        self.filter = FocusOutFilter(self.hISO)
         self.hISO.installEventFilter(self.filter)
         self.hISO.textChanged.connect(self.flagUnsavedEdits)
         
-        '''Lexicon tab'''
+        """Lexicon tab"""
         
         #Lexicographic info
     
-        self.filter = focusOutFilter(self.lOrthography)
+        self.filter = FocusOutFilter(self.lOrthography)
         self.lOrthography.installEventFilter(self.filter)
         self.lOrthography.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = focusOutFilter(self.lPOS)
+        self.filter = FocusOutFilter(self.lPOS)
         self.lPOS.installEventFilter(self.filter)
         self.lPOS.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = focusOutFilter(self.lRegister)
+        self.filter = FocusOutFilter(self.lRegister)
         self.lRegister.installEventFilter(self.filter)
         self.lRegister.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = focusOutFilter(self.lIPA)
+        self.filter = FocusOutFilter(self.lIPA)
         self.lIPA.installEventFilter(self.filter)
         self.lIPA.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = dialectFilter(self.lDialect)
+        self.filter = DialectFilter(self.lDialect)
         self.lDialect.installEventFilter(self.filter)
         self.lDialect.textChanged.connect(self.flagUnsavedEdits)
-        self.filter = borrowFilter(self.lBrrw)
+        self.filter = BorrowFilter(self.lBrrw)
         self.lBrrw.installEventFilter(self.filter)
         self.lBrrw.textChanged.connect(self.flagUnsavedEdits)
         
@@ -326,184 +327,184 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         
         self.lL2Definition.customContextMenuRequested.connect(L2Menu) 
         
-        self.filter = focusOutFilter(self.lLiteral)
+        self.filter = FocusOutFilter(self.lLiteral)
         self.lLiteral.installEventFilter(self.filter)
         self.lLiteral.textChanged.connect(self.flagUnsavedEdits)
     
         #Metadata
     
-        self.filter = focusOutFilter(self.lSource)
+        self.filter = FocusOutFilter(self.lSource)
         self.lSource.installEventFilter(self.filter)
         self.lSource.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.lResearcher)
+        self.filter = FocusOutFilter(self.lResearcher)
         self.lResearcher.installEventFilter(self.filter)
         self.lResearcher.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = focusOutFilter(self.lDate)
+        self.filter = FocusOutFilter(self.lDate)
         self.lDate.installEventFilter(self.filter)
         self.lDate.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.lUpdated)
+        self.filter = FocusOutFilter(self.lUpdated)
         self.lUpdated.installEventFilter(self.filter)
         self.lUpdated.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.lConfirmed)
+        self.filter = FocusOutFilter(self.lConfirmed)
         self.lConfirmed.installEventFilter(self.filter)
         self.lConfirmed.textChanged.connect(self.flagUnsavedEdits)
   
         #Notes
         
-        self.filter = focusOutFilter(self.lNotes)
+        self.filter = FocusOutFilter(self.lNotes)
         self.lNotes.installEventFilter(self.filter)
         self.lNotes.textChanged.connect(self.flagUnsavedEdits)
     
         #Indices
         
-        self.filter = focusOutFilter(self.lPrimaryIndex)
+        self.filter = FocusOutFilter(self.lPrimaryIndex)
         self.lPrimaryIndex.installEventFilter(self.filter)
         self.lPrimaryIndex.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.lSecondaryIndex)
+        self.filter = FocusOutFilter(self.lSecondaryIndex)
         self.lSecondaryIndex.installEventFilter(self.filter)
         self.lSecondaryIndex.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = exLineFilter(self.lKeywordIndex)
+        self.filter = ExLineFilter(self.lKeywordIndex)
         self.lKeywordIndex.installEventFilter(self.filter)
         self.lKeywordIndex.textChanged.connect(self.flagUnsavedEdits)
         
-        '''text fields'''
-        '''Texts tab'''
+        """text fields"""
+        """Texts tab"""
          
-        self.filter = focusOutFilter(self.tSource)
+        self.filter = FocusOutFilter(self.tSource)
         self.tSource.installEventFilter(self.filter)
         self.tSource.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.tResearcher)
+        self.filter = FocusOutFilter(self.tResearcher)
         self.tResearcher.installEventFilter(self.filter)
         self.tResearcher.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = focusOutFilter(self.tDate)
+        self.filter = FocusOutFilter(self.tDate)
         self.tDate.installEventFilter(self.filter)
         self.tDate.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.tUpdated)
+        self.filter = FocusOutFilter(self.tUpdated)
         self.tUpdated.installEventFilter(self.filter)
         self.tUpdated.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.tTranscriber)
+        self.filter = FocusOutFilter(self.tTranscriber)
         self.tTranscriber.installEventFilter(self.filter)
         self.tTranscriber.textChanged.connect(self.flagUnsavedEdits)
        
-        self.filter = focusOutFilter(self.tNotes)
+        self.filter = FocusOutFilter(self.tNotes)
         self.tNotes.installEventFilter(self.filter)
         self.tNotes.textChanged.connect(self.flagUnsavedEdits)
     
-        self.filter = focusOutFilter(self.tTitle)
+        self.filter = FocusOutFilter(self.tTitle)
         self.tTitle.installEventFilter(self.filter)
         self.tTitle.textChanged.connect(self.flagUnsavedEdits)
-        self.tTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.tTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         
-        '''Examples tab'''
-        self.filter = exLineFilter(self.eLine)
+        """Examples tab"""
+        self.filter = ExLineFilter(self.eLine)
         self.eLine.installEventFilter(self.filter)
         self.eLine.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eL1Gloss)
+        self.filter = FocusOutFilter(self.eL1Gloss)
         self.eL1Gloss.installEventFilter(self.filter)
         self.eL1Gloss.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eL2Gloss)
+        self.filter = FocusOutFilter(self.eL2Gloss)
         self.eL2Gloss.installEventFilter(self.filter)
         self.eL2Gloss.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eNotes)
+        self.filter = FocusOutFilter(self.eNotes)
         self.eNotes.installEventFilter(self.filter)
         self.eNotes.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eKeywords)
+        self.filter = FocusOutFilter(self.eKeywords)
         self.eKeywords.installEventFilter(self.filter)
         self.eKeywords.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eSource)
+        self.filter = FocusOutFilter(self.eSource)
         self.eSource.installEventFilter(self.filter)
         self.eSource.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eResearcher)
+        self.filter = FocusOutFilter(self.eResearcher)
         self.eResearcher.installEventFilter(self.filter)
         self.eResearcher.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eDate)
+        self.filter = FocusOutFilter(self.eDate)
         self.eDate.installEventFilter(self.filter)
         self.eDate.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eUpdated)
+        self.filter = FocusOutFilter(self.eUpdated)
         self.eUpdated.installEventFilter(self.filter)
         self.eUpdated.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eSourceText)
+        self.filter = FocusOutFilter(self.eSourceText)
         self.eSourceText.installEventFilter(self.filter)
         self.eSourceText.textChanged.connect(self.flagUnsavedEdits)
      
-        self.filter = focusOutFilter(self.eTimeCode)
+        self.filter = FocusOutFilter(self.eTimeCode)
         self.eTimeCode.installEventFilter(self.filter)
         self.eTimeCode.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.eTimeCode)
+        self.filter = FocusOutFilter(self.eTimeCode)
         self.eSpokenBy.installEventFilter(self.filter)
         self.eSpokenBy.textChanged.connect(self.flagUnsavedEdits)
         
-        '''Datasets tab'''
-        self.filter = focusOutFilter(self.dSource)
+        """Datasets tab"""
+        self.filter = FocusOutFilter(self.dSource)
         self.dSource.installEventFilter(self.filter)
         self.dSource.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.dResearcher)
+        self.filter = FocusOutFilter(self.dResearcher)
         self.dResearcher.installEventFilter(self.filter)
         self.dResearcher.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.dDate)
+        self.filter = FocusOutFilter(self.dDate)
         self.dDate.installEventFilter(self.filter)
         self.dDate.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.dKeywords)
+        self.filter = FocusOutFilter(self.dKeywords)
         self.dKeywords.installEventFilter(self.filter)
         self.dKeywords.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.dNotes)
+        self.filter = FocusOutFilter(self.dNotes)
         self.dNotes.installEventFilter(self.filter)
         self.dNotes.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.dData)
+        self.filter = FocusOutFilter(self.dData)
         self.dData.installEventFilter(self.filter)
         self.dData.textChanged.connect(self.flagUnsavedEdits)
         self.dNumberBox = NumberedLineEdit.DataNumberWidget(self.datasets)
         self.dNumberBox.setGeometry(12, 72, 896, 480)
         
-        self.filter = focusOutFilter(self.dTitle)
+        self.filter = FocusOutFilter(self.dTitle)
         self.dTitle.installEventFilter(self.filter)
         self.dTitle.textChanged.connect(self.flagUnsavedEdits)
         
-        '''metadata tab'''
-        self.filter = focusOutFilter(self.oOrder)
+        """metadata tab"""
+        self.filter = FocusOutFilter(self.oOrder)
         self.oOrder.installEventFilter(self.filter)
         self.oOrder.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.oDiacriticsField)
+        self.filter = FocusOutFilter(self.oDiacriticsField)
         self.oDiacriticsField.installEventFilter(self.filter)
         self.oDiacriticsField.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.sOrder)
+        self.filter = FocusOutFilter(self.sOrder)
         self.sOrder.installEventFilter(self.filter)
         self.sOrder.textChanged.connect(self.flagUnsavedEdits)
         
-        self.filter = focusOutFilter(self.sExclusions)
+        self.filter = FocusOutFilter(self.sExclusions)
         self.sExclusions.installEventFilter(self.filter)
         self.sExclusions.textChanged.connect(self.flagUnsavedEdits)
         
-        '''buttons, list widgets and comboboxes'''
+        """buttons, list widgets and comboboxes"""
         
-        '''HOME Tab'''        
+        """HOME Tab"""        
         
         def goToLxCard():
             data = self.hLexNav.currentIndex().data(32)
@@ -536,7 +537,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
     
         self.hDataNav.clicked.connect(goToDataCard)
  
-        '''Lexicon card'''
+        """Lexicon card"""
         
         def goToLxCard2():
           data = self.lLexNav.currentIndex().data(32)
@@ -552,12 +553,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             targetCard = dataIndex.lexDict[data]
             cardLoader.loadLexCard(targetCard)
             dataIndex.unsavedEdit = 0
-            for i in range(0,self.lLexNav.model().rowCount()):
+            for i in range(0, self.lLexNav.model().rowCount()):
                 if self.lLexNav.model().index(i, 0).data(32) == data:
                     theItem = i
                     break                    
-            self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem,0))
-            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.PositionAtCenter)
+            self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem, 0))
+            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
           
         self.lDerivatives.doubleClicked.connect(goToDerivation)
         
@@ -566,12 +567,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             targetCard = dataIndex.lexDict[data]
             cardLoader.loadLexCard(targetCard)
             dataIndex.unsavedEdit = 0
-            for i in range(0,self.lLexNav.model().rowCount()):
+            for i in range(0, self.lLexNav.model().rowCount()):
                 if self.lLexNav.model().index(i, 0).data(32) == data:
                     theItem = i
                     break                    
-            self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem,0))
-            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.PositionAtCenter)
+            self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem, 0))
+            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
            
         self.lBase.clicked.connect(goToBase)
         
@@ -581,7 +582,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         except AttributeError:
             pass
 
-        '''TextCard'''
+        """TextCard"""
         
         self.tText.setVisible(1)
         self.textLayout = QtWidgets.QVBoxLayout(self.tText)
@@ -599,16 +600,16 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         comboBox = self.tOrthography
         Orthographies.fillOrthPickers(comboBox)  
         
-        '''Example card'''
+        """Example card"""
 
         metaDataTableFillers.fillAbbrevTables(self)
 
         comboBox = self.eOrthography
         Orthographies.fillOrthPickers(comboBox)   
         
-        '''Datasets'''
+        """Datasets"""
 
-        '''ListWidgets'''
+        """ListWidgets"""
         def goToDataCard2():
             data = self.dDataNav.currentIndex().data(32)
             dataIndex.currentCard = data
@@ -619,7 +620,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
     
         self.dDataNav.clicked.connect(goToDataCard2)
         
-        '''Searches card'''
+        """Searches card"""
         
         def setSignal(targets):
             for checkBox in targets:
@@ -641,24 +642,24 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         setSignal(self.cTextsFocusBox.children())
         setExSignal(self.cExamplesFocusBox.children())
         
-        '''METADATA Tab'''
+        """METADATA Tab"""
     
-        '''Consultants sub-tab'''
+        """Consultants sub-tab"""
     
         metaDataTableFillers.fillConsultantTable(self)
-        self.mSpTable.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.mSpTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)
         self.mSpSetDefaultBtn.setEnabled(0)
     
-        '''researchers sub-tab'''
+        """researchers sub-tab"""
         
-        levelList = ['Admin','Editor','Output','Read only','None']
-        self.mPrivilegesBox.insertItems(-1,levelList)
+        levelList = ['Admin', 'Editor', 'Output', 'Read only', 'None']
+        self.mPrivilegesBox.insertItems(-1, levelList)
         self.mPrivilegesBox.setCurrentIndex(-1)
         metaDataTableFillers.fillRTable(self)
-        self.mRTable.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.mRTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)
         self.mRSetDefaultBtn.setEnabled(0)
     
-        '''media sub-tab'''
+        """media sub-tab"""
         
         self.mSpDelBtn.setEnabled(0)
         self.mSpUpdateBtn.setEnabled(0)
@@ -669,12 +670,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         if dataIndex.root.get("MediaFolder"):
             prefix = dataIndex.root.get("MediaFolder")
             self.mMediaPath.setText(prefix)
-        self.mMediaTable.sortItems(0,QtCore.Qt.AscendingOrder)
+        self.mMediaTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)
         
-        '''orthographies sub-tab'''
+        """orthographies sub-tab"""
         
-        self.oList.setColumnWidth(0,118)    
-        self.oList.setColumnWidth(1,78)    
+        self.oList.setColumnWidth(0, 118)    
+        self.oList.setColumnWidth(1, 78)    
         self.oList.verticalHeader().hide()
         self.oList.setAlternatingRowColors(1)
         self.oList.setStyleSheet("selection-background-color: #E6E6E6;")
@@ -684,28 +685,28 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.oTransformBox.insertItem(1, 'Phon ⇨ Orth')
         self.oTransformBox.setStyleSheet('selection-color: blue;')
         
-        '''alphabetization sub-tab'''
+        """alphabetization sub-tab"""
         
         metaDataTableFillers.fillSort(self)
         self.sList.itemClicked.connect(metaDataBtns.selectSRow)
 
-        '''index card'''
+        """index card"""
         
         self.iSortingBox.clear()
-        self.iSortingBox.insertItem(0,'Wordforms')
-        self.iSortingBox.insertItem(1,'Morphs')
-        self.iSortingBox.insertItem(2,'Analysis')
+        self.iSortingBox.insertItem(0, 'Wordforms')
+        self.iSortingBox.insertItem(1, 'Morphs')
+        self.iSortingBox.insertItem(2, 'Analysis')
         
-        self.iIndex.setTabStopWidth(150)
+        self.iIndex.setTabStopDistance(150)
 
-        '''final setup'''
+        """final setup"""
         
         dataIndex.lastText = dataIndex.root.attrib.get('LastText')
         dataIndex.lastLex = dataIndex.root.attrib.get('LastLex')
         dataIndex.lastEx = dataIndex.root.attrib.get('lastEx')
         dataIndex.lastDset = dataIndex.root.attrib.get('LastDset')
         keyList = list(dataIndex.root.keys())
-        #if there are default researchers and speakers set,
+        #if there are default researchers and speakers set, 
         #use these to set lastRschr and lastSpeaker, otherwise
         #use saved values for lastRschr and lastSpeaker
         if 'DefaultRschr' in keyList:
@@ -721,7 +722,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         dataIndex.unsavedEdit = 0
         
     def flagUnsavedEdits(self):
-        '''set flag when fields are edited'''
+        """set flag when fields are edited"""
         dataIndex.unsavedEdit = 1
         return dataIndex.unsavedEdit
         
@@ -740,7 +741,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         Actions performed when tabWidget is clicked.
         """
-        if dataIndex.sourceFile == None:
+        if dataIndex.sourceFile is None:
             return
         if self.tabWidget.currentIndex() == 0: #Home tab
             self.actionNewCard.setEnabled(False)
@@ -770,7 +771,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             if lastLex:
                 entry = dataIndex.lexDict[lastLex]
             else:
-                lastLex = self.lLexNav.model().index(0,0).data(32)     
+                lastLex = self.lLexNav.model().index(0, 0).data(32)     
                 entry = dataIndex.lexDict[lastLex]
                 dataIndex.lastLex = lastLex
             cardLoader.loadLexCard(entry)
@@ -788,12 +789,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             self.actionFind_Again.setEnabled(1)
             self.actionFuzzy_Find.setEnabled(1)
             self.actionFuzzy_Find_Again.setEnabled(1)
-            for i in range(0,self.lLexNav.model().rowCount()):
-                if self.lLexNav.model().index(i,0).data(32) == lastLex:
+            for i in range(0, self.lLexNav.model().rowCount()):
+                if self.lLexNav.model().index(i, 0).data(32) == lastLex:
                     theItem = i
                     break                    
-            self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem,0))
-            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+            self.lLexNav.setCurrentIndex(self.lLexNav.model().index(theItem, 0))
+            self.lLexNav.scrollTo(self.lLexNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
             if pendingChange:
                 dataIndex.unsavedEdit = 1
             else:
@@ -808,12 +809,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             lastText = dataIndex.root.attrib.get('LastText')
             if lastText:
                 entry = dataIndex.textDict[lastText]
-                for i in range(0,self.tTextNav.model().rowCount()):
-                    if self.tTextNav.model().index(i,0).data(32) == lastText:
+                for i in range(0, self.tTextNav.model().rowCount()):
+                    if self.tTextNav.model().index(i, 0).data(32) == lastText:
                         theItem = i
                         break                    
-                self.tTextNav.setCurrentIndex(self.tTextNav.model().index(theItem,0))
-                self.tTextNav.scrollTo(self.tTextNav.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+                self.tTextNav.setCurrentIndex(self.tTextNav.model().index(theItem, 0))
+                self.tTextNav.scrollTo(self.tTextNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
                 dataIndex.currentCard = lastText
             entry = dataIndex.textDict[lastText]
             cardLoader.loadTextCard(entry)
@@ -878,12 +879,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             lastDset = dataIndex.root.attrib.get('LastDset')
             if lastDset:
                 entry = dataIndex.dataDict[lastDset]
-                for i in range(0,self.dDataNav.model().rowCount()):
-                    if self.dDataNav.model().index(i,0).data(32) == lastDset:
+                for i in range(0, self.dDataNav.model().rowCount()):
+                    if self.dDataNav.model().index(i, 0).data(32) == lastDset:
                         theItem = i
                         break                    
-                self.dDataNav.setCurrentIndex(self.dDataNav.model().index(theItem,0))
-                self.dDataNav.scrollTo(self.dDataNav.currentIndex(), QtWidgets.QAbstractItemView.EnsureVisible)
+                self.dDataNav.setCurrentIndex(self.dDataNav.model().index(theItem, 0))
+                self.dDataNav.scrollTo(self.dDataNav.currentIndex(), QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible)
                 dataIndex.currentCard = lastDset
             else:
                 lastDset = dataIndex.root.find('Dset')         
@@ -960,7 +961,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             pass
 
     def recoverRecentFiles(self):
-        '''get list of recently opened files from QSettings and store it in dataIndex'''
+        """get list of recently opened files from QSettings and store it in dataIndex"""
         try:
             if len(self.settings.value('RecentFile')) != 0:
                 fnames = self.settings.value('RecentFile')
@@ -974,7 +975,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             pass
 
     def giveWindowTitle(self):
-        if dataIndex.sourceFile != None:
+        if dataIndex.sourceFile is not None:
             self.setWindowTitle("{0}[*]".format(os.path.basename(dataIndex.sourceFile)))
         else:
             self.setWindowTitle("Electronic Fieldbook")
@@ -1090,7 +1091,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         dsetOnlyBtns.dAdvancedSearch(self)
         
-    '''sound buttons (all cards)'''
+    """sound buttons (all cards)"""
     
     @QtCore.pyqtSlot()
     def on_dResetBtn_released(self):
@@ -1135,21 +1136,21 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         if self.mMediaTable.currentRow() == -1:
             return
         msgbox = QtWidgets.QMessageBox()
-        msgbox.setIcon(QtWidgets.QMessageBox.Warning)
+        msgbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
         msgbox.setText("Remove recording.")
         msgbox.setInformativeText('This will remove all links to \n'
                                   'and information about this \n'
                                   'recording from the database. Proceed?')
-        msgbox.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
-        msgbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
-        msgbox.exec_()
-        if msgbox.result() == QtWidgets.QMessageBox.Ok:
+        msgbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok | QtWidgets.QMessageBox.StandardButton.Cancel)
+        msgbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+        msgbox.exec()
+        if msgbox.result() == QtWidgets.QMessageBox.StandardButton.Ok:
             mediaElement = self.mMediaTable.currentItem().data(36)
             mediaID = mediaElement.attrib.get('MedID')
             del dataIndex.mediaDict[mediaID]
             dataIndex.root.remove(mediaElement)
             self.mMediaTable.removeRow(self.mMediaTable.currentRow())
-            self.mMediaTable.setCurrentCell(-1,-1)
+            self.mMediaTable.setCurrentCell(-1, -1)
             update.cleanUpIDs(mediaID)
             dataIndex.unsavedEdit = 1    
     
@@ -1160,10 +1161,10 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         the default directory for media files
         """
         newPath=self.mMediaPath.text()
-        dataIndex.root.set("MediaFolder",newPath)
+        dataIndex.root.set("MediaFolder", newPath)
         dataIndex.unsavedEdit = 1
 
-    '''lexicon card buttons'''
+    """lexicon card buttons"""
     
     @QtCore.pyqtSlot()
     def on_lAddDerBtn_released(self):
@@ -1214,13 +1215,13 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             except AttributeError:
                 elemList = list(lexNode)
                 elemList.reverse()
-                for i,item in enumerate(elemList):
+                for i, item in enumerate(elemList):
                     if item.tag == 'POS': 
                         break
                     elif item.tag == 'Orth': 
                         break
                 i = len(elemList) - i
-                lexNode.insert(i,etree.Element('IPA'))
+                lexNode.insert(i, etree.Element('IPA'))
                 lexNode.find('IPA').text = IPA
             self.lIPA.setText(IPA)
             dataIndex.unsavedEdits = 1
@@ -1230,7 +1231,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         check box for lexical entries considered more or less complete.
         """
-        lexOnlyBtns.doneBtn(self, p0)
+        lexOnlyBtns.doneBtn(p0)
         
     @QtCore.pyqtSlot()
     def on_lClipBtn_released(self):
@@ -1238,7 +1239,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         copies a digest of the lexical entry to the clipboard.
         """
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        if modifiers == QtCore.Qt.AltModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
             outputLanguage = 'L2'
         else:
             outputLanguage = 'L1'
@@ -1285,7 +1286,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             self.lSearchForm.setVisible(1)
         self.lexicon.setVisible(0)
 
-    '''text card only buttons'''
+    """text card only buttons"""
     
     @QtCore.pyqtSlot()
     def on_tAnalyzeBtn_released(self):
@@ -1341,7 +1342,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         except AttributeError:
             return
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        if modifiers == QtCore.Qt.AltModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
             outputLanguage = 'L2'
         else:
             outputLanguage = 'L1'
@@ -1353,7 +1354,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         Place text on clipboard.
         """
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        if modifiers == QtCore.Qt.AltModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
             outputLanguage = 'L2'
         else:
             outputLanguage = 'L1'
@@ -1373,7 +1374,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         textOnlyBtns.tAdvancedSearch(self)
     
-    '''example card only buttons'''
+    """example card only buttons"""
     
     @QtCore.pyqtSlot()
     def on_eAddAbbrBtn_released(self):
@@ -1480,7 +1481,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         node = dataIndex.exDict[dataIndex.currentCard]
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        if modifiers == QtCore.Qt.AltModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
             outputLanguage = 'L2'
         else:
             outputLanguage = 'L1'
@@ -1517,7 +1518,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         cardLoader.loadLexCard(lexRoot)
         self.tabWidget.setCurrentIndex(1)
 
-    '''metadata card buttons'''
+    """metadata card buttons"""
     
     @QtCore.pyqtSlot()
     def on_oTestBtn_released(self):
@@ -1723,7 +1724,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         egOnlyBtns.editAbbr(self, 'index')
     
-    '''index card buttons'''
+    """index card buttons"""
     
     @QtCore.pyqtSlot()
     def on_iSortNowBtn_released(self):
@@ -1799,7 +1800,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         Slot documentation goes here.
         """
         value = self.iTabSlider.value()
-        self.iIndex.setTabStopWidth(value*10)
+        self.iIndex.setTabStopDistance(value*10)
     
     @QtCore.pyqtSlot()
     def on_iClearHiliteBtn_released(self):
@@ -1814,12 +1815,12 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         responds to user click on search results view on Search card
         """
         modifiers = QtWidgets.QApplication.keyboardModifiers()
-        if modifiers == QtCore.Qt.AltModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.AltModifier:
             self.cSearchResults.model().removeRow(index.row())
             hitNumber = self.cSearchResults.model().rowCount()
             self.cNumberOfHits.setText('Hits: %s' %str(hitNumber))
             return
-        if modifiers == QtCore.Qt.ControlModifier:
+        if modifiers == QtCore.Qt.KeyboardModifier.MetaModifier:
             row = index.row()
             datum = self.cSearchResults.model().item(row, 0).text()
             datum = datum.replace("</p><p>", "\n")
@@ -1847,7 +1848,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         elif tCard[0] == "T":
             targetCard = dataIndex.textDict[tCard]
             lineList = targetCard.findall('Ln')
-            for i in range(0,len(lineList)):
+            for i in range(0, len(lineList)):
                 if lineList[i].attrib.get('LnRef') == self.cSearchResults.currentIndex().data(36 ):
                     lineNo =i + 1
                     break
@@ -2033,10 +2034,10 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         field = QtGui.QGuiApplication.focusObject()
         if field.metaObject().className() == 'QTextEdit':
-            if field.fontWeight() == QtGui.QFont.Bold:
-                field.setFontWeight(QtGui.QFont.Normal)
+            if field.fontWeight() == QtGui.QFont.Weight.Bold:
+                field.setFontWeight(QtGui.QFont.Weight.Normal)
             else:
-                field.setFontWeight(QtGui.QFont.Bold)
+                field.setFontWeight(QtGui.QFont.Weight.Bold)
     
     @QtCore.pyqtSlot()
     def on_actionUnderline_triggered(self):
@@ -2057,7 +2058,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         if field.metaObject().className() == 'QTextEdit':
             field.setFontUnderline(0)
             field.setFontItalic(0)
-            field.setFontWeight(QtGui.QFont.Normal)
+            field.setFontWeight(QtGui.QFont.Weight.Normal)
     
     @QtCore.pyqtSlot(bool)
     def on_mSpSetDefaultBtn_toggled(self, checked):

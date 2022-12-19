@@ -76,7 +76,7 @@ class LineTextWidget(QFrame):
     def __init__(self, *args):
         QFrame.__init__(self, *args)
  
-        self.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)
+        self.setFrameStyle(QFrame.Shape.StyledPanel | QFrame.Shadow.Sunken)
  
         self.edit = QTextEdit()
         self.edit.setFrameStyle(QFrame.NoFrame)

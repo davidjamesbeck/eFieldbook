@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 from ELFB.ui.fieldbook import MainWindow
 from ELFB.qtLibPathFacade.qtLibPathFacade import QtLibPathFacade
 from ELFB import dataIndex
@@ -10,7 +10,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     dataIndex.rootPath = QtCore.QFileInfo(__file__).absolutePath()
     pixmap = QtGui.QPixmap(':Splash(book).png')
-    splash = QtWidgets.QSplashScreen(pixmap, QtCore.Qt.WindowStaysOnTopHint)
+    splash = QtWidgets.QSplashScreen(pixmap, QtCore.Qt.WindowType.WindowStaysOnTopHint)
     splash.show()
     app.processEvents()
     ui = MainWindow()
@@ -21,4 +21,4 @@ if __name__ == "__main__":
     ui.show()
     splash.finish(ui)
     del splash
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

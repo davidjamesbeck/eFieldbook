@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 from ELFB import HTMLDelegate, dataIndex, formattingHandlers, autoparsing, textOnlyBtns
 import re
 from ELFB.palettes import SessionDate
@@ -14,15 +14,15 @@ class ExampleDelegate(HTMLDelegate.HTMLDelegate):
         update = SessionDate.dateFinder()
         self.fldbk.eUpdated.setPlainText(update)
         ExNode = dataIndex.exDict[dataIndex.currentCard]
-        ExNode.set('Update',update)
+        ExNode.set('Update', update)
         updateFlag = False
-        if self.fldbk.eAutoParsingBtn.isChecked() and dataIndex.unparsedILEG != None:
+        if self.fldbk.eAutoParsingBtn.isChecked() and not dataIndex.unparsedILEG is None:
             updateFlag = True
         for r in range(0, self.fldbk.eAnalysis.rowCount()): #for every row
             try:
                 string = ''
                 label = self.fldbk.eAnalysis.verticalHeaderItem(r).text()
-                for c in range(0,self.fldbk.eAnalysis.columnCount()-1): #for each cell
+                for c in range(0, self.fldbk.eAnalysis.columnCount()-1): #for each cell
                     try:
                         itemText = self.fldbk.eAnalysis.item(r, c).text()
                         itemText = itemText.strip()
@@ -61,50 +61,51 @@ class ExampleDelegate(HTMLDelegate.HTMLDelegate):
                 pass
         self.fldbk.eAnalysis.resizeColumnsToContents()  
         self.fldbk.eAnalysis.clearSelection()
-        if ExNode.attrib.get('SourceText') != None and dataIndex.currentText != None:
-            if ExNode.attrib.get('SourceText') == dataIndex.currentText:
+        if ExNode.attrib.get('SourceText') is not None and dataIndex.currentText is not None:
+            print(ExNode.attrib.get('SourceText'), dataIndex.currentText)
+            if ExNode.attrib.get('SourceText') == dataIndex.currentText.attrib.get('TextID'):
                 textOnlyBtns.updateText(self.fldbk, ExNode)
         
     def boundaryChecker(self, row, column):
-        '''first step in checking to make sure divisions match on Mrph and ILEG lines'''
-        '''row will always be 1'''
+        """first step in checking to make sure divisions match on Mrph and ILEG lines"""
+        """row will always be 1"""
         #TODO allow customization of boundary list
         theMorphs = self.fldbk.eAnalysis.item(row -1, column)
         theAnalysis = self.fldbk.eAnalysis.item(row, column)
-        boundaryList = ["–","=", "•","+"]
-        '''check to make sure that the target cell is not monomorphemic'''
+        boundaryList = ["–", "=", "•", "+"]
+        """check to make sure that the target cell is not monomorphemic"""
         unparsed = 'yes'
         for boundary in boundaryList:
             if boundary in theAnalysis.text() or boundary in theMorphs.text():
                 self.compareItems(theMorphs, theAnalysis, boundary)
                 unparsed = 'no'
         if unparsed == 'yes':
-            brush = QtGui.QBrush(QtCore.Qt.white)
+            brush = QtGui.QBrush(QtCore.Qt.GlobalColor.white)
             theMorphs.setBackground(brush)
             theAnalysis.setBackground(brush)
             
     def compareItems(self, theMorphs, theAnalysis, boundary):
-        '''checks morphs and glosses to ensure that there is no mismatched boundary,
-        hilites the errors'''
+        """checks morphs and glosses to ensure that there is no mismatched boundary, 
+        hilites the errors"""
         morphs = theMorphs.text()
         analysis = theAnalysis.text()
         morphList = morphs.split(boundary)
         analysisList = analysis.split(boundary)
         if len(morphList) != len(analysisList):
-            brush = QtGui.QBrush(QtCore.Qt.cyan)
+            brush = QtGui.QBrush(QtCore.Qt.GlobalColor.cyan)
             theMorphs.setBackground(brush)
             theAnalysis.setBackground(brush)
         else:
-            brush = QtGui.QBrush(QtCore.Qt.white)
+            brush = QtGui.QBrush(QtCore.Qt.GlobalColor.white)
             theMorphs.setBackground(brush)
             theAnalysis.setBackground(brush)
 
 class EgTable(QtWidgets.QTableWidget):
-    '''class defines the properties of the example field on the example card'''
+    """class defines the properties of the example field on the example card"""
         
     def __init__(self, parent):
         super(EgTable, self).__init__(parent)
-        self.SelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.SelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
         self.setStyleSheet("selection-background-color: #E6E6E6; border: 0px;")
         self.delegate = ExampleDelegate(self)
         self.setItemDelegate(self.delegate)
@@ -115,8 +116,8 @@ class EgTable(QtWidgets.QTableWidget):
         self.horizontalHeader().sectionClicked.connect(self.headerClicked)
         self.setShowGrid(0)
         self.setMinimumHeight(95)
-        self.setSizePolicy(QtWidgets.QSizePolicy.Preferred,QtWidgets.QSizePolicy.MinimumExpanding)
-        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.MinimumExpanding)
+        self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.fldbk = dataIndex.fldbk
         self.itemDoubleClicked.connect(self.stripTags)
     
@@ -139,16 +140,16 @@ class EgTable(QtWidgets.QTableWidget):
         colLoc = self.columnCount()-1
         if colLoc ==  self.currentColumn():
             self.insertColumn(colLoc)
-        for i in range(0,self.rowCount()):
+        for i in range(0, self.rowCount()):
             newItem = QtWidgets.QTableWidgetItem(1001)
-            self.setItem(i,colLoc,newItem)
+            self.setItem(i, colLoc, newItem)
         self.delegate = ExampleDelegate(self)
         self.setItemDelegate(self.delegate)
         lastCol = self.columnCount()-1
         for i in range(0, self.rowCount()):
             newItem = QtWidgets.QTableWidgetItem(1001)
-            flags = QtCore.Qt.ItemFlags()
-            flags != QtCore.Qt.ItemIsEnabled
-            newItem.setFlags(flags)
+            flags = newItem.flags()
+            if flags != QtCore.Qt.ItemFlag.ItemIsEnabled:
+                newItem.setFlags(flags)
             self.setItem(i, lastCol, newItem)
 

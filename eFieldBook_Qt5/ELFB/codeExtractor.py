@@ -1,22 +1,23 @@
 import re
+from ELFB import dataIndex
 
-'''
+"""
 script for extracting speaker and time codes from glosses
-'''
+"""
 
 def getTime(gloss):
-    '''
+    """
     extracts a time code of format "[H:MM(:SS)(.NNNNNN))]" 
     and returns it along with the gloss minus time
-    '''
-    regex = '\[(\d*)(:\d\d)(:\d\d){0,1}(.\d*){0,}\]'
-    m = re.search(regex,gloss)
-    if m != None:
+    """
+    regex = '\[(\d*)(:\d\d)(:\d\d){0, 1}(.\d*){0, }\]'
+    m = re.search(regex, gloss)
+    if m is not None:
         timeCode = m.group(0)[1:-1]
         gloss = gloss[:m.start()].strip()
         rangeEx = '-|–'
         k = re.search(rangeEx, timeCode)
-        if k != None:
+        if k is not None:
             if '-' in timeCode:
                 codes = timeCode.split('-')
             else:
@@ -32,10 +33,11 @@ def getTime(gloss):
 
 def getSpokenBy(gloss):
     checkGloss = gloss.split(' ')
+    spokenBy = None
     if checkGloss[0][-1] == ":":
         pieces = gloss.partition(':')
-        spokenBy = pieces[0]
+        firstPiece = pieces[0]
         gloss = pieces[2]
-    else:
-        spokenBy = None
+        if firstPiece in dataIndex.speakerDict.keys():
+            spokenBy = firstPiece
     return spokenBy, gloss

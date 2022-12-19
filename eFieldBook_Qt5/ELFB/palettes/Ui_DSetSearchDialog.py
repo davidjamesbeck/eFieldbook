@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/DSetSearchDialog.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_SearchDSets(object):
     def setupUi(self, SearchDSets):
@@ -15,7 +15,7 @@ class Ui_SearchDSets(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(SearchDSets)
         self.buttonBox.setGeometry(QtCore.QRect(361, 171, 141, 41))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.groupBox = QtWidgets.QGroupBox(SearchDSets)
         self.groupBox.setGeometry(QtCore.QRect(352, 0, 148, 107))
@@ -25,7 +25,7 @@ class Ui_SearchDSets(object):
         font = QtGui.QFont()
         font.setPointSize(9)
         self.Source.setFont(font)
-        self.Source.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.Source.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.Source.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.Source.setObjectName("Source")
         self.Researcher = QtWidgets.QPlainTextEdit(self.groupBox)
@@ -33,21 +33,21 @@ class Ui_SearchDSets(object):
         font = QtGui.QFont()
         font.setPointSize(9)
         self.Researcher.setFont(font)
-        self.Researcher.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.Researcher.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.Researcher.setObjectName("Researcher")
         self.Date = QtWidgets.QPlainTextEdit(self.groupBox)
         self.Date.setGeometry(QtCore.QRect(8, 78, 60, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.Date.setFont(font)
-        self.Date.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.Date.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.Date.setObjectName("Date")
         self.Updated = QtWidgets.QPlainTextEdit(self.groupBox)
         self.Updated.setGeometry(QtCore.QRect(80, 78, 60, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.Updated.setFont(font)
-        self.Updated.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.Updated.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.Updated.setObjectName("Updated")
         self.label = QtWidgets.QLabel(self.groupBox)
         self.label.setGeometry(QtCore.QRect(8, 22, 35, 16))
@@ -240,5 +240,5 @@ if __name__ == "__main__":
     ui = Ui_SearchDSets()
     ui.setupUi(SearchDSets)
     SearchDSets.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 

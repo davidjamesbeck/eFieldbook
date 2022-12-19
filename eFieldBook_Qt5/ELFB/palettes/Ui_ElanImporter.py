@@ -2,11 +2,11 @@
 
 # Form implementation generated from reading ui file '/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/eFieldBook_Qt5/ELFB/palettes/ElanImporter.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt6 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 class Ui_ElanImporter(object):
     def setupUi(self, ElanImporter):
@@ -28,7 +28,7 @@ class Ui_ElanImporter(object):
         self.sourceList = QtWidgets.QTreeWidget(self.horizontalLayoutWidget)
         self.sourceList.setMinimumSize(QtCore.QSize(0, 157))
         self.sourceList.setMaximumSize(QtCore.QSize(300, 157))
-        self.sourceList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.sourceList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.sourceList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.sourceList.setDragDropMode(QtWidgets.QAbstractItemView.DragOnly)
         self.sourceList.setIndentation(5)
@@ -41,7 +41,7 @@ class Ui_ElanImporter(object):
         self.targetList = QtWidgets.QTableWidget(self.horizontalLayoutWidget)
         self.targetList.setMinimumSize(QtCore.QSize(0, 157))
         self.targetList.setMaximumSize(QtCore.QSize(300, 157))
-        self.targetList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.targetList.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.targetList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.targetList.setDragEnabled(True)
         self.targetList.setDragDropMode(QtWidgets.QAbstractItemView.DragDrop)
@@ -54,7 +54,7 @@ class Ui_ElanImporter(object):
         self.horizontalLayout.addWidget(self.targetList)
         self.tMetadataBox = QtWidgets.QGroupBox(self.centralWidget)
         self.tMetadataBox.setGeometry(QtCore.QRect(9, 60, 429, 64))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tMetadataBox.sizePolicy().hasHeightForWidth())
@@ -87,8 +87,8 @@ class Ui_ElanImporter(object):
         font.setItalic(False)
         font.setWeight(50)
         self.newResearcher.setFont(font)
-        self.newResearcher.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.newResearcher.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.newResearcher.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.newResearcher.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.newResearcher.setObjectName("newResearcher")
         self.horizontalLayout_2.addWidget(self.newResearcher)
         self.tLabelResearcher = QtWidgets.QLabel(self.formLayoutWidget)
@@ -104,8 +104,8 @@ class Ui_ElanImporter(object):
         font.setItalic(False)
         font.setWeight(50)
         self.newSource.setFont(font)
-        self.newSource.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.newSource.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.newSource.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.newSource.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.newSource.setObjectName("newSource")
         self.horizontalLayout_2.addWidget(self.newSource)
         self.tLabelDate = QtWidgets.QLabel(self.formLayoutWidget)
@@ -121,8 +121,8 @@ class Ui_ElanImporter(object):
         font.setItalic(False)
         font.setWeight(50)
         self.newDate.setFont(font)
-        self.newDate.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.newDate.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.newDate.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.newDate.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.newDate.setObjectName("newDate")
         self.horizontalLayout_2.addWidget(self.newDate)
         self.tLabelUpdated = QtWidgets.QLabel(self.formLayoutWidget)
@@ -138,19 +138,19 @@ class Ui_ElanImporter(object):
         font.setItalic(False)
         font.setWeight(50)
         self.newTranscriber.setFont(font)
-        self.newTranscriber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.newTranscriber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.newTranscriber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.newTranscriber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.newTranscriber.setReadOnly(False)
         self.newTranscriber.setObjectName("newTranscriber")
         self.horizontalLayout_2.addWidget(self.newTranscriber)
         self.buttonBox = QtWidgets.QDialogButtonBox(self.centralWidget)
         self.buttonBox.setGeometry(QtCore.QRect(189, 343, 243, 32))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy()
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
         self.buttonBox.setSizePolicy(sizePolicy)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok|QtWidgets.QDialogButtonBox.Reset)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.StandardButton.Cancel|QtWidgets.QDialogButtonBox.StandardButton.Ok|QtWidgets.QDialogButtonBox.StandardButton.Reset)
         self.buttonBox.setObjectName("buttonBox")
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralWidget)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(13, 9, 426, 41))
@@ -198,5 +198,5 @@ if __name__ == "__main__":
     ui = Ui_ElanImporter()
     ui.setupUi(ElanImporter)
     ElanImporter.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
