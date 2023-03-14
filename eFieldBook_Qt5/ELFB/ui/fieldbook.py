@@ -16,6 +16,8 @@ from ELFB.FocusOutFilter import FocusOutFilter, DialectFilter, BorrowFilter, ExL
 from ELFB.palettes import LexSearchForm
 from xml.etree import ElementTree as etree
 from ELFB.ui.rsrc import images_rc
+
+
 # from os import path
 
 class MainWindow(QMainWindow, Ui_Fieldbook):
@@ -32,9 +34,10 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         super(MainWindow, self).__init__(parent)
         QtWidgets.QApplication.setActiveWindow(self)
         QtWidgets.QApplication.setKeyboardInputInterval(600)
-        font = QtGui.QFont()
-        font.setFamily("Helvetica Neue")
-        font.setWeight(50)
+#        font = QtGui.QFont()
+#        font.setFamily(font.defaultFamily())
+        font = QtGui.QFont("Times New Roman")
+        font.setWeight(QtGui.QFont.Weight.Light)
         QtWidgets.QApplication.setFont(font)
         self.ui = Ui_Fieldbook
         # self.settings = QtCore.QSettings('UNTProject', 'eFieldbook')
@@ -91,7 +94,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             openFileDialog = QtWidgets.QFileDialog(self)
             filePath = openFileDialog.directory().currentPath()
             openFileDialog.setDirectory(filePath)
-            fname = openFileDialog.getOpenFileName(self, "Open...", "", "XML (*.xml)")
+            fname = openFileDialog.getOpenFileName(self, "Open...", "")#, "XML (*.xml)")
             if len(fname[0]) != 0:
                 """user selects file in FileDialog"""
                 fname = fname[0]
@@ -690,6 +693,10 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         self.oTransformBox.insertItem(0, 'Orth ⇨ Phon')
         self.oTransformBox.insertItem(1, 'Phon ⇨ Orth')
         self.oTransformBox.setStyleSheet('selection-color: blue;')
+        newCardIconSize = QtCore.QSize(40, 40)
+        newCardIcon = QtGui.QIcon(':HelpBtn.png')
+        self.oHelpBtn.setIcon(newCardIcon)
+        self.oHelpBtn.setIconSize(newCardIconSize)
 
         """alphabetization sub-tab"""
 
@@ -1251,7 +1258,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             outputLanguage = 'L2'
         else:
             outputLanguage = 'L1'
-        lexOnlyBtns.clipEG(self, outputLanguage)
+        lexOnlyBtns.clipEG(outputLanguage)
 
     @QtCore.pyqtSlot(QtWidgets.QListWidgetItem)
     def on_iErrorBox_itemClicked(self, item):

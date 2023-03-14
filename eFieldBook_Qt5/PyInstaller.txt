@@ -1,0 +1,5 @@
+PyInstaller command
+
+python3 -m PyInstaller eFieldBook.spec --clean --noconfirm
+
+from eFieldBook_Qt5 directory

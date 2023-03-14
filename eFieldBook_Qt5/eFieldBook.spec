@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['eFieldBook.py'],
-             pathex=['/Users/David/OpenSource/github/ELFB/eFieldBook_Qt5'],
+             pathex=['/Users/David/Google Drive/Current/ELFB/eFieldBook_Qt5'],
              binaries=[],
              datas=[],
              hiddenimports=[],

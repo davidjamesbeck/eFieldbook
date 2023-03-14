@@ -579,8 +579,13 @@ class LexSearchEngine(SearchEngine):
                     defText = hit.find('Def/L1').text
             defText = self.formatHandler(defText)
             hitid = hit.attrib.get('LexID')
+            print(hitid)
+            if hit.find('POS').text != None:
+                POS = hit.find('POS').text
+            else:
+                POS = ' '
             try:
-                result = "<b>" + hit.find('Orth').text + "</b> (" + hit.find('POS').text + ") " + defText
+                result = "<b>" + hit.find('Orth').text + "</b> (" + POS + ") " + defText
             except AttributeError: 
                 result = "<b>" + hit.find('Orth').text + "</b> " + defText        
             resultsdict[hitid] = result

@@ -3,12 +3,12 @@
 """
 Module implementing MainWindow.
 """
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtCore import pyqtSlot
+from PyQt6 import QtGui, QtCore, QtWidgets
+from PyQt6.QtCore import pyqtSlot
 import xml.etree.ElementTree as etree
 from .Ui_mainwindow import Ui_MainWindow
 
-class Alphabetizer(QtGui.QSortFilterProxyModel):
+class Alphabetizer(QtCore.QSortFilterProxyModel):
     def __init__(self, parent=None):
         super(Alphabetizer, self).__init__(parent)
         self.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
@@ -50,7 +50,7 @@ class Alphabetizer(QtGui.QSortFilterProxyModel):
                 string = string.replace(item[0], item[1])
         return string
 
-class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     """
     Class documentation goes here.
     """
@@ -62,7 +62,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         """
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-        self.fname ='/Users/David/Library/Mobile Documents/com~apple~CloudDocs/Current/ELFB/data/2015-06-23.xml'
+        self.fname ='sorter.e4p'
         xmltree = etree.parse(self.fname)
         root = xmltree.getroot()
         navModel = QtGui.QStandardItemModel()

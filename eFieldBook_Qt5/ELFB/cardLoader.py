@@ -1059,7 +1059,7 @@ def addTextWidget(fldbk, textRoot):
     """
     numLines = len(textRoot.findall('Ln'))
     progDialog = QtWidgets.QProgressDialog("Loading text ...", "Stop", 0, numLines, fldbk)
-    progDialog.setWindowModality(QtCore.Qt.WindowModality.WindowModality.WindowModal)
+    progDialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
     progDialog.setWindowTitle('Loading')
     j = 0
     fldbk.tText.setVisible(0)

@@ -195,9 +195,7 @@ def toggleAuto(fldbk):
     dataIndex.unsavedEdit = 1
 
 
-def clipEG():
-    """need to write an if Opt pressed to make outputlanguage L2"""
-    outputLanguage = 'L1'
+def clipEG(outputLanguage):
     lex = dataIndex.lexDict[dataIndex.currentCard]
     datum = lex.find('Orth').text + " "
     if lex.find('POS') is not None:

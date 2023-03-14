@@ -115,15 +115,14 @@ paste into a text document.</string>
     <property name="geometry">
      <rect>
       <x>108</x>
-      <y>52</y>
+      <y>53</y>
       <width>16</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
+      <pointsize>12</pointsize>
       <bold>true</bold>
      </font>
     </property>
@@ -158,15 +157,14 @@ QToolButton:pressed {
     <property name="geometry">
      <rect>
       <x>125</x>
-      <y>52</y>
+      <y>53</y>
       <width>16</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
-      <weight>75</weight>
+      <pointsize>12</pointsize>
       <bold>true</bold>
      </font>
     </property>

@@ -409,7 +409,7 @@ def mRAdd(fldbk):
             fldbk.mRTable.setColumnWidth(j, 165)
     fldbk.mRTable.resizeColumnToContents(fldbk.mRTable.columnCount() - 1)
     fldbk.mRUpdateBtn.setEnabled(1)
-    dictBuilder.rschrDictBuilder(fldbk)
+    dictBuilder.rschrDictBuilder()
     fldbk.mRSetDefaultBtn.setEnabled(1)
     dataIndex.unsavedEdit = 1
 
@@ -573,7 +573,7 @@ def mSpAdd(fldbk):
     fldbk.mSpTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)
     fldbk.mSpTable.scrollToItem(newItem, QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter)
     fldbk.mSpUpdateBtn.setEnabled(1)
-    dictBuilder.speakerDictBuilder(fldbk)
+    dictBuilder.speakerDictBuilder()
     dataIndex.unsavedEdit = 1
     fldbk.mSpSetDefaultBtn.setEnabled(1)
 

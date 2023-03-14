@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -15,29 +15,29 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(578, 663)
-        self.centralWidget = QtGui.QWidget(MainWindow)
+        self.centralWidget = QtWidgets.QWidget(MainWindow)
         self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
-        self.start = QtGui.QListView(self.centralWidget)
+        self.start = QtWidgets.QListView(self.centralWidget)
         self.start.setGeometry(QtCore.QRect(20, 20, 261, 551))
         self.start.setObjectName(_fromUtf8("start"))
-        self.finish = QtGui.QListView(self.centralWidget)
+        self.finish = QtWidgets.QListView(self.centralWidget)
         self.finish.setGeometry(QtCore.QRect(300, 20, 261, 551))
         self.finish.setObjectName(_fromUtf8("finish"))
-        self.doSort = QtGui.QPushButton(self.centralWidget)
+        self.doSort = QtWidgets.QPushButton(self.centralWidget)
         self.doSort.setGeometry(QtCore.QRect(420, 600, 110, 32))
         self.doSort.setObjectName(_fromUtf8("doSort"))
-        self.sortOrder = QtGui.QPlainTextEdit(self.centralWidget)
+        self.sortOrder = QtWidgets.QPlainTextEdit(self.centralWidget)
         self.sortOrder.setGeometry(QtCore.QRect(20, 580, 391, 71))
         self.sortOrder.setObjectName(_fromUtf8("sortOrder"))
         MainWindow.setCentralWidget(self.centralWidget)
@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtGui.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)

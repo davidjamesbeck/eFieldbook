@@ -64,7 +64,9 @@ class QtLibPathFacade(object):
     
     pluginDirPath = cls._appBundlePluginsPath(aAppDirPath)
     logAlert('pluginDirPath: {}'.format(pluginDirPath))
-    
+
+    """this is my fix, might have to be disabled when bundling"""
+    # QCoreApplication.addLibraryPath('/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/PyQt5/Qt/plugins/imageformats')
     if pluginDirPath is not None:
       logAlert("On MacOS, prepending plugin path: {}".format(pluginDirPath))
       QCoreApplication.addLibraryPath(pluginDirPath)
