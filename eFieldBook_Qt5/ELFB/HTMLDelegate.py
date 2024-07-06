@@ -24,7 +24,7 @@ class HTMLDelegate(QtWidgets.QStyledItemDelegate):
         self.initStyleOption(options, index)
         doc = QtGui.QTextDocument()
         doc.setHtml(options.text)
-        return QtCore.QSize(doc.idealWidth(), doc.size().height())
+        return QtCore.QSize(int(doc.idealWidth()), int(doc.size().height()))
 
 
 class SearchDelegate(QtWidgets.QStyledItemDelegate):
@@ -59,7 +59,7 @@ class SearchDelegate(QtWidgets.QStyledItemDelegate):
         tStyle = self.setStyle()
         doc.setDefaultStyleSheet(tStyle)
         doc.setHtml(options.text)
-        return QtCore.QSize(doc.idealWidth(), doc.size().height())
+        return QtCore.QSize(int(doc.idealWidth()), int(doc.size().height()))
         
     def setOption(self):
         tOption = QtGui.QTextOption()

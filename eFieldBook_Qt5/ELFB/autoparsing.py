@@ -11,7 +11,7 @@ def doParse():
     elif len(fldbk.eL2Gloss.toPlainText()) != 0:
         gloss = fldbk.eL1Gloss.toPlainText()
     else:
-        gloss = ''
+        gloss = None
     try:
         if len(fldbk.eAnalysis.item(0, 0).text()) == 0:
             noParse = True
@@ -27,6 +27,7 @@ def doParse():
         fldbk.eAnalysis.setRowCount(2)
         fldbk.eAnalysis.setColumnCount(len(wordList)+1)
         for i, word in enumerate(wordList):
+#            print(i,"word=", word, "line =", line, "gloss =", gloss)
             newMorphs, newAnalysis = autoParse(word, line, gloss)
             if newMorphs is None:
                 newMorphs = word
@@ -60,6 +61,7 @@ def doParse():
     fldbk.eAnalysis.delegate.updateExample()
         
 def autoParse(word, textLine=None, glossLine=None):
+#    print(word, textLine, glossLine)
     fldbk = dataIndex.fldbk
     newMorphs = None
     newAnalysis = None
@@ -77,6 +79,7 @@ def autoParse(word, textLine=None, glossLine=None):
                 line = Index[begin:end]
                 lineList = line.split('\t')
                 if lineList[0] == word:
+#                    print(lineList)
                     matchedLines.append(lineList)
             if len(matchedLines) == 1:
                 newMorphs = matchedLines[0][1]
@@ -84,6 +87,7 @@ def autoParse(word, textLine=None, glossLine=None):
             elif len(matchedLines) > 1:
                 homophoneList = []
                 for line in matchedLines:
+#                    print(line)
                     homophoneList.append(line[1] + ' ‘' + line[2] +'’')
                 if dataIndex.homophoneDefaultChoice is not None and word in dataIndex.homophoneDefaultChoice:
                     form = dataIndex.homophoneDefaultChoice[word]
@@ -126,9 +130,9 @@ def askToBuildIndex():
 
 def cleanLine(line):
     #TODO: make it possible for users to define punctuation characters
-    table = str.maketrans('', '', '!¡?¿., /…-–—“”;')
+    table = str.maketrans('', '', '!¡?¿.,/…-–—“”;')
     line = line.translate(table)
-    p = re.compile('[\(\[\{<].*?[\)\]\}>]')
+    p = re.compile(r'[\(\[\{<].*?[\)\]\}>]')
     line = p.sub('', line)
     while '  ' in line:
         line = line.replace('  ', ' ')

@@ -73,7 +73,7 @@ class TextDelegate(HTMLDelegate.HTMLDelegate):
                         if len(string) == 0:
                             string = itemText
                         else:
-                            string = string + "\t" + itemText
+                            string = string + " " + itemText
                     if r == 1:
                         ExNode.find('Mrph').text = string
                     elif r == 2:

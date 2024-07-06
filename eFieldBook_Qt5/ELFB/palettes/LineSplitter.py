@@ -50,22 +50,22 @@ class LineSplitter(QDialog, Ui_Dialog):
                 if mrph1 is None:
                     mrph1 = item
                 else:
-                    mrph1 += '\t' + item
+                    mrph1 += ' ' + item
             for item in mrphList2:
                 if mrph2 is None:
                     mrph2 = item
                 else:
-                    mrph2 += '\t' + item
+                    mrph2 += ' ' + item
             for item in ilegList1:
                 if ileg1 is None:
                     ileg1 = item
                 else:
-                    ileg1 += '\t' + item
+                    ileg1 += ' ' + item
             for item in ilegList2:
                 if ileg2 is None:
                     ileg2 = item
                 else:
-                    ileg2 += '\t' + item
+                    ileg2 += ' ' + item
         update = SessionDate.dateFinder()
         tDate = self.fldbk.tDate.toPlainText()
         spkr = self.fldbk.tSource.toPlainText()
@@ -117,8 +117,8 @@ class LineSplitter(QDialog, Ui_Dialog):
         self.egTable.horizontalHeader().show()
         self.egTable.horizontalHeader().setEnabled(1)
         if node.find('Mrph') is not None:
-            entryRow1 = node.findtext('Mrph').split('\t')
-            entryRow2 = node.findtext('ILEG').split('\t')
+            entryRow1 = node.findtext('Mrph').split(' ')
+            entryRow2 = node.findtext('ILEG').split(' ')
             self.egTable.setRowCount(2)
             self.egTable.setColumnCount(len(entryRow1))
             self.egTable.setRowHeight(0, 20)

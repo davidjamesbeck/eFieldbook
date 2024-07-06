@@ -2,7 +2,7 @@ from PyQt6 import QtGui, QtCore, QtWidgets
 from ELFB import dataIndex, cardLoader, formattingHandlers, autoparsing
 from ELFB.searchClasses import SearchEngine
 from ELFB.palettes import RecordBrowser
-
+#from xml.etree import ElementTree as etree
 
 def buildIndex():
     fldbk = dataIndex.fldbk
@@ -15,9 +15,42 @@ def buildIndex():
     for key in examplelist:
         try:
             line = examplelist[key].find('Line').text
+
+            #check for and remove extraneous returns in EgCard elements
+            if "\n" in line:
+                line = line.replace("\n", " ")
+                while "  " in line:
+                    line = line.replace("  ", " ")
+                examplelist[key].find('Line').text = line
+                dataIndex.unsavedEdit = 1
+            if "\n" in examplelist[key].find('L1Gloss').text:
+                gloss = examplelist[key].find('L1Gloss').text.replace("\n", " ")
+                while "  " in gloss:
+                    gloss = gloss.replace("  ", " ")
+                examplelist[key].find('L1Gloss').text = gloss
+                dataIndex.unsavedEdit = 1 
+            if "\n" in examplelist[key].find('L2Gloss').text:
+                gloss = examplelist[key].find('L2Gloss').text.replace("\n", " ")
+                while "  " in gloss:
+                    gloss = gloss.replace("  ", " ")
+                examplelist[key].find('L2Gloss').text = gloss
+                dataIndex.unsavedEdit = 1 
+            if "\n" in examplelist[key].find('Mrph').text:
+                morph = examplelist[key].find('Mrph').text.replace("\n", " ")
+                while "  " in morph:
+                    morph = morph.replace("  ", " ")
+                examplelist[key].find('Mrph').text = morph
+                dataIndex.unsavedEdit = 1 
+            if "\n" in examplelist[key].find('ILEG').text:
+                ileg = examplelist[key].find('ILEG').text.replace("\n", " ")
+                while "  " in ileg:
+                    ileg = ileg.replace("  ", " ")
+                examplelist[key].find('ILEG').text = ileg
+                dataIndex.unsavedEdit = 1 
+                
             lineList = autoparsing.cleanLine(line)
-            morphList = examplelist[key].find('Mrph').text.split('\t')
-            glossList = examplelist[key].find('ILEG').text.split('\t')
+            morphList = examplelist[key].find('Mrph').text.split(' ')
+            glossList = examplelist[key].find('ILEG').text.split(' ')
             for i in range(0, len(morphList)):
                 morph = morphList[i]
                 if len(morph) == 0:
@@ -141,12 +174,12 @@ def updateWordForms(fldbk):
         node = dataIndex.exDict[ID]
         morphNode = node.find('Mrph').text
         glossNode = node.find('ILEG').text
-        morphList = morphNode.split('\t')
-        glossList = glossNode.split('\t')
+        morphList = morphNode.split(' ')
+        glossList = glossNode.split(' ')
         morphList[index] = morphs
         glossList[index] = analysis
-        morphNode = '\t'.join(morphList)
-        glossNode = '\t'.join(glossList)
+        morphNode = ' '.join(morphList)
+        glossNode = ' '.join(glossList)
         node.find('Mrph').text = morphNode
         node.find('ILEG').text = glossNode
 

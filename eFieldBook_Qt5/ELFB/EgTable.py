@@ -50,7 +50,7 @@ class ExampleDelegate(HTMLDelegate.HTMLDelegate):
                     if len(string) == 0:
                         string = itemText
                     else:
-                        string += "\t" + itemText
+                        string += " " + itemText
                 if label =='Morph':
                     ExNode.find('Mrph').text = string
                 elif label == 'ILEG':
@@ -126,7 +126,7 @@ class EgTable(QtWidgets.QTableWidget):
         if newText == '[—]':
             autoparsing.storeUnparsedItem(item)
         else:
-            regex = re.compile('(?<=<small>)\w*(?=</small>)')
+            regex = re.compile(r'(?<=<small>)\w*(?=</small>)')
             abbrList = regex.findall(newText)
             if len(abbrList) != 0:
                 for abbr in abbrList:

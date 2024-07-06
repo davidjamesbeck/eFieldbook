@@ -339,8 +339,10 @@ class DefinitionsManager(QtWidgets.QDialog, Ui_Dialog):
                 eg = '<i>' + egElement.findtext('Line') + '</i>'
                 if len(egElement.findtext('L1Gloss')) != 0:
                     eg = eg + " ‘" + egElement.findtext('L1Gloss') + "’ ("
-                else:
+                elif egElement.findtext == None:
                     eg = eg + " ‘" + egElement.findtext('L2Gloss') + "’ ("
+                else:
+                    eg = eg + " ‘" + '[UNGLOSSED]' + "’ ("
                 eg = eg + egElement.attrib.get('Spkr') + ")"
                 eg = re.sub('{i}', '', eg)
                 eg = re.sub('{/i}', '', eg)

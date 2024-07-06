@@ -233,7 +233,7 @@ class ElanImporter(QtWidgets.QDialog, Ui_ElanImporter):
                 except (TypeError, AttributeError):
                     errorList += 'missing morph at line #%d\n' % i
                     partsList.append('ERROR')
-            morphLine = '\t'.join(partsList)
+            morphLine = ' '.join(partsList)
             partsList = []
             for item in glossList:
                 try:
@@ -245,7 +245,7 @@ class ElanImporter(QtWidgets.QDialog, Ui_ElanImporter):
                     print('?????')
                     errorList += 'missing gloss at line #%d\n' % i
                     partsList.append('ERROR')
-            glossLine = '\t'.join(partsList)
+            glossLine = ' '.join(partsList)
             partsList = []
 
             # FREE TRANSLATION

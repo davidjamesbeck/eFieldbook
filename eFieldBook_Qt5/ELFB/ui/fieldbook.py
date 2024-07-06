@@ -716,7 +716,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
 
         dataIndex.lastText = dataIndex.root.attrib.get('LastText')
         dataIndex.lastLex = dataIndex.root.attrib.get('LastLex')
-        dataIndex.lastEx = dataIndex.root.attrib.get('lastEx')
+        dataIndex.lastEx = dataIndex.root.attrib.get('LastEx')
         dataIndex.lastDset = dataIndex.root.attrib.get('LastDset')
         keyList = list(dataIndex.root.keys())
         # if there are default researchers and speakers set, 
@@ -862,7 +862,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             else:
                 pendingChange = 0
 
-            lastEx = dataIndex.root.attrib.get('lastEx')
+            lastEx = dataIndex.root.attrib.get('LastEx')
             if lastEx:
                 entry = dataIndex.exDict[lastEx]
             else:
@@ -2139,4 +2139,6 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         Slot documentation goes here.
         """
         # TODO: this is just a temporary fix
+        print("entering on_actionLoad_Schema_triggered")
         exports.outputLexiconToCSV(self)
+        exports.sayHello()

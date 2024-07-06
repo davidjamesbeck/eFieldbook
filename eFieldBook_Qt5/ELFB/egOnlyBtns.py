@@ -122,7 +122,7 @@ def editAbbr(fldbk, card):
             oldAbbr = a
             newAbbr = newData[0]
             oldLitAbbr = "‘" + oldAbbr + "’"
-            regex = re.compile('(?<!\w)%s(?!\w)'%oldAbbr) 
+            regex = re.compile(r'(?<!\w)%s(?!\w)'%oldAbbr) 
             for child in dataIndex.root.iter('Lit'):
                 if oldLitAbbr in child.text:
                     child.text = regex.sub(newAbbr, child.text)                   
@@ -227,12 +227,12 @@ def eRemoveColumn(fldbk):
         if mrph is None:
             mrph = item
         else:
-            mrph += '\t' + item
+            mrph += ' ' + item
     for item in ilegList:
         if ileg is None:
             ileg = item
         else:
-            ileg += '\t' + item
+            ileg += ' ' + item
     node = dataIndex.exDict[dataIndex.currentCard]
     try:
         node.find('Mrph').text = mrph

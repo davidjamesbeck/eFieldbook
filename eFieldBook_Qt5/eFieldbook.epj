@@ -1,8 +1,8 @@
 {
   "header": {
     "comment": "eric project file for project eFieldbook",
-    "copyright": "Copyright (C) 2022 , ",
-    "saved": "2022-12-20, 13:41:35"
+    "copyright": "Copyright (C) 2024 , ",
+    "saved": "2024-07-04, 20:03:03"
   },
   "project": {
     "AUTHOR": "",
@@ -120,6 +120,7 @@
       "ELFB/dsetOnlyBtns.py",
       "ELFB/egOnlyBtns.py",
       "ELFB/exports.py",
+      "ELFB/fileMaintenance.py",
       "ELFB/focusOutFilter.py",
       "ELFB/formattingHandlers.py",
       "ELFB/idGenerator.py",
@@ -199,6 +200,7 @@
       "__init__.py",
       "eFieldBook.py"
     ],
+    "SOURCESDIR": "",
     "SPELLEXCLUDES": "",
     "SPELLLANGUAGE": "",
     "SPELLWORDS": "",

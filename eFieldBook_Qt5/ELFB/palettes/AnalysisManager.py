@@ -89,8 +89,8 @@ class AnalysisManager(QDialog, Ui_Dialog):
         """
         parseLine = parseLine.replace('\t\n', '')
         ilegLine = ilegLine.replace('\t\n', '')
-        wordList = parseLine.split('\t')
-        ilegList = ilegLine.split('\t')
+        wordList = parseLine.split(' ')
+        ilegList = ilegLine.split(' ')
         if len(wordList) != len(ilegList):
             self.tNumberBox.wordErrors.append(blockNumber - 2)
         else:
@@ -354,16 +354,16 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     ilegLine = text.findBlockByNumber(blockNumber - 2).text()
                     ilegLine = self.cleanText(ilegLine)
                     if '[—]' in ilegLine:
-                        wordList = parseLine.split('\t')
-                        ilegList = ilegLine.split('\t')
+                        wordList = parseLine.split(' ')
+                        ilegList = ilegLine.split(' ')
                         for i, item in enumerate(ilegList):
                             if item == '[—]':
                                 newMorphs, newAnalysis = autoparsing.autoParse(wordList[i], textLine, glossLine)
                                 if newMorphs is not None:
                                     ilegList[i] = newAnalysis
                                     wordList[i] = newMorphs
-                        parseLine = '\t'.join(wordList)
-                        ilegLine = '\t'.join(ilegList)
+                        parseLine = ' '.join(wordList)
+                        ilegLine = ' '.join(ilegList)
                 elif counter == 2:
                     # if this is a 2-line block without an interlinear gloss
                     textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime = self.twoLineTextHandler(
@@ -418,8 +418,8 @@ class AnalysisManager(QDialog, Ui_Dialog):
                     parseLine = newMorphs
                     ilegLine = newAnalysis
                 else:
-                    parseLine += '\t' + newMorphs
-                    ilegLine += '\t' + newAnalysis
+                    parseLine += ' ' + newMorphs
+                    ilegLine += ' ' + newAnalysis
         return textLine, glossLine, parseLine, ilegLine, timeCode, spokenBy, endTime
 
     def newBlock(self, count):
@@ -734,7 +734,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
         charformat = QtGui.QTextCharFormat()
         charformat.setBackground(QtGui.QBrush(QtGui.QColor("yellow")))
         if self.wholeWordBtn.isChecked():
-            lookFor = '(\s|^)' + lookFor + '(\s|$)'
+            lookFor = r'(\s|^)' + lookFor + r'(\s|$)'
         regex = QtCore.QRegularExpression(lookFor)
         pos = 0
         index = QtCore.QRegularExpressionMatch()
@@ -821,8 +821,8 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 parseLine = lineList.pop(0).strip()
                 ilegLine = lineList.pop(0).strip()
                 for i in range(0, len(lineList), 2):
-                    parseLine += '\t' + lineList[i].strip()
-                    ilegLine += '\t' + lineList[i + 1].strip()
+                    parseLine += ' ' + lineList[i].strip()
+                    ilegLine += ' ' + lineList[i + 1].strip()
                 newLine += parseLine + '\n' + ilegLine + '\n' + glossLine
                 charformat = QtGui.QTextCharFormat()
                 charformat.setBackground(QtCore.Qt.GlobalColor.white)
@@ -881,12 +881,12 @@ class AnalysisManager(QDialog, Ui_Dialog):
                 if counter == 6:
                     parseLine = textLines[1]
                     parsePart2 = textLines.pop(3)
-                    parseLine += '\t' + parsePart2
+                    parseLine += ' ' + parsePart2
                     parseLine = self.cleanText(parseLine)
                     textLines[1] = parseLine
                     ilegLine = textLines[2]
                     ilegPart2 = textLines.pop(3)
-                    ilegLine += '\t' + ilegPart2
+                    ilegLine += ' ' + ilegPart2
                     ilegLine = self.cleanText(ilegLine)
                     textLines[2] = ilegLine
 
@@ -1396,6 +1396,7 @@ class AnalysisManager(QDialog, Ui_Dialog):
         @param p0 DESCRIPTION
         @type str
         """
+        print('entering on_importSelector_activated')
         self.importFiles(p0)
 
     @pyqtSlot()

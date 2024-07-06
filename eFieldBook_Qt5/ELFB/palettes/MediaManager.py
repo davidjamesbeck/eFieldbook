@@ -10,9 +10,10 @@ from .Ui_MediaManager import Ui_MediaManager
 class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
     """class for setting metadata for recorded media"""
 
-    def __init__(self, parent):
+    def __init__(self, parent, soundPanel):
         super(MediaManager, self).__init__(parent)
         self.setupUi(self)
+        self.soundPanel = soundPanel
         codeList = sorted(dataIndex.speakerDict.keys())
         for index, item in enumerate(codeList):
             try:
@@ -70,6 +71,7 @@ class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
         self.metadataLabel = metadataLabel
         self.item = item
         child = dataIndex.mediaDict[mediaID]
+        self.child = child
         attribDict = child.attrib
         if 'Spkr' in attribDict and len(attribDict['Spkr']) != 0:
             sNode = dataIndex.speakerDict[attribDict['Spkr']]
@@ -119,8 +121,10 @@ class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
 
     def getValues(self):
         """retrieves values from palette for updating in XML file"""
+        print('entering getValues')
         fldbk = dataIndex.fldbk
         caller = self.caller
+        child = self.child
         mediaID = self.mediaID
         item = self.item
         #        metadataLabel = self.metadataLabel
@@ -146,7 +150,6 @@ class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
         metaData.append(self.apparatus.toPlainText())
         metaData.append(self.catalog.toPlainText())
         metaData.append(self.comments.toPlainText())
-        child = dataIndex.mediaDict[mediaID]
         oldFile = child.get('Filename')
         oldResearcher = child.get('Rschr')
         # TODO: move this back into the calling routine in metaDataBtns?
@@ -215,6 +218,11 @@ class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
                         fldbk.mMediaTable.item(i, 0).setData(37, newname)
                     fldbk.mMediaTable.sortItems(0, QtCore.Qt.SortOrder.AscendingOrder)
                     break
+#        print(etree.tostring(child, encoding='unicode'))
+#        print(etree.tostring(self.child, encoding='unicode'))
+        dataIndex.mediaDict[mediaID] = self.child
+        self.speaker = metaData[0]
+        self.date = metaData[2]
         return metaData
 
     def locateFile(self, fldbk, caller, soundFile, IDREF=None):
@@ -241,6 +249,7 @@ class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
 
     def clearAll(self):
         """clears fields when Reset button is clicked"""
+        print('entering clearAll')
         self.apparatus.clear()
         self.catalog.clear()
         self.place.clear()
@@ -255,14 +264,19 @@ class MediaManager(QtWidgets.QDialog, Ui_MediaManager):
         """
         button box code
         """
-        if self.buttonBox.buttonRole(button) == 7:
+        print("clicked on button ", self.buttonBox.buttonRole(button))
+        if self.buttonBox.buttonRole(button) == QtWidgets.QDialogButtonBox.ButtonRole.ResetRole:
+            print('preparing to clear palette')
             self.clearAll()
-        elif self.buttonBox.buttonRole(button) == 0:
+        elif self.buttonBox.buttonRole(button) == QtWidgets.QDialogButtonBox.ButtonRole.AcceptRole:
+            print('preparing to get values')
             self.getValues()
             dataIndex.lastApparatus = self.apparatus.toPlainText()
             dataIndex.lastPlace = self.place.toPlainText()
             dataIndex.lastFileFormat = self.type.toPlainText()
             dataIndex.unsavedEdits = 1
+            self.soundPanel.updatePanel(self.speaker,  self.date)
+#            cardLoader.loadLexCard(dataIndex.lexDict[dataIndex.currentCard], navBtn=False, currentRecording=self.child)
             self.accept()
 
 

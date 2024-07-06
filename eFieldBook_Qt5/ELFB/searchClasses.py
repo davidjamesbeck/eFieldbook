@@ -102,9 +102,9 @@ class SearchEngine(QtCore.QObject):
         
     def setEdge(self, lookFor):
         if lookFor[0] == "#":
-            lookFor = "(\s|^)" + lookFor[1:]
+            lookFor = r"(\s|^)" + lookFor[1:]
         elif lookFor[-1] == "#":
-            lookFor = lookFor[:-1] + "(\s|$)"
+            lookFor = lookFor[:-1] + r"(\s|$)"
         return lookFor        
 
     def makeDiacritList(self):
@@ -134,7 +134,7 @@ class SearchEngine(QtCore.QObject):
                 newItem[0] = term[0]
                 newItem[1] = item.strip()
                 newTermList.append(newItem)
-            targetList = target.split('\t')
+            targetList = target.split(' ')
             thisWordIsGood = False
             for item in targetList:
                 for nTerm in newTermList:
@@ -579,7 +579,7 @@ class LexSearchEngine(SearchEngine):
                     defText = hit.find('Def/L1').text
             defText = self.formatHandler(defText)
             hitid = hit.attrib.get('LexID')
-            print(hitid)
+            #print(hitid)
             if hit.find('POS').text != None:
                 POS = hit.find('POS').text
             else:

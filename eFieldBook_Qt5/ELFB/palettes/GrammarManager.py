@@ -26,9 +26,9 @@ class GrammarManager(QDialog, Ui_gManager):
         def eventFilter(self, sender, event):
             gManager = sender.parent().parent()
             if event.type() == QtCore.QEvent.Type.FocusIn:
-                print("my name is %s" % sender.objectName())
+#                print("my name is %s" % sender.objectName())
                 if sender.objectName() == "grammar" or sender.objectName() == "C2":
-                    print('okay')
+#                    print('okay')
                     gManager.whichTable = sender.objectName()
                     gManager.gSound.setEnabled(1)
                     gManager.Del.setEnabled(1)

@@ -1,7 +1,7 @@
 import re
 import textwrap
 from PyQt6 import  QtCore, QtWidgets
-from ELFB import textTable, contextMenus, dataIndex, Orthographies, formattingHandlers, update
+from ELFB import textTable, contextMenus, dataIndex, Orthographies, formattingHandlers, update,  fileMaintenance
 #import xml.etree.ElementTree as etree
 
 def loadDataCard(dataRoot, navBtn=False):
@@ -78,14 +78,15 @@ def loadDataCard(dataRoot, navBtn=False):
 def textTableBuilder(node, j, spokenBy, lineNode):
     """builds tables for presenting lines on the text card"""
     aFlag = 1
+    node = fileMaintenance.cleanExElement(node)
     entryRow0 = node.findtext('Line')
     entryRow0 = formattingHandlers.XMLtoRTF(entryRow0)
     try: 
         if len(node.findtext('Mrph')) == 0:
             aFlag = 0 
         else:
-            entryRow1 = node.findtext('Mrph').split('\t')
-            entryRow2 = node.findtext('ILEG').split('\t')
+            entryRow1 = node.findtext('Mrph').split(' ')
+            entryRow2 = node.findtext('ILEG').split(' ')
     except AttributeError:
         aFlag = 0
     if node.find('L2Gloss') is not None:    
@@ -296,10 +297,11 @@ def loadTextCard(textRoot, navBtn=False):
 
 def loadExCard(egRoot, navBtn=False):
     fldbk = dataIndex.fldbk
+    egRoot = fileMaintenance.cleanExElement(egRoot)
     targetCard = egRoot.attrib.get('ExID')
     dataIndex.currentCard = targetCard
     dataIndex.lastEx = egRoot.attrib.get('ExID')   
-    dataIndex.root.set('lastEx', dataIndex.lastEx)
+    dataIndex.root.set('LastEx', dataIndex.lastEx)
     if navBtn is False:
         if len(fldbk.eNavBar.stack) == 0:
             fldbk.eNavBar.stack.append(targetCard)
@@ -413,8 +415,8 @@ def loadExCard(egRoot, navBtn=False):
     fldbk.eAnalysis.clear()
     fldbk.eAnalysis.setColumnCount(0)
     if egRoot.findtext('Mrph') is not None and len(egRoot.findtext('Mrph')) != 0:
-        entryRow1 = egRoot.findtext('Mrph').split('\t')
-        entryRow2 = egRoot.findtext('ILEG').split('\t')
+        entryRow1 = egRoot.findtext('Mrph').split(' ')
+        entryRow2 = egRoot.findtext('ILEG').split(' ')
         #need to handle case where the two lines have different numbers of cells (BAD!)
         if len(entryRow1) > len(entryRow2):
             while len(entryRow1) > len(entryRow2):
@@ -464,7 +466,7 @@ def loadExCard(egRoot, navBtn=False):
             lastRow = fldbk.eAnalysis.rowCount()
             fldbk.eAnalysis.insertRow(lastRow)
             fldbk.eAnalysis.setVerticalHeaderItem(lastRow, rowHeader)
-            tagsList = item.text.split("\t")
+            tagsList = item.text.split(" ")
             for t, tag in enumerate(tagsList):
                 itemWidget = QtWidgets.QTableWidgetItem(1001)
                 itemWidget.setText(tag)
@@ -722,7 +724,9 @@ def loadDefinitions(fldbk, lexRoot):
         j += 1
     fldbk.lL2Definition.resizeRowsToContents()
 
-def loadLexCard(lexRoot, navBtn=False):
+def loadLexCard(lexRoot, navBtn=False,  currentRecording=None):
+    print('entering loadLexCard')
+    lexRoot = fileMaintenance.cleanLexElement(lexRoot)
     fldbk = dataIndex.fldbk
     targetCard = lexRoot.attrib.get('LexID')
     dataIndex.currentCard = targetCard
@@ -969,6 +973,9 @@ def loadLexCard(lexRoot, navBtn=False):
             word = der.findtext('Orth')
             POS = der.findtext('POS')
             L1 = der.findtext('Def/L1')
+            if '\n' in L1:
+                der = fileMaintenance.cleanLexElement(der)
+                L1 = der.findtext('Def/L1')
             if POS:
                 text = word + " (" + POS + ") " + L1
             item = QtWidgets.QListWidgetItem(parent, QtWidgets.QListWidgetItem.ItemType.UserType)
@@ -996,7 +1003,7 @@ def loadLexCard(lexRoot, navBtn=False):
         fldbk.lBreakLnkBtn.setEnabled(1)
 
     """Recordings"""
-    fldbk.lSound.loadMedia(lexRoot, mediaRefs)
+    fldbk.lSound.loadMedia(lexRoot, mediaRefs=None)
     resetNavBars(fldbk.lLexNav, dataIndex.currentCard)
 
 def resetNavBars(navBar, tCard):
@@ -1057,6 +1064,7 @@ def addTextWidget(fldbk, textRoot):
     contains a line number, data 35 is a cross-ref to an EX and data 36 is the
     Ln node represented by the table
     """
+    print("entering cardLoader.addTextWdiget")
     numLines = len(textRoot.findall('Ln'))
     progDialog = QtWidgets.QProgressDialog("Loading text ...", "Stop", 0, numLines, fldbk)
     progDialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)

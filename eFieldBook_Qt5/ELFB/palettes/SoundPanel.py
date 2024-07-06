@@ -6,7 +6,7 @@ Provides basic media access functionality on
 data cards
 """
 
-from PyQt6 import QtWidgets, QtGui, QtCore, QtMultimedia, QtNetwork
+from PyQt6 import QtWidgets, QtGui, QtCore#, QtMultimedia, QtNetwork
 from ELFB import dataIndex, metaDataBtns, playaudio
 from ELFB.palettes import MediaManager
 from os import path
@@ -40,7 +40,8 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
         self.SoundMetaBtn.setIconSize(infoIconSize)
         self.GrammarManagerCell = None
 
-    def loadMedia(self, root, mediaRefs=None):
+    def loadMedia(self, root, mediaRefs=None, currentRecording=None):
+        print('entering loadMedia')
         self.Recordings.clear()
         self.SoundFileMeta.clear()
         if root is not None:
@@ -59,14 +60,12 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
             for i, item in enumerate(mediaList):
                 mediaElement = dataIndex.mediaDict[item]
                 recording = mediaElement.attrib.get('Filename')
-                speaker = mediaElement.attrib.get('Spkr')
-                date = mediaElement.attrib.get('Date')
                 self.Recordings.insertItem(i, recording)
                 self.Recordings.setItemData(i, item, 35)
-            self.Recordings.setCurrentIndex(0)
-            self.SoundFileMeta.setText(speaker + " " + date)
-            self.Recordings.setEnabled(1)
-            self.DelMediaBtn.setEnabled(1)
+                if i == 0:
+                    speaker = mediaElement.attrib.get('Spkr')
+                    date = mediaElement.attrib.get('Date')
+                    self.updatePanel(speaker,  date,  currentRecording=None)
         else:
             self.Recordings.setEnabled(0)
             self.DelMediaBtn.setEnabled(0)
@@ -76,7 +75,7 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
         i = self.Recordings.currentIndex()
         mediaID = self.Recordings.itemData(i, 35)
         item = self.Recordings.itemData(i, 37)
-        mManager = MediaManager.MediaManager(dataIndex.fldbk)
+        mManager = MediaManager.MediaManager(dataIndex.fldbk, self)
         mManager.renameWindow(self.Recordings.currentText())
         mManager.setValues(mediaID, self.Recordings, item, self.SoundFileMeta)
         mManager.exec()
@@ -86,6 +85,11 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
         (rather than building the path each time)"""
         if self.Recordings.currentIndex() == -1:
             return
+        else:
+            mediaElement = dataIndex.mediaDict[self.Recordings.currentData(35)]
+            speaker = mediaElement.attrib.get('Spkr')
+            date = mediaElement.attrib.get('Date')
+            print(speaker,  date)
         if dataIndex.root.get("MediaFolder"):
             prefix = dataIndex.root.get("MediaFolder")
         else:
@@ -93,6 +97,7 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
         soundFile = self.Recordings.currentText()
         clipboard = QtWidgets.QApplication.clipboard()
         clipboard.setText(soundFile)
+        self.updatePanel(speaker,  date, mediaElement)
         oldSoundFile = soundFile
         if prefix is not None:
             soundFile = prefix + "/" + soundFile
@@ -102,10 +107,26 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
             soundFile = self.locateFile(soundFile)
             if soundFile:
                 if path.basename(soundFile) != oldSoundFile:
-                    dataIndex.mediaDict[self.Recordings.currentData(35)].set('Filename', path.basename(soundFile))
+                    mediaElement.set('Filename', path.basename(soundFile))
                     self.Recordings.setItemText(self.Recordings.currentIndex(), path.basename(soundFile))
                 playaudio.soundOutput(soundFile)
-
+    
+    def updatePanel(self,  speaker,  date,  currentRecording=None):
+        print('entering updatePanel')
+        if currentRecording == None:
+            self.Recordings.setCurrentIndex(0)
+            self.SoundFileMeta.setText(speaker + " " + date)
+        else:
+            soundfile = currentRecording.attrib.get('Filename')
+            filenameindex = self.Recordings.findText(soundfile)
+            speaker = currentRecording.attrib.get('Spkr')
+            date = currentRecording.attrib.get('Date')
+            self.Recordings.setCurrentIndex(filenameindex)
+            self.SoundFileMeta.setText(speaker + " " + date)
+        self.Recordings.setEnabled(1)
+        self.DelMediaBtn.setEnabled(1)
+        self.update()
+        
     def locateFile(self, soundFile):
         mFolder = QtWidgets.QFileDialog(dataIndex.fldbk, "Find missing recording?")
         mFolder.setFileMode(QtWidgets.QFileDialog.FileMode.ExistingFile)
@@ -333,19 +354,20 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
             dataIndex.unsavedEdit = 1
             return medID
 
-    @QtCore.pyqtSlot(str)
+    @QtCore.pyqtSlot(int)
     def on_Recordings_activated(self, p0):
         """
         plays the sound shown in the combobox list if selection is changed, 
         and updates the metadata synopsis on the card
         calls the play sound button command
         """
+        print('entering on_Recordings_activated')
         self.playSound()
-        soundID = self.Recordings.itemData(self.Recordings.currentIndex(), 35)
-        child = dataIndex.mediaDict[soundID]
-        speaker = child.attrib.get('Spkr')
-        date = child.attrib.get('Date')
-        self.SoundFileMeta.setText(speaker + ' ' + date)
+#        soundID = self.Recordings.itemData(self.Recordings.currentIndex(), 35)
+#        child = dataIndex.mediaDict[soundID]
+#        speaker = child.attrib.get('Spkr')
+#        date = child.attrib.get('Date')
+#        self.SoundFileMeta.setText(speaker + ' ' + date)
 
     @QtCore.pyqtSlot()
     def on_PlaySoundBtn_released(self):
@@ -359,6 +381,7 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
         """
         updates label with recording info
         """
+        print('entering on_SoundMetaBtn_released')
         if self.Recordings.count() != 0:
             self.mediaInfo()
 

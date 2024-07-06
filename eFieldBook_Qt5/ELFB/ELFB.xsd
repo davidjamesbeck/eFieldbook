@@ -117,8 +117,8 @@
                                         </xsd:element>
                                     </xsd:sequence>
                                     <xsd:attribute name="Index" type="xsd:integer" use="required"/>
-                                    <xsd:attribute name="L1Index" type="xsd:integer" use="optional"/>
-                                    <xsd:attribute name="L2Index" type="xsd:integer" use="optional"
+                                    <xsd:attribute name="L1Index" type="xsd:string" use="optional"/>
+                                    <xsd:attribute name="L2Index" type="xsd:string" use="optional"
                                     />
                                 </xsd:complexType>
                             </xsd:element>

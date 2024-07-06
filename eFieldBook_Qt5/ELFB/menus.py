@@ -154,7 +154,7 @@ def openDb(fldbk, fname=None):
         metaDataTableFillers.fillAbbrevTables(fldbk)
         dataIndex.lastText = dataIndex.root.attrib.get('LastText')
         dataIndex.lastLex = dataIndex.root.attrib.get('LastLex')
-        dataIndex.lastEx = dataIndex.root.attrib.get('lastEx')
+        dataIndex.lastEx = dataIndex.root.attrib.get('LastEx')
         dataIndex.lastDset = dataIndex.root.attrib.get('LastDset')
         try:
             if dataIndex.root.attrib.get('lAuto') == 'on':
@@ -407,7 +407,7 @@ def copyCard(fldbk):
         cardLoader.loadExCard(newElem)
         dataIndex.currentCard = newID
         dataIndex.lastText = newID
-        dataIndex.root.set('lastEx', newID)
+        dataIndex.root.set('LastEx', newID)
         try:
             if newElem.attrib['Links'] is not None:
                 del newElem.attrib['Links']
@@ -542,7 +542,7 @@ def newCard(fldbk):
         dataIndex.currentCard = newID
         dataIndex.exDict[newID] = newNode
         dataIndex.lastEx = newID
-        dataIndex.root.set('lastEx', newID)
+        dataIndex.root.set('LastEx', newID)
         cardLoader.loadExCard(newNode)
        
     if fldbk.tabWidget.currentIndex() == 4:  # dataset card

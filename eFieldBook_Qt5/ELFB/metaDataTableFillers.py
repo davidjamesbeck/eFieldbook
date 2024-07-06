@@ -1,5 +1,5 @@
 from PyQt6 import QtWidgets, QtCore,  QtGui
-from ELFB import dataIndex, metaDataBtns
+from ELFB import dataIndex, metaDataBtns, fileMaintenance
 
 
 def fillRTable(fldbk):
@@ -123,6 +123,7 @@ def fillOrth(fldbk):
         orthList = dataIndex.root.findall('Orthography')
         fldbk.oList.setRowCount(len(orthList))
         for i, item in enumerate(orthList):
+            item = fileMaintenance.cleanOrthoElement(item)
             name = item.attrib.get('Name')
             labelList.append(name)
             kind = ''
@@ -176,6 +177,7 @@ def fillSort(fldbk):
     fldbk.sList.setItemDelegate(delegate)
     delegate.commitData.connect(metaDataBtns.changeOrderName)        
     for node in dataIndex.root.iter('SortKey'):
+        node = fileMaintenance.cleanSortElement(node)
         sortKey = node.attrib.get('SName')
         item = QtWidgets.QListWidgetItem(sortKey)
         item.setData(32, sortKey)
