@@ -20,7 +20,7 @@ class LineTextWidget(QtWidgets.QFrame):
             Updates the number bar to display the current set of numbers.
             Also, adjusts the width of the number bar if necessary.
             """
-            width = self.fontMetrics().width(str(self.highest_line)) + 14
+            width = self.fontMetrics().horizontalAdvance(str(self.highest_line)) + 14
             if self.width() != width:
                 self.setFixedWidth(width)
             QtWidgets.QWidget.update(self, *args)
@@ -43,7 +43,7 @@ class LineTextWidget(QtWidgets.QFrame):
                 # Draw the line number right justified at the y position of the line. 
                 # 3 is a magic padding number. drawText(x, y, text).
                 painter.setPen(QtGui.QColor('#5882FA'))
-                painter.drawText(self.width() - font_metrics.width(str(line_count)) - 5, round(position.y()+4) - contents_y + font_metrics.ascent(), str(line_count)) 
+                painter.drawText(self.width() - font_metrics.horizontalAdvance(str(line_count)) - 5, round(position.y()+4) - contents_y + font_metrics.ascent(), str(line_count)) 
                 block = block.next() 
             self.highest_line = line_count
             painter.end() 
@@ -60,7 +60,7 @@ class LineTextWidget(QtWidgets.QFrame):
         """
         vPosition = self.edit.verticalScrollBar().value()
         self.number_bar.scroll(0, vPosition)
-        width = self.number_bar.fontMetrics().width(str(self.number_bar.highest_line)) + 14
+        width = self.number_bar.fontMetrics().horizontalAdvance(str(self.number_bar.highest_line)) + 14
         if self.number_bar.width() != width:
             self.number_bar.setFixedWidth(width)
  

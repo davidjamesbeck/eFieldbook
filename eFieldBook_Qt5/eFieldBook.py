@@ -6,6 +6,8 @@ from ELFB import dataIndex
 if __name__ == "__main__":
     import sys
     
+#    if getattr(sys, 'frozen', False):
+#        import pyi_splash
     QtLibPathFacade.addBundledPluginsPath()
     app = QtWidgets.QApplication(sys.argv)
     dataIndex.rootPath = QtCore.QFileInfo(__file__).absolutePath()
@@ -22,6 +24,8 @@ if __name__ == "__main__":
     print('splash WindowState is: %s' % splash.windowState())
     app.processEvents()
     ui = MainWindow()
+#    if getattr(sys, 'frozen', False):
+#        pyi_splash.close()
     QtWidgets.QApplication.setOrganizationName("UNTProject")
     QtWidgets.QApplication.setApplicationName("eFieldbook")
     QtWidgets.QApplication.setOrganizationDomain("http://www.artsrn.ualberta.ca/totonaco/")

@@ -267,4 +267,5 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
                 self.chooseTypeAndSave(saveDoc)
             elif mbox.result() == QtWidgets.QMessageBox.StandardButton.Cancel:
                 event.ignore()
+        self.hitList = []
         pass

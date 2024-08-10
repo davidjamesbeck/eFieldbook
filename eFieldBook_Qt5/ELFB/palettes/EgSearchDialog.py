@@ -19,8 +19,16 @@ class EgSearchDialog(QDialog, Ui_SearchExamples):
         
         @param parent reference to the parent widget (QWidget)
         """
+        print('building eg search dialog')
         super(EgSearchDialog, self).__init__(parent)
         self.setupUi(self)
+
+    def keyPressEvent(self, qKeyEvent):
+        if qKeyEvent.key() == QtCore.Qt.Key.Key_Return:
+            print('return in field')
+            self.callSearchEngine()
+        else:
+            super().keyPressEvent(qKeyEvent)
 
     @QtCore.pyqtSlot()
     def on_egSearchHelpBtn_released(self):

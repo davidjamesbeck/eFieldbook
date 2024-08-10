@@ -1,5 +1,5 @@
 from ELFB import dataIndex
-import xml.etree.ElementTree as etree
+#import xml.etree.ElementTree as etree
 
 
 def cleanExElement(node):
@@ -22,11 +22,15 @@ def cleanExElement(node):
 
     Mrph = node.findtext('Mrph')
     MrphNode = node.find('Mrph')
+    if Mrph != None:
+        Mrph = Mrph.strip()
     if '\n' in Mrph:
         MrphNode = removeExtraneousReturns(MrphNode, Mrph)
 
     ILEG = node.findtext('ILEG')
     ILEGNode = node.find('ILEG')
+    if ILEG != None:
+        ILEG = ILEG.strip()
     if '\n' in ILEG:
         ILEGNode = removeExtraneousReturns(ILEGNode, ILEG)
 
@@ -66,7 +70,7 @@ def removeExtraneousReturns(node, text):
     print('entering removeExtraneousReturns')
     text = text.replace('\n',  ' ')
     node.text = removeExtraneousSpaces(text)
-    print(etree.tostring(node,  encoding='unicode'))
+#    print(etree.tostring(node,  encoding='unicode'))
     dataIndex.unsavedEdit = 1
     return node
     

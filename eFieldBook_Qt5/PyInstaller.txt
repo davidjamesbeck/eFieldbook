@@ -2,4 +2,8 @@ PyInstaller command
 
 python3 -m PyInstaller eFieldBook.spec --clean --noconfirm
 
+with splash screen command
+
+python3 -m PyInstaller eFieldBook.spec --clean --noconfirm --splash "/Splash.png"
+
 from eFieldBook_Qt5 directory

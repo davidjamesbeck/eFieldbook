@@ -730,6 +730,10 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             dataIndex.lastSpeaker = dataIndex.root.attrib.get('DefaultSpeaker')
         elif 'LastSpeaker' in keyList:
             dataIndex.lastSpeaker = dataIndex.root.attrib.get('LastSpeaker')
+            
+        self.lSearchForm = LexSearchForm.LexSearchForm(self)
+        self.lSearchForm.setGeometry(10, 40, 1126, 686)
+        self.lSearchForm.setVisible(0)
 
         self.recoverRecentFiles()
         dataIndex.unsavedEdit = 0
@@ -972,7 +976,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             if self.lSearchForm.isVisible() == 1:
                 self.lSearchForm.setVisible(0)
                 self.lexicon.setVisible(1)
-        except AttributeError:
+        except (AttributeError, RuntimeError):
             pass
 
     def recoverRecentFiles(self):
@@ -1292,14 +1296,25 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         Slot documentation goes here.
         """
-        try:
-            self.lSearchForm.setVisible(1)
-            self.lSearchForm.clearAll()
-        except AttributeError:
-            self.lSearchForm = LexSearchForm.LexSearchForm(self)
-            self.lSearchForm.setGeometry(10, 40, 1126, 686)
-            self.lSearchForm.setVisible(1)
+        print("entering on_lAdvancedSearchBtn_released")
+#        if self.lSearchForm.visible() == 0:
+        self.lSearchForm.hide()
+        self.lSearchForm.show()
+#        self.lSearchForm.setVisible(1)
+        print('b')
+#        try:
+#            print("step 1")
+#            if self.lSearchForm.visible() == 0:
+#                self.lSearchForm.setVisible(1)
+#                print('visible')
+#            self.lSearchForm.clearAll()
+#        except (AttributeError, TypeError):
+#            print("step 2")
+#            self.lSearchForm = LexSearchForm.LexSearchForm(self)
+#            self.lSearchForm.setGeometry(10, 40, 1126, 686)
+#            self.lSearchForm.setVisible(1)
         self.lexicon.setVisible(0)
+        print("leaving on_lAdvancedSearchBtn_released")
 
     """text card only buttons"""
 
@@ -1886,7 +1901,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
                 hitList = self.recordBrowser.hitList
                 self.recordBrowser.listIndex = hitList.index(tCard)
                 self.recordBrowser.progressBar.setValue(self.recordBrowser.listIndex)
-        except AttributeError:
+        except (AttributeError, ValueError):
             pass
 
     @QtCore.pyqtSlot()
@@ -1967,7 +1982,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         find text anywhere on cards of current type
         """
-        menus.findAgain(self)
+        menus.findAgain()
 
     @QtCore.pyqtSlot()
     def on_actionFuzzy_Find_triggered(self):

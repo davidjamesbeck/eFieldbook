@@ -21,6 +21,7 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
         @param parent reference to the parent widget (QWidget)
         """
         super(LexSearchForm, self).__init__(parent)
+        print("creating LexSearchForm")
         self.setupUi(self)
         dataIndex.updateEnabled = 'off'
         dataIndex.activeSearch = 1
@@ -51,6 +52,7 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
                                  'with the string "an").\n\n'
                                  'Combine AND/NOT and "#" in the order "¬#". \n\n'
                                  'Use the checkboxes on the left to parameterize searches.')
+        print("leaving create LexSearchForm")
 
     def keyPressEvent(self, qKeyEvent):
         if qKeyEvent.key() == QtCore.Qt.Key.Key_Return:
@@ -112,6 +114,7 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
         return parameters
 
     def clearAll(self):
+        print("entering LexSearchForm clearAll()")
         fldList = self.listFormFields()
         for fld in fldList:
             fld.clear()

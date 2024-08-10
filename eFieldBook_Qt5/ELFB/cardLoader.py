@@ -2,7 +2,7 @@ import re
 import textwrap
 from PyQt6 import  QtCore, QtWidgets
 from ELFB import textTable, contextMenus, dataIndex, Orthographies, formattingHandlers, update,  fileMaintenance
-#import xml.etree.ElementTree as etree
+import xml.etree.ElementTree as etree
 
 def loadDataCard(dataRoot, navBtn=False):
     fldbk = dataIndex.fldbk
@@ -686,7 +686,7 @@ def loadDefinitions(fldbk, lexRoot):
                 fldbk.lL1Definition.insertRow(j)
                 tableCell = QtWidgets.QTableWidgetItem()
                 egIndex = eg.split("@")
-                text = breakLines(egIndex[0], 120, '&nbsp;&nbsp;&nbsp;')
+                text = breakLines(egIndex[0], 163, '&nbsp;&nbsp;&nbsp;')
                 tableCell.setText(text)
                 tableCell.setData(35, egIndex[1])
                 tableCell.setTextAlignment(QtCore.Qt.TextFlag.TextWordWrap)
@@ -715,7 +715,7 @@ def loadDefinitions(fldbk, lexRoot):
                 fldbk.lL2Definition.insertRow(j)
                 tableCell = QtWidgets.QTableWidgetItem()
                 egIndex = eg.split("@")
-                text = breakLines(egIndex[0], 120, '&nbsp;&nbsp;&nbsp;')
+                text = breakLines(egIndex[0], 163, '&nbsp;&nbsp;&nbsp;')
                 tableCell.setText(text)
                 tableCell.setData(35, egIndex[1])
                 tableCell.setFlags(QtCore.Qt.ItemFlag.ItemIsEnabled)
@@ -728,6 +728,7 @@ def loadLexCard(lexRoot, navBtn=False,  currentRecording=None):
     print('entering loadLexCard')
     lexRoot = fileMaintenance.cleanLexElement(lexRoot)
     fldbk = dataIndex.fldbk
+    fldbk.lSearchForm.hide()
     targetCard = lexRoot.attrib.get('LexID')
     dataIndex.currentCard = targetCard
     dataIndex.lastLex = lexRoot.attrib.get('LexID')   
@@ -1077,6 +1078,7 @@ def addTextWidget(fldbk, textRoot):
         if widget is not None:
             widget.deleteLater()
     for child in textRoot.iter('Ln'):
+        print(etree.tostring(child, encoding='unicode'))
         if child.attrib.get('LnRef'):
             lineRef = child.attrib.get('LnRef')
             spokenBy = child.attrib.get('SpokenBy')

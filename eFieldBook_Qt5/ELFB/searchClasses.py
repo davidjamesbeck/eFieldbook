@@ -580,9 +580,10 @@ class LexSearchEngine(SearchEngine):
             defText = self.formatHandler(defText)
             hitid = hit.attrib.get('LexID')
             #print(hitid)
-            if hit.find('POS').text != None:
+            try:
+#            if hit.find('POS').text != None:
                 POS = hit.find('POS').text
-            else:
+            except AttributeError:
                 POS = ' '
             try:
                 result = "<b>" + hit.find('Orth').text + "</b> (" + POS + ") " + defText

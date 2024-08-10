@@ -202,6 +202,10 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
         dataIndex.unsavedEdit = 1
         if self.Recordings.count() == 0:
             self.DelMediaBtn.setEnabled(0)
+        else:
+            print("resetting pulldown")
+            self.Recordings.setCurrentIndex(0)
+            self.playSound()
 
     def fileExists(self, item, newName):
         node = dataIndex.root.find('Media[@Filename="%s"]' % newName)
@@ -329,7 +333,7 @@ class SoundPanel(QtWidgets.QWidget, Ui_SoundPanel):
                 """create a new <Media> Node, add to the media table"""
                 medID, node = metaDataBtns.updateMediaInfo(newPath, newName)
                 """add additional information to the <Media> Node"""
-                mManager = MediaManager.MediaManager(dataIndex.fldbk)
+                mManager = MediaManager.MediaManager(dataIndex.fldbk, self)
                 mManager.renameWindow(newName)
                 mManager.setValues(medID, self.Recordings, newPath, self.SoundFileMeta)
                 #                mManager.setComboBoxes()

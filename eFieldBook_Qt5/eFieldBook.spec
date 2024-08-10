@@ -15,8 +15,10 @@ a = Analysis(['eFieldBook.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
+
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
+
 exe = EXE(pyz,
           a.scripts,
           a.binaries,
@@ -30,7 +32,9 @@ exe = EXE(pyz,
           upx=True,
           runtime_tmpdir=None,
           console=False , icon='/Users/David/OpenSource/github/ELFB/eFieldBook_Qt5/ELFB.icns')
+
 app = BUNDLE(exe,
              name='eFieldbook.app',
              icon='/Users/David/OpenSource/github/ELFB/eFieldBook_Qt5/ELFB.icns',
              bundle_identifier='com.ualberta.linguistics.eFieldbook')
+
