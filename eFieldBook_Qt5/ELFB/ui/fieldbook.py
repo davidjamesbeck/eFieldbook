@@ -11,7 +11,7 @@ from .Ui_fieldbook import Ui_Fieldbook
 from ELFB import dataIndex, cardLoader, Alphabetizer, menus, navLists, dictBuilder, contextMenus
 from ELFB import lexOnlyBtns, textOnlyBtns, egOnlyBtns, metaDataBtns, tabConstructors
 from ELFB import indexOnlyBtns, searchOnlyBtns, dsetOnlyBtns, Orthographies, exports
-from ELFB import NumberedLineEdit, metaDataTableFillers, formattingHandlers, update
+from ELFB import NumberedLineEdit, metaDataTableFillers, formattingHandlers, update,  firstAid
 from ELFB.FocusOutFilter import FocusOutFilter, DialectFilter, BorrowFilter, ExLineFilter
 from ELFB.palettes import LexSearchForm
 from xml.etree import ElementTree as etree
@@ -592,7 +592,7 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
 
         """TextCard"""
 
-        self.tText.setVisible(1)
+#        self.tText.setVisible(1)
         self.textLayout = QtWidgets.QVBoxLayout(self.tText)
         self.textLayout.setSpacing(8)
         self.textLayout.setStretch(0, 0)
@@ -650,6 +650,8 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         setSignal(self.cLexiconFocusBox.children())
         setSignal(self.cTextsFocusBox.children())
         setExSignal(self.cExamplesFocusBox.children())
+        self.lSearchForm = LexSearchForm.LexSearchForm(self)
+        self.sSearchTabs.addTab(self.lSearchForm, 'Lexicon')
 
         """METADATA Tab"""
 
@@ -730,10 +732,6 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             dataIndex.lastSpeaker = dataIndex.root.attrib.get('DefaultSpeaker')
         elif 'LastSpeaker' in keyList:
             dataIndex.lastSpeaker = dataIndex.root.attrib.get('LastSpeaker')
-            
-        self.lSearchForm = LexSearchForm.LexSearchForm(self)
-        self.lSearchForm.setGeometry(10, 40, 1126, 686)
-        self.lSearchForm.setVisible(0)
 
         self.recoverRecentFiles()
         dataIndex.unsavedEdit = 0
@@ -742,16 +740,6 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """set flag when fields are edited"""
         dataIndex.unsavedEdit = 1
         return dataIndex.unsavedEdit
-
-    @QtCore.pyqtSlot(int)
-    def on_tabWidget_tabBarClicked(self, index):
-        if self.tabWidget.currentIndex() == 1:
-            try:
-                if self.lSearchForm.isVisible() == 1:
-                    self.lSearchForm.setVisible(0)
-                    self.lexicon.setVisible(1)
-            except AttributeError:
-                pass
 
     @QtCore.pyqtSlot(int)
     def on_tabWidget_currentChanged(self, index):
@@ -971,13 +959,6 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
             self.actionFuzzy_Find.setEnabled(0)
             self.actionFuzzy_Find_Again.setEnabled(0)
             dataIndex.currentCard = 'index'
-
-        try:
-            if self.lSearchForm.isVisible() == 1:
-                self.lSearchForm.setVisible(0)
-                self.lexicon.setVisible(1)
-        except (AttributeError, RuntimeError):
-            pass
 
     def recoverRecentFiles(self):
         """get list of recently opened files from QSettings and store it in dataIndex"""
@@ -1297,23 +1278,8 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         Slot documentation goes here.
         """
         print("entering on_lAdvancedSearchBtn_released")
-#        if self.lSearchForm.visible() == 0:
-        self.lSearchForm.hide()
-        self.lSearchForm.show()
-#        self.lSearchForm.setVisible(1)
-        print('b')
-#        try:
-#            print("step 1")
-#            if self.lSearchForm.visible() == 0:
-#                self.lSearchForm.setVisible(1)
-#                print('visible')
-#            self.lSearchForm.clearAll()
-#        except (AttributeError, TypeError):
-#            print("step 2")
-#            self.lSearchForm = LexSearchForm.LexSearchForm(self)
-#            self.lSearchForm.setGeometry(10, 40, 1126, 686)
-#            self.lSearchForm.setVisible(1)
-        self.lexicon.setVisible(0)
+        self.tabWidget.setCurrentIndex(5)
+        self.sSearchTabs.setCurrentIndex(1)
         print("leaving on_lAdvancedSearchBtn_released")
 
     """text card only buttons"""
@@ -2157,3 +2123,8 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         print("entering on_actionLoad_Schema_triggered")
         exports.outputLexiconToCSV(self)
         exports.sayHello()
+        
+    @QtCore.pyqtSlot()
+    def on_actionCommand_Line_triggered(self): 
+        print("entering actionCommand_Line")
+        firstAid.run_Command()

@@ -27,22 +27,6 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
         dataIndex.activeSearch = 1
         self.sDoneBtn.setCheckState(QtCore.Qt.CheckState.Checked)
 
-        controlBar = ':ControlPanel.png'
-        self.lSearchControlBar.setStyleSheet("QPushButton {border: 0px solid black;"
-                                             "     border-radius: 4px;"
-                                             "     min-width: 70px;"
-                                             "     min-height: 24px;"
-                                             "     max-width: 70px;"
-                                             "     max-height: 24px;"
-                                             "     background: #6698FF;"
-                                             "     color: white;}"
-                                             "QPushButton:pressed {background: #1E90FF; border: 2px outset #1E90FF;}"
-                                             "QFrame {border: 1px solid gray; "
-                                             "border: 0px solid black;"
-                                             "border-radius: 8px;"
-                                             "padding: 0px;"
-                                             "background-image: url('%s');}" % controlBar)
-
         self.instruction.setText('Enter text to find in the fields where you wish to search. '
                                  'Entering terms in more than one field will search for entries that '
                                  'meet all search criteria.\n\n'
@@ -68,8 +52,6 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
         fieldList = self.listFields()
         engine.fieldList = fieldList
         engine.doSearch()
-        self.setVisible(0)
-        fldbk.lexicon.setVisible(0)
 
     def listFields(self):
         """returns a list of search fields with context"""
@@ -133,8 +115,6 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
     def restoreLexCard(self):
         dataIndex.updateEnabled = 'on'
         dataIndex.activeSearch = None
-        self.setVisible(0)
-        dataIndex.fldbk.lexicon.setVisible(1)
 
     @pyqtSlot()
     def on_doSearch_released(self):
@@ -150,9 +130,9 @@ class LexSearchForm(QtWidgets.QWidget, Ui_LexSearchForm):
         """
         self.clearAll()
 
-    @pyqtSlot()
-    def on_lCancelSearch_released(self):
-        """
-        Close form, return to last lexicon card
-        """
-        self.restoreLexCard()
+#    @pyqtSlot()
+#    def on_lCancelSearch_released(self):
+#        """
+#        Close form, return to last lexicon card
+#        """
+#        self.restoreLexCard()

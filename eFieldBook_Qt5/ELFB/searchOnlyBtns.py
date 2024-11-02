@@ -32,16 +32,14 @@ def clearResults(fldbk):
 def returnToSearch(fldbk):
     if dataIndex.activeSearch:
         try:
-            if dataIndex.callingCard[0] == 'L':
-                fldbk.tabWidget.setCurrentIndex(1)
-                fldbk.lSearchForm.setVisible(1)
-                fldbk.lexicon.setVisible(0)
-            elif dataIndex.callingCard[0] == 'T':
+            if dataIndex.callingCard[0] == 'T':
                 fldbk.tabWidget.setCurrentIndex(2)
             elif dataIndex.callingCard[0] == 'E':
                 fldbk.tabWidget.setCurrentIndex(3)
             elif dataIndex.callingCard[0] == 'D':
                 fldbk.tabWidget.setCurrentIndex(4)
+            else:
+                fldbk.sSearchTabs.setCurrentIndex(1)
             dataIndex.callingCard = None
         except (TypeError, AttributeError):
             pass

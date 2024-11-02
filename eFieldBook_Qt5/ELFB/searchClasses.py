@@ -174,7 +174,7 @@ class SearchEngine(QtCore.QObject):
         if self.parameters[0] == 1:
             lookFor = self.removeAccents(lookFor)
         if self.parameters[5] == 1: # if whole word search
-            lookFor = '(\s|^)' + lookFor + '(\s|$)'
+            lookFor = r'(\s|^)' + lookFor + r'(\s|$)'
         elif "#" in lookFor:
             lookFor = self.setEdge(lookFor)
         if self.parameters[2] == 0:  # parameters[2] flags caps
@@ -553,6 +553,7 @@ class LexSearchEngine(SearchEngine):
         except AttributeError:
             pass   
         self.fldbk.tabWidget.setCurrentIndex(5)
+        self.fldbk.sSearchTabs.setCurrentIndex(0)
         if len(hits) == 0:
             targetText = self.fldbk.cTarget.text()
             targetText = "! " + targetText
@@ -569,6 +570,7 @@ class LexSearchEngine(SearchEngine):
         self.idList = []
         resultsdict = {} 
         for hit in hits:
+            print(etree.tostring(hit, encoding='unicode'))
             if self.parameters[6] == 0:
                 defText = hit.find('Def/L1').text
                 if not defText:

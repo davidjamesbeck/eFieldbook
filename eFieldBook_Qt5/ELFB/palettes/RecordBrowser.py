@@ -150,14 +150,14 @@ class RecordBrowser(QtWidgets.QDialog, Ui_Dialog):
         if mbox.clickedButton() == fileButton:
             fileDialog = QtWidgets.QFileDialog()
             fileDialog.setWindowFlags(QtCore.Qt.WindowType.WindowStaysOnTopHint)
-            self.setVisible(0)
+#            self.setVisible(0)
             fname = fileDialog.getSaveFileName(self.fldbk, "Save Scratchpad As...")[0]
             if fname:
                 self.scratchPadName = [fname, 'file']
                 self.saveAsFile(fname, saveDoc)
-                self.setVisible(1)
+#                self.setVisible(1)
             else:
-                self.setVisible(1)
+#                self.setVisible(1)
                 return
         elif mbox.clickedButton() == datasetButton:
             nameBox = StyledInputDialog.StyledInputDialog(self.fldbk)

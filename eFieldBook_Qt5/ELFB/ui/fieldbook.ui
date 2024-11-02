@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1145</width>
-    <height>720</height>
+    <width>1143</width>
+    <height>735</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1145</width>
-    <height>720</height>
+    <width>1155</width>
+    <height>735</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -205,6 +205,9 @@ p {
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:36pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Lucida Grande';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -761,6 +764,7 @@ multiple entries with a semi-colon.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <italic>true</italic>
              <bold>false</bold>
@@ -833,6 +837,7 @@ Use the format: Sp. “nena”</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>10</pointsize>
              <bold>false</bold>
             </font>
@@ -886,6 +891,7 @@ Use the format: Sp. “nena”</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -905,6 +911,7 @@ Use the format: Sp. “nena”</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -924,6 +931,7 @@ Use the format: Sp. “nena”</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -943,6 +951,7 @@ Use the format: Sp. “nena”</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -962,6 +971,7 @@ Use the format: Sp. “nena”</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -1368,6 +1378,7 @@ on &quot;–&quot; below to delete.</string>
             </property>
             <property name="font">
              <font>
+              <family>Lucida Grande</family>
               <pointsize>13</pointsize>
               <italic>false</italic>
               <bold>false</bold>
@@ -1469,6 +1480,7 @@ entry for base</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
              <bold>false</bold>
             </font>
@@ -1501,6 +1513,7 @@ entry for base</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>9</pointsize>
             <italic>true</italic>
             <bold>false</bold>
@@ -1640,6 +1653,7 @@ in L2</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -1659,6 +1673,7 @@ in L2</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -1678,6 +1693,7 @@ in L2</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -1697,6 +1713,7 @@ in L2</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -1716,6 +1733,7 @@ in L2</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -1923,7 +1941,7 @@ selection-background-color: transparent;</string>
              <x>0</x>
              <y>0</y>
              <width>1900</width>
-             <height>498</height>
+             <height>499</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -1951,6 +1969,7 @@ selection-background-color: transparent;</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <bold>false</bold>
            </font>
           </property>
@@ -1990,6 +2009,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -2016,6 +2036,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -2036,6 +2057,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="tRemoveLineBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -2053,6 +2075,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="tSplitLineBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -2070,6 +2093,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="tCopyLineBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -2121,6 +2145,7 @@ and practical working (primary) orthography.</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>10</pointsize>
             <italic>true</italic>
             <bold>false</bold>
@@ -2450,6 +2475,7 @@ text name and line number</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2469,6 +2495,7 @@ text name and line number</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>12</pointsize>
              <italic>false</italic>
              <bold>false</bold>
@@ -2493,6 +2520,7 @@ in a text or dataset</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2593,6 +2621,7 @@ in a text or dataset</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2651,6 +2680,7 @@ in a text or dataset</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2712,6 +2742,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="eAddAnnotationBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>12</pointsize>
                <bold>false</bold>
               </font>
@@ -2729,6 +2760,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="eSplitBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>12</pointsize>
                <bold>false</bold>
               </font>
@@ -2745,6 +2777,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="eAddMorphBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>12</pointsize>
                <bold>false</bold>
               </font>
@@ -2761,6 +2794,7 @@ QPushButton:pressed {
             <widget class="QPushButton" name="eDeleteBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>12</pointsize>
                <bold>false</bold>
               </font>
@@ -2778,6 +2812,7 @@ removes morph from analysis</string>
             <widget class="QPushButton" name="eRemoveTier">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>12</pointsize>
                <bold>false</bold>
               </font>
@@ -2859,6 +2894,7 @@ removes morph from analysis</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2878,6 +2914,7 @@ removes morph from analysis</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2897,6 +2934,7 @@ removes morph from analysis</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -2916,6 +2954,7 @@ removes morph from analysis</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -3215,6 +3254,7 @@ entry or datset</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>10</pointsize>
             <italic>true</italic>
             <bold>false</bold>
@@ -3252,7 +3292,7 @@ ID Number</string>
              <x>0</x>
              <y>0</y>
              <width>1900</width>
-             <height>339</height>
+             <height>340</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -3316,6 +3356,7 @@ ID Number</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>10</pointsize>
             <italic>true</italic>
             <bold>false</bold>
@@ -3638,6 +3679,7 @@ and practical working (primary) orthography.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -3657,6 +3699,7 @@ and practical working (primary) orthography.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -3676,6 +3719,7 @@ and practical working (primary) orthography.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -3695,6 +3739,7 @@ and practical working (primary) orthography.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>9</pointsize>
              <bold>false</bold>
             </font>
@@ -3910,6 +3955,7 @@ format recommended</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>10</pointsize>
             <bold>false</bold>
            </font>
@@ -3970,6 +4016,9 @@ QPushButton:pressed {
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:24pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
@@ -3995,71 +4044,6 @@ p, li { white-space: pre-wrap; }
          <attribute name="title">
           <string>Search</string>
          </attribute>
-         <widget class="QGroupBox" name="cResultsBox">
-          <property name="geometry">
-           <rect>
-            <x>13</x>
-            <y>59</y>
-            <width>878</width>
-            <height>589</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QListWidget {
-	border: 1px;
-	border-color: rgb(0, 0, 0);
-	border-radius: 0px;
-}</string>
-          </property>
-          <property name="title">
-           <string>Results</string>
-          </property>
-          <widget class="QListView" name="cSearchResults">
-           <property name="geometry">
-            <rect>
-             <x>16</x>
-             <y>51</y>
-             <width>846</width>
-             <height>526</height>
-            </rect>
-           </property>
-           <property name="toolTip">
-            <string>Search results are displayed here. Click 
-on line to go to database entry. Hold down 
-the option key and click to remove. To cut-
-and-paste a hit into another application, hold
-down the Command key and click on the
-example, then paste into desired application.</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">border-left: 1px;
-border-color: rgb(0, 0, 0);</string>
-           </property>
-          </widget>
-          <widget class="QLabel" name="cNumberOfHits">
-           <property name="geometry">
-            <rect>
-             <x>17</x>
-             <y>26</y>
-             <width>79</width>
-             <height>16</height>
-            </rect>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>12</pointsize>
-             <italic>true</italic>
-             <bold>false</bold>
-            </font>
-           </property>
-           <property name="toolTip">
-            <string>number of hits</string>
-           </property>
-           <property name="text">
-            <string>Hits:</string>
-           </property>
-          </widget>
-         </widget>
          <widget class="QGroupBox" name="cResultsControlsBox">
           <property name="geometry">
            <rect>
@@ -4225,6 +4209,7 @@ that can be reloaded later</string>
             <widget class="QCheckBox" name="cRecOnlyBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>true</italic>
                <bold>false</bold>
@@ -4239,6 +4224,7 @@ that can be reloaded later</string>
             <widget class="QCheckBox" name="cAppendBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>true</italic>
                <bold>false</bold>
@@ -4263,6 +4249,7 @@ that can be reloaded later</string>
             <widget class="QCheckBox" name="cNarrowBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>true</italic>
                <bold>false</bold>
@@ -4309,6 +4296,7 @@ that can be reloaded later</string>
             <widget class="QCheckBox" name="cFindAllBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <bold>false</bold>
               </font>
@@ -4350,6 +4338,7 @@ lexicon to search</string>
                <widget class="QCheckBox" name="cOrthographyBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4364,6 +4353,7 @@ lexicon to search</string>
                <widget class="QCheckBox" name="cLiteralGlossBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4378,6 +4368,7 @@ lexicon to search</string>
                <widget class="QCheckBox" name="cL1DefinitionBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4392,6 +4383,7 @@ lexicon to search</string>
                <widget class="QCheckBox" name="cGrammarBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4406,6 +4398,7 @@ lexicon to search</string>
                <widget class="QCheckBox" name="cL2DefinitionBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4420,6 +4413,7 @@ lexicon to search</string>
                <widget class="QCheckBox" name="cKeywordBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4459,6 +4453,7 @@ examples to search</string>
                <widget class="QCheckBox" name="cL2GlossExamplesBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4473,6 +4468,7 @@ examples to search</string>
                <widget class="QCheckBox" name="cLineExamplesBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4487,6 +4483,7 @@ examples to search</string>
                <widget class="QCheckBox" name="cL1GlossExamplesBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4501,6 +4498,7 @@ examples to search</string>
                <widget class="QCheckBox" name="cParseExamplesBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4515,6 +4513,7 @@ examples to search</string>
                <widget class="QCheckBox" name="cAnalysisExamplesBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4529,6 +4528,7 @@ examples to search</string>
                <widget class="QCheckBox" name="cExKeywordBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4546,7 +4546,7 @@ examples to search</string>
             <widget class="QGroupBox" name="cTextsFocusBox">
              <property name="minimumSize">
               <size>
-               <width>59</width>
+               <width>57</width>
                <height>178</height>
               </size>
              </property>
@@ -4574,6 +4574,7 @@ texts to search</string>
                <widget class="QCheckBox" name="cAnalysisTextsBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4588,6 +4589,7 @@ texts to search</string>
                <widget class="QCheckBox" name="cLineTextsBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4602,6 +4604,7 @@ texts to search</string>
                <widget class="QCheckBox" name="cL1GlossTextsBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4616,6 +4619,7 @@ texts to search</string>
                <widget class="QCheckBox" name="cL2GlossTextsBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4630,6 +4634,7 @@ texts to search</string>
                <widget class="QCheckBox" name="cParseTextsBtn">
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>9</pointsize>
                   <italic>true</italic>
                   <bold>false</bold>
@@ -4650,6 +4655,7 @@ texts to search</string>
                 </property>
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>11</pointsize>
                   <bold>false</bold>
                  </font>
@@ -4684,6 +4690,7 @@ texts to search</string>
                 </property>
                 <property name="font">
                  <font>
+                  <family>Arial</family>
                   <pointsize>11</pointsize>
                   <bold>false</bold>
                  </font>
@@ -4839,6 +4846,7 @@ QToolButton:pressed {
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>13</pointsize>
             <bold>false</bold>
            </font>
@@ -4846,6 +4854,93 @@ QToolButton:pressed {
           <property name="text">
            <string>Browser</string>
           </property>
+         </widget>
+         <widget class="QTabWidget" name="sSearchTabs">
+          <property name="geometry">
+           <rect>
+            <x>15</x>
+            <y>60</y>
+            <width>875</width>
+            <height>556</height>
+           </rect>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="sSearchResultsTab">
+           <attribute name="title">
+            <string>Results</string>
+           </attribute>
+           <attribute name="toolTip">
+            <string>search results</string>
+           </attribute>
+           <widget class="QGroupBox" name="cResultsBox">
+            <property name="geometry">
+             <rect>
+              <x>8</x>
+              <y>4</y>
+              <width>854</width>
+              <height>520</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QListWidget {
+	border: 1px;
+	border-color: rgb(0, 0, 0);
+	border-radius: 0px;
+}</string>
+            </property>
+            <property name="title">
+             <string notr="true"/>
+            </property>
+            <widget class="QListView" name="cSearchResults">
+             <property name="geometry">
+              <rect>
+               <x>16</x>
+               <y>34</y>
+               <width>822</width>
+               <height>475</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>Search results are displayed here. Click 
+on line to go to database entry. Hold down 
+the option key and click to remove. To cut-
+and-paste a hit into another application, hold
+down the Command key and click on the
+example, then paste into desired application.</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">border-left: 1px;
+border-color: rgb(0, 0, 0);</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="cNumberOfHits">
+             <property name="geometry">
+              <rect>
+               <x>16</x>
+               <y>10</y>
+               <width>79</width>
+               <height>16</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>12</pointsize>
+               <italic>true</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="toolTip">
+              <string>number of hits</string>
+             </property>
+             <property name="text">
+              <string>Hits:</string>
+             </property>
+            </widget>
+           </widget>
+          </widget>
          </widget>
         </widget>
         <widget class="QWidget" name="meta">
@@ -4982,6 +5077,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5001,6 +5097,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5020,6 +5117,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5057,6 +5155,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5076,6 +5175,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5110,6 +5210,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5132,6 +5233,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5198,6 +5300,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>true</italic>
                <bold>false</bold>
@@ -5335,6 +5438,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5354,6 +5458,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5373,6 +5478,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5392,6 +5498,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5411,6 +5518,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5430,6 +5538,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5452,6 +5561,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5518,6 +5628,7 @@ yyyy-MM-dd format recommended</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>true</italic>
                <bold>false</bold>
@@ -5546,6 +5657,7 @@ and auto-filled when adding new records.</string>
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>13</pointsize>
             <bold>false</bold>
            </font>
@@ -5828,6 +5940,7 @@ in the correct order and test before saving.</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -5850,6 +5963,7 @@ in the correct order and test before saving.</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -5963,6 +6077,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>18</pointsize>
                <bold>false</bold>
               </font>
@@ -5982,6 +6097,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6004,6 +6120,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6026,6 +6143,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6072,6 +6190,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <bold>false</bold>
               </font>
@@ -6094,6 +6213,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <bold>false</bold>
               </font>
@@ -6164,6 +6284,7 @@ or practical to phonetic orthography)</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6187,6 +6308,7 @@ of all headwords in the lexicon.</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6233,6 +6355,7 @@ This does not change what is saved in the database.</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6252,6 +6375,7 @@ This does not change what is saved in the database.</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6460,6 +6584,7 @@ QPushButton:pressed {
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <bold>false</bold>
               </font>
@@ -6562,6 +6687,7 @@ QToolButton:pressed {
             </property>
             <property name="font">
              <font>
+              <family>Arial</family>
               <pointsize>12</pointsize>
               <bold>false</bold>
              </font>
@@ -6615,6 +6741,7 @@ be removed before sorting</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>true</italic>
                <bold>false</bold>
@@ -6851,6 +6978,7 @@ Double-click to edit names.</string>
              </property>
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>10</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -6878,6 +7006,7 @@ Double-click to edit names.</string>
               <widget class="QPushButton" name="sUpdateBtn">
                <property name="font">
                 <font>
+                 <family>Arial</family>
                  <pointsize>10</pointsize>
                  <bold>false</bold>
                 </font>
@@ -6896,6 +7025,7 @@ in the list.</string>
               <widget class="QPushButton" name="sDoSort">
                <property name="font">
                 <font>
+                 <family>Arial</family>
                  <pointsize>10</pointsize>
                  <bold>false</bold>
                 </font>
@@ -6912,6 +7042,7 @@ in the list.</string>
               <widget class="QPushButton" name="sSaveAsBtn">
                <property name="font">
                 <font>
+                 <family>Arial</family>
                  <pointsize>10</pointsize>
                  <bold>false</bold>
                 </font>
@@ -6929,6 +7060,7 @@ in the list.</string>
               <widget class="QPushButton" name="sClearBtn">
                <property name="font">
                 <font>
+                 <family>Arial</family>
                  <pointsize>10</pointsize>
                  <bold>false</bold>
                 </font>
@@ -6951,6 +7083,7 @@ in the list.</string>
             </property>
             <property name="font">
              <font>
+              <family>Arial</family>
               <pointsize>10</pointsize>
               <italic>true</italic>
               <bold>false</bold>
@@ -7328,6 +7461,7 @@ QPushButton:pressed {
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>10</pointsize>
             <bold>false</bold>
            </font>
@@ -7350,6 +7484,7 @@ QPushButton:pressed {
           </property>
           <property name="font">
            <font>
+            <family>Arial</family>
             <pointsize>10</pointsize>
             <bold>false</bold>
            </font>
@@ -7462,6 +7597,7 @@ elements. Click on line to go to example.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>10</pointsize>
              <italic>false</italic>
              <bold>false</bold>
@@ -7494,6 +7630,7 @@ elements. Click on line to go to example.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>10</pointsize>
              <italic>false</italic>
              <bold>false</bold>
@@ -7526,6 +7663,7 @@ elements. Click on line to go to example.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>10</pointsize>
              <italic>false</italic>
              <bold>false</bold>
@@ -7620,6 +7758,7 @@ elements. Click on line to go to example.</string>
            </property>
            <property name="font">
             <font>
+             <family>Arial</family>
              <pointsize>11</pointsize>
              <bold>false</bold>
             </font>
@@ -7817,6 +7956,7 @@ breakdown, or analysis</string>
             <widget class="QPushButton" name="iDuplicateBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <bold>false</bold>
               </font>
@@ -7833,6 +7973,7 @@ breakdown, or analysis</string>
             <widget class="QPushButton" name="iSortNowBtn">
              <property name="font">
               <font>
+               <family>Arial</family>
                <pointsize>11</pointsize>
                <bold>false</bold>
               </font>
@@ -7915,8 +8056,8 @@ breakdown, or analysis</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1145</width>
-     <height>21</height>
+     <width>1143</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -7951,6 +8092,12 @@ breakdown, or analysis</string>
     <property name="title">
      <string>Edit</string>
     </property>
+    <widget class="QMenu" name="menuFirst_Aid">
+     <property name="title">
+      <string>First Aid</string>
+     </property>
+     <addaction name="actionCommand_Line"/>
+    </widget>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
     <addaction name="separator"/>
@@ -7959,6 +8106,7 @@ breakdown, or analysis</string>
     <addaction name="actionPaste"/>
     <addaction name="actionSelect_All"/>
     <addaction name="separator"/>
+    <addaction name="menuFirst_Aid"/>
    </widget>
    <widget class="QMenu" name="menuFormat">
     <property name="title">
@@ -8363,6 +8511,11 @@ breakdown, or analysis</string>
     <string>Session Researcher</string>
    </property>
   </action>
+  <action name="actionCommand_Line">
+   <property name="text">
+    <string>Command Line</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
@@ -8410,7 +8563,6 @@ breakdown, or analysis</string>
   <tabstop>dResearcher</tabstop>
   <tabstop>dDate</tabstop>
   <tabstop>dUpdated</tabstop>
-  <tabstop>cSearchResults</tabstop>
   <tabstop>cSaveResultsBtn</tabstop>
   <tabstop>cClearResultsBtn</tabstop>
   <tabstop>cTarget</tabstop>

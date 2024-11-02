@@ -1071,7 +1071,7 @@ def addTextWidget(fldbk, textRoot):
     progDialog.setWindowModality(QtCore.Qt.WindowModality.WindowModal)
     progDialog.setWindowTitle('Loading')
     j = 0
-    fldbk.tText.setVisible(0)
+#    fldbk.tText.setVisible(0)
     while fldbk.textLayout.count():
         item = fldbk.textLayout.takeAt(0)
         widget = item.widget()
@@ -1094,6 +1094,6 @@ def addTextWidget(fldbk, textRoot):
         j += 1
     fldbk.textLayout.insertStretch(-1, 100)
     progDialog.setValue(numLines)
-    fldbk.tText.setVisible(1)
+#    fldbk.tText.setVisible(1)
     if dataIndex.lastText != dataIndex.currentCard:
         dataIndex.unsavedEdit = 1
