@@ -2,7 +2,7 @@
   "header": {
     "comment": "eric project file for project eFieldbook",
     "copyright": "Copyright (C) 2024 , ",
-    "saved": "2024-11-02, 11:16:04"
+    "saved": "2024-12-14, 14:39:04"
   },
   "project": {
     "AUTHOR": "",
@@ -46,6 +46,7 @@
       "ELFB/palettes/RecordBrowser.ui",
       "ELFB/palettes/SearchHelp.ui",
       "ELFB/palettes/SearchResultsToFile.ui",
+      "ELFB/palettes/SelectOutputSchema.ui",
       "ELFB/palettes/SessionDate.ui",
       "ELFB/palettes/SoundPanel.ui",
       "ELFB/palettes/StyledInputDialog.ui",
@@ -163,6 +164,7 @@
       "ELFB/palettes/RecordBrowser.py",
       "ELFB/palettes/SearchHelp.py",
       "ELFB/palettes/SearchResultsToFile.py",
+      "ELFB/palettes/SelectOutputSchema.py",
       "ELFB/palettes/SessionDate.py",
       "ELFB/palettes/SoundPanel.py",
       "ELFB/palettes/StyledInputDialog.py",
@@ -189,6 +191,7 @@
       "ELFB/palettes/Ui_RecordBrowser.py",
       "ELFB/palettes/Ui_SearchHelp.py",
       "ELFB/palettes/Ui_SearchResultsToFile.py",
+      "ELFB/palettes/Ui_SelectOutputSchema.py",
       "ELFB/palettes/Ui_SessionDate.py",
       "ELFB/palettes/Ui_SoundPanel.py",
       "ELFB/palettes/Ui_StyledInputDialog.py",

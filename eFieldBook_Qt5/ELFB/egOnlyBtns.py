@@ -327,6 +327,7 @@ def eAdd2Lex(fldbk):
     
 def eBreakLink(fldbk):
     """removes a link to a lex card ONLY—need to consider the breaking of a link to a text"""
+    print('enteringeBreakLink')
     targetNumber = fldbk.eLinksList.currentIndex()
     if targetNumber == -1:
         return

@@ -10,6 +10,7 @@ class ExampleDelegate(HTMLDelegate.HTMLDelegate):
         self.fldbk = dataIndex.fldbk       
         
     def updateExample(self):
+        print("entering updateExample")
         dataIndex.unsavedEdit = 1
         update = SessionDate.dateFinder()
         self.fldbk.eUpdated.setPlainText(update)

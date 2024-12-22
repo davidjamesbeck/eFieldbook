@@ -263,6 +263,7 @@ class DefinitionsManager(QtWidgets.QDialog, Ui_Dialog):
             field.setFontWeight(QtGui.QFont.Weight.Normal)
 
     def fillForm(self, row, column):
+        print("entering fillForm")
         """fills in the fields with data from the subentry selected in the table list"""
         self.POS.clear()
         self.Reg.clear()
@@ -742,6 +743,7 @@ class DefinitionsManager(QtWidgets.QDialog, Ui_Dialog):
         """
         Unlink example from subentry.
         """
+        print('entering minusEgBtn')
         if self.Ln.rowCount() == 0:
             return
         try:
@@ -760,19 +762,20 @@ class DefinitionsManager(QtWidgets.QDialog, Ui_Dialog):
         self.unsavedEdit = 1
         exNode = dataIndex.exDict[egIndex]
         links = exNode.get('Links')
-        linksList = links.split(', ')
-        try:
-            i = linksList.index(dataIndex.currentCard)
-            linksList.pop(i)
-        except ValueError:
-            pass
-        if len(linksList) == 1:
-            exNode.set('Links', linksList[0])
-        elif len(linksList) > 1:
-            links = ', '.join(linksList)
-            exNode.set('Links', links)
-        else:
-            del exNode.attrib['Links']
+        if links != None:
+            linksList = links.split(', ')
+            try:
+                i = linksList.index(dataIndex.currentCard)
+                linksList.pop(i)
+            except ValueError:
+                pass
+            if len(linksList) == 1:
+                exNode.set('Links', linksList[0])
+            elif len(linksList) > 1:
+                links = ', '.join(linksList)
+                exNode.set('Links', links)
+            else:
+                del exNode.attrib['Links']
         if self.Ln.rowCount() < 2:
             self.switchEgBtn.setEnabled(1)
         else:

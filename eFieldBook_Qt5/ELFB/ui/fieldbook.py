@@ -2121,8 +2121,9 @@ class MainWindow(QMainWindow, Ui_Fieldbook):
         """
         # TODO: this is just a temporary fix
         print("entering on_actionLoad_Schema_triggered")
-        exports.outputLexiconToCSV(self)
-        exports.sayHello()
+        exports.selectSchema(self)
+#        exports.outputLexiconToCSV(self)
+#        exports.sayHello()
         
     @QtCore.pyqtSlot()
     def on_actionCommand_Line_triggered(self): 
